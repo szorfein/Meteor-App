@@ -1,1 +1,22 @@
-Hello World!
+<ul>
+    <li>
+        <span>Index</span>
+        <p>Presentation</p>
+    </li>
+    <li>
+        <span>Blog</span>
+        <p>All article</p>
+    </li>
+</ul>
+<div>
+    <articles-form></articles-form>
+    <ul>
+        <li *ngFor="let article of articles | async">
+            {{article.title}}
+            <p>{{article._id}}</p>
+            <p>{{article.image}}</p>
+            <p>{{article.body}}</p>
+            <p>{{article.writer}}</p>
+        </li>
+    </ul>
+</div>

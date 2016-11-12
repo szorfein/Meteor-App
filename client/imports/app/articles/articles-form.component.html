@@ -1,0 +1,15 @@
+<form [formGroup]="addForm" (ngSubmit)="addArticle()">
+    <label>Title</label>
+    <input type="text" formControlName="title">
+
+    <label>Writer</label>
+    <input type="text" formControlName="writer">
+
+    <label>Image</label>
+    <input type="text" formControlName="image">
+
+    <label>Body</label>
+    <input type="text" formControlName="body">
+
+    <button type="submit">Add</button>
+</form>
