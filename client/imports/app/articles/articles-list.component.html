@@ -2,7 +2,7 @@
     <articles-form></articles-form>
     <ul>
         <li *ngFor="let article of articles | async">
-            <a [routerLink]="['/article', article._id]">
+            <a [routerLink]="['/blog', article._id]">
                 {{ article.title }}
             </a>
             {{article.title}}
