@@ -1,20 +1,10 @@
-import { Component } from '@angular/core'
-import { Observable } from 'rxjs/Observable'
+import { Component } from '@angular/core'
 
-import { Articles } from '/both/collections/articles.collection'
-import { Article } from '/both/models/article.model'
-
-import template from '/client/imports/app/app.component.html'
+import template from './app.component.html'
 
 @Component({
     selector: 'app',
     template
 })
 
-export class AppComponent {
-    articles: Observable<Article[]>
-    
-    constructor() {
-        this.articles = Articles.find({}).zone()
-    }
-}
+export class AppComponent {}

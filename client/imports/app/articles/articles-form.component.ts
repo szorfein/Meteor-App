@@ -15,7 +15,7 @@ export class ArticlesFormComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder
-    ){}
+    ) {}
 
     ngOnInit() {
         this.addForm = this.formBuilder.group({
