@@ -1,6 +1,23 @@
-<header>
+<form *ngIf="article" (submit)="saveArticle()">
+    <label>Title</label>
+    <input type="text" [(ngModel)]="article.title" name="title">
+
+    <label>Image</label>
+    <input type="text" [(ngModel)]="article.image" name="image">
+
+    <label>Writer</label>
+    <input type="text" [(ngModel)]="article.writer" name="writer">
+
+    <label>Body</label>
+    <input type="text" [(ngModel)]="article.body" name="body">
+
+    <button type="submit">Save</button>
+    <a [routerLink]="['blog/']">Cancel</a>
+</form>
+
+<header *ngIf="article">
     <h2>{{ article.title }}</h2>
-    <p>{{ article.img }}</p>
+    <p>{{ article.image }}</p>
     <p>{{ article.writer }}</p>
 </header>
 <article>

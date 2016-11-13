@@ -1,4 +1,5 @@
 import { Route } from '@angular/router'
+import { Meteor } from 'meteor/meteor'
 
 import { ArticlesListComponent } from './articles/articles-list.component'
 import { ArticleDetailsComponent } from './articles/article-details.component'
@@ -11,3 +12,8 @@ export const routes: Route[] = [
     { path: 'blog/:articleId', component: ArticleDetailsComponent },
     { path: 'about', component: AboutComponent }
 ]
+
+export const ROUTES_PROVIDERS = [{
+    provide: 'canActivateForLoggedIn',
+    useValue: () => !! Meteor.userId()
+}]

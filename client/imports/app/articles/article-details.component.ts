@@ -1,6 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Subscription } from 'rxjs/Subscription'
+import { Meteor } from 'meteor/meteor'
+import { MeteorObservable } from 'meteor-rxjs'
+import { InjectUser } from 'angular2-meteor-accounts-ui'
 
 import 'rxjs/add/operator/map'
 
@@ -14,11 +17,14 @@ import template from './article-details.component.html'
     template
 })
 
+@InjectUser('user')
 export class ArticleDetailsComponent implements OnInit, OnDestroy {
 
+    user: Meteor.User
     articleId: string
     paramsSub: Subscription
     article: Article
+    articleSub: Subscription
 
     constructor(
         private route: ActivatedRoute
@@ -26,10 +32,31 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.paramsSub = this.route.params
-        .map(params => params['articleId'])
-        .subscribe(articleId => {
-            this.articleId = articleId
-            this.article = Articles.findOne(this.articleId)
+            .map(params => params['articleId'])
+            .subscribe(articleId => {
+                this.articleId = articleId
+           
+                if (this.articleSub) {
+                    this.articleSub.unsubscribe()
+                }
+
+                    this.article = Articles.findOne(this.articleId)
+            })
+    }
+
+    saveArticle() {
+        if (!Meteor.userId()) {
+            alert('Please log in to change this article')
+            return
+        }
+
+        Articles.update(this.article._id, {
+            $set: {
+                title: this.article.title,
+                image: this.article.image,
+                writer: this.article.writer,
+                body: this.article.body
+            }
         })
     }
 

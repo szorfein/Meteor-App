@@ -4,5 +4,7 @@ export interface Article extends CollectionObject {
     title: string,
     image: string,
     body: string,
-    writer: string
+    writer: string,
+    owner?: string,
+    public: boolean;
 }

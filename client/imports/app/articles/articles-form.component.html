@@ -1,4 +1,5 @@
-<form [formGroup]="addForm" (ngSubmit)="addArticle()">
+<div *ngIf="!user">Please, log in to change article</div>
+<form *ngIf="user" [formGroup]="addForm" (ngSubmit)="addArticle()">
     <label>Title</label>
     <input type="text" formControlName="title">
 
@@ -10,6 +11,9 @@
 
     <label>Body</label>
     <input type="text" formControlName="body">
+
+    <label>Public</label>
+    <input type="checkbox" formControlName="public">
 
     <button type="submit">Add</button>
 </form>

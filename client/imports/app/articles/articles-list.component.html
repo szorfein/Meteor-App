@@ -1,10 +1,12 @@
 <div>
-    <articles-form></articles-form>
+    <articles-form style="float: left"></articles-form>
+
+    <input type="text" #searchtext placeholder="Search by Body">
+    <button type="button" (click)="search(searchtext.value)">Search</button>
+
     <ul>
         <li *ngFor="let article of articles | async">
-            <a [routerLink]="['/blog', article._id]">
-                {{ article.title }}
-            </a>
+            <a [routerLink]="['/blog', article._id]">{{article.title}}</a>
             {{article.title}}
             <p>{{article._id}}</p>
             <p>{{article.image}}</p>
