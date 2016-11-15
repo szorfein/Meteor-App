@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 import { MeteorObservable } from 'meteor-rxjs'
+import { InjectUser } from 'angular2-meteor-accounts-ui'
+import { Meteor } from 'meteor/meteor'
 
 import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
@@ -13,7 +15,9 @@ import template from './articles-list.component.html'
     template
 })
 
+@InjectUser('user')
 export class ArticlesListComponent implements OnInit, OnDestroy {
+    user: Meteor.User
     articles: Observable<Article[]>
     articlesSub: Subscription
     

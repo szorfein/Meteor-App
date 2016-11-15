@@ -7,4 +7,5 @@ import template from './header-component.html'
     template
 })
 
-export class HeaderComponent {}
+export class HeaderComponent {
+}

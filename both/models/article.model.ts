@@ -6,5 +6,6 @@ export interface Article extends CollectionObject {
     body: string,
     writer: string,
     owner?: string,
-    public: boolean;
+    public: boolean,
+    datenow?: {type: Date};
 }

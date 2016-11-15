@@ -1,4 +1,3 @@
-<div *ngIf="!user">Please, log in to change article</div>
 <form *ngIf="user" [formGroup]="addForm" (ngSubmit)="addArticle()">
     <label>Title</label>
     <input type="text" formControlName="title">

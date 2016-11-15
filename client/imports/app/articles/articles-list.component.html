@@ -12,7 +12,7 @@
             <p>{{article.image}}</p>
             <p>{{article.body}}</p>
             <p>{{article.writer}}</p>
-            <button (click)="removeArticle(article)">Remove</button>
+            <button *ngIf=user (click)="removeArticle(article)">Remove</button>
         </li>
     </ul>
 </div>
