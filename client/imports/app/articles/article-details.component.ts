@@ -1,9 +1,13 @@
+/// <reference types="/typings/index.d.ts" />
+
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Subscription } from 'rxjs/Subscription'
 import { Meteor } from 'meteor/meteor'
 import { MeteorObservable } from 'meteor-rxjs'
 import { InjectUser } from 'angular2-meteor-accounts-ui'
+
+import MarkdownIt = require('markdown-it')
 
 import 'rxjs/add/operator/map'
 
@@ -25,6 +29,8 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     paramsSub: Subscription
     article: Article
     articleSub: Subscription
+    result: string
+    md = new MarkdownIt()
 
     constructor(
         private route: ActivatedRoute
@@ -39,8 +45,9 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
                 if (this.articleSub) {
                     this.articleSub.unsubscribe()
                 }
-
-                    this.article = Articles.findOne(this.articleId)
+            
+                this.article = Articles.findOne(this.articleId)
+                this.result = this.md.render('# A fucking title')
             })
     }
 

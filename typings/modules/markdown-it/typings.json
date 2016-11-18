@@ -1,0 +1,9 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/rapropos/typed-markdown-it/70184c9d393c09fb93e5cdac9ccf8df2a0f8d291/typings.json",
+    "raw": "registry:npm/markdown-it#4.0.0+20160704212804",
+    "main": "index.d.ts",
+    "name": "markdown-it"
+  }
+}

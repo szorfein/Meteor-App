@@ -28,9 +28,9 @@ function buildQuery(articleId?: string): Object {
             }]
         }]
     }
-
     if (articleId) {
         return {
+            // only single article
             $and: [{
                 _id: articleId
             },

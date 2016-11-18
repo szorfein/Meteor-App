@@ -6,16 +6,22 @@
             "dom"
         ],
         "module": "commonjs",
+        "isolatedModules": false,
         "moduleResolution": "node",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
-        "sourceMap": true
+        "removeComments": false,
+        "noImplicitAny": false,
+        "sourceMap": true,
+        "skipLibCheck": true
     },
     "exclude": [
         "node_modules"
     ],
     "files": [
-        "typings.d.ts"
+        "typings.d.ts",
+        "typings/index.d.ts",
+        "typings/modules/markdown-it/index.d.ts"
     ],
     "compileOnSave": false,
     "angularCompilerOptions": {
