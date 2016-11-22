@@ -19,4 +19,3 @@ shell-server@0.2.1            # Server-side component of the `meteor shell` comm
 
 angular2-compilers
 accounts-password
-convexset:markdown-it-plugins

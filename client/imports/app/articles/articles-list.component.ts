@@ -20,10 +20,12 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     user: Meteor.User
     articles: Observable<Article[]>
     articlesSub: Subscription
+    fckArray
     
     ngOnInit() {
         this.articles = Articles.find({}).zone()
         this.articlesSub = MeteorObservable.subscribe('articles').subscribe()
+        this.fckArray = [{ title : 'hijack' }]
     }
     
     removeArticle(article: Article): void {
@@ -31,7 +33,7 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     }
 
     search(value: string): void {
-        this.articles = Articles.find(value ? { body: value } : {}).zone()
+        this.articles = Articles.find(value ? { lang: value } : {}).zone()
     }
 
     ngOnDestroy() {

@@ -16,19 +16,28 @@ import template from './articles-form.component.html'
 export class ArticlesFormComponent implements OnInit {
     addForm: FormGroup
     user: Meteor.User
+    blocTmp: [{ 
+        title: string, 
+        lastEdit: Date,
+        lastEditOwner: string,
+        description: string,
+        lang: string, 
+        article: string
+    }]
 
     constructor(
         private formBuilder: FormBuilder
     ) {}
 
     ngOnInit() {
-        console.log(this.user)
+        console.log('User: ' + this.user)
         this.addForm = this.formBuilder.group({
-            writer: ['', Validators.required],
             title: ['', Validators.required],
             image: ['', Validators.required],
-            body: ['', Validators.required],
-            public: [false]
+            description: ['', Validators.required],
+            lang: ['en'],
+            article: ['', Validators.required],
+            isPublic: [false]
         })
     }
 
@@ -40,7 +49,21 @@ export class ArticlesFormComponent implements OnInit {
         }
 
         if (this.addForm.valid) {
-            Articles.insert(Object.assign({}, this.addForm.value, { owner: Meteor.userId() }))
+            this.blocTmp = [ { 
+                title: this.addForm.value.title, 
+                lastEdit: new Date(),
+                lastEditOwner: Meteor.userId(),
+                description: this.addForm.value.description,
+                lang: this.addForm.value.lang,
+                article: this.addForm.value.article
+            } ]
+            Articles.insert({
+                createdAt: new Date(),
+                owner: Meteor.userId(), 
+                image: this.addForm.value.image,
+                bloc: this.blocTmp,
+                isPublic: this.addForm.value.isPublic
+            })
 
             this.addForm.reset()
         }

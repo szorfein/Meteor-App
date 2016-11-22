@@ -1,24 +1,22 @@
-import { ninja } from '/lib/config.js'
+import { ninja } from '/lib/config'
 import { Accounts } from 'meteor/accounts-base'
 
 export function createRootAccount() {
 
-    this.newRoot = ninja
-
-    if (!this.newRoot.username)
+    if (!ninja.username)
         return
 
-    if (!this.newRoot.password)
+    if (!ninja.password)
         return
 
-    if (!this.newRoot.email)
+    if (!ninja.email)
         return
     
-    if (Accounts.findUserByUsername(this.newRoot.username)) {
-        console.log('Root '+this.newRoot.username+' alrealy exist')
+    if (Accounts.findUserByUsername(ninja.username)) {
+        console.log('Root '+ninja.username+' alrealy exist')
         return
     }
 
-    Accounts.createUser(this.newRoot)
+    Accounts.createUser(ninja)
 }
 

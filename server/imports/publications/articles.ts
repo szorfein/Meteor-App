@@ -13,7 +13,7 @@ function buildQuery(articleId?: string): Object {
     const isAvailable = {
         $or: [{
             // article is public
-            public: true
+            isPublic: true
         },
         // or
         {

@@ -1,5 +1,3 @@
-/// <reference types="/typings/index.d.ts" />
-
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Subscription } from 'rxjs/Subscription'
@@ -29,8 +27,11 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     paramsSub: Subscription
     article: Article
     articleSub: Subscription
-    result: string
     md = new MarkdownIt()
+
+    get markdownDisplay() { 
+        return this.md.render(this.article.bloc[0].article)
+    } 
 
     constructor(
         private route: ActivatedRoute
@@ -46,8 +47,9 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
                     this.articleSub.unsubscribe()
                 }
             
+                this.user
                 this.article = Articles.findOne(this.articleId)
-                this.result = this.md.render('# A fucking title')
+                this.markdownDisplay
             })
     }
 
@@ -59,10 +61,8 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
 
         Articles.update(this.article._id, {
             $set: {
-                title: this.article.title,
                 image: this.article.image,
-                writer: this.article.writer,
-                body: this.article.body
+                bloc: this.article.bloc
             }
         })
     }

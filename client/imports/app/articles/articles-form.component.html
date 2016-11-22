@@ -1,18 +1,21 @@
 <form *ngIf="user" [formGroup]="addForm" (ngSubmit)="addArticle()">
-    <label>Title</label>
-    <input type="text" formControlName="title">
+    <label for="title">Title</label>
+    <input type="text" formControlName="title" name="title">
 
-    <label>Writer</label>
-    <input type="text" formControlName="writer">
+    <label for="image">Image</label>
+    <input type="text" formControlName="image" name="image">
 
-    <label>Image</label>
-    <input type="text" formControlName="image">
+    <label for="description">Description</label>
+    <input type="text" formControlName="description" name="description">
 
-    <label>Body</label>
-    <input type="text" formControlName="body">
+    <label for="lang">Lang</label>
+    <input type="text" formControlName="lang" name="lang">
 
-    <label>Public</label>
-    <input type="checkbox" formControlName="public">
+    <label for="article">Article</label>
+    <input type="text" formControlName="article" name="article">
+
+    <label for="public">Public</label>
+    <input type="checkbox" formControlName="isPublic">
 
     <button type="submit">Add</button>
 </form>
