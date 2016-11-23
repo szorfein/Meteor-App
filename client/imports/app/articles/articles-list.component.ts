@@ -33,7 +33,9 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     }
 
     search(value: string): void {
-        this.articles = Articles.find(value ? { lang: value } : {}).zone()
+        console.log('search value : ' + value.length)
+        if (value.length === 2)
+            this.articles = Articles.find(value ? { 'bloc.lang': value } : {}).zone()
     }
 
     ngOnDestroy() {
