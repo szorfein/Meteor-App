@@ -2,9 +2,8 @@ import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
 
 export function loadArticles() {
-    console.log(Articles.find().cursor.count())
-    if (Articles.find().cursor.count() === 0) {
 
+    if (Articles.find().cursor.count() === 0) {
         const articles: Article[] = [
             {
                 owner: 'myroot',
@@ -55,7 +54,7 @@ export function loadArticles() {
                 hate: 33
             }
         ]
-
         articles.forEach((article: Article) => Articles.insert(article))
     }
+
 }
