@@ -17,5 +17,10 @@
     <label for="public">Public</label>
     <input type="checkbox" formControlName="isPublic">
 
+    <div *ngFor="let t of tags | async">
+        <label for="tag">{{ t.name }}</label>
+        <input type="checkbox" (click)="addTag(t.name)" name="{{ t.name }}">
+    </div>
+
     <button type="submit">Add</button>
 </form>

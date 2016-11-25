@@ -1,0 +1,17 @@
+<div *ngIf="tag">
+    <h1>{{tag.name}}</h1>
+</div>
+<div *ngIf="articles">
+
+        <div *ngFor="let article of articles | async">
+            <div *ngFor="let bl of article.bloc">
+
+                <p><a [routerLink]="['/blog', article._id]">{{ bl.title }}</a></p>
+                <p>{{ article.image }}<br />
+                Owner: {{ article.owner }}<br />
+                createdAd: {{ article.createdAd }}
+                <p>{{ bl.description }}</p>
+            </div>
+
+        </div>
+</div>

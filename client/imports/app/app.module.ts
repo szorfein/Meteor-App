@@ -11,11 +11,11 @@ import { AboutComponent } from './about/about-component'
 import { IndexComponent } from './index/index.component'
 import { SidebarComponent } from './sidebar/sidebar.component'
 import { ContactComponent } from './contact/contact.component'
-import { TagComponent } from './tags/tag.component'
 
 import { ARTICLES_DECLARATIONS } from './articles'
 import { HEADER_DECLARATIONS } from './header'
 import { FOOTER_DECLARATIONS } from './footer'
+import { TAGS_DECLARATIONS } from './tags'
 
 @NgModule({
     imports: [
@@ -31,10 +31,10 @@ import { FOOTER_DECLARATIONS } from './footer'
         AboutComponent,
         SidebarComponent,
         ContactComponent,
-        TagComponent,
         ...ARTICLES_DECLARATIONS,
         ...HEADER_DECLARATIONS,
-        ...FOOTER_DECLARATIONS
+        ...FOOTER_DECLARATIONS,
+        ...TAGS_DECLARATIONS
     ],
     providers: [
         ...ROUTES_PROVIDERS

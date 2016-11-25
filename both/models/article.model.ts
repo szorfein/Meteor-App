@@ -14,5 +14,6 @@ export interface Article extends CollectionObject {
     } ],  
     isPublic: boolean,
     like?: number,
-    hate?: number
+    hate?: number,
+    tags?: [ string ]   
 }

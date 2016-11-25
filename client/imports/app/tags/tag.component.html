@@ -1,5 +1,5 @@
 <div *ngFor="let tag of tags | async">
     <li>
-        <ul>{{ tag.name }}</ul>
+        <ul><a [routerLink]="['/blog/category', tag.name]">{{tag.name}}</a></ul>
     </li>
 </div>

@@ -19,7 +19,8 @@ export function loadArticles() {
                 } ],
                 isPublic: true,
                 like: 344,
-                hate: 11
+                hate: 11,
+                tags: [ 'linux', 'Windows', 'OSX' ]
             },
             {
                 owner: 'myroot',
