@@ -5,12 +5,12 @@ import { RouterModule } from '@angular/router'
 import { AccountsModule } from 'angular2-meteor-accounts-ui'
 
 import { AppComponent } from './app.component'
-import { routes } from './app.routes'
-import { ROUTES_PROVIDERS } from './app.routes'
+import { routes, ROUTES_PROVIDERS } from './app.routes'
 import { AboutComponent } from './about/about-component'
 import { IndexComponent } from './index/index.component'
 import { SidebarComponent } from './sidebar/sidebar.component'
 import { ContactComponent } from './contact/contact.component'
+import { UserDetailsComponent } from './user/user-details.component'
 
 import { ARTICLES_DECLARATIONS } from './articles'
 import { HEADER_DECLARATIONS } from './header'
@@ -31,6 +31,7 @@ import { TAGS_DECLARATIONS } from './tags'
         AboutComponent,
         SidebarComponent,
         ContactComponent,
+        UserDetailsComponent,
         ...ARTICLES_DECLARATIONS,
         ...HEADER_DECLARATIONS,
         ...FOOTER_DECLARATIONS,

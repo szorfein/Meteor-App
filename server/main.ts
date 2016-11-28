@@ -5,6 +5,7 @@ import { createRootAccount } from '/server/imports/fixtures/root'
 import { loadTags } from '/server/imports/fixtures/tags'
 
 import './imports/publications/articles'
+import '/both/methods/users.methods'
 import './imports/publications/tags'
 
 Meteor.startup(() => {

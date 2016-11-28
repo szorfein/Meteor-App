@@ -11,10 +11,11 @@
     </div>
 
     <button type="submit">Finish</button>
+    <a [routerLink]="['/']">Cancel</a>
 </form>
 
 <header *ngIf="article">
-    <h1>{{article.owner}}</h1>
+    <h1>{{article.author}}</h1>
     <p>{{ article.image }}</p>
     <div *ngFor="let bloc of article.bloc">
     {{ bloc.title }}

@@ -6,7 +6,8 @@ export function loadArticles() {
     if (Articles.find().cursor.count() === 0) {
         const articles: Article[] = [
             {
-                owner: 'myroot',
+                author: 'myroot',
+                authorId: 'jfoizefjigzoi',
                 createdAt: new Date(),
                 image: '/path/to/img',
                 bloc: [ {
@@ -23,7 +24,8 @@ export function loadArticles() {
                 tags: [ 'linux', 'Windows', 'OSX' ]
             },
             {
-                owner: 'myroot',
+                author: 'myroot',
+                authorId: 'ofjiozgjozjg',
                 createdAt: new Date(),
                 image: '/path/to/img',
                 bloc: [ {
@@ -39,7 +41,8 @@ export function loadArticles() {
                 hate: 11
             },
             {
-                owner: 'myroot',
+                author: 'myroot',
+                authorId: 'jgoizjgzjij',
                 createdAt: new Date(),
                 image: '/path/to/img',
                 bloc: [ {

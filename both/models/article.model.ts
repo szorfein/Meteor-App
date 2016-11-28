@@ -1,7 +1,8 @@
 import { CollectionObject } from './collection-object.model'
 
 export interface Article extends CollectionObject {
-    owner: string,
+    author: string,
+    authorId: string,
     createdAt: Date,
     image: string,
     bloc: [ { 

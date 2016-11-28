@@ -86,7 +86,8 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
 
             Articles.insert({
                 createdAt: new Date(),
-                owner: Meteor.userId(), 
+                author: this.user.username,
+                authorId: Meteor.userId(), 
                 image: this.addForm.value.image,
                 bloc: this.blocTmp,
                 isPublic: this.addForm.value.isPublic,

@@ -10,7 +10,7 @@
 
                 <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
                 <p>{{ article.image }}<br />
-                Owner: {{ article.owner }} <br />
+                <a [routerLink]="['/user', article.author]">{{article.author}}</a><br />
                 createdAt: {{ article.createdAt }}
                 <p>{{ bl.description }}</p>
             </div>

@@ -19,10 +19,10 @@ function buildQuery(articleId?: string): Object {
         {
             // current user is the owner
             $and: [{
-                owner: this.userId
+                authorId: this.userId
             },
             {
-                owner: {
+                authorId: {
                     $exists: true
                 }
             }]
