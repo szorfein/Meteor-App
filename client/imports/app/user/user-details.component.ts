@@ -1,12 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Subscription } from 'rxjs/Subscription'
+import { Observable } from 'rxjs/Observable'
 
 import { InjectUser } from 'angular2-meteor-accounts-ui'
 import { Meteor } from 'meteor/meteor'
 import { MeteorObservable } from 'meteor-rxjs'
-
-import { CanActivate } from '@angular/router'
 
 import { UserExt } from '/both/models/user.model'
 import { UsersExt } from '/both/collections/users.collection'
@@ -21,22 +20,18 @@ import { Accounts } from 'meteor/accounts-base'
 })
 
 @InjectUser('user')
-export class UserDetailsComponent implements OnInit, OnDestroy, CanActivate {
+export class UserDetailsComponent implements OnInit, OnDestroy {
+
     user: Meteor.User
     userName: string
     paramsSub: Subscription
-    userExt: UserExt
-    userExtSub: Subscription
+
+    userext: Observable<UserExt[]>
+    userextsub: Subscription
 
     userRegister
-    userext
 
     constructor( private route: ActivatedRoute ) {}
-
-    canActivate() {
-        const userExt = UsersExt.findOne({ 'idOwner': this.user })
-        return (userExt && userExt.idOwner == Meteor.userId())
-    }
 
     ngOnInit() {
         this.paramsSub = this.route.params
@@ -45,7 +40,16 @@ export class UserDetailsComponent implements OnInit, OnDestroy, CanActivate {
             this.userName = userName
 
             this.user
-            this.userext = UsersExt.findOne({ 'idOwner': this.userName })
+
+            if (this.userextsub) {
+                this.userextsub.unsubscribe()
+            }
+
+            this.userextsub = MeteorObservable
+            .subscribe('userprofile', this.userName)
+            .subscribe(() => {
+                this.userext = UsersExt.findOne({ 'name': this.userName })
+            })
 
             if (this.user) {
                 MeteorObservable.call('createUserProfil', this.user._id, this.userName)
@@ -57,5 +61,6 @@ export class UserDetailsComponent implements OnInit, OnDestroy, CanActivate {
     }
 
     ngOnDestroy() {
+        this.userextsub.unsubscribe()
     }
 }

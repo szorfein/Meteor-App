@@ -51,7 +51,6 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
-        console.log('User: ' + this.user)
         this.addForm = this.formBuilder.group({
             title: ['', [Validators.required, Validators.minLength(2)] ],
             image: ['', Validators.required],

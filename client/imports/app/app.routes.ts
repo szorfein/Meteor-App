@@ -17,7 +17,6 @@ export const routes: Route[] = [
     { path: 'about', component: AboutComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'user/:userName', component: UserDetailsComponent }
-    //{ path: 'user/:userName', component: UserDetailsComponent, canActivate: ['canActivateForLoggedIn'] }
 ]
 
 export const ROUTES_PROVIDERS = [{

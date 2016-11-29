@@ -1,4 +1,8 @@
-<div *ngIf='user'>
-    <h1>Hi {{user}}</h1>
+<div *ngIf='userext'>
+    Name: {{ userext.name }}
+    Profile: {{ userext.isPublic }}
+</div>
+<div *ngIf='!userext'>
+    <p>User not found</p>
 </div>
 <div *ngIf='!user'>Please log in</div>
