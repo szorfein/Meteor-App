@@ -59,13 +59,13 @@ Meteor.methods({
         check(userName, String)
 
         if (isRegisterFromUserExt(userId)) 
-            throw new Meteor.Error('400', 'User alrealy created')
+            throw new Meteor.Error('200', 'User alrealy created')
 
         if (Meteor.isServer) {
 
             // isRegister is only server side
             if (!isRegister(userName))
-                throw new Meteor.Error('403', 'No permissions')
+                throw new Meteor.Error('401', 'No permissions')
 
             // Only first user is condiderate as Admin
             if (isFirstUser && !isRegisterFromUserExt(userId))

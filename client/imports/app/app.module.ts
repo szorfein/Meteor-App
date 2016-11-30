@@ -16,6 +16,7 @@ import { ARTICLES_DECLARATIONS } from './articles'
 import { HEADER_DECLARATIONS } from './header'
 import { FOOTER_DECLARATIONS } from './footer'
 import { TAGS_DECLARATIONS } from './tags'
+import { COMMENTS_DECLARATIONS } from './comments'
 
 @NgModule({
     imports: [
@@ -32,6 +33,7 @@ import { TAGS_DECLARATIONS } from './tags'
         SidebarComponent,
         ContactComponent,
         UserDetailsComponent,
+        ...COMMENTS_DECLARATIONS,
         ...ARTICLES_DECLARATIONS,
         ...HEADER_DECLARATIONS,
         ...FOOTER_DECLARATIONS,

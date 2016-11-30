@@ -1,0 +1,14 @@
+<div>
+    <h3>Comments</h3>
+    <div *ngIf="user">
+        <comment-form></comment-form>
+    </div>
+    <div *ngIf="comment">
+        <p>some comments found...</p>
+        <div *ngFor="let co of comment | async">
+            {{ co.poster }}
+            {{ co.posted }}
+            {{ co.post }}
+        </div>
+    </div>
+</div>

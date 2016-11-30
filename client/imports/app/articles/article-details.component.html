@@ -1,26 +1,37 @@
-<form *ngIf=user (submit)="saveArticle()">
+<div *ngIf="article">
+    <form *ngIf="user" (submit)="saveArticle()">
 
-    <label for="image">Image</label>
-    <input type="text" [(ngModel)]="article.image" name="image">
+        <label for="image">Image</label>
+        <input type="text" [(ngModel)]="article.image" name="image">
 
-    <div *ngFor="let bloc of article.bloc">
-        <label for="title">Title</label>
-        <input type="text" [(ngModel)]="bloc.title" name="title">
-        <label for="article">Article</label>
-        <textarea [(ngModel)]="bloc.article" name="article"></textarea>
-    </div>
+        <div *ngFor="let bloc of article.bloc">
+            <label for="title">Title</label>
+            <input type="text" [(ngModel)]="bloc.title" name="title">
 
-    <button type="submit">Finish</button>
-    <a [routerLink]="['/']">Cancel</a>
-</form>
+            <label for="description">Description</label>
+            <textarea [(ngModel)]="bloc.description" name="description"></textarea>
 
-<header *ngIf="article">
-    <h1>{{article.author}}</h1>
-    <p>{{ article.image }}</p>
-    <div *ngFor="let bloc of article.bloc">
-    {{ bloc.title }}
-    {{ bloc.description }}
-    {{ bloc.lang }}
-    </div>
-</header>
-<div [innerHTML]="markdownDisplay"></div>
+            <label for="article">Article</label>
+            <textarea [(ngModel)]="bloc.article" name="article"></textarea>
+        </div>
+
+        <button type="submit">Finish</button>
+        <a [routerLink]="['/']">Cancel</a>
+    </form>
+</div>
+
+<div *ngIf="article">
+    <section *ngFor="let bloc of article.bloc">
+        <article>
+            <header>
+                <h2>{{ bloc.title }}</h2>
+                <cite>{{article.author}}</cite>
+                <figure>{{ article.image }}</figure>
+                {{ bloc.description }}
+                {{ bloc.lang }}
+            </header>
+            <div [innerHTML]="markdownDisplay"></div>
+        </article>
+    </section>
+</div>
+<comment></comment>

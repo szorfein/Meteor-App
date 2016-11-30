@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor'
+import { check } from 'meteor/check'
 import { Articles } from '/both/collections/articles.collection'
 
 Meteor.publish('articles', function() {
@@ -10,31 +11,23 @@ Meteor.publish('article', function(articleId: string) {
 })
 
 function buildQuery(articleId?: string): Object {
+    if(articleId) check(articleId, String)
+
     const isAvailable = {
-        $or: [{
-            // article is public
-            isPublic: true
-        },
-        // or
-        {
-            // current user is the owner
-            $and: [{
-                authorId: this.userId
-            },
-            {
-                authorId: {
-                    $exists: true
-                }
-            }]
-        }]
+        $or: [
+            { isPublic: true },
+            { $and: [
+                { authorId: this.userId },
+                { authorId: { $exists: true } }
+            ] }
+        ]
     }
+    
     if (articleId) {
         return {
-            // only single article
-            $and: [{
-                _id: articleId
-            },
-            isAvailable
+            $and: [
+                { _id: articleId },
+                isAvailable
             ]
         }
     }

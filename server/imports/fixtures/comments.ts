@@ -1,10 +1,10 @@
-import { C0mm3nts } from '/both/collections/comments.collection'
-import { C0mm3nt } from '/both/models/comment.model'
+import { Comments } from '/both/collections/comments.collection'
+import { C0mment } from '/both/models/comment.model'
 import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
 
 function isCleanComment() {
-    return (C0mm3nts.find().cursor.count() === 0)
+    return (Comments.find().cursor.count() === 0)
 }
 
 function isExistArticle() {

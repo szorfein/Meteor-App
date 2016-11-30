@@ -1,12 +1,10 @@
 import { CollectionObject } from './collection-object.model'
 
-export interface C0mm3nt extends CollectionObject {
-    articleId: string,
+export interface C0mment extends CollectionObject {
     poster: string, 
     posted: Date, 
-    lastEdit?: Date,
-    img: string, 
-    parentId?: string,
-    like: [ { nb: number, username: string, when: Date } ]
-    hate: [ { nb: number, username: string, when: Date } ]
+    lastposted?: Date,
+    father: string,
+    son?: string,
+    post: string
 }

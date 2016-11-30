@@ -1,0 +1,7 @@
+<div>
+    <form *ngIf="user" [formGroup]="addForm" (ngSubmit)="addComment()">
+        <label for="post">Post</label>
+        <textarea formControlName="post" name="post"></textarea>
+        <button type="submit">Add Post</button>
+    </form>
+</div>

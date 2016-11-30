@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Subscription } from 'rxjs/Subscription'
+import { Observable } from 'rxjs/Observable'
 import { Meteor } from 'meteor/meteor'
 import { MeteorObservable } from 'meteor-rxjs'
 import { InjectUser } from 'angular2-meteor-accounts-ui'
@@ -25,17 +26,14 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     user: Meteor.User
     articleId: string
     paramsSub: Subscription
+
+    /* Bug if i add Observable<Article[]>, test later with update... */
     article: Article
     articleSub: Subscription
+
     md = new MarkdownIt()
 
-    get markdownDisplay() { 
-        return this.md.render(this.article.bloc[0].article)
-    } 
-
-    constructor(
-        private route: ActivatedRoute
-    ) {}
+    constructor(private route: ActivatedRoute) {}
 
     ngOnInit() {
         this.paramsSub = this.route.params
@@ -48,10 +46,17 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
                 }
             
                 this.user
-                this.article = Articles.findOne(this.articleId)
-                this.markdownDisplay
+                this.articleSub = MeteorObservable
+                .subscribe('article', this.articleId)
+                .subscribe(() => {
+                    this.article = Articles.findOne({ '_id': this.articleId })
+                })
             })
     }
+
+    get markdownDisplay() { 
+        if (this.article) return this.md.render(this.article.bloc[0].article)
+    } 
 
     saveArticle() {
         if (!Meteor.userId()) {
@@ -59,12 +64,14 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
             return
         }
 
-        Articles.update(this.article._id, {
-            $set: {
-                image: this.article.image,
-                bloc: this.article.bloc
-            }
-        })
+        if (this.article) {
+            Articles.update(this.article._id, {
+                $set: {
+                    image: this.article.image,
+                    bloc: this.article.bloc
+                }
+            })
+        }
     }
 
     ngOnDestroy() {

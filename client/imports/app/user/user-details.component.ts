@@ -12,8 +12,6 @@ import { UsersExt } from '/both/collections/users.collection'
 
 import template from './user-details.component.html'
 
-import { Accounts } from 'meteor/accounts-base'
-
 @Component({
     selector: 'user-detail',
     template
@@ -50,14 +48,16 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
             .subscribe(() => {
                 this.userext = UsersExt.findOne({ 'name': this.userName })
             })
-
-            if (this.user) {
-                MeteorObservable.call('createUserProfil', this.user._id, this.userName)
-                .subscribe(() => {
-                    console.log(this.userName + ' has been created .')
-                }, (error) => { console.log(`Failed because -> ${error}`) })
-            }
         })
+    }
+
+    addUserProfile() {
+        if (this.user) {
+            MeteorObservable.call('createUserProfil', this.user._id, this.userName)
+            .subscribe(() => {
+                console.log(this.userName + ' has been created .')
+            }, (error) => { console.log(`Failed because -> ${error}`) })
+        }
     }
 
     ngOnDestroy() {

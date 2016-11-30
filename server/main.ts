@@ -4,10 +4,13 @@ import { loadArticles } from '/server/imports/fixtures/articles'
 import { createRootAccount } from '/server/imports/fixtures/root'
 import { loadTags } from '/server/imports/fixtures/tags'
 
-import './imports/publications/articles'
 import '/both/methods/users.methods'
+import '/both/methods/comments.methods'
+
+import './imports/publications/articles'
 import './imports/publications/tags'
 import './imports/publications/users'
+import './imports/publications/comments'
 
 Meteor.startup(() => {
     loadArticles()
