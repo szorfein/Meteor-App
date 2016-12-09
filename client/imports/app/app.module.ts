@@ -17,6 +17,7 @@ import { FOOTER_DECLARATIONS } from './footer'
 import { TAGS_DECLARATIONS } from './tags'
 import { COMMENTS_DECLARATIONS } from './comments'
 import { USERS_DECLARATIONS } from './user'
+import { AUTH_DECLARATIONS } from './auth'
 
 @NgModule({
     imports: [
@@ -37,7 +38,8 @@ import { USERS_DECLARATIONS } from './user'
         ...HEADER_DECLARATIONS,
         ...FOOTER_DECLARATIONS,
         ...USERS_DECLARATIONS,
-        ...TAGS_DECLARATIONS
+        ...TAGS_DECLARATIONS,
+        ...AUTH_DECLARATIONS
     ],
     providers: [
         ...ROUTES_PROVIDERS

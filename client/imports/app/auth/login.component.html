@@ -1,0 +1,15 @@
+<div>
+    <h2>Sign In</h2>
+    <div>
+        <p>Sign in with email</p>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <label for="email">Email</label>
+            <input type="email" formControlName="email">
+
+            <label for="password">Password</label>
+            <input type="password" formControlName="password">
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <div><a [routerLink]="['/signup']">Need an account?</a></div>
+</div>

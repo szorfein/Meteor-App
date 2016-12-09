@@ -70,6 +70,10 @@ export class UserBarComponent implements OnInit, OnDestroy {
         }
     }
 
+    logout() {
+        Meteor.logout()
+    }
+
     ngOnDestroy() {
         this.userextsub.unsubscribe()
         this.usersub.unsubscribe()

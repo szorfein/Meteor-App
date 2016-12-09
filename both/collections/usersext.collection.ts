@@ -8,11 +8,6 @@ export const UsersExt = new MongoObservable.Collection<UserExt>('usersext')
 const newroot = UsersExt.findOne({ 'admin': true })
 
 function isRoot() {
-    console.log('newroot exist in root ? 1 ' + !!newroot.idOwner)
-    console.log('newroot exist in root ? 2 ' + newroot.idOwner)
-    console.log('newroot exist in root ? 3 ' + !!newroot)
-    console.log('newroot exist in root ? 4 ' + newroot)
-    console.log('User is root ? -> ' + !!(newroot.idOwner === Meteor.userId()))
     if (!newroot) return false
         else
             return newroot.idOwner === Meteor.userId()

@@ -1,8 +1,10 @@
 <div *ngIf="user">
     <p>
     <a [routerLink]="['/user', user.username]">{{ user.username }}</a>
+    <button (click)="logout()">Logout</button>
     </p>
 </div>
 <div *ngIf="userext">
     <p>userext seem present</p>
 </div>
+

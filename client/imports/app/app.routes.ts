@@ -8,6 +8,9 @@ import { IndexComponent } from './index/index.component'
 import { ContactComponent } from './contact/contact.component'
 import { TagDetailComponent } from './tags/tag-detail.component'
 import { UserDetailsComponent } from './user/user-details.component'
+import { LoginComponent } from './auth/login.component'
+import { SignupComponent } from './auth/signup.component'
+import { RecoverComponent } from './auth/recover.component'
 
 export const routes: Route[] = [
     { path: '', component: IndexComponent },
@@ -16,7 +19,10 @@ export const routes: Route[] = [
     { path: 'blog/category/:tagName', component: TagDetailComponent },
     { path: 'about', component: AboutComponent },
     { path: 'contact', component: ContactComponent },
-    { path: 'user/:userName', component: UserDetailsComponent }
+    { path: 'user/:userName', component: UserDetailsComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'signup', component: SignupComponent },
+    { path: 'recover', component: RecoverComponent }
 ]
 
 export const ROUTES_PROVIDERS = [{

@@ -1,0 +1,13 @@
+<div>
+    <h2>Recover account</h2>
+    <div>
+        <form [formGroup]="recoverForm" (ngSubmit)="recover()">
+
+            <label for="email">Email</label>
+            <input type="email" formControlName="email">
+
+            <button type="submit">Recover</button>
+        </form>
+    </div>
+    <div><a [routerLink]="['/login']">remember password?</a></div>
+</div>
