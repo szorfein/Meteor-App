@@ -1,0 +1,8 @@
+<div *ngIf="user">
+    <p>
+    <a [routerLink]="['/user', user.username]">{{ user.username }}</a>
+    </p>
+</div>
+<div *ngIf="userext">
+    <p>userext seem present</p>
+</div>

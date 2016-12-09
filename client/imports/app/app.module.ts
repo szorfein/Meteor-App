@@ -10,13 +10,13 @@ import { AboutComponent } from './about/about-component'
 import { IndexComponent } from './index/index.component'
 import { SidebarComponent } from './sidebar/sidebar.component'
 import { ContactComponent } from './contact/contact.component'
-import { UserDetailsComponent } from './user/user-details.component'
 
 import { ARTICLES_DECLARATIONS } from './articles'
 import { HEADER_DECLARATIONS } from './header'
 import { FOOTER_DECLARATIONS } from './footer'
 import { TAGS_DECLARATIONS } from './tags'
 import { COMMENTS_DECLARATIONS } from './comments'
+import { USERS_DECLARATIONS } from './user'
 
 @NgModule({
     imports: [
@@ -32,11 +32,11 @@ import { COMMENTS_DECLARATIONS } from './comments'
         AboutComponent,
         SidebarComponent,
         ContactComponent,
-        UserDetailsComponent,
         ...COMMENTS_DECLARATIONS,
         ...ARTICLES_DECLARATIONS,
         ...HEADER_DECLARATIONS,
         ...FOOTER_DECLARATIONS,
+        ...USERS_DECLARATIONS,
         ...TAGS_DECLARATIONS
     ],
     providers: [

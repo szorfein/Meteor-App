@@ -94,6 +94,9 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
             })
 
             //var idArticle = Articles.findOne({ 'bloc.title' : this.addForm.value.title })
+        
+            this.myTag.clear()
+            arrayOfTags = []
             this.addForm.reset()
         }
     }
