@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, NgZone, OnInit, OnDestroy } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { InjectUser } from 'angular2-meteor-accounts-ui'
 
@@ -10,6 +10,8 @@ import { Observable } from 'rxjs/Observable'
 import { Articles } from '/both/collections/articles.collection'
 import { Tags } from '/both/collections/tags.collection'
 import { Tag } from '/both/models/tag.model'
+import { UserExt } from '/both/models/userext.model'
+import { UsersExt } from '/both/collections/usersext.collection'
 
 import template from './articles-form.component.html'
 
@@ -22,6 +24,9 @@ import template from './articles-form.component.html'
 export class ArticlesFormComponent implements OnInit, OnDestroy {
     addForm: FormGroup
     user: Meteor.User
+
+    root: Observable<UserExt>
+    rootsub: Subscription
 
     blocTmp: [{ 
         title: string, 
@@ -47,10 +52,34 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
     }
 
     constructor(
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private zone: NgZone
     ) {}
 
     ngOnInit() {
+        if (this.rootsub)
+            this.rootsub.unsubscribe()
+
+        if (!!Meteor.user()) {
+            this.rootsub = MeteorObservable.subscribe('root').subscribe(() => {
+                MeteorObservable.autorun().subscribe(() => {
+                    this.callRoot()
+                    this.printForm()
+                }, (error) => {
+                    if (error) {
+                        this.zone.run(() => {
+                        })
+                    }
+                })
+            })
+        }
+    }
+
+    callRoot() {
+        this.root = UsersExt.findOne({ 'idOwner': Meteor.userId() })
+    }
+
+    printForm():void {
         this.addForm = this.formBuilder.group({
             title: ['', [Validators.required, Validators.minLength(2)] ],
             image: ['', Validators.required],
@@ -59,13 +88,15 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
             article: ['', Validators.required],
             isPublic: [false]
         })
+        if (this.tagsSub)
+            this.tagsSub.unsubscribe()
 
-        this.tags = Tags.find({}).zone()
-        this.tagsSub = MeteorObservable.subscribe('tags').subscribe()
+        this.tagsSub = MeteorObservable.subscribe('tags').subscribe(() => {
+            this.tags = Tags.find({}).zone()
+        })
     }
 
     addArticle(): void {
-
         var arrayOfTags = Array.from(this.myTag)
 
         if (!Meteor.userId()) {
@@ -92,16 +123,20 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
                 isPublic: this.addForm.value.isPublic,
                 tags: arrayOfTags
             })
-
-            //var idArticle = Articles.findOne({ 'bloc.title' : this.addForm.value.title })
         
+            // TODO: clear this.tags...
             this.myTag.clear()
-            arrayOfTags = []
+            //arrayOfTags = []
+            //this.tags 
             this.addForm.reset()
         }
     }
 
     ngOnDestroy() {
-        this.tagsSub.unsubscribe()
+        if (this.tagsSub)
+            this.tagsSub.unsubscribe()
+        
+        if (this.rootsub)
+            this.rootsub.unsubscribe()
     }
 }

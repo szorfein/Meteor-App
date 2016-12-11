@@ -14,7 +14,7 @@
                 createdAt: {{ article.createdAt }}
                 <p>{{ bl.description }}</p>
             </div>
-            <button *ngIf=user (click)="removeArticle(article)">Remove</button>
+            <button *ngIf=root (click)="removeArticle(article)">Remove</button>
         </li>
     </ul>
 </div>

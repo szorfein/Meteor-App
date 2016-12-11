@@ -12,6 +12,8 @@ import 'rxjs/add/operator/map'
 
 import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
+import { UsersExt } from '/both/collections/usersext.collection'
+import { UserExt } from '/both/models/userext.model'
 
 import template from './article-details.component.html'
 
@@ -27,7 +29,12 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     articleId: string
     paramsSub: Subscription
 
-    /* Bug if i add Observable<Article[]>, test later with update... */
+    root: Observable<UserExt>
+    rootsub: Subscription
+
+    /* Bug if i add Observable<Article>, test later with update...
+    * Complain about property 'xxx' do not exist on type 'Observable<>'
+    */
     article: Article
     articleSub: Subscription
 
@@ -40,22 +47,41 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
             .map(params => params['articleId'])
             .subscribe(articleId => {
                 this.articleId = articleId
-           
-                if (this.articleSub) {
-                    this.articleSub.unsubscribe()
-                }
             
                 this.user
-                this.articleSub = MeteorObservable
-                .subscribe('article', this.articleId)
-                .subscribe(() => {
-                    this.article = Articles.findOne({ '_id': this.articleId })
-                })
+                this.printArticle()
+                
+                if (!!Meteor.user()) {
+                    if (this.rootsub) 
+                        this.rootsub.unsubscribe()
+
+                    this.rootsub = MeteorObservable.subscribe('root').subscribe(() => {
+                        MeteorObservable.autorun().subscribe(() => {
+                            this.callRoot()
+                        })
+                    })
+                }
             })
     }
 
+    callRoot() {
+        this.root = UsersExt.findOne({'idOwner': Meteor.userId() })
+    }
+
+    printArticle() {
+        if (this.articleSub)
+            this.articleSub.unsubscribe()
+
+        this.articleSub = MeteorObservable
+        .subscribe('article', this.articleId)
+        .subscribe(() => {
+            this.article = Articles.findOne({ '_id': this.articleId })
+        })
+    }
+
     get markdownDisplay() { 
-        if (this.article) return this.md.render(this.article.bloc[0].article)
+        if (this.article) 
+            return this.md.render(this.article.bloc[0].article)
     } 
 
     saveArticle() {

@@ -3,8 +3,8 @@
     <nav>
         <a [routerLink]="['/']">Home</a>
         <a [routerLink]="['/blog']">blog</a>
-        <a [routerLink]="['/login']">login</a>
-        <a [routerLink]="['/signup']">signup</a>
+        <a *ngIf="!user" [routerLink]="['/login']">login</a>
+        <a *ngIf="!user" [routerLink]="['/signup']">signup</a>
         <a [routerLink]="['/about']">about</a>
         <a [routerLink]="['/contact']">contact</a>
     </nav>

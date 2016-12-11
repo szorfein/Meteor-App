@@ -6,9 +6,11 @@
     <div *ngIf="comment">
         <p>some comments found...</p>
         <div *ngFor="let co of comment | async">
+            <p>
             {{ co.poster }}
-            {{ co.posted }}
+            {{ co.posted }}<br />
             {{ co.post }}
+            </p>
         </div>
     </div>
 </div>

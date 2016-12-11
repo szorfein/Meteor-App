@@ -1,26 +1,31 @@
-<form *ngIf="user" [formGroup]="addForm" (ngSubmit)="addArticle()">
-    <label for="title">Title</label>
-    <input type="text" formControlName="title" name="title">
+<div *ngIf="root">
+    Root present
 
-    <label for="image">Image</label>
-    <input type="text" formControlName="image" name="image">
+    <form [formGroup]="addForm" (ngSubmit)="addArticle()">
+        <label for="title">Title</label>
+        <input type="text" formControlName="title" name="title">
 
-    <label for="description">Description</label>
-    <input type="text" formControlName="description" name="description">
+        <label for="image">Image</label>
+        <input type="text" formControlName="image" name="image">
 
-    <label for="lang">Lang</label>
-    <input type="text" formControlName="lang" name="lang">
+        <label for="description">Description</label>
+        <input type="text" formControlName="description" name="description">
 
-    <label for="article">Article</label>
-    <input type="text" formControlName="article" name="article">
+        <label for="lang">Lang</label>
+        <input type="text" formControlName="lang" name="lang">
 
-    <label for="public">Public</label>
-    <input type="checkbox" formControlName="isPublic">
+        <label for="article">Article</label>
+        <input type="text" formControlName="article" name="article">
 
-    <div *ngFor="let t of tags | async">
-        <label for="tag">{{ t.name }}</label>
-        <input type="checkbox" (click)="addTag(t.name)" name="{{ t.name }}">
-    </div>
+        <label for="public">Public</label>
+        <input type="checkbox" formControlName="isPublic">
 
-    <button type="submit">Add</button>
-</form>
+        <div *ngFor="let t of tags | async">
+            <label for="tag">{{ t.name }}</label>
+            <input type="checkbox" (click)="addTag(t.name)" name="{{ t.name }}">
+        </div>
+
+        <button type="submit">Add</button>
+    </form>
+</div>
+<div *ngIf="!root">Root NOT present</div>

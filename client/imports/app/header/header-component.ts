@@ -1,4 +1,5 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
+import { InjectUser } from 'angular2-meteor-accounts-ui'
 
 import template from './header-component.html'
 
@@ -7,5 +8,12 @@ import template from './header-component.html'
     template
 })
 
-export class HeaderComponent {
+@InjectUser('user')
+export class HeaderComponent implements OnInit {
+    user: Meteor.User
+
+    ngOnInit() {
+        this.user
+    }
 }
+

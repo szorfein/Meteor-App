@@ -1,5 +1,5 @@
 <div *ngIf="article">
-    <form *ngIf="user" (submit)="saveArticle()">
+    <form *ngIf="root" (submit)="saveArticle()">
 
         <label for="image">Image</label>
         <input type="text" [(ngModel)]="article.image" name="image">

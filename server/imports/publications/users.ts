@@ -22,6 +22,29 @@ Meteor.publish('userbar', function() {
     return UsersExt.find({ 'idOwner': this.userId })
 })
 
+Meteor.publish('root', function() {
+    let root = UsersExt.findOne({ 
+        $and: [
+            { 'idOwner': this.userId },
+            { 'name': { $exists: true }},
+            { 'admin': true },
+            { 'isPublic': false }
+        ]
+    })
+
+    if (!root) 
+        return
+
+    if (root.idOwner === this.userId) {
+        return UsersExt.find({
+            $and: [
+                { 'idOwner': this.userId },
+                { 'admin': true }
+            ]
+        })
+    }
+})
+
 function buildQuery(userName: string) {
     check(userName, String)
     const validator = {

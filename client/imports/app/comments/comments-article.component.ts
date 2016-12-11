@@ -24,7 +24,7 @@ export class CommentsArticleComponent implements OnInit, OnDestroy {
     urlparam: Subscription
 
     comment: Observable<C0mment[]>
-    commentSub: Subscription
+    commentsub: Subscription
     
     constructor(private route: ActivatedRoute) {}
 
@@ -34,8 +34,11 @@ export class CommentsArticleComponent implements OnInit, OnDestroy {
         .subscribe(articleId => {
             this.articleId = articleId
             this.user
-            this.commentSub = MeteorObservable
-            .subscribe('comments', articleId)
+
+            if (this.commentsub)
+                this.commentsub.unsubscribe()
+
+            this.commentsub = MeteorObservable.subscribe('comments', articleId)
             .subscribe(() => {
                 this.comment = Comments.find({ 'father': this.articleId })
             })
@@ -52,5 +55,6 @@ export class CommentsArticleComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.urlparam.unsubscribe()
+        this.commentsub.unsubscribe()
     }
 }
