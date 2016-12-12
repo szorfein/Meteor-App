@@ -11,6 +11,7 @@ import './imports/publications/articles'
 import './imports/publications/tags'
 import './imports/publications/users'
 import './imports/publications/comments'
+import './imports/publications/contact'
 
 Meteor.startup(() => {
     loadArticles()

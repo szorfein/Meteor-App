@@ -6,10 +6,7 @@ import { AccountsModule } from 'angular2-meteor-accounts-ui'
 
 import { AppComponent } from './app.component'
 import { routes, ROUTES_PROVIDERS } from './app.routes'
-import { AboutComponent } from './about/about-component'
-import { IndexComponent } from './index/index.component'
 import { SidebarComponent } from './sidebar/sidebar.component'
-import { ContactComponent } from './contact/contact.component'
 
 import { ARTICLES_DECLARATIONS } from './articles'
 import { HEADER_DECLARATIONS } from './header'
@@ -18,6 +15,9 @@ import { TAGS_DECLARATIONS } from './tags'
 import { COMMENTS_DECLARATIONS } from './comments'
 import { USERS_DECLARATIONS } from './user'
 import { AUTH_DECLARATIONS } from './auth'
+import { CONTACT_DECLARATIONS } from './contact'
+import { ABOUT_DECLARATIONS } from './about'
+import { INDEX_DECLARATIONS } from './index'
 
 @NgModule({
     imports: [
@@ -29,17 +29,17 @@ import { AUTH_DECLARATIONS } from './auth'
     ],
     declarations: [
         AppComponent,
-        IndexComponent,
-        AboutComponent,
         SidebarComponent,
-        ContactComponent,
         ...COMMENTS_DECLARATIONS,
         ...ARTICLES_DECLARATIONS,
         ...HEADER_DECLARATIONS,
         ...FOOTER_DECLARATIONS,
         ...USERS_DECLARATIONS,
         ...TAGS_DECLARATIONS,
-        ...AUTH_DECLARATIONS
+        ...AUTH_DECLARATIONS,
+        ...CONTACT_DECLARATIONS,
+        ...ABOUT_DECLARATIONS,
+        ...INDEX_DECLARATIONS
     ],
     providers: [
         ...ROUTES_PROVIDERS

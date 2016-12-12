@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor'
 
 import { ArticlesListComponent } from './articles/articles-list.component'
 import { ArticleDetailsComponent } from './articles/article-details.component'
-import { AboutComponent } from './about/about-component'
+import { AboutComponent } from './about/about.component'
 import { IndexComponent } from './index/index.component'
 import { ContactComponent } from './contact/contact.component'
 import { TagDetailComponent } from './tags/tag-detail.component'

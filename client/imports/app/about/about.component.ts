@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Subscription } from 'rxjs/Subscription'
 import { MeteorObservable } from 'meteor-rxjs'
@@ -11,14 +11,14 @@ import { UserExt } from '/both/models/userext.model'
 import { UsersExt } from '/both/collections/usersext.collection'
 import { isRoot } from '/lib/users'
 
-import template from './index.component.html'
+import template from './about.component.html'
 
 @Component({
-    selector: 'index',
+    selector: 'about-me',
     template
 })
 
-export class IndexComponent implements OnInit {
+export class AboutComponent implements OnInit, OnDestroy {
 
     extra: Extra
     extrasub: Subscription
@@ -36,7 +36,7 @@ export class IndexComponent implements OnInit {
         if (this.extrasub)
             this.extrasub.unsubscribe()
 
-        this.extrasub = MeteorObservable.subscribe('index').subscribe(() => {
+        this.extrasub = MeteorObservable.subscribe('about').subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
                 this.callExtra()
             })
@@ -53,7 +53,7 @@ export class IndexComponent implements OnInit {
     }
 
     callExtra() {
-        this.extra = Extras.findOne({ 'title': 'indexen' })
+        this.extra = Extras.findOne({ 'title': 'abouten' })
     }
 
     callRoot() {
@@ -61,7 +61,7 @@ export class IndexComponent implements OnInit {
     }
 
     /* can only update with id... */
-    saveIndex() {
+    saveAbout() {
         if (isRoot(Meteor.userId())) {
             if (this.extra) {
                 Extras.update(this.extra._id, {
@@ -72,5 +72,9 @@ export class IndexComponent implements OnInit {
                 })
             }
         }
+    }
+
+    ngOnDestroy() {
+
     }
 }

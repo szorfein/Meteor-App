@@ -1,4 +1,15 @@
-<div>
-    <h1>contact</h1>
-    <p>blablabla.</p>
+<div *ngIf="!extra">
+    <contact-form></contact-form>
+</div>
+<div *ngIf="extra">
+    {{ extra.post }}
+</div>
+<div *ngIf="root">
+    <div *ngIf="extra">
+        <form (submit)="saveContact()">
+            <label for="post">Contact</label>
+            <textarea [(ngModel)]="extra.post" name="post"></textarea>
+            <button type="submit">Change Contact</button>
+        </form>
+    </div>
 </div>

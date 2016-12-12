@@ -1,0 +1,10 @@
+<div *ngIf="root">
+    Hi ROOT !
+    <form [formGroup]="contactForm" (ngSubmit)="addPost()">
+        <label for="post">Contact</label>
+        <textarea formControlName="post" name="post"></textarea>
+        <label for="lang">Lang</label>
+        <input type="text" formControlName="lang" name="lang">
+        <button type="submit">Add Contact</button>
+    </form>
+</div>

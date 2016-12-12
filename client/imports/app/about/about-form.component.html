@@ -1,0 +1,9 @@
+<div *ngIf="root">
+    <form [formGroup]="aboutForm" (ngSubmit)="addPost()">
+        <label for="post">About Me</label>
+        <textarea formControlName="post" name="post"></textarea>
+        <label for="lang">Lang</label>
+        <input type="text" formControlName="lang" name="lang">
+        <button type="submit">Add About</button>
+    </form>
+</div>

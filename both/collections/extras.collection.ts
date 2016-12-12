@@ -1,9 +1,9 @@
 import { MongoObservable } from 'meteor-rxjs'
-import { Article } from '/both/models/article.model'
-import { isRoot } from '/lib/users'
+import { Extra } from '/both/models/extra.model'
+import { isRoot } from '/lib/users'
 
-export const Articles = new MongoObservable.Collection<Article>('articles')
-Articles.allow({
+export const Extras = new MongoObservable.Collection<Extra>('extras')
+Extras.allow({
     insert: function(userId: string) {
         return isRoot(userId)
     },

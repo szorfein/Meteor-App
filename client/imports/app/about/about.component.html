@@ -1,15 +1,15 @@
 <div *ngIf="!extra">
-    <index-form></index-form>
+    <about-form></about-form>
 </div>
 <div *ngIf="extra">
     {{ extra.post }}
 </div>
 <div *ngIf="root">
     <div *ngIf="extra">
-        <form (submit)="indexContact()">
-            <label for="post">Presentation</label>
+        <form (submit)="saveAbout()">
+            <label for="post">About Me</label>
             <textarea [(ngModel)]="extra.post" name="post"></textarea>
-            <button type="submit">Change Msg</button>
+            <button type="submit">Change About</button>
         </form>
     </div>
 </div>
