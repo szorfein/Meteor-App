@@ -12,7 +12,7 @@
                 <p>{{ article.image }}<br />
                 <a [routerLink]="['/user', article.author]">{{article.author}}</a><br />
                 createdAt: {{ article.createdAt }}
-                <p>{{ bl.description }}</p>
+                <div [innerHTML]="markdownDisplay(bl.description)"></div>
             </div>
             <button *ngIf=root (click)="removeArticle(article)">Remove</button>
         </li>

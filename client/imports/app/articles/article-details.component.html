@@ -27,10 +27,10 @@
                 <h2>{{ bloc.title }}</h2>
                 <cite>{{article.author}}</cite>
                 <figure>{{ article.image }}</figure>
-                {{ bloc.description }}
+                <div [innerHTML]="markdownDisplay(bloc.description)"></div>
                 {{ bloc.lang }}
             </header>
-            <div [innerHTML]="markdownDisplay"></div>
+            <div [innerHTML]="markdownDisplay(bloc.article)"></div>
         </article>
     </section>
 </div>

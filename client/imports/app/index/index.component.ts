@@ -11,6 +11,7 @@ import { UserExt } from '/both/models/userext.model'
 import { UsersExt } from '/both/collections/usersext.collection'
 import { isRoot } from '/lib/users'
 
+import MarkdownIt = require('markdown-it')
 import template from './index.component.html'
 
 @Component({
@@ -25,6 +26,8 @@ export class IndexComponent implements OnInit {
 
     root: Observable<UserExt>
     rootsub: Subscription
+
+    md = new MarkdownIt()
 
     constructor(
         private route: ActivatedRoute
@@ -47,13 +50,20 @@ export class IndexComponent implements OnInit {
                 this.rootsub.unsubscribe()
 
             this.rootsub = MeteorObservable.subscribe('root').subscribe(() => {
-                this.callRoot()
+                MeteorObservable.autorun().subscribe(() => {
+                    this.callRoot()
+                })
             })
         }
     }
 
     callExtra() {
         this.extra = Extras.findOne({ 'title': 'indexen' })
+    }
+
+    get markdownDisplay() {
+        if (this.extra)
+            return this.md.render(this.extra.post)
     }
 
     callRoot() {

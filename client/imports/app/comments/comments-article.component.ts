@@ -9,6 +9,8 @@ import { Comments } from '/both/collections/comments.collection'
 import { C0mment } from '/both/models/comment.model'
 
 import { InjectUser } from 'angular2-meteor-accounts-ui'
+
+import MarkdownIt = require('markdown-it')
 import template from './comments-article.component.html'
 
 @Component({
@@ -26,6 +28,8 @@ export class CommentsArticleComponent implements OnInit, OnDestroy {
     comment: Observable<C0mment[]>
     commentsub: Subscription
     
+    md = new MarkdownIt()
+
     constructor(private route: ActivatedRoute) {}
 
     ngOnInit() {
@@ -43,6 +47,11 @@ export class CommentsArticleComponent implements OnInit, OnDestroy {
                 this.comment = Comments.find({ 'father': this.articleId })
             })
         })
+    }
+
+    markdownDisplay(text: string):string {
+        if (this.comment)
+            return this.md.render(text)
     }
 
     editComment() {

@@ -1,16 +1,16 @@
 <div>
     <h3>Comments</h3>
-    <div *ngIf="user">
-        <comment-form></comment-form>
-    </div>
     <div *ngIf="comment">
         <p>some comments found...</p>
         <div *ngFor="let co of comment | async">
             <p>
             {{ co.poster }}
-            {{ co.posted }}<br />
-            {{ co.post }}
+            {{ co.posted }}
             </p>
+            <div [innerHTML]="markdownDisplay(co.post)"></div>
         </div>
+    </div>
+    <div *ngIf="user">
+        <comment-form></comment-form>
     </div>
 </div>

@@ -1,12 +1,10 @@
 <div *ngIf="!extra">
     <index-form></index-form>
 </div>
-<div *ngIf="extra">
-    {{ extra.post }}
-</div>
+<div *ngIf="extra" [innerHTML]="markdownDisplay"></div>
 <div *ngIf="root">
     <div *ngIf="extra">
-        <form (submit)="indexContact()">
+        <form (submit)="saveIndex()">
             <label for="post">Presentation</label>
             <textarea [(ngModel)]="extra.post" name="post"></textarea>
             <button type="submit">Change Msg</button>

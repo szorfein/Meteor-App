@@ -11,6 +11,7 @@ import { UserExt } from '/both/models/userext.model'
 import { UsersExt } from '/both/collections/usersext.collection'
 import { isRoot } from '/lib/users'
 
+import MarkdownIt = require('markdown-it')
 import template from './contact.component.html'
 
 @Component({
@@ -25,6 +26,8 @@ export class ContactComponent implements OnInit {
 
     root: Observable<UserExt>
     rootsub: Subscription
+
+    md = new MarkdownIt()
 
     constructor(
         private route: ActivatedRoute
@@ -54,6 +57,11 @@ export class ContactComponent implements OnInit {
 
     callExtra() {
         this.extra = Extras.findOne({ 'title': 'contacten' })
+    }
+
+    get markdownDisplay() {
+        if (this.extra)
+            return this.md.render(this.extra.post)
     }
 
     callRoot() {

@@ -1,9 +1,7 @@
 <div *ngIf="!extra">
     <contact-form></contact-form>
 </div>
-<div *ngIf="extra">
-    {{ extra.post }}
-</div>
+<div *ngIf="extra" [innerHTML]="markdonwDisplay"></div>
 <div *ngIf="root">
     <div *ngIf="extra">
         <form (submit)="saveContact()">

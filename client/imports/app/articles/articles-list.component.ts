@@ -10,6 +10,7 @@ import { Article } from '/both/models/article.model'
 import { UserExt } from '/both/models/userext.model'
 import { UsersExt } from '/both/collections/usersext.collection'
 
+import MarkdownIt = require('markdown-it')
 import template from './articles-list.component.html'
 
 @Component({
@@ -26,6 +27,8 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     root: Observable<UserExt>
     rootsub: Subscription
     
+    md = new MarkdownIt()
+
     constructor(private zone: NgZone) {}
 
     ngOnInit() {
@@ -51,6 +54,11 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     
     callRoot() {
         this.root = UsersExt.findOne({ 'idOwner': Meteor.userId() })
+    }
+
+    markdownDisplay(text:string):string {
+        if (this.articles)
+            return this.md.render(text)
     }
 
     removeArticle(article: Article): void {

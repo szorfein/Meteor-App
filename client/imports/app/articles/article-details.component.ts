@@ -79,9 +79,9 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
         })
     }
 
-    get markdownDisplay() { 
+    markdownDisplay(text:string):string { 
         if (this.article) 
-            return this.md.render(this.article.bloc[0].article)
+            return this.md.render(text)
     } 
 
     saveArticle() {
