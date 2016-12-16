@@ -1,0 +1,14 @@
+@import "imports/app/mobile/ionic.scss";
+
+body {
+    background-color: #fefefe;
+}
+
+body.mobile {
+    overflow: hidden;
+}
+
+body.web {
+    overflow: visible;
+    position: initial;
+}
