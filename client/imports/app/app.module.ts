@@ -6,6 +6,7 @@ import { AccountsModule } from 'angular2-meteor-accounts-ui'
 
 import { AppComponent } from './app.component.web'
 import { routes, ROUTES_PROVIDERS } from './app.routes'
+import { FileDropModule } from 'angular2-file-drop'
 import { SidebarComponent } from './sidebar/sidebar.component'
 
 import { ARTICLES_DECLARATIONS } from './articles'
@@ -18,6 +19,8 @@ import { AUTH_DECLARATIONS } from './auth'
 import { CONTACT_DECLARATIONS } from './contact'
 import { ABOUT_DECLARATIONS } from './about'
 import { INDEX_DECLARATIONS } from './index'
+import { UPLOAD_DECLARATIONS } from './uploads'
+import { SHARED_DECLARATIONS } from './shared'
 
 import { MOBILE_DECLARATIONS } from './mobile'
 import { AppMobileComponent } from './mobile/app.component.mobile'
@@ -32,6 +35,7 @@ if (Meteor.isCordova) {
             IonicModule.forRoot(AppMobileComponent)
         ],
         declarations: [
+            ...SHARED_DECLARATIONS,
             ...MOBILE_DECLARATIONS
         ],
         providers: [
@@ -50,11 +54,13 @@ if (Meteor.isCordova) {
             FormsModule,
             ReactiveFormsModule,
             RouterModule.forRoot(routes),
-            AccountsModule
+            AccountsModule,
+            FileDropModule
         ],
         declarations: [
             AppComponent,
             SidebarComponent,
+            ...SHARED_DECLARATIONS,
             ...COMMENTS_DECLARATIONS,
             ...ARTICLES_DECLARATIONS,
             ...HEADER_DECLARATIONS,
@@ -64,7 +70,8 @@ if (Meteor.isCordova) {
             ...AUTH_DECLARATIONS,
             ...CONTACT_DECLARATIONS,
             ...ABOUT_DECLARATIONS,
-            ...INDEX_DECLARATIONS
+            ...INDEX_DECLARATIONS,
+            ...UPLOAD_DECLARATIONS
         ],
         providers: [
             ...ROUTES_PROVIDERS

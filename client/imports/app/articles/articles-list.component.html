@@ -8,10 +8,13 @@
         <li *ngFor="let article of articles | async">
             <div *ngFor="let bl of article.bloc">
 
+                <p>
                 <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
-                <p>{{ article.image }}<br />
+                <img *ngIf="article.image && article.image.length > 0" 
+                class="img-list" [src]="article | displayMainImage">
                 <a [routerLink]="['/user', article.author]">{{article.author}}</a><br />
                 createdAt: {{ article.createdAt }}
+                </p>
                 <div [innerHTML]="markdownDisplay(bl.description)"></div>
             </div>
             <button *ngIf=root (click)="removeArticle(article)">Remove</button>

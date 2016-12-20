@@ -22,11 +22,11 @@ import template from './articles-form.component.html'
 
 @InjectUser('user')
 export class ArticlesFormComponent implements OnInit, OnDestroy {
-    addForm: FormGroup
-    user: Meteor.User
+    addForm : FormGroup
+    user : Meteor.User
 
-    root: Observable<UserExt>
-    rootsub: Subscription
+    root : Observable<UserExt>
+    rootsub : Subscription
 
     blocTmp: [{ 
         title: string, 
@@ -37,9 +37,11 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
         article: string
     }]
 
-    tags: Observable<Tag[]>
-    tagsSub: Subscription
+    tags : Observable<Tag[]>
+    tagsSub : Subscription
     myTag = new Set()
+    arrayOfTags : string[] = []
+    image: string = ''
 
     // TODO: Add test if tagValue exist in collection !
     addTag(tagValue: string): void {
@@ -79,10 +81,14 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
         this.root = UsersExt.findOne({ 'idOwner': Meteor.userId() })
     }
 
+    onImage(imageId : string) : void {
+        this.image = imageId
+        console.log('Last image register -> ' + this.image)
+    }
+
     printForm():void {
         this.addForm = this.formBuilder.group({
             title: ['', [Validators.required, Validators.minLength(2)] ],
-            image: ['', Validators.required],
             description: ['', Validators.required],
             lang: ['en'],
             article: ['', Validators.required],
@@ -96,8 +102,13 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
         })
     }
 
+    onReset() {
+            this.myTag.clear()
+            this.arrayOfTags = []
+    }
+
     addArticle(): void {
-        var arrayOfTags = Array.from(this.myTag)
+        this.arrayOfTags = Array.from(this.myTag)
 
         if (!Meteor.userId()) {
             alert('Please log in to add article')
@@ -118,15 +129,12 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
                 createdAt: new Date(),
                 author: this.user.username,
                 authorId: Meteor.userId(), 
-                image: this.addForm.value.image,
+                image: this.image,
                 bloc: this.blocTmp,
                 isPublic: this.addForm.value.isPublic,
-                tags: arrayOfTags
+                tags: this.arrayOfTags
             })
         
-            // TODO: clear this.tags...
-            this.myTag.clear()
-            //arrayOfTags = []
             //this.tags 
             this.addForm.reset()
         }

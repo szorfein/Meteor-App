@@ -22,10 +22,12 @@ export class ArticlesList implements OnInit, OnDestroy {
     rootsub: Subscription
     
     md = new MarkdownIt()
+    imageSub : Subscription
 
     constructor(private zone: NgZone) {}
 
     ngOnInit() {
+        this.imageSub = MeteorObservable.subscribe('images').subscribe()
         this.articles = Articles.find({}).zone()
         this.articlesSub = MeteorObservable.subscribe('articles').subscribe()
 
@@ -67,5 +69,6 @@ export class ArticlesList implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.articlesSub.unsubscribe()
+        this.imageSub.unsubscribe()
     }
 }

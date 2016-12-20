@@ -12,6 +12,7 @@ import './imports/publications/tags'
 import './imports/publications/users'
 import './imports/publications/comments'
 import './imports/publications/contact'
+import './imports/publications/images'
 
 Meteor.startup(() => {
     loadArticles()

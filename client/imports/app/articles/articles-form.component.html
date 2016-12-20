@@ -1,12 +1,10 @@
 <div *ngIf="root">
-    Root present
-
-    <form [formGroup]="addForm" (ngSubmit)="addArticle()">
+    <form [formGroup]="addForm" (ngSubmit)="addArticle(); onReset()">
         <label for="title">Title</label>
         <input type="text" formControlName="title" name="title">
 
         <label for="image">Image</label>
-        <input type="text" formControlName="image" name="image">
+        <upload-image #upload (onFile)="onImage($event)"></upload-image>
 
         <label for="description">Description</label>
         <textarea formControlName="description" name="description"></textarea>
@@ -28,4 +26,3 @@
         <button type="submit">Add</button>
     </form>
 </div>
-<div *ngIf="!root">Root NOT present</div>
