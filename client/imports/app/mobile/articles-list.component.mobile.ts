@@ -1,5 +1,6 @@
 import { Component, NgZone } from '@angular/core'
 import { ArticlesList } from '../shared-components/articles-list.class'
+import { PaginationService } from 'ng2-pagination'
 
 import template from './articles-list.component.mobile.html'
 
@@ -10,7 +11,7 @@ import template from './articles-list.component.mobile.html'
 
 export class ArticlesListMobileComponent extends ArticlesList {
 
-    constructor(zone: NgZone) {
-        super(zone)
+    constructor( zone: NgZone, paginationService: PaginationService ) {
+        super( zone, paginationService )
     }
 }

@@ -3,32 +3,6 @@ Minimal webblog with meteor, ionic and angular2.
 
 ## Installation 
 
-### 0 - Mobile.
-
-Require JDK (Java Development Kit) installed for mobile compability (ionic, cordova).  
-On gentoo, proceed with:  
-
-    emerge -av dev-util/android-studio
-    download [jdk-8u112-linux-x64.tar.gz](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-    Move it in /usr/portage/distfiles
-    emerge -av oracle-jdk-bin
-    java-config --list-available-vms
-    java-config --set-system-vm icedtea-8
-    
-on tilling wm, u must launch command bellow  before launch studio.sh:
-
-    export _JAVA_AWT_WM_NONREPARENTING=1
-
-if problem with tmp dir is full, simply change directory:
-
-    export _JAVA_OPTIONS=-Djava.io.tmpdir=/var/tmp
-
-    cd /opt/android-studio/bin && ./studio.sh
-
-    export ANDROID_HOME=$HOME/meteor-sdk
-    export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
-    export JAVA_HOME=/opt/oracle-jdk-bin-1.8.0.112
-
 ### 1 - install Meteor 
 
     $ curl https://install.meteor.com/ | sh
@@ -51,3 +25,10 @@ if problem with tmp dir is full, simply change directory:
 ### 5 - Start
 
     $ meteor
+
+## Troubleshooting:
+
+### With GrSec and PAX, you need disable MPROTECT on meteor and mongo.
+
+    # paxctl-ng -Em ~/.meteor/packages/meteor-tool/.1.4.2.1r0536n++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/bin/node
+    # paxctl-ng -Em ~/.meteor/packages/meteor-tool/.1.4.2.1r0536n++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/mongodb/bin/mongo 

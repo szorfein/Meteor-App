@@ -4,20 +4,24 @@
     <input type="text" #searchtext placeholder="Search by Lang">
     <button type="button" (click)="search(searchtext.value)">Search</button>
 
-    <ul>
-        <li *ngFor="let article of articles | async">
+    <section>
+        <div *ngFor="let article of articles | async">
             <div *ngFor="let bl of article.bloc">
-
-                <p>
-                <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
-                <img *ngIf="article.image && article.image.length > 0" 
-                class="img-list" [src]="article | displayMainImage">
-                <a [routerLink]="['/user', article.author]">{{article.author}}</a><br />
-                createdAt: {{ article.createdAt }}
-                </p>
-                <div [innerHTML]="markdownDisplay(bl.description)"></div>
+                <article>
+                    <header>
+                        <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
+                        <img *ngIf="article.image && article.image.length > 0" 
+                        class="img-list" [src]="article | displayMainImage">
+                        <a [routerLink]="['/user', article.author]">{{article.author}}</a>
+                        createdAt: {{ article.createdAt }}
+                    </header>
+                    <tbody>
+                        <div [innerHTML]="markdownDisplay(bl.description)"></div>
+                        <button *ngIf=root (click)="removeArticle(article)">Remove</button>
+                    </tbody>
+                </article>
             </div>
-            <button *ngIf=root (click)="removeArticle(article)">Remove</button>
-        </li>
-    </ul>
+        </div>
+    </section>
+    <pagination-controls (pageChange)="onPageChanged($event)"></pagination-controls>
 </div>

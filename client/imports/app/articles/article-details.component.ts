@@ -14,6 +14,7 @@ import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
 import { UsersExt } from '/both/collections/usersext.collection'
 import { UserExt } from '/both/models/userext.model'
+import { Images } from '/both/collections/images.collection'
 
 import template from './article-details.component.html'
 
@@ -25,6 +26,8 @@ import template from './article-details.component.html'
 @InjectUser('user')
 export class ArticleDetailsComponent implements OnInit, OnDestroy {
 
+    imageSub : Subscription
+
     user: Meteor.User
     articleId: string
     paramsSub: Subscription
@@ -32,9 +35,6 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     root: Observable<UserExt>
     rootsub: Subscription
 
-    /* Bug if i add Observable<Article>, test later with update...
-    * Complain about property 'xxx' do not exist on type 'Observable<>'
-    */
     article: Article
     articleSub: Subscription
 
@@ -48,6 +48,8 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
             .subscribe(articleId => {
                 this.articleId = articleId
             
+                this.imageSub = MeteorObservable.subscribe('images').subscribe()
+
                 this.user
                 this.printArticle()
                 
@@ -75,7 +77,9 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
         this.articleSub = MeteorObservable
         .subscribe('article', this.articleId)
         .subscribe(() => {
-            this.article = Articles.findOne({ '_id': this.articleId })
+            MeteorObservable.autorun().subscribe(() => {
+                this.article = Articles.findOne({ '_id': this.articleId })
+            })
         })
     }
 
@@ -90,17 +94,16 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
             return
         }
 
-        if (this.article) {
-            Articles.update(this.article._id, {
-                $set: {
-                    image: this.article.image,
-                    bloc: this.article.bloc
-                }
-            })
-        }
+        Articles.update(this.article._id, {
+            $set: {
+                image: this.article.image,
+                bloc: this.article.bloc
+            }
+        })
     }
 
     ngOnDestroy() {
         this.paramsSub.unsubscribe()
+        this.imageSub.unsubscribe()
     }
 }

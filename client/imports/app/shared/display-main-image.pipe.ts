@@ -9,16 +9,18 @@ import { Article } from '/both/models/article.model'
 export class DisplayMainImagePipe implements PipeTransform {
     transform(article: Article) {
 
-        if (!article) 
+        if (!article) {
             return
+        }
 
         let imageUrl : string
         let imageId : string = article.image
 
         const found = Images.findOne({ '_id': imageId }) 
 
-        if (found) 
+        if (found) {
             imageUrl = found.url
+        }
 
         return imageUrl
     }
