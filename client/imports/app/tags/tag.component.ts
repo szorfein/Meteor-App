@@ -9,10 +9,12 @@ import { Tags } from '/both/collections/tags.collection'
 import { Tag } from '/both/models/tag.model'
 
 import template from './tag.component.html'
+import style from './tag.component.scss'
 
 @Component({
     selector: 'tag-main',
-    template
+    template,
+    styles: [style]
 })
 
 export class TagComponent implements OnInit, OnDestroy { 

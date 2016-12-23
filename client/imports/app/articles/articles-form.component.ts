@@ -14,10 +14,12 @@ import { UserExt } from '/both/models/userext.model'
 import { UsersExt } from '/both/collections/usersext.collection'
 
 import template from './articles-form.component.html'
+import style from './articles-form.component.scss'
 
 @Component({
     selector: 'articles-form',
-    template
+    template,
+    styles: [style]
 })
 
 @InjectUser('user')

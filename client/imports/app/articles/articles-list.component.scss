@@ -1,4 +1,24 @@
-img.img-list {
-    max-width: 40%;
-    max-height: 40%;
+.articles-list-container {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    margin: 0 auto;
+    width: 100%;
+    display: table;
+
+    h2 {
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    }
+
+    .filter-card {
+        margin: 20px;
+    }
+
+    .img-list {
+        max-width: auto;
+        max-height: 200px;
+    }
 }

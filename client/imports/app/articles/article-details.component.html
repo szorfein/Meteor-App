@@ -1,39 +1,45 @@
-<div *ngIf="article">
-    <form *ngIf="root" (submit)="saveArticle()">
+<div class="edit-form-article" *ngIf="article && root">
+    <md-card>
+        <form (submit)="saveArticle()">
 
-        <label for="image">Image</label>
-        <input type="text" [(ngModel)]="article.image" name="image">
+            <p>
+            <md-input type="text" [(ngModel)]="article.image" name="image">
+            </md-input>
+            </p>
 
-        <div *ngFor="let bloc of article.bloc">
-            <label for="title">Title</label>
-            <input type="text" [(ngModel)]="bloc.title" name="title">
+            <p *ngFor="let bloc of article.bloc">
+            <md-input type="text" [(ngModel)]="bloc.title" name="title">
+            </md-input>
+            <br />
 
-            <label for="description">Description</label>
-            <textarea [(ngModel)]="bloc.description" name="description"></textarea>
+            <textarea md-input [(ngModel)]="bloc.description" name="description">
+            </textarea>
+            <br />
 
-            <label for="article">Article</label>
-            <textarea [(ngModel)]="bloc.article" name="article"></textarea>
-        </div>
+            <textarea md-input [(ngModel)]="bloc.article" name="article">
+            </textarea>
+            <br />
+            </p>
 
-        <button type="submit">Finish</button>
-        <a [routerLink]="['/']">Cancel</a>
-    </form>
+            <button md-raised-button color="accent" type="submit">Finish</button>
+            <a [routerLink]="['/']" md-raised-button>Cancel</a>
+        </form>
+    </md-card>
 </div>
 
-<div *ngIf="article">
+<div class="article-detail" *ngIf="article">
     <section *ngFor="let bloc of article.bloc">
-        <article>
-            <header>
-                <h2>{{ bloc.title }}</h2>
-                <cite>{{article.author}}</cite>
-                <figure>
-                    <img [src]="article | displayMainImage">
-                </figure>
+        <md-card>
+            <md-card-header>
+                <md-card-title>{{ bloc.title }}</md-card-title>
+                <md-card-subtitle>{{article.author}}</md-card-subtitle>
+            </md-card-header>
+            <img md-card-image [src]="article | displayMainImage">
+            <md-card-content>
                 <div [innerHTML]="markdownDisplay(bloc.description)"></div>
-                {{ bloc.lang }}
-            </header>
-            <div [innerHTML]="markdownDisplay(bloc.article)"></div>
-        </article>
+                <div [innerHTML]="markdownDisplay(bloc.article)"></div>
+            </md-card-content>
+        </md-card>
     </section>
 </div>
 <comment></comment>

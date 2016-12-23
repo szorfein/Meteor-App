@@ -17,10 +17,12 @@ import { UserExt } from '/both/models/userext.model'
 import { Images } from '/both/collections/images.collection'
 
 import template from './article-details.component.html'
+import style from './article-details.component.scss'
 
 @Component({
     selector: 'article-details',
-    template
+    template,
+    styles: [style]
 })
 
 @InjectUser('user')

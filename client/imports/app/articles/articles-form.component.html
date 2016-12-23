@@ -1,28 +1,37 @@
-<div *ngIf="root">
-    <form [formGroup]="addForm" (ngSubmit)="addArticle(); onReset()">
-        <label for="title">Title</label>
-        <input type="text" formControlName="title" name="title">
+<div class="form-container">
+    <div *ngIf="root">
+        <form [formGroup]="addForm" (ngSubmit)="addArticle(); onReset()">
+               
+            <p>
+            <md-input dividerColor="accent" formControlName="title" placeholder="title">
+            </md-input>
+            </p>
+            <p>
+            <label for="image">Image</label>
+            <upload-image #upload (onFile)="onImage($event)"></upload-image>
+            </p>
+            <p>
+            <textarea md-input dividerColor="accent" 
+                formControlName="description" placeholder="description">
+            </textarea>
+            </p>
+            <p>
+            <md-input dividerColor="accent" formControlName="lang" placeholder="lang">
+            </md-input>
+            </p>
+            <p>
+            <textarea md-input formControlName="article" placeholder="article">
+            </textarea>
+            </p>
+            <p>
+            <md-checkbox formControlName="isPublic">Public?</md-checkbox>
+            </p>
 
-        <label for="image">Image</label>
-        <upload-image #upload (onFile)="onImage($event)"></upload-image>
+            <div *ngFor="let t of tags | async">
+                <md-checkbox (click)="addTag(t.name)" name="{{ t.name }}">{{t.name}}</md-checkbox>
+            </div>
 
-        <label for="description">Description</label>
-        <textarea formControlName="description" name="description"></textarea>
-
-        <label for="lang">Lang</label>
-        <input type="text" formControlName="lang" name="lang">
-
-        <label for="article">Article</label>
-        <textarea formControlName="article" name="article"></textarea>
-
-        <label for="public">Public</label>
-        <input type="checkbox" formControlName="isPublic">
-
-        <div *ngFor="let t of tags | async">
-            <label for="tag">{{ t.name }}</label>
-            <input type="checkbox" (click)="addTag(t.name)" name="{{ t.name }}">
-        </div>
-
-        <button type="submit">Add</button>
-    </form>
+            <button color="accent" md-raised-button type="submit">Add</button>
+        </form>
+    </div>
 </div>

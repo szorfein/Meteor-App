@@ -1,25 +1,37 @@
 <div>
-    <articles-form style="float: left"></articles-form>
+    <articles-form></articles-form>
 
-    <input type="text" #searchtext placeholder="Search by Lang">
-    <button type="button" (click)="search(searchtext.value)">Search</button>
+    <md-card class="filter-card">
+        <form>
+            <md-input dividerColor="primary" type="text" #searchtext 
+                                             placeholder="Search by Lang">
+            </md-input>
+            <button md-button (click)="search(searchtext.value)">Search</button>
+        </form>
+    </md-card>
 
-    <section>
+    <section class="articles-list-container">
         <div *ngFor="let article of articles | async">
             <div *ngFor="let bl of article.bloc">
-                <article>
-                    <header>
-                        <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
-                        <img *ngIf="article.image && article.image.length > 0" 
-                        class="img-list" [src]="article | displayMainImage">
-                        <a [routerLink]="['/user', article.author]">{{article.author}}</a>
-                        createdAt: {{ article.createdAt }}
-                    </header>
-                    <tbody>
+                <md-card>
+                    <md-card-header>
+                        <md-card-title>
+                            <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
+                        </md-card-title>
+                        <md-card-subtitle>
+                            by <a [routerLink]="['/user', article.author]">{{article.author}}</a>
+                            created {{ article.createdAt }}
+                        </md-card-subtitle>
+                    </md-card-header>
+                    <img md-card-lg-image *ngIf="article.image"  
+                    class="img-list" [src]="article | displayMainImage">
+                    <md-card-content>
                         <div [innerHTML]="markdownDisplay(bl.description)"></div>
-                        <button *ngIf=root (click)="removeArticle(article)">Remove</button>
-                    </tbody>
-                </article>
+                    </md-card-content>
+                </md-card>
+                <button md-icon-button *ngIf=root (click)="removeArticle(article)">
+                    <md-icon class="md-24">X</md-icon>
+                </button>
             </div>
         </div>
     </section>

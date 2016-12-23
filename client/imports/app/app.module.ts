@@ -22,6 +22,7 @@ import { ABOUT_DECLARATIONS } from './about'
 import { INDEX_DECLARATIONS } from './index'
 import { UPLOAD_DECLARATIONS } from './uploads'
 import { SHARED_DECLARATIONS } from './shared'
+import { MaterialModule } from '@angular/material'
 
 import { MOBILE_DECLARATIONS } from './mobile'
 import { AppMobileComponent } from './mobile/app.component.mobile'
@@ -58,7 +59,8 @@ if (Meteor.isCordova) {
             RouterModule.forRoot(routes),
             AccountsModule,
             Ng2PaginationModule,
-            FileDropModule
+            FileDropModule,
+            MaterialModule.forRoot()
         ],
         declarations: [
             AppComponent,

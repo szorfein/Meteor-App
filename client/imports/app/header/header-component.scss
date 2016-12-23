@@ -1,0 +1,18 @@
+.toolbar-title {
+    text-decoration: none;
+    color: white;
+
+    span {
+        padding-left: .5em;
+    }
+}
+
+md-toolbar {
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+
+    a {
+        text-decoration: none;
+        color: white;
+    }
+}
+

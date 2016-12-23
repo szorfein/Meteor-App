@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor'
 import { MeteorObservable } from 'meteor-rxjs'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
-import { InjectUser } from 'angular2-meteor-accounts-ui'
+import { InjectUser } from 'angular2-meteor-accounts-ui'
 
 import { User } from '/both/models/user.model'
 import { Users } from '/both/collections/users.collection'
@@ -11,10 +11,12 @@ import { UserExt } from '/both/models/userext.model'
 import { UsersExt } from '/both/collections/usersext.collection' 
 
 import template from './user-bar.component.html'
+import style from './user-bar.component.scss'
 
 @Component({
     selector: 'user-bar',
-    template
+    template,
+    styles: [style]
 })
 
 @InjectUser('user')

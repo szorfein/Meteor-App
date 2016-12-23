@@ -1,5 +1,6 @@
-<div *ngFor="let tag of tags | async">
-    <li>
-        <ul><a [routerLink]="['/blog/category', tag.name]">{{tag.name}}</a></ul>
-    </li>
-</div>
+<md-toolbar class="tag-list-banner"> 
+    <div *ngFor="let tag of tags | async">
+        <span><a [routerLink]="['/blog/category', tag.name]">{{tag.name}}</a></span>
+        <span class="fill-remaining-space"></span>
+    </div>
+</md-toolbar>

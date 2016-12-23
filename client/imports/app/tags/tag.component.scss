@@ -1,0 +1,16 @@
+.tag-list-banner {
+    text-align: center;
+
+    span {
+        padding-left:.6em; 
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    md-toolbar {
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.22);
+    }
+}

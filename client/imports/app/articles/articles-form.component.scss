@@ -1,0 +1,13 @@
+.form-container {
+    position: relative;
+    display: inline-block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-grow: 1;
+    width: 100%;
+    color: black;
+
+    form {
+        width: 100%;
+    }
+}
