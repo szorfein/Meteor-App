@@ -1,4 +1,7 @@
 <div *ngIf='userext'>
+    <div [hidden]="!root">
+        <articles-form></articles-form>
+    </div>
     Name: {{ userext.name }}
     Profile: {{ userext.isPublic }}
 </div>

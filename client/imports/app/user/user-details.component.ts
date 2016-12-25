@@ -24,10 +24,11 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     userName: string
     paramsSub: Subscription
 
-    userext: Observable<UserExt[]>
-    userextsub: Subscription
+    root: Observable<UserExt>
+    rootSub: Subscription
 
-    userRegister
+    userext: Observable<UserExt>
+    userextsub: Subscription
 
     constructor( private route: ActivatedRoute ) {}
 
@@ -48,10 +49,23 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
             .subscribe(() => {
                 this.userext = UsersExt.findOne({ 'name': this.userName })
             })
+
+            if (this.rootSub) 
+                this.rootSub.unsubscribe()
+
+            this.rootSub = MeteorObservable
+            .subscribe('root').subscribe(() => {
+                this.callRoot()
+            })
         })
+    }
+
+    callRoot() {
+        this.root = UsersExt.findOne({'idOwner': Meteor.userId() })
     }
 
     ngOnDestroy() {
         this.userextsub.unsubscribe()
+        this.rootSub.unsubscribe()
     }
 }

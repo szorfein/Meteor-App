@@ -1,16 +1,5 @@
-@import '../node_modules/@angular/material/core/theming/all-theme';
+@import "{}/node_modules/bootstrap/scss/bootstrap.scss";
 @import "imports/app/mobile/ionic.scss";
-
-@include md-core();
-$app-primary: md-palette($md-purple, 700, 400, 300);
-$app-accent: md-palette($md-green, A700, A400, A200);
-$app-warn: md-palette($md-red);
-$app-theme: md-light-theme($app-primary, $app-accent, $app-warn);
-@include angular-material-theme($app-theme);
-
-.fill-remaining-space {
-    flex: 1 1 auto;
-}
 
 body {
     background-color: #fefefe;

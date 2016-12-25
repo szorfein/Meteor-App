@@ -1,37 +1,38 @@
+<!--<button md-icon-button [md-menu-trigger-for]="menu"> Open Menu </button>
+-->
+
 <div class="form-container">
     <div *ngIf="root">
         <form [formGroup]="addForm" (ngSubmit)="addArticle(); onReset()">
                
             <p>
-            <md-input dividerColor="accent" formControlName="title" placeholder="title">
-            </md-input>
+            <input formControlName="title" placeholder="title">
             </p>
             <p>
             <label for="image">Image</label>
             <upload-image #upload (onFile)="onImage($event)"></upload-image>
             </p>
             <p>
-            <textarea md-input dividerColor="accent" 
+            <textarea dividerColor="accent" 
                 formControlName="description" placeholder="description">
             </textarea>
             </p>
             <p>
-            <md-input dividerColor="accent" formControlName="lang" placeholder="lang">
-            </md-input>
+            <input formControlName="lang" placeholder="lang">
             </p>
             <p>
-            <textarea md-input formControlName="article" placeholder="article">
+            <textarea formControlName="article" placeholder="article">
             </textarea>
             </p>
             <p>
-            <md-checkbox formControlName="isPublic">Public?</md-checkbox>
+            <button type="checkbox" formControlName="isPublic">Public?</button>
             </p>
 
             <div *ngFor="let t of tags | async">
-                <md-checkbox (click)="addTag(t.name)" name="{{ t.name }}">{{t.name}}</md-checkbox>
+                <button type="checkbox" (click)="addTag(t.name)" name="{{ t.name }}">{{t.name}}</button>
             </div>
 
-            <button color="accent" md-raised-button type="submit">Add</button>
+            <button type="submit">Add</button>
         </form>
     </div>
 </div>

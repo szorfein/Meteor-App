@@ -1,45 +1,35 @@
 <div class="edit-form-article" *ngIf="article && root">
-    <md-card>
         <form (submit)="saveArticle()">
 
             <p>
-            <md-input type="text" [(ngModel)]="article.image" name="image">
-            </md-input>
+            <input type="text" [(ngModel)]="article.image" name="image">
             </p>
 
             <p *ngFor="let bloc of article.bloc">
-            <md-input type="text" [(ngModel)]="bloc.title" name="title">
-            </md-input>
+            <input type="text" [(ngModel)]="bloc.title" name="title">
             <br />
 
-            <textarea md-input [(ngModel)]="bloc.description" name="description">
+            <textarea [(ngModel)]="bloc.description" name="description">
             </textarea>
             <br />
 
-            <textarea md-input [(ngModel)]="bloc.article" name="article">
+            <textarea [(ngModel)]="bloc.article" name="article">
             </textarea>
             <br />
             </p>
 
-            <button md-raised-button color="accent" type="submit">Finish</button>
-            <a [routerLink]="['/']" md-raised-button>Cancel</a>
+            <button type="submit">Finish</button>
+            <a [routerLink]="['/']">Cancel</a>
         </form>
-    </md-card>
 </div>
 
 <div class="article-detail" *ngIf="article">
     <section *ngFor="let bloc of article.bloc">
-        <md-card>
-            <md-card-header>
-                <md-card-title>{{ bloc.title }}</md-card-title>
-                <md-card-subtitle>{{article.author}}</md-card-subtitle>
-            </md-card-header>
-            <img md-card-image [src]="article | displayMainImage">
-            <md-card-content>
-                <div [innerHTML]="markdownDisplay(bloc.description)"></div>
-                <div [innerHTML]="markdownDisplay(bloc.article)"></div>
-            </md-card-content>
-        </md-card>
+        {{ bloc.title }}
+        {{article.author}}
+        <img [src]="article | displayMainImage">
+        <div [innerHTML]="markdownDisplay(bloc.description)"></div>
+        <div [innerHTML]="markdownDisplay(bloc.article)"></div>
     </section>
 </div>
 <comment></comment>

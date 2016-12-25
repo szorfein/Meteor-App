@@ -1,36 +1,20 @@
 <div>
-    <articles-form></articles-form>
-
-    <md-card class="filter-card">
-        <form>
-            <md-input dividerColor="primary" type="text" #searchtext 
-                                             placeholder="Search by Lang">
-            </md-input>
-            <button md-button (click)="search(searchtext.value)">Search</button>
-        </form>
-    </md-card>
+    <form>
+        <input type="text" #searchtext 
+               placeholder="Search by Lang">
+        <button(click)="search(searchtext.value)">Search</button>
+    </form>
 
     <section class="articles-list-container">
         <div *ngFor="let article of articles | async">
             <div *ngFor="let bl of article.bloc">
-                <md-card>
-                    <md-card-header>
-                        <md-card-title>
-                            <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
-                        </md-card-title>
-                        <md-card-subtitle>
-                            by <a [routerLink]="['/user', article.author]">{{article.author}}</a>
-                            created {{ article.createdAt }}
-                        </md-card-subtitle>
-                    </md-card-header>
-                    <img md-card-lg-image *ngIf="article.image"  
-                    class="img-list" [src]="article | displayMainImage">
-                    <md-card-content>
-                        <div [innerHTML]="markdownDisplay(bl.description)"></div>
-                    </md-card-content>
-                </md-card>
-                <button md-icon-button *ngIf=root (click)="removeArticle(article)">
-                    <md-icon class="md-24">X</md-icon>
+                <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
+                by <a [routerLink]="['/user', article.author]">{{article.author}}</a>
+                created {{ article.createdAt }}
+                <img *ngIf="article.image"  
+                class="img-list" [src]="article | displayMainImage">
+                <div [innerHTML]="markdownDisplay(bl.description)"></div>
+                <button *ngIf=root (click)="removeArticle(article)">
                 </button>
             </div>
         </div>

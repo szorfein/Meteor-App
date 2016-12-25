@@ -1,5 +1,6 @@
 .tag-list-banner {
     text-align: center;
+    display: inline-block;
 
     span {
         padding-left:.6em; 
@@ -8,6 +9,16 @@
     a {
         text-decoration: none;
         color: black;
+    }
+
+    md-nav-list {
+        text-align: center;
+        margin: auto;
+    }
+
+    md-list-item {
+        display: inline-block;
+        margin-bottom: .5em;
     }
 
     md-toolbar {

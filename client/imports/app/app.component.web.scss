@@ -1,0 +1,13 @@
+.to-left {
+    float: left;
+}
+
+.to-right {
+    float: right;
+}
+
+.clear::after {
+    content: "";
+    clear: both;
+    display: table;
+}

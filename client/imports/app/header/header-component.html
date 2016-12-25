@@ -1,11 +1,9 @@
 <header>
-    <md-toolbar color="primary">
-        <a [routerLink]="['/']" class="toolbar-title">WebSite</a>
-        <span class="fill-remaining-space"></span>
+    <nav class="navbar navbar-light bg-faded">
+        <a class="navbar-brand" [routerLink]="['/']">WebSite</a>
         <span><a [routerLink]="['/blog']">blog</a></span>
         <span><a [routerLink]="['/about']">about</a></span>
         <span><a [routerLink]="['/contact']">contact</a></span>
-        <span class="fill-remaining-space"></span>
         <div [hidden]="user">
             <a md-button [routerLink]="['/login']">login</a>
             <a md-button [routerLink]="['/signup']">signup</a>
@@ -13,5 +11,5 @@
         <div [hidden]="!user">
             <user-bar></user-bar>
         </div>
-    </md-toolbar>
+    </nav>
 </header>
