@@ -1,18 +1,45 @@
-.toolbar-title {
-    text-decoration: none;
-    color: white;
-
-    span {
-        padding-left: .5em;
-    }
+.inner { 
+    padding: 2rem;
 }
 
-md-toolbar {
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+.masthead {
+    background-color: rgba(44,24,60,.73);
+    text-align: center;
+    padding: 10px 0 26px 0;
 
     a {
+        color: rgba(243,241,240,1);
+        color: rgba(243,241,240,1);
         text-decoration: none;
-        color: white;
+    }
+
+    .masthead-brand {
+        font-weight: normal;
+    }
+
+    .nav-masthead {
+        a {
+            margin-left: .8rem;
+            font-weight: bold;
+
+            &:hover {
+                color: #aaa;
+                border-bottom: 2px solid #aaa;
+            }
+        }
+
+        .active {
+            color: #fff;
+            border-bottom: 2px solid #fff;
+        }
+    }
+
+    @media (min-width: 33em) {
+        .masthead-brand {
+            float: left;
+        }
+        .nav-masthead {
+            float: right;
+        }
     }
 }
-

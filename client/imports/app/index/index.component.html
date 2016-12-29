@@ -1,13 +1,22 @@
-<div *ngIf="!extra">
-    <index-form></index-form>
-</div>
-<div *ngIf="extra" [innerHTML]="markdownDisplay"></div>
-<div *ngIf="root">
-    <div *ngIf="extra">
-        <form (submit)="saveIndex()">
-            <label for="post">Presentation</label>
-            <textarea [(ngModel)]="extra.post" name="post"></textarea>
-            <button type="submit">Change Msg</button>
-        </form>
+<div class="inner cover">
+    <div class="jumbotron">
+        <div class="container-fluid">
+            <div *ngIf="!extra">
+                <index-form></index-form>
+            </div>
+            <div *ngIf="extra" [innerHTML]="markdownDisplay"></div>
+            <p>
+            <a class="btn btn-primary btn-lg" [routerLink]="['/blog']">Learn More</a>
+            </p>
+            <div *ngIf="root">
+                <div *ngIf="extra">
+                    <form (submit)="saveIndex()">
+                        <label for="post">Presentation</label>
+                        <textarea [(ngModel)]="extra.post" name="post"></textarea>
+                        <button type="submit">Change Msg</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

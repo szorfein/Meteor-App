@@ -1,5 +1,11 @@
-<div class="tag-list-banner"> 
-        <div *ngFor="let tag of tags | async">
-            <a [routerLink]="['/blog/category', tag.name]">{{tag.name}}</a>
+<div class="bar-tags">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li class="inline" *ngFor="let tag of tags | async">
+                    <a [routerLink]="['/blog/category', tag.name]">{{tag.name}}</a>
+                </li>
+            </ul>
         </div>
+    </nav>
 </div>

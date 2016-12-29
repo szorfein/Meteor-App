@@ -13,10 +13,12 @@ import { isRoot } from '/lib/users'
 
 import MarkdownIt = require('markdown-it')
 import template from './index.component.html'
+import style from './index.component.scss'
 
 @Component({
     selector: 'index',
-    template
+    template,
+    styles: [style]
 })
 
 export class IndexComponent implements OnInit {

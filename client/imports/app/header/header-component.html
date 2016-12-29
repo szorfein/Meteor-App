@@ -1,15 +1,17 @@
-<header>
-    <nav class="navbar navbar-light bg-faded">
-        <a class="navbar-brand" [routerLink]="['/']">WebSite</a>
-        <span><a [routerLink]="['/blog']">blog</a></span>
-        <span><a [routerLink]="['/about']">about</a></span>
-        <span><a [routerLink]="['/contact']">contact</a></span>
-        <div [hidden]="user">
-            <a md-button [routerLink]="['/login']">login</a>
-            <a md-button [routerLink]="['/signup']">signup</a>
-        </div>
-        <div [hidden]="!user">
-            <user-bar></user-bar>
-        </div>
-    </nav>
+<header class="masthead clearfix">
+    <div class="inner">
+        <h3 class="masthead-brand">
+            <a class="nav-link" [routerLink]="['/']">WebSite</a>
+        </h3>
+        <nav class="navbar nav-masthead">
+            <a class="nav-link active" [routerLink]="['/blog']">blog</a>
+            <a class="nav-link" [routerLink]="['/about']">about</a>
+            <a class="nav-link" [routerLink]="['/contact']">contact</a>
+            <a [hidden]="user" class="nav-link" [routerLink]="['/login']">login</a>
+            <a [hidden]="user" class="nav-link" [routerLink]="['/signup']">signup</a>
+            <div [hidden]="!user">
+                <user-bar></user-bar>
+            </div>
+        </nav>
+    </div>
 </header>
