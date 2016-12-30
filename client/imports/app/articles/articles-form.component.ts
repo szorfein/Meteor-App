@@ -13,6 +13,8 @@ import { Tag } from '/both/models/tag.model'
 import { UserExt } from '/both/models/userext.model'
 import { UsersExt } from '/both/collections/usersext.collection'
 
+import MarkdownIt = require('markdown-it')
+
 import template from './articles-form.component.html'
 import style from './articles-form.component.scss'
 
@@ -44,6 +46,8 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
     myTag = new Set()
     arrayOfTags : string[] = []
     image: string = ''
+    imageSub : Subscription
+    md = new MarkdownIt()
 
     // TODO: Add test if tagValue exist in collection !
     addTag(tagValue: string): void {
@@ -61,6 +65,8 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
+        
+        this.imageSub = MeteorObservable.subscribe('images').subscribe()
         if (this.rootsub)
             this.rootsub.unsubscribe()
 
@@ -77,6 +83,11 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
                 })
             })
         }
+    }
+
+    markdownDisplay(text: string):string {
+        if(text)
+            return this.md.render(text)
     }
 
     callRoot() {
@@ -148,5 +159,7 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
         
         if (this.rootsub)
             this.rootsub.unsubscribe()
+
+        this.imageSub.unsubscribe()
     }
 }

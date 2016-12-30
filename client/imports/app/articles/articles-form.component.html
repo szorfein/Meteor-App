@@ -1,38 +1,76 @@
-<!--<button md-icon-button [md-menu-trigger-for]="menu"> Open Menu </button>
--->
+<div *ngIf="root" class="form-container">
+    <div class="fluid-container">
+        <div class="row">
+            <div class="col-xs-6 form-part">
+                <form [formGroup]="addForm" (ngSubmit)="addArticle(); onReset()">
 
-<div class="form-container">
-    <div *ngIf="root">
-        <form [formGroup]="addForm" (ngSubmit)="addArticle(); onReset()">
-               
-            <p>
-            <input formControlName="title" placeholder="title">
-            </p>
-            <p>
-            <label for="image">Image</label>
-            <upload-image #upload (onFile)="onImage($event)"></upload-image>
-            </p>
-            <p>
-            <textarea dividerColor="accent" 
-                formControlName="description" placeholder="description">
-            </textarea>
-            </p>
-            <p>
-            <input formControlName="lang" placeholder="lang">
-            </p>
-            <p>
-            <textarea formControlName="article" placeholder="article">
-            </textarea>
-            </p>
-            <p>
-            <button type="checkbox" formControlName="isPublic">Public?</button>
-            </p>
+                    <fieldset>
 
-            <div *ngFor="let t of tags | async">
-                <button type="checkbox" (click)="addTag(t.name)" name="{{ t.name }}">{{t.name}}</button>
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input class="form-control" 
+                                   type="text" formControlName="title" placeholder="title">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="image">Image</label>
+                            <upload-image #upload (onFile)="onImage($event)"></upload-image>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" rows="3"
+                                                           formControlName="description" placeholder="description">
+                            </textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lang">Language</label>
+                            <input class="form-control" 
+                                   type="text" formControlName="lang" placeholder="lang">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="article">Article</label>
+                            <textarea class="form-control" rows="6"
+                                                           formControlName="article" placeholder="article">
+                            </textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" 
+                                           formControlName="isPublic">
+                                    Public
+                                </label>
+
+                                <div *ngFor="let t of tags | async">
+                                    <label>
+                                        <input type="checkbox"
+                                               (click)="addTag(t.name)" name="{{ t.name }}">
+                                        {{t.name}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" type="submit">Add</button>
+                    </fieldset>
+                </form>
             </div>
+            <div class="col-xs-6 preview">
+                <h2>Preview</h2>
+                <h3>{{ addForm.value.title }}</h3>
+                <div class="thumbnail">
+                    <img *ngIf="image" [src]="image | previewImage">
+                    <div class="caption">
+                        <div [innerHTML]="markdownDisplay(addForm.value.description)"></div>
+                        <div [innerHTML]="markdownDisplay(addForm.value.article)"></div>
 
-            <button type="submit">Add</button>
-        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

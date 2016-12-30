@@ -1,24 +1,26 @@
-<tag-main></tag-main>
-<div>
-    <form>
-        <input type="text" #searchtext 
-               placeholder="Search by Lang">
-        <button(click)="search(searchtext.value)">Search</button>
-    </form>
+<div class="articles">
+    <tag-main></tag-main>
+    <div>
+        <form>
+            <input type="text" #searchtext 
+                   placeholder="Search by Lang">
+            <button(click)="search(searchtext.value)">Search</button>
+        </form>
 
-    <section class="articles-list-container">
-        <div *ngFor="let article of articles | async">
-            <div *ngFor="let bl of article.bloc">
-                <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
-                by <a [routerLink]="['/user', article.author]">{{article.author}}</a>
-                created {{ article.createdAt }}
-                <img *ngIf="article.image"  
-                class="img-list" [src]="article | displayMainImage">
-                <div [innerHTML]="markdownDisplay(bl.description)"></div>
-                <button *ngIf=root (click)="removeArticle(article)">
-                </button>
+        <section class="articles-list-container">
+            <div *ngFor="let article of articles | async">
+                <div *ngFor="let bl of article.bloc">
+                    <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
+                    by <a [routerLink]="['/user', article.author]">{{article.author}}</a>
+                    created {{ article.createdAt }}
+                    <img *ngIf="article.image"  
+                 class="img-list" [src]="article | displayMainImage">
+                    <div [innerHTML]="markdownDisplay(bl.description)"></div>
+                    <button *ngIf=root (click)="removeArticle(article)">
+                    </button>
+                </div>
             </div>
-        </div>
-    </section>
-    <pagination-controls (pageChange)="onPageChanged($event)"></pagination-controls>
+        </section>
+        <pagination-controls (pageChange)="onPageChanged($event)"></pagination-controls>
+    </div>
 </div>

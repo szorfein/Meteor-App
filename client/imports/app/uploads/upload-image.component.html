@@ -1,11 +1,7 @@
-<div>
-    <div fileDrop
-        [ngClass]="{'file-is-over': fileIsOver, 'file-uploading': uploading}"
-        (fileOver)="fileOver($event)"
-        (onFileDrop)="onFileDrop($event)">
-        Drop image here
-    </div>
-    <div>
-        <input type="file" class="form-control" name="upload" (change)="oniClick($event)">
-    </div>
+<div fileDrop
+    [ngClass]="{'file-is-over': fileIsOver, 'file-uploading': uploading}"
+    (fileOver)="fileOver($event)"
+    (onFileDrop)="onFileDrop($event)">
+    Drop image here
 </div>
+<input class="form-control" type="file" name="upload" (change)="oniClick($event)">

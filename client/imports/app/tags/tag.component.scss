@@ -1,9 +1,10 @@
 .bar-tags {
     width: 100%;
-    margin: 2rem auto 2rem auto;
+    margin: 1.3rem auto 1.3rem auto;
     background-color: transparent;
     position: relative;
     display: block;
+    text-align: center;
 
     .inline {
         display: inline-block;
@@ -16,6 +17,7 @@
     a {
         text-decoration: none;
         padding: 10px 0 10px 0;
+        color: #222;
 
         &:hover {
             border-bottom: 2px solid;
