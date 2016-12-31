@@ -29,7 +29,7 @@
                         </h3>
                         <p>
                         by <a [routerLink]="['/user', article.author]">{{article.author}}</a>
-                        created {{ article.createdAt }}
+                        at {{ article.createdAt | date:"d MMMM y à H" }}h
                         </p>
                         <a [routerLink]="['/blog', article._id]">
                             <img *ngIf="article.image" [src]="article | displayMainImage">

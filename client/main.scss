@@ -13,3 +13,18 @@ body.web {
 html, body {
     background-color: rgba(44,24,60,.73);
 }
+
+// css for markdown must be define globally, not work else :<
+// Markdown
+h1 {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+ol, ul, dl {
+    margin: 1rem 0;
+}
+
+pre {
+    background-color: rgba(167,162,162,.09);
+}

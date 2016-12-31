@@ -1,35 +1,59 @@
 <div class="edit-form-article" *ngIf="article && root">
+    <div class="container">
         <form (submit)="saveArticle()">
 
-            <p>
-            <input type="text" [(ngModel)]="article.image" name="image">
-            </p>
+            <fieldset>
+                <div class="form-group">
+                    <label for="image">ImageId</label>
+                    <input class="form-control"
+                           type="text" [(ngModel)]="article.image" name="image">
+                </div>
 
-            <p *ngFor="let bloc of article.bloc">
-            <input type="text" [(ngModel)]="bloc.title" name="title">
-            <br />
+                <div *ngFor="let bloc of article.bloc">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input class="form-control"
+                               type="text" [(ngModel)]="bloc.title" name="title">
+                    </div>
 
-            <textarea [(ngModel)]="bloc.description" name="description">
-            </textarea>
-            <br />
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" rows="3"
+                                  [(ngModel)]="bloc.description" name="description">
+                        </textarea>
+                    </div>
 
-            <textarea [(ngModel)]="bloc.article" name="article">
-            </textarea>
-            <br />
-            </p>
+                    <div class="form-group">
+                        <label for="article">Article</label>
+                        <textarea class="form-control" rows="4"
+                                  [(ngModel)]="bloc.article" name="article">
+                        </textarea>
+                    </div>
+                </div>
 
-            <button type="submit">Finish</button>
-            <a [routerLink]="['/']">Cancel</a>
+                <button class="btn btn-primary"
+                        type="submit">Finish</button>
+                <a [routerLink]="['/']">Cancel</a>
+            </fieldset>
         </form>
+    </div>
 </div>
 
 <div class="article-detail" *ngIf="article">
-    <section *ngFor="let bloc of article.bloc">
-        {{ bloc.title }}
-        {{article.author}}
-        <img [src]="article | displayMainImage">
-        <div [innerHTML]="markdownDisplay(bloc.description)"></div>
-        <div [innerHTML]="markdownDisplay(bloc.article)"></div>
-    </section>
+    <div class="row">
+        <div class="container">
+            <section *ngFor="let bloc of article.bloc">
+                <div class="page-header">
+                    <h1 class="h1">{{ bloc.title }} <small>by: {{article.author}}</small></h1>
+                </div>
+                <p>le: {{ article.createdAt | date:"d MMMM y à H" }}h</p>
+                <img class="img-responsive" [src]="article | displayMainImage">
+                <div class="description"
+                    [innerHTML]="markdownDisplay(bloc.description)"></div>
+                <div class="article"
+                    [innerHTML]="markdownDisplay(bloc.article)"></div>
+            </section>
+        </div>
+    </div>
 </div>
 <comment></comment>
