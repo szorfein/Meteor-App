@@ -1,10 +1,21 @@
-<div *ngIf="root">
-    Hi ROOT !
-    <form [formGroup]="contactForm" (ngSubmit)="addPost()">
-        <label for="post">Contact</label>
-        <textarea formControlName="post" name="post"></textarea>
-        <label for="lang">Lang</label>
-        <input type="text" formControlName="lang" name="lang">
-        <button type="submit">Add Contact</button>
-    </form>
+<div *ngIf="root" class="form-container">
+    <div class="container">
+        <form [formGroup]="contactForm" (ngSubmit)="addPost()">
+            <fieldset>
+                <div class="form-group">
+                    <label for="contact">Contact</label>
+                    <textarea class="form-control" rows="3"
+                        formControlName="post" name="contact">
+                    </textarea>
+                </div>
+                <div class="form-group">
+                    <label for="lang">Lang</label>
+                    <input class="form-control"
+                           type="text" formControlName="lang" name="lang">
+                </div>
+                <button class="btn btn-primary"
+                    type="submit">Add Contact</button>
+            </fieldset>
+        </form>
+    </div>
 </div>

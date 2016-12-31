@@ -5,7 +5,28 @@
 .articles {
     background-color: #fff;
     color: #000;
-    
+
+    .articles-list {
+
+        height: 35em;
+
+        @media (min-width: 544px) {
+            height: 28em;
+        }
+
+        @media (min-width: 1200px) {
+            height: 32em;
+        }
+    }
+
+    .description {
+        display: block;
+        max-height: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
     .thumbnail {
         text-align: center;
         a {

@@ -13,10 +13,12 @@ import { isRoot } from '/lib/users'
 
 import MarkdownIt = require('markdown-it')
 import template from './about.component.html'
+import style from './about.component.scss'
 
 @Component({
     selector: 'about-me',
-    template
+    template,
+    styles: [style]
 })
 
 export class AboutComponent implements OnInit, OnDestroy {

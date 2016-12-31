@@ -1,13 +1,27 @@
 <div *ngIf="!extra">
     <about-form></about-form>
 </div>
-<div *ngIf="extra" [innerHTML]="markdownDisplay"></div>
+
+<div class="jumbotron">
+    <div class="container">
+        <p class="aboutme" *ngIf="extra" [innerHTML]="markdownDisplay"></p>
+    </div>
+</div>
+
 <div *ngIf="root">
     <div *ngIf="extra">
-        <form (submit)="saveAbout()">
-            <label for="post">About Me</label>
-            <textarea [(ngModel)]="extra.post" name="post"></textarea>
-            <button type="submit">Change About</button>
-        </form>
+        <div class="container">
+            <form (submit)="saveAbout()">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="aboutme">About Me</label>
+                        <textarea class="form-control" rows="3"
+                            [(ngModel)]="extra.post" name="aboutme"></textarea>
+                    </div>
+                    <button class="btn btn-primary"
+                        type="submit">Change About</button>
+                </fieldset>
+            </form>
+        </div>
     </div>
 </div>

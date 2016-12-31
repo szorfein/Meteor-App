@@ -1,9 +1,22 @@
 <div *ngIf="root">
-    <form [formGroup]="aboutForm" (ngSubmit)="addPost()">
-        <label for="post">About Me</label>
-        <textarea formControlName="post" name="post"></textarea>
-        <label for="lang">Lang</label>
-        <input type="text" formControlName="lang" name="lang">
-        <button type="submit">Add About</button>
-    </form>
+    <div class="form-container">
+        <div class="container">
+            <form [formGroup]="aboutForm" (ngSubmit)="addPost()">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="aboutme">About Me</label>
+                        <textarea class="form-control" rows="3"
+                            formControlName="post" name="aboutme"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="lang">Lang</label>
+                        <input class="form-group" 
+                               type="text" formControlName="lang" name="lang">
+                    </div>
+                    <button class="btn btn-primary"
+                        type="submit">Add About</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
 </div>

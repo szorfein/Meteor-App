@@ -13,10 +13,12 @@ import { isRoot } from '/lib/users'
 
 import MarkdownIt = require('markdown-it')
 import template from './contact.component.html'
+import style from './contact.component.scss'
 
 @Component({
     selector: 'contact',
-    template
+    template,
+    styles: [style]
 })
 
 export class ContactComponent implements OnInit {

@@ -3,7 +3,7 @@ Minimal webblog with meteor, ionic and angular2.
 
 ## Preview
 
-![Article with preview](https://raw.githubusercontent.com/szorfein/Meteor-App/master/screenshot.png)
+![Article with preview](https://raw.githubusercontent.com/szorfein/Meteor-App/master/screenshot.jpg)
 
 ## Installation 
 

@@ -19,8 +19,9 @@
 
     <tag-main></tag-main>
 
+    <div class="container">
     <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let article of articles | async">
+            <div class="col-xs-12 col-sm-6 col-md-4 articles-list" *ngFor="let article of articles | async">
                 <div class="thumbnail">
                     <div *ngFor="let bl of article.bloc">
                         <h3>
@@ -34,13 +35,18 @@
                             <img *ngIf="article.image" [src]="article | displayMainImage">
                         </a>
                         <div class="caption">
-                            <div [innerHTML]="markdownDisplay(bl.description)"></div>
+                            <div class="small description" [innerHTML]="markdownDisplay(bl.description)"></div>
+                            <p>
+                            <a class="btn btn-primary btn-lg"
+                                [routerLink]="['/blog', article._id]">Learn More</a>
+                            </p>
                             <button [hidden]="!root" (click)="removeArticle(article)">
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
+    </div>
     </div>
     <div class="clearfix visible-xs-block"></div>
     <div class="pagination">
