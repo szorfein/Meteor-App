@@ -1,6 +1,10 @@
 # Meteor-App
 Minimal webblog with meteor, ionic and angular2.
 
+## Preview
+
+![Article with preview](https://raw.githubusercontent.com/szorfein/Meteor-App/master/screenshot.png)
+
 ## Installation 
 
 ### 1 - install Meteor 

@@ -85,12 +85,12 @@ export class ArticlesList implements OnInit, OnDestroy {
 
         this.paginationService.register({
             id: this.paginationService.defaultId,
-            itemsPerPage: 10,
+            itemsPerPage: 6,
             currentPage: 1,
             totalItems: this.articlesSize
         })
 
-        this.pageSize.next(8)
+        this.pageSize.next(5)
         this.curPage.next(1)
         this.nameOrder.next(1)
 
