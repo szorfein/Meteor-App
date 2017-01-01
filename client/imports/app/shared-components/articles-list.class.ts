@@ -134,8 +134,14 @@ export class ArticlesList implements OnInit, OnDestroy {
 
     search(value: string): void {
         console.log('search value : ' + value.length)
-        if (value.length === 2)
+
+        if (value.length === 2) 
             this.articles = Articles.find(value ? { 'bloc.lang': value } : {}).zone()
+    }
+
+    searchByTag(tag) {
+        if (tag)
+            this.articles = Articles.find({ 'tags': tag }).zone()
     }
 
     onPageChanged(page: number):void {

@@ -2,22 +2,36 @@
 
     <div class="row ma-filter">
         <div class="col-md-6">
-            <form class="form-inline">
-                <div class="input-group">
-                    <input class="form-control" type="text" #searchtext 
-                                                placeholder="Search for..."> 
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" 
-                                              (click)="search(searchtext.value)">
-                            Search
-                        </button>
-                    </span>
-                </div>
-            </form>
+            <button class="btn btn-default search" type="button" data-toggle="collapse"
+                                                          data-target="#searchbar"
+                                                          aria-expanded="false"
+                                                          aria-controls="searchbar"
+                                                          aria-label="Search">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                Search
+            </button>
+            <div class="collapse" id="searchbar">
+                <form>
+                    <div class="input-group">
+                        <input class="form-control" type="text" #searchtext 
+                                                    placeholder="Search for..."> 
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" 
+                                                  (click)="search(searchtext.value)">
+                                Search
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
-    <tag-main></tag-main>
+    <div class="row">
+        <div class="col-md-12">
+            <tag-main (tagSelect)="searchByTag($event)"></tag-main>
+        </div>
+    </div>
 
     <div class="container">
     <div class="row">

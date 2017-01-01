@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 import { MeteorObservable } from 'meteor-rxjs'
@@ -19,29 +19,23 @@ import style from './tag.component.scss'
 
 export class TagComponent implements OnInit, OnDestroy { 
     tags: Observable<Tag[]>
+    tag: string
     tagsSub: Subscription
-
-    _stringify = JSON.stringify;
-    bleeding = function (value, ...args) {
-        if (args.length) {
-            return this._stringify(value, ...args);
-        } else {
-            return this._stringify(value, function (key, value) {
-                if (value && key === 'zone' && value['_zoneDelegate'] 
-                    && value['_zoneDelegate']['zone'] === value) {
-                        return undefined;
-                    }
-                    return value;
-            });
-        }
-    }
+    @Output() tagSelect : EventEmitter<string> = new EventEmitter<string>()
 
     ngOnInit() {
-        this.tags = Tags.find({}).zone()
-        this.tagsSub = MeteorObservable.subscribe('tags').subscribe()
-        //console.log('Tags : ' + this.bleeding(this.tags))
+        this.tagsSub = MeteorObservable.subscribe('tags')
+        .subscribe(() => {
+            this.tags = Tags.find({}).zone()
+        })
+    }
+
+    tagSelected(tag) {
+        if (tag)
+            this.tagSelect.emit(tag)
     }
 
     ngOnDestroy() {
+        this.tagsSub.unsubscribe()
     }
 }

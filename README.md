@@ -26,7 +26,12 @@ Minimal webblog with meteor, ionic and angular2.
     this.password = "p4ss_C0mpl1c4t3d";
     this.email = "myroot@ki.ki";
 
-### 5 - Start
+### 5 - Copy file require for bootstrap in public/js
+
+    cp node_modules/{bootstrap,tether}/dist/js/{bootstrap,tether}.js public/js
+    cp node_modules/jquery/dist/jquery.js public/js/
+
+### 6 - Start
 
     $ meteor
 
