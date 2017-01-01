@@ -12,10 +12,12 @@ import { InjectUser } from 'angular2-meteor-accounts-ui'
 
 import MarkdownIt = require('markdown-it')
 import template from './comments-article.component.html'
+import style from './comments-article.component.scss'
 
 @Component({
     selector: 'comment',
-    template
+    template,
+    styles: [style]
 })
 
 @InjectUser('user')
@@ -50,7 +52,7 @@ export class CommentsArticleComponent implements OnInit, OnDestroy {
     }
 
     markdownDisplay(text: string):string {
-        if (this.comment)
+        if (text)
             return this.md.render(text)
     }
 

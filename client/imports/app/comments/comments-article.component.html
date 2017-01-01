@@ -1,16 +1,22 @@
-<div>
+<div *ngIf="!comment">
+    <p>No comment for this article.</p>
+</div>
+<div *ngIf="comment" class="media">
     <h3>Comments</h3>
-    <div *ngIf="comment">
-        <p>some comments found...</p>
-        <div *ngFor="let co of comment | async">
-            <p>
-            {{ co.poster }}
-            {{ co.posted }}
-            </p>
-            <div [innerHTML]="markdownDisplay(co.post)"></div>
+
+    <div *ngFor="let co of comment | async">
+        <div class="media-left">
+            <a href="#">
+                <img class="media-object" src="" alt="">
+            </a>
         </div>
-    </div>
-    <div *ngIf="user">
-        <comment-form></comment-form>
+        <div class="media-body">
+            <h3 class="h3 media-heading">{{ co.poster }}
+                <small>>{{ co.posted | date:"d MMMM y à H:M" }}</small></h3>
+            <div [innerHTML]="markdownDisplay(co.post)"></div>
+            <div *ngIf="user">
+                <comment-form></comment-form>
+            </div>
+        </div>
     </div>
 </div>

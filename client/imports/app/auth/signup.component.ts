@@ -4,10 +4,12 @@ import { Router } from '@angular/router'
 import { Accounts } from 'meteor/accounts-base'
 
 import template from './signup.component.html'
+import style from './signup.component.scss'
 
 @Component({
     selector: 'signup',
-    template
+    template,
+    styles: [style]
 })
 
 export class SignupComponent implements OnInit {

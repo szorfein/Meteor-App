@@ -5,11 +5,14 @@ import { ActivatedRoute } from '@angular/router'
 import { MeteorObservable } from 'meteor-rxjs'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { InjectUser } from 'angular2-meteor-accounts-ui'
+
 import template from './comments-form.component.html'
+import style from './comments-form.component.scss'
 
 @Component({
     selector: 'comment-form',
-    template
+    template,
+    styles: [style]
 })
 
 @InjectUser('user')

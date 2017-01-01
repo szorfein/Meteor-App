@@ -1,17 +1,28 @@
-<div>
-    <h2>Sign Up</h2>
-    <div>
+<div class="signup">
+    <div class="container">
+        <h3>Create an account</h3>
         <form [formGroup]="signupForm" (ngSubmit)="signup()">
-            <label for="email">Email</label>
-            <input type="email" formControlName="email">
+            <fieldset>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input class="form-control" 
+                           type="email" formControlName="email">
+                </div>
 
-            <label for="username">username</label>
-            <input type="text" formControlName="username">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input class="form-control"
+                           type="text" formControlName="username">
+                </div>
 
-            <label for="password">Password</label>
-            <input type="password" formControlName="password">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input class="form-control"
+                           type="password" formControlName="password">
+                </div>
 
-            <button type="submit">Sign Up</button>
+                <button class="btn btn-primary" type="submit">Sign Up</button>
+            </fieldset>
         </form>
     </div>
 </div>

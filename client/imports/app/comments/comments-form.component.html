@@ -1,7 +1,10 @@
-<div>
-    <form *ngIf="user" [formGroup]="addForm" (ngSubmit)="addComment()">
-        <label for="post">Post</label>
-        <textarea formControlName="post" name="post"></textarea>
-        <button type="submit">Add Post</button>
-    </form>
-</div>
+<form *ngIf="user" [formGroup]="addForm" (ngSubmit)="addComment()">
+    <fieldset>
+        <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea class="form-control" rows="3"
+            formControlName="post" name="post"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Add Comment</button>
+    </fieldset>
+</form>
