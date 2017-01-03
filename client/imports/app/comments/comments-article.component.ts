@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Meteor } from 'meteor/meteor'
 import { Subscription } from 'rxjs/Subscription'
 import { ActivatedRoute } from '@angular/router'
@@ -23,16 +24,19 @@ import style from './comments-article.component.scss'
 @InjectUser('user')
 export class CommentsArticleComponent implements OnInit, OnDestroy {
 
+    replyForm: FormGroup
+
     user: Meteor.User
     articleId: string
     urlparam: Subscription
 
-    comment: Observable<C0mment[]>
-    commentsub: Subscription
+    comments: Observable<C0mment[]>
+    commentsSub: Subscription
+    comment: C0mment
     
     md = new MarkdownIt()
 
-    constructor(private route: ActivatedRoute) {}
+    constructor(private route: ActivatedRoute, private formBuilder: FormBuilder) {}
 
     ngOnInit() {
         this.urlparam = this.route.params
@@ -41,12 +45,18 @@ export class CommentsArticleComponent implements OnInit, OnDestroy {
             this.articleId = articleId
             this.user
 
-            if (this.commentsub)
-                this.commentsub.unsubscribe()
+            if (this.commentsSub)
+                this.commentsSub.unsubscribe()
 
-            this.commentsub = MeteorObservable.subscribe('comments', articleId)
+            this.commentsSub = MeteorObservable.subscribe('comments', articleId)
             .subscribe(() => {
-                this.comment = Comments.find({ 'father': this.articleId })
+                this.comments = Comments.find({ 
+                    $and: [
+                        { 'father': this.articleId },
+                        { 'son': null }
+                    ]
+                })
+                this.printReplyForm()
             })
         })
     }
@@ -56,8 +66,38 @@ export class CommentsArticleComponent implements OnInit, OnDestroy {
             return this.md.render(text)
     }
 
-    editComment() {
+    editComment(postId: string, postEdit: string):void {
+        if (!Meteor.userId())
+            return
 
+        if (postId) {
+            Comments.update(postId, {
+                $set: {
+                    lastposted: new Date(),
+                    post: postEdit
+                }
+            })
+        }
+    }
+
+    printReplyForm():void {
+        this.replyForm = this.formBuilder.group({
+            post: ['', Validators.required]
+        })
+    }
+
+    replyComment(postId: string):void {
+        if (this.replyForm.valid && postId) {
+            Comments.insert({
+                poster: this.user.username,
+                posted: new Date(),
+                post: this.replyForm.value.post,
+                lastposted: new Date(),
+                father: this.articleId,
+                son: postId
+            })
+            this.replyForm.reset()
+        }
     }
 
     delComment() {
@@ -66,6 +106,6 @@ export class CommentsArticleComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.urlparam.unsubscribe()
-        this.commentsub.unsubscribe()
+        this.commentsSub.unsubscribe()
     }
 }
