@@ -3,7 +3,7 @@
 
     <!-- comment -->
     <ul class="media-list">
-        <li class="media" *ngFor="let comment of comments | async">
+        <li class="media" *ngFor="let comment of comments | async; let i=index">
             <div class="media-left">
                 <a href="#">
                     <img class="media-object" src="" alt="">
@@ -14,9 +14,15 @@
                 <h3 class="h3 media-heading">{{ comment.poster }}
                     <small>>{{ comment.posted | date:"d MMMM y à H:M" }}</small></h3>
                 <div [innerHTML]="markdownDisplay(comment.post)"></div>
+                <div *ngIf="user">
+                    <comment-button 
+                    [post]="comment" 
+                    [articleId]="articleId"
+                    [index]="i"></comment-button>
+                </div>
 
                 <!-- Reply 1 -->
-                <div class="media" *ngFor="let reply of (comment | displayReplyComment) | async"> 
+                <div class="media" *ngFor="let reply of (comment | displayReplyComment) | async; let i=index"> 
                     <div class="media-left">
                         <a href="#">
                             <img class="media-object" src="" alt="">
@@ -29,9 +35,15 @@
                             <small>>{{ reply.posted | date:"d MMMM y à H:M" }}</small></h3>
                         <div [innerHTML]="markdownDisplay(reply.post)"></div>
 
+                        <div *ngIf="user">
+                            <comment-button 
+                            [post]="reply" 
+                            [articleId]="articleId"
+                            [index]="i"></comment-button>
+                        </div>
 
                         <!-- Reply 2 -->
-                        <div class="media" *ngFor="let reply1 of (reply | displayReplyComment) | async"> 
+                        <div class="media" *ngFor="let reply1 of (reply | displayReplyComment) | async; let i=index"> 
                             <div class="media-left">
                                 <a href="#">
                                     <img class="media-object" src="" alt="">
@@ -44,8 +56,15 @@
                                     <small>>{{ reply.posted | date:"d MMMM y à H:M" }}</small></h3>
                                 <div [innerHTML]="markdownDisplay(reply1.post)"></div>
 
+                                <div *ngIf="user">
+                                    <comment-button 
+                                    [post]="reply1" 
+                                    [articleId]="articleId"
+                                    [index]="i"></comment-button>
+                                </div>
+
                                 <!-- Reply 3 -->
-                                <div class="media" *ngFor="let reply2 of (reply1 | displayReplyComment) | async"> 
+                                <div class="media" *ngFor="let reply2 of (reply1 | displayReplyComment) | async; let i=index"> 
                                     <div class="media-left">
                                         <a href="#">
                                             <img class="media-object" src="" alt="">
@@ -58,6 +77,12 @@
                                             <small>>{{ reply2.posted | date:"d MMMM y à H:M" }}</small></h3>
                                         <div [innerHTML]="markdownDisplay(reply2.post)"></div>
 
+                                        <div *ngIf="user">
+                                            <comment-button 
+                                            [post]="reply2" 
+                                            [articleId]="articleId"
+                                            [index]="i"></comment-button>
+                                        </div>
 
                                     </div> <!-- End media body 3 -->
                                 </div> <!-- End reply 3 -->
@@ -68,3 +93,7 @@
         </li> <!-- End Comment -->
     </ul>
 </div> <!-- End media -->
+<div [hidden]="!user">
+    <h3>New post</h3>
+    <comment-form></comment-form>
+</div>

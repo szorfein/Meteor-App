@@ -1,5 +1,5 @@
 # Meteor-App
-Minimal webblog with meteor, ionic and angular2.
+Minimal webblog with meteor, angular2, bootstrap 4 and ionic.
 
 ## Preview
 
@@ -20,7 +20,7 @@ Minimal webblog with meteor, ionic and angular2.
     $ cd Meteor-App
     $ meteor npm install
     
-### 4 - Edit ./lib/config.ts
+### 4 - Edit ./lib/config.ts (will be change in future...)
 
     this.username = "s3cr3tR00t";
     this.password = "p4ss_C0mpl1c4t3d";

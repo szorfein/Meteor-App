@@ -1,0 +1,49 @@
+INDEX = {{ index }}
+<div class="comment-button">
+    <button class="btn btn-default" type="button" data-toggle="collapse"
+                                                  [attr.data-target]="'#'+'edit'+post._id"
+                                                  aria-expanded="false"
+                                                  [attr.aria-controls]="'edit'+post._id">
+        Edit
+    </button>
+    <button class="btn btn-default" type="button" data-toggle="collapse"
+                                                  [attr.data-target]="'#'+'reply'+post._id"
+
+                                                  aria-expanded="false"
+                                                  [attr.aria-controls]="'reply'+post._id">
+        Reply
+    </button>
+    <button class="btn btn-default" type="button" data-toggle="collapse"
+                                                  [attr.data-target]="'#'+'remove'+post._id"
+                                                  aria-expanded="false"
+                                                  [attr.aria-controls]="'remove'+post._id">
+        Remove
+    </button>
+</div>
+<div class="collapse" [attr.id]="'edit'+post._id">
+    <form [formGroup]="editForm" (ngSubmit)="edit(post)">
+        <fieldset>
+            <div class="form-group">
+                <label [attr.for]="'edit'+post._id">Edit {{post._id}}</label>
+                <textarea class="form-control" rows="3" formControlName="post" [attr.name]="'edit'+post._id">
+                </textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Reply</button>
+        </fieldset>
+    </form>
+</div>
+<div class="collapse" [attr.id]="'reply'+post._id">
+    <form [formGroup]="replyForm" (ngSubmit)="reply(post)">
+        <fieldset>
+            <div class="form-group">
+                <label [attr.for]="'reply'+post._id">Reply {{post._id}}</label>
+                <textarea class="form-control" rows="3" formControlName="post" [attr.name]="'reply'+post._id">
+                </textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Reply</button>
+        </fieldset>
+    </form>
+</div>
+<div class="collapse" [attr.id]="'remove'+post._id">
+    <button class="btn btn-primary" (click)='remove(post)'></button>
+</div>

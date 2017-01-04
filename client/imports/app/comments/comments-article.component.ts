@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Meteor } from 'meteor/meteor'
 import { Subscription } from 'rxjs/Subscription'
 import { ActivatedRoute } from '@angular/router'
@@ -24,8 +23,6 @@ import style from './comments-article.component.scss'
 @InjectUser('user')
 export class CommentsArticleComponent implements OnInit, OnDestroy {
 
-    replyForm: FormGroup
-
     user: Meteor.User
     articleId: string
     urlparam: Subscription
@@ -36,7 +33,7 @@ export class CommentsArticleComponent implements OnInit, OnDestroy {
     
     md = new MarkdownIt()
 
-    constructor(private route: ActivatedRoute, private formBuilder: FormBuilder) {}
+    constructor(private route: ActivatedRoute) {}
 
     ngOnInit() {
         this.urlparam = this.route.params
@@ -56,7 +53,6 @@ export class CommentsArticleComponent implements OnInit, OnDestroy {
                         { 'son': null }
                     ]
                 })
-                this.printReplyForm()
             })
         })
     }
@@ -64,44 +60,6 @@ export class CommentsArticleComponent implements OnInit, OnDestroy {
     markdownDisplay(text: string):string {
         if (text)
             return this.md.render(text)
-    }
-
-    editComment(postId: string, postEdit: string):void {
-        if (!Meteor.userId())
-            return
-
-        if (postId) {
-            Comments.update(postId, {
-                $set: {
-                    lastposted: new Date(),
-                    post: postEdit
-                }
-            })
-        }
-    }
-
-    printReplyForm():void {
-        this.replyForm = this.formBuilder.group({
-            post: ['', Validators.required]
-        })
-    }
-
-    replyComment(postId: string):void {
-        if (this.replyForm.valid && postId) {
-            Comments.insert({
-                poster: this.user.username,
-                posted: new Date(),
-                post: this.replyForm.value.post,
-                lastposted: new Date(),
-                father: this.articleId,
-                son: postId
-            })
-            this.replyForm.reset()
-        }
-    }
-
-    delComment() {
-
     }
 
     ngOnDestroy() {
