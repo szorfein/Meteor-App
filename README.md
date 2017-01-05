@@ -31,7 +31,14 @@ Minimal webblog with meteor, angular2, bootstrap 4 and ionic.
     cp node_modules/{bootstrap,tether}/dist/js/{bootstrap,tether}.js public/js
     cp node_modules/jquery/dist/jquery.js public/js/
 
-### 6 - Start
+### 6 - Captcha
+
+I have implement a very simple captcha based on question/response, I wouldn't implement google solution...    
+You probably want change with specific language or add an army of question/response before start server:  
+
+    ./server/immports/fixtures/captcha.ts
+
+### 7 - Start
 
     $ meteor
 

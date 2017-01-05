@@ -1,4 +1,4 @@
-<div class="signup">
+<div *ngIf="captcha" class="signup">
     <div class="container">
         <h3>Create an account</h3>
         <form [formGroup]="signupForm" (ngSubmit)="signup()">
@@ -19,6 +19,13 @@
                     <label for="password">Password</label>
                     <input class="form-control"
                            type="password" formControlName="password">
+                </div>
+               
+                <div class="form-group">
+                    <h3>Captcha</h3>
+                    <label [attr.for]="'captcha_'+hash">{{captcha.question}}</label>
+                    <input class="form-control" 
+                           type="text" formControlName="captcha" [attr.name]="'captcha_'+hash">
                 </div>
 
                 <button class="btn btn-primary" type="submit">Sign Up</button>

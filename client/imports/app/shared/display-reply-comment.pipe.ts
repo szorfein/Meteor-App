@@ -10,8 +10,9 @@ import { Observable } from 'rxjs/Observable'
 export class DisplayReplyCommentPipe implements PipeTransform {
     transform(comment: C0mment) {
 
+        let response: Observable<C0mment[]>
         if (!comment) {
-            return ''
+            return response
         }
 
         let replyComments : Observable<C0mment[]>
@@ -20,9 +21,9 @@ export class DisplayReplyCommentPipe implements PipeTransform {
         replyComments = Comments.find({ 'son': commentFatherId }).zone()
 
         if (replyComments) {
-            return replyComments
+            response = replyComments
         }
 
-        return ''
+        return response
     }
 }
