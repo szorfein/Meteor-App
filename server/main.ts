@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor'
 import { loadArticles } from '/server/imports/fixtures/articles'
 import { createRootAccount } from '/server/imports/fixtures/root'
 import { loadTags } from '/server/imports/fixtures/tags'
-import { loadCaptcha } from '/server/imports/fixtures/captchas'
+import { loadCaptchaIndex, loadCaptcha } from '/server/imports/fixtures/captchas'
 
 import '/both/methods/users.methods'
 import '/both/methods/comments.methods'
@@ -20,5 +20,6 @@ Meteor.startup(() => {
     loadArticles()
     createRootAccount()
     loadTags()
+    loadCaptchaIndex()
     loadCaptcha()
 })

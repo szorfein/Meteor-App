@@ -1,7 +1,17 @@
 import { CollectionObject } from './collection-object.model'
 
 export interface Captcha extends CollectionObject {
-    question: string,
-    response: string,
-    lang: string
+    bloc: [
+        { 
+            lang: string,
+            question: string,
+            response: string
+        }
+    ],
+    index: number
+}
+
+export interface CaptchaIndex {
+    _id : string,
+    seq: number
 }

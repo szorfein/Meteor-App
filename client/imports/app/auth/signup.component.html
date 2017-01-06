@@ -21,11 +21,21 @@
                            type="password" formControlName="password">
                 </div>
                
-                <div class="form-group">
-                    <h3>Captcha</h3>
-                    <label [attr.for]="'captcha_'+hash">{{captcha.question}}</label>
-                    <input class="form-control" 
-                           type="text" formControlName="captcha" [attr.name]="'captcha_'+hash">
+                <button class="btn btn-default" type="button" 
+                     data-toggle="collapse"
+                     [attr.data-target]="'#'+'captcha_'+hash"
+                     aria-expanded="false"
+                     [attr.aria-controls]="'captcha_'+hash">
+                    Captcha
+                </button>
+                <div class="collapse" [attr.id]="'captcha_'+hash">
+                    <div class="form-group">
+                        <label [attr.for]="'captcha_'+hash">{{ captcha | displayCaptcha }}</label>
+                        <input class="form-control" 
+                               type="text" 
+                               formControlName="captcha"
+                               [attr.name]="'captcha_'+hash">
+                    </div>
                 </div>
 
                 <button class="btn btn-primary" type="submit">Sign Up</button>

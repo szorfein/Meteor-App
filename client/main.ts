@@ -17,7 +17,6 @@ function setClass(css:string):void {
 
 Meteor.startup(() => {
 
-    console.log('Is Meteor.isCordova ? ' + Meteor.isCordova)
     if (Meteor.isCordova) {
         ionicSelector('app')
         setClass('mobile')

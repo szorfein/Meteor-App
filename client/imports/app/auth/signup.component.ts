@@ -5,7 +5,7 @@ import { Accounts } from 'meteor/accounts-base'
 import { Subscription } from 'rxjs/Subscription'
 import { MeteorObservable } from 'meteor-rxjs'
 import { Md5 } from 'ts-md5/dist/md5'
-
+import { Counts } from 'meteor/tmeasday:publish-counts'
 import { Captcha } from '/both/models/captcha.model'
 import { Captchas } from '/both/collections/captchas.collection'
 
@@ -36,20 +36,37 @@ export class SignupComponent implements OnInit, OnDestroy {
 
     // TODO: find a way for select ONE captcha with random.
     ngOnInit() {
-        console.log('MD5 has hash -> ' + this.hash)
         if (this.captchaSub) 
             this.captchaSub.unsubscribe()
 
         this.captchaSub = MeteorObservable.subscribe('captcha','en').subscribe(() => {
-            this.captcha = Captchas.findOne({ 'lang': 'en'})
-            this.doHashThis()
-            this.printSignup()
-            this.initTimeOut()
+            this.selectCaptcha()
+            if (this.captcha) {
+                this.doHashThis()
+                this.printSignup()
+                this.initTimeOut()
+            } else {
+                console.log('this.captcha has fail to initialize ')
+            }
         })
         this.error = ''
     }
 
-    printSignup() {
+    randomIntFromInterval(min,max):number {
+        return Math.floor(Math.random()*(max-min+1)+min);
+    }
+
+    selectCaptcha():void {
+        let nbCaptcha : number = Counts.get('numberOfCaptcha')
+        let selectRow : number = this.randomIntFromInterval(1,nbCaptcha)
+        console.log('selectRow will choose -> ' + selectRow)
+        this.captcha = Captchas.findOne({ $and: [
+            {'bloc.lang': 'en'},
+            {'index': selectRow }
+        ]})
+    }
+
+    printSignup():void {
         if (this.captcha) {
             this.signupForm = this.formBuilder.group({
                 email: ['', Validators.required],
@@ -60,9 +77,26 @@ export class SignupComponent implements OnInit, OnDestroy {
         }
     }
 
+    captchaControl():boolean {
+        return (this.captcha.bloc[0].response == this.signupForm.value.captcha)
+    }
+
+    signupCondition():boolean {
+        if (!this.checkIsValidHash())
+            console.log('checkIsValidHash has fail')
+
+        if (!this.checkTimerValid())
+            console.log('checkTimerValid has fail')
+
+        if (!this.captchaControl())
+            console.log('captchaControl has fail')
+
+        return (this.checkIsValidHash() && this.checkTimerValid() && this.captchaControl())
+    }
+
     // TODO: control response is good.
-    signup() {
-        if (this.signupForm.valid && this.checkIsValidHash() && this.checkTimerValid()) {
+    signup():void {
+        if (this.signupForm.valid && this.signupCondition()) {
             Accounts.createUser({
                 email: this.signupForm.value.email,
                 password: this.signupForm.value.password,
@@ -114,6 +148,7 @@ export class SignupComponent implements OnInit, OnDestroy {
                 return true
             }
         }
+        console.log('CheckValidHash no found valid HASH !')
         return false
     }
 
