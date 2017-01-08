@@ -1,6 +1,10 @@
 # Meteor-App
 Minimal webblog with meteor, angular2, bootstrap 4 and ionic.
 
+# Status
+
+Currently again in development, try it with caution.
+
 ## Preview
 
 ![Article with preview](https://raw.githubusercontent.com/szorfein/Meteor-App/master/screenshot.jpg)
@@ -20,11 +24,9 @@ Minimal webblog with meteor, angular2, bootstrap 4 and ionic.
     $ cd Meteor-App
     $ meteor npm install
     
-### 4 - Edit ./lib/config.ts (will be change in future...)
+### 4 - Edit ./server/main.config.ts
 
-    this.username = "s3cr3tR00t";
-    this.password = "p4ss_C0mpl1c4t3d";
-    this.email = "myroot@ki.ki";
+change salt value, try generate an harder !
 
 ### 5 - Copy file require for bootstrap in public/js
 
@@ -34,7 +36,7 @@ Minimal webblog with meteor, angular2, bootstrap 4 and ionic.
 ### 6 - Captcha
 
 I have implement a very simple captcha based on question/response, I wouldn't implement google solution...    
-You probably want change with specific language or add an army of question/response before start server:  
+You probably want change couple question/response in file bellow before start...
 
     ./server/immports/fixtures/captcha.ts
 

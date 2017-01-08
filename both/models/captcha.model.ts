@@ -12,6 +12,11 @@ export interface Captcha extends CollectionObject {
 }
 
 export interface CaptchaIndex {
-    _id : string,
-    seq: number
+    _id : string;
+    seq: number;
+}
+
+export interface SecretCaptcha {
+    hash : string;
+    question : string;
 }

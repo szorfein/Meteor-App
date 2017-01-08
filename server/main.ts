@@ -5,9 +5,12 @@ import { createRootAccount } from '/server/imports/fixtures/root'
 import { loadTags } from '/server/imports/fixtures/tags'
 import { loadCaptchaIndex, loadCaptcha } from '/server/imports/fixtures/captchas'
 
+// Public method
 import '/both/methods/users.methods'
 import '/both/methods/comments.methods'
+import '/both/methods/captcha.methods'
 
+// Publication
 import './imports/publications/articles'
 import './imports/publications/tags'
 import './imports/publications/users'
