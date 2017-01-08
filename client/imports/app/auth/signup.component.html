@@ -21,20 +21,23 @@
                            type="password" formControlName="password">
                 </div>
                
-                <button class="btn btn-default" type="button" 
+                <button *ngIf="captcha.hash"
+                     (click)="onClickCaptcha()" class="btn btn-default" type="button" 
                      data-toggle="collapse"
-                     [attr.data-target]="'#'+'captcha_'+hash"
+                     [attr.data-target]="'#'+'captcha_'+captcha.hash"
                      aria-expanded="false"
-                     [attr.aria-controls]="'captcha_'+hash">
+                     [attr.aria-controls]="'captcha_'+captcha.hash">
                     Captcha
                 </button>
-                <div class="collapse" [attr.id]="'captcha_'+hash">
+
+                <div *ngIf="captchaClick && captcha.hash"
+                    class="collapse" [attr.id]="'captcha_'+captcha.hash">
                     <div class="form-group">
-                        <label [attr.for]="'captcha_'+hash">{{ captcha | displayCaptcha }}</label>
+                        <label [attr.for]="'captcha_'+captcha.hash">{{ captcha.question }}</label>
                         <input class="form-control" 
                                type="text" 
                                formControlName="captcha"
-                               [attr.name]="'captcha_'+hash">
+                               [attr.name]="'captcha_'+captcha.hash">
                     </div>
                 </div>
 

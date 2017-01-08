@@ -5,6 +5,7 @@ import { AppModule } from './imports/app/app.module'
 import { Meteor } from 'meteor/meteor'
 
 import '/both/methods/users.methods'
+import '/both/methods/captcha.methods'
 
 import ionicSelector from 'ionic-selector'
 
