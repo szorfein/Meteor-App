@@ -42,18 +42,14 @@ export class SignupComponent implements OnInit, OnDestroy {
         this.captchaSub = MeteorObservable.subscribe('captcha','en').subscribe(() => {
             this.getCaptcha()
         })
-
-        this.error = ''
     }
 
     getCaptcha() {
         let getCount = this.generateCount()
         MeteorObservable.call('secretCaptcha', getCount).subscribe((captcha) => {
-            MeteorObservable.autorun().subscribe(() => {
-                this.captcha = captcha
-                this.printSignup()
-                this.initTimeOut()
-            })
+            this.captcha = captcha
+            this.printSignup()
+            this.initTimeOut()
         }, (err) => {
             alert(`cannot create captcha cause ${err}`)
         })
@@ -82,24 +78,21 @@ export class SignupComponent implements OnInit, OnDestroy {
         }
     }
 
-    captchaControl():boolean {
+    captchaControl() {
         let resp : string = this.signupForm.value.captcha
         let ques : string = this.captcha.question
-        let bool : boolean
         MeteorObservable.call('controlResponse', ques, resp).subscribe(() => {
-            bool = true
+            return true
         }, (err) => {
             alert(`Bad cause ${err}`)
-            bool = false
+            return false
         })
-        return bool
     }
 
     // If not valid Hash, we remake an other captcha
     signupCondition() {
         this.checkIsValidHash()
         this.captchaControl()
-        this.checkTimerValid()
     }
 
     signup():void {

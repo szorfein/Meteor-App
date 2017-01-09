@@ -1,3 +1,4 @@
+//TODO remove it
 function Ninja() {
     this.username = "myroot";
     this.password = "afroninja";
