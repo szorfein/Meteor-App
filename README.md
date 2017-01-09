@@ -36,7 +36,7 @@ change salt value, try generate an harder !
 ### 6 - Captcha
 
 I have implement a very simple captcha based on question/response, I wouldn't implement google solution...    
-You probably want change with specific language or add an army of question/response before start server:  
+You probably want change couple question/response in file bellow before start...
 
     ./server/immports/fixtures/captcha.ts
 

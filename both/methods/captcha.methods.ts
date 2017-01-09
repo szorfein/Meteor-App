@@ -1,9 +1,5 @@
 import { Meteor } from 'meteor/meteor'
-
-interface SecretCaptcha {
-    hash: '',
-    question : string
-}
+import { SecretCaptcha } from '/both/models/captcha.model'
 
 Meteor.methods({
 
@@ -18,18 +14,20 @@ Meteor.methods({
             throw new Meteor.Error('403', 'Alrealy Logged')
 
         if (Meteor.isServer) {
-            let genId = Meteor.call('randomCaptcha', getCount)
-            captcha.hash = Meteor.call('hash', genId)
-            captcha.question = Meteor.call('question', genId)
+            const { captchaLib } = require('/lib/server/captcha')
+            let genId = captchaLib.randomCaptcha(getCount)
+            captcha.hash = captchaLib.hash(genId)
+            captcha.question = captchaLib.question(genId)
         }
 
         return captcha
     },
-    // TODO regenerate captcha if fail !
     checkValidHash: function(captcha: SecretCaptcha) {
         if (Meteor.isServer) {
-            if(!Meteor.call('controlValidHash', captcha))
-                throw new Meteor.Error('Captcha will be regenerate')
+            const { captchaLib } = require('/lib/server/captcha')
+            if (!captchaLib.controlValidHash(captcha)) {
+                throw new Meteor.Error('201', 'new captcha regenerate')
+            }
         }
     },
     controlResponse: function(ques: string, resp: string) {
@@ -40,10 +38,10 @@ Meteor.methods({
             throw new Meteor.Error('403', 'Alrealy Logged')
 
         if (Meteor.isServer) {
-            if (!Meteor.call('checkQuestionResponse', ques, resp))
+            const { captchaLib } = require('/lib/server/captcha')
+
+            if (!captchaLib.checkQuestionResponse(ques, resp))
                 throw new Meteor.Error('400', 'Bad response')
         }
-
-        return true
     }
 })

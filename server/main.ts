@@ -10,9 +10,6 @@ import '/both/methods/users.methods'
 import '/both/methods/comments.methods'
 import '/both/methods/captcha.methods'
 
-// Server method
-import '/lib/server/captcha'
-
 // Publication
 import './imports/publications/articles'
 import './imports/publications/tags'

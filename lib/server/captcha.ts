@@ -1,5 +1,5 @@
 import { Md5 } from 'ts-md5/dist/md5'
-import { Captcha } from '/both/models/captcha.model'
+import { Captcha, SecretCaptcha } from '/both/models/captcha.model'
 import { Captchas } from '/both/collections/captchas.collection'
 import { Server } from '/server/main.config.ts'
 import { Meteor } from 'meteor/meteor'
@@ -36,47 +36,55 @@ function doHashThis(captcha: Captcha) {
     return hash
 }
 
-Meteor.methods({
+class CaptchaLib {
 
-    hash: function(intRow: number) {
+    public hash(intRow: number) {
         let captcha : Captcha = selectCaptcha(intRow)
         let hashString = doHashThis(captcha)
         return hashString
-    },
-    question: function(IntRow: number) {
+    }
+
+    public question(IntRow: number) {
         let captcha = selectCaptcha(IntRow)
 
         if (captcha)
             return captcha.bloc[1].question
-    },
-    randomCaptcha: function(index: number) {
-        console.log('randomCaptcha from secret')
+    }
+
+    public randomCaptcha(index: number) {
         return randomIntFromInterval(1,index)
-    },
-    checkQuestionResponse: function(ques: string, resp: string) {
+    }
+
+    public checkQuestionResponse(ques: string, resp: string) {
         let captcha : Captcha = selectCaptcha2(ques)
 
         if (!captcha)
-            throw new Meteor.Error('404', 'Captcha not found')
+            return false
 
         if (resp !== captcha.bloc[1].response)
-            throw new Meteor.Error('404', 'Bad reponse found')
+            return false
 
         return true
-    },
-    controlValidHash: function(capt):boolean {
+    }
+
+    public controlValidHash(capt: SecretCaptcha):boolean {
         let captcha : Captcha = selectCaptcha2(capt.question)
         let salt : string = Server.salt
-        let time : Date = new Date()
-        for (let i = 0; i<5; i++) {
-            time.setMinutes(time.getMinutes() + i, 0);
+        let timenow : Date = new Date()
+        timenow.setMinutes(timenow.getMinutes() - 5, 0)
+        const time : Date = timenow
+
+        for (let i = 0; i < 10; i++) {
+            time.setMinutes(time.getMinutes() + 1, 0);
             let willbetransform = time + captcha._id + salt
             let newHash = Md5.hashStr(willbetransform)
 
-            if (newHash == this.hash) {
+            if (newHash == capt.hash) {
                 return true
             }
         }
         return false
     }
-})
+}
+
+export const captchaLib = new CaptchaLib()

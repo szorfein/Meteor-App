@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable'
 import { MeteorObservable } from 'meteor-rxjs'
 import { Counts } from 'meteor/tmeasday:publish-counts'
 import { Captchas } from '/both/collections/captchas.collection'
+import { SecretCaptcha } from '/both/models/captcha.model'
 import { Meteor } from 'meteor/meteor'
 
 import template from './signup.component.html'
@@ -20,7 +21,7 @@ import style from './signup.component.scss'
 
 export class SignupComponent implements OnInit, OnDestroy {
 
-    captcha
+    captcha 
     timer : Date = new Date()
     timeOut : Date
     signupForm : FormGroup
@@ -41,7 +42,6 @@ export class SignupComponent implements OnInit, OnDestroy {
         this.captchaSub = MeteorObservable.subscribe('captcha','en').subscribe(() => {
             this.getCaptcha()
         })
-        this.error = ''
     }
 
     getCaptcha() {
@@ -50,7 +50,6 @@ export class SignupComponent implements OnInit, OnDestroy {
             this.captcha = captcha
             this.printSignup()
             this.initTimeOut()
-            console.log('Captcha Hash for form -> ' + this.captcha.hash)
         }, (err) => {
             alert(`cannot create captcha cause ${err}`)
         })
@@ -65,7 +64,6 @@ export class SignupComponent implements OnInit, OnDestroy {
 
     generateCount() {
         let nbCaptcha : number = Counts.get('numberOfCaptcha')
-        console.log('Counts work here -> ' + nbCaptcha)
         return nbCaptcha
     }
 
@@ -80,11 +78,10 @@ export class SignupComponent implements OnInit, OnDestroy {
         }
     }
 
-    captchaControl():boolean {
+    captchaControl() {
         let resp : string = this.signupForm.value.captcha
         let ques : string = this.captcha.question
         MeteorObservable.call('controlResponse', ques, resp).subscribe(() => {
-            console.log('Captcha response, question seem valid')
             return true
         }, (err) => {
             alert(`Bad cause ${err}`)
@@ -93,15 +90,14 @@ export class SignupComponent implements OnInit, OnDestroy {
     }
 
     // If not valid Hash, we remake an other captcha
-    signupCondition():boolean {
-        if (!this.checkIsValidHash())
-            //this.selectCaptcha()
-
-        return (this.checkTimerValid() && this.captchaControl())
+    signupCondition() {
+        this.checkIsValidHash()
+        this.captchaControl()
     }
 
     signup():void {
-        if (this.signupForm.valid && this.signupCondition()) {
+        this.signupCondition()
+        if (this.signupForm.valid && this.checkTimerValid()) {
             Accounts.createUser({
                 email: this.signupForm.value.email,
                 password: this.signupForm.value.password,
@@ -130,13 +126,12 @@ export class SignupComponent implements OnInit, OnDestroy {
         return (time > this.timeOut)
     }
 
-    checkIsValidHash():boolean {
-        let captcha = this.captcha
-        MeteorObservable.call('checkValidHash', captcha).subscribe(() => {
+    checkIsValidHash() {
+        MeteorObservable.call('checkValidHash', this.captcha).subscribe(() => {
             return true
         }, (err) => {
             alert(`Probleme with captcha, will generata an other...${err}`)
-            return false
+            this.getCaptcha()
         })
     }
 
