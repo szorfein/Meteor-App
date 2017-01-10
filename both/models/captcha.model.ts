@@ -20,3 +20,8 @@ export interface SecretCaptcha {
     hash : string;
     question : string;
 }
+
+export interface CaptchaForm {
+    question: string;
+    response: string;
+}

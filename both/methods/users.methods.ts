@@ -1,6 +1,6 @@
 import { UsersExt } from '/both/collections/usersext.collection'
 import { UserExt } from '/both/models/userext.model'
-import { User } from '/both/models/user.model'
+import { User, RegisterUser } from '/both/models/user.model'
 import { check } from 'meteor/check'
 import { Meteor } from 'meteor/meteor'
 import { Accounts } from 'meteor/accounts-base'
@@ -66,6 +66,20 @@ Meteor.methods({
                 throw new Meteor.Error('401', 'No permissions')
 
             registerUser(user._id, user.username)
+        }
+    },
+    createNewNinja: function(newNinja: RegisterUser) {
+        check(newNinja.email, String)
+        check(newNinja.password, String)
+        check(newNinja.username, String)
+
+        if (Meteor.isServer) {
+            const { userLib } = require('/lib/server/user')
+            Accounts.createUser({
+                email: newNinja.email,
+                password: newNinja.password,
+                username: newNinja.username
+            })
         }
     }
 })
