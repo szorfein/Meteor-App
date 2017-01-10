@@ -75,11 +75,8 @@ Meteor.methods({
 
         if (Meteor.isServer) {
             const { userLib } = require('/lib/server/user')
-            Accounts.createUser({
-                email: newNinja.email,
-                password: newNinja.password,
-                username: newNinja.username
-            })
+            if (userLib.isAlrealyRegister(newNinja))
+                throw new Meteor.Error('301', 'Address or Name alrealy exist')
         }
     }
 })

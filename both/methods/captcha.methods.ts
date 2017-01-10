@@ -4,9 +4,6 @@ import { RegisterUser } from '/both/models/user.model'
 
 Meteor.methods({
 
-    /*
-     * We return only hash and question to view.
-     */
     secretCaptcha: function(getCount: number) {
         check(getCount, Number)
         let captcha : SecretCaptcha = { hash: '', question: '' }
@@ -52,5 +49,7 @@ Meteor.methods({
         Meteor.call('checkValidHash', captcha)
         Meteor.call('controlResponse', captchaForm)
         Meteor.call('createNewNinja', newNinja)
+
+        return newNinja
     }
 })

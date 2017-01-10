@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable'
 import { MeteorObservable } from 'meteor-rxjs'
 import { Counts } from 'meteor/tmeasday:publish-counts'
 import { Meteor } from 'meteor/meteor'
+import { RegisterUser } from '/both/models/user.model'
 
 import template from './signup.component.html'
 import style from './signup.component.scss'
@@ -85,28 +86,26 @@ export class SignupComponent implements OnInit, OnDestroy {
                                   this.signupForm.value,
                                   this.captcha,
                                   this.captchaForm)
-            .subscribe(() => {
-                alert('You are register')
-                this.router.navigate(['/'])
+            .subscribe((newNinja: RegisterUser) => {
+                if (newNinja) {
+                    Accounts.createUser({
+                        email: newNinja.email,
+                        password: newNinja.password,
+                        username: newNinja.username
+                    }, (err) => {
+                        if (err) {
+                            this.zone.run(() => {
+                                this.error = err
+                            })
+                        } else {
+                            this.router.navigate(['/'])
+                        }
+                    })
+                }
             }, (err) => {
                 alert(`You cannot been register cause ${err}`)
                 this.getCaptcha()
             })
-            /*
-            Accounts.createUser({
-                email: this.signupForm.value.email,
-                password: this.signupForm.value.password,
-                username: this.signupForm.value.username
-            }, (err) => {
-                if (err) {
-                    this.zone.run(() => {
-                        this.error = err
-                    })
-                } else {
-                    this.router.navigate(['/'])
-                }
-            })
-            */
            this.signupForm.reset()
         }
     }
