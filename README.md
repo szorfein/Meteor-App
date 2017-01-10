@@ -26,7 +26,7 @@ Currently again in development, try it with caution.
     
 ### 4 - Edit ./server/main.config.ts
 
-change salt value, try generate an harder !
+change salt value, try generate an harder, and change root account too, it will be created at start.
 
 ### 5 - Copy file require for bootstrap in public/js
 

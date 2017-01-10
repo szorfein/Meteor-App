@@ -1,4 +1,4 @@
-import { ninja } from '/lib/config'
+import { ninja } from '/server/main.config.ts'
 import { Accounts } from 'meteor/accounts-base'
 
 export function createRootAccount() {
@@ -19,4 +19,3 @@ export function createRootAccount() {
 
     Accounts.createUser(ninja)
 }
-
