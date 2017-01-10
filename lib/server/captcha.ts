@@ -1,5 +1,5 @@
 import { Md5 } from 'ts-md5/dist/md5'
-import { Captcha, SecretCaptcha } from '/both/models/captcha.model'
+import { Captcha, SecretCaptcha, CaptchaForm } from '/both/models/captcha.model'
 import { Captchas } from '/both/collections/captchas.collection'
 import { Server } from '/server/main.config.ts'
 import { Meteor } from 'meteor/meteor'
@@ -55,13 +55,13 @@ class CaptchaLib {
         return randomIntFromInterval(1,index)
     }
 
-    public checkQuestionResponse(ques: string, resp: string) {
-        let captcha : Captcha = selectCaptcha2(ques)
+    public ctrlCaptchaForm(captchaForm: CaptchaForm) {
+        let captcha : Captcha = selectCaptcha2(captchaForm.question)
 
         if (!captcha)
             return false
 
-        if (resp !== captcha.bloc[1].response)
+        if (captchaForm.response !== captcha.bloc[1].response)
             return false
 
         return true
