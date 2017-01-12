@@ -1,0 +1,122 @@
+@import "./colors";
+
+
+/*
+* Base
+*/
+
+body {
+}
+
+/*
+* Navbar
+*/
+
+.main-header {
+
+    #nav-menu-collapse-1 {
+        .nav-item {
+            float: none;
+        }
+        .navbar-collapse.in {
+            margin: 3em 0;
+            text-align: center;
+        }
+    }
+
+    .navbar-toggler {
+        position: fixed;
+        left: 47.6%;
+        padding: 0;
+
+        .navbar-toggler-icon {
+            display: inline-block;
+            width: 1.5em;
+            height: 1.5em;
+            vertical-align: middle;
+            content: "";
+            background: no-repeat center center;
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+        }
+    }
+    .social-media {
+        position: absolute;
+        right: 0;
+        top: 0;
+        .nav-item {
+            float: right;
+        }
+    }
+}
+
+/*
+* Header
+*/
+
+
+/*
+* Footer
+*/
+
+/*
+* Media Query
+*/
+
+// Extra small devices (portrait phones, less than 576px)
+// No media query since this is the default in Bootstrap
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+    .main-header {
+        nav { 
+        }
+        .navbar-toggler {
+            display: none;
+        }
+    }
+    .social-media {
+        float: right;
+        .nav-item {
+            float: right;
+        }
+    }
+    #nav-menu-collapse-1 {
+        ul {
+            display: inline-block;
+        }
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+    .social-media {
+        float: right;
+        .nav-item {
+            float: right;
+        }
+    }
+
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+    .social-media {
+        float: right;
+        .nav-item {
+            float: right;
+        }
+    }
+
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+    .social-media {
+        float: right;
+        .nav-item {
+            float: right;
+        }
+    }
+
+}
