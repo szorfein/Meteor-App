@@ -14,6 +14,10 @@ body {
 
 .main-header {
 
+    background-color: rgba(46,35,53,.19);
+    position: fixed;
+    width: 100%;
+    
     #nav-menu-collapse-1 {
         .nav-item {
             float: none;
@@ -41,13 +45,27 @@ body {
         }
     }
     .social-media {
-        position: absolute;
-        right: 0;
-        top: 0;
+        position: fixed;
+        right: 10px;
+        top: 5px;
         .nav-item {
             float: right;
         }
     }
+}
+
+/* 
+* /index
+*/
+
+.index-img {
+    height: 32rem;
+}
+.banner-bottom {
+    background-color: #333;
+    color: #fff;
+    min-height: 10rem;
+    margin-top: -32px;
 }
 
 /*
@@ -81,8 +99,14 @@ body {
             float: right;
         }
     }
+    #nav-menu-collapse-1.collapse {
+        display: block;
+        position: fixed;
+        top: 5px;
+        left: 29%;
+    }
     #nav-menu-collapse-1 {
-        ul {
+        .nav-item {
             display: inline-block;
         }
     }
@@ -96,7 +120,9 @@ body {
             float: right;
         }
     }
-
+    #nav-menu-collapse-1.collapse {
+        left: 35%;
+    }
 }
 
 // Large devices (desktops, 992px and up)
@@ -106,6 +132,9 @@ body {
         .nav-item {
             float: right;
         }
+    }
+    #nav-menu-collapse-1.collapse {
+        left: 37%;
     }
 
 }
