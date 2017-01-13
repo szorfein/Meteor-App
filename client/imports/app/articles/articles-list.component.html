@@ -34,37 +34,41 @@
     </div>
 
     <div class="container">
-    <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-4 articles-list" *ngFor="let article of articles | async">
-                <div class="thumbnail">
-                    <div *ngFor="let bl of article.bloc">
-                        <h3>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 articles-list" *ngFor="let article of articles | async">
+                <div class="card blog" *ngFor="let bl of article.bloc">
+                    <div class="card-block">
+                        <h3 class="card-title">
                             <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
                         </h3>
-                        <p>
-                        by <a [routerLink]="['/user', article.author]">{{article.author}}</a>
-                        at {{ article.createdAt | date:"d MMMM y à H" }}h
+                        <p class="card-text">
+                            <i class="fa fa-user fa-fw"></i>
+                            <a [routerLink]="['/user', article.author]">{{article.author}}</a>
                         </p>
                         <a [routerLink]="['/blog', article._id]">
-                            <img *ngIf="article.image" [src]="article | displayMainImage">
+                            <img class="card-img img-fluid" *ngIf="article.image" [src]="article | displayMainImage">
                         </a>
-                        <div class="caption">
-                            <div class="small description" [innerHTML]="markdownDisplay(bl.description)"></div>
-                            <p>
-                            <a class="btn btn-primary btn-lg"
-                                [routerLink]="['/blog', article._id]">Learn More</a>
-                            </p>
-                            <button [hidden]="!root" (click)="removeArticle(article)">
-                            </button>
-                        </div>
+                        <div class="card-text text-center" [innerHTML]="markdownDisplay(bl.description)"></div>
+                        <p>
+                        <a class="btn btn-default btn-sm"
+                           [routerLink]="['/blog', article._id]">Read more</a>
+                        </p>
+                        <p class="card-text">
+                        <i class="fa fa-user fa-fw"></i>
+                        <small>
+                            {{ article.createdAt | date:"d MMMM y à H" }}h
+                        </small>
+                        </p>
                     </div>
+                    <button [hidden]="!root" (click)="removeArticle(article)">
+                    </button>
                 </div>
             </div>
+        </div>
     </div>
-    </div>
-    <div class="clearfix visible-xs-block"></div>
-    <div class="pagination">
-        <pagination-controls (pageChange)="onPageChanged($event)">
-        </pagination-controls>
-    </div>
+</div>
+<div class="container">
+    <nav aria-label="Pagination">
+        <pagination-controls (pageChange)="onPageChanged($event)"></pagination-controls>
+    </nav>
 </div>
