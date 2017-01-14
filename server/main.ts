@@ -9,6 +9,7 @@ import { loadCaptchaIndex, loadCaptcha } from '/server/imports/fixtures/captcha
 import '/both/methods/users.methods'
 import '/both/methods/comments.methods'
 import '/both/methods/captcha.methods'
+import '/both/methods/extras.methods'
 
 // Publication
 import './imports/publications/articles'

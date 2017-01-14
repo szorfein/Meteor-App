@@ -1,22 +1,134 @@
 <div *ngIf="root">
-    <div class="form-container">
-        <div class="container">
-            <form [formGroup]="aboutForm" (ngSubmit)="addPost()">
-                <fieldset>
-                    <div class="form-group">
-                        <label for="aboutme">About Me</label>
-                        <textarea class="form-control" rows="3"
-                            formControlName="post" name="aboutme"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="lang">Lang</label>
-                        <input class="form-group" 
-                               type="text" formControlName="lang" name="lang">
-                    </div>
-                    <button class="btn btn-primary"
-                        type="submit">Add About</button>
-                </fieldset>
-            </form>
-        </div>
+    <div class="container">
+        <form [formGroup]="aboutForm" (ngSubmit)="addPost()">
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="image">Image</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="image" formControlName="image" name="image">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="lang">Lang</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="lang" formControlName="lang" name="lang">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="name">Name</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="name" formControlName="name" name="image">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="company">Company</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="company" formControlName="company" name="company">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="jobName">Job</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="jobName" formControlName="jobName" name="jobName">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="mail">Email</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="email" id="mail" formControlName="mail" name="mail">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="mobile">Phone Mobile</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="mobile" formControlName="mobile" name="mobile">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="fix">Phone</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="fix" formControlName="fix" name="fix">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="fax">Fax</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="fax" formControlName="fax" name="fax">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="aboutMe">About Me</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" type="text" id="aboutMe" formControlName="aboutMe" name="aboutMe">
+                    </textarea>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="address">Address</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="address" formControlName="address" name="address">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="facebook">Facebook Link</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="facebook" formControlName="facebook" name="facebook">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="github">Github Link</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="github" formControlName="github" name="github">
+                </div>
+            </div>
+
+            <div class="form-group row">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="twitter">Twitter</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="twitter" formControlName="twitter" name="twitter">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="dotshare">DotshareIt</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="dotshare" formControlName="dotshare" name="dotshare">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="imgur">Imgur</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="imgur" formControlName="imgur" name="imgur">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="reddit">Reddit</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="reddit" formControlName="reddit" name="reddit">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="offset-sm-2 col-sm-10">
+                    <button class="btn btn-primary" type="submit">Add About</button>
+                </div>
+            </div>
+
+        </form>
     </div>
 </div>

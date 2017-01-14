@@ -47,7 +47,22 @@ function sendUserBar(userId):UserBar {
     return userbar
 }
 
+function isAdmin(userId: string):boolean {
+    let root = UsersExt.findOne({
+        $and: [
+            { 'idOwner': userId },
+            { 'admin': true },
+            { 'isPublic': false }
+        ]
+    })
+    return !!root
+}
+
 class UserLib {
+
+    public returnAdmin(userId: string) {
+        return isAdmin(userId)
+    }
 
     public isAlrealyRegister(newNinja : RegisterUser) {
         const user = Users.find({ $or: [

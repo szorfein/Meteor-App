@@ -1,13 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MeteorObservable } from 'meteor-rxjs'
-import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 import { Meteor } from 'meteor/meteor'
-import { UsersExt } from '/both/collections/usersext.collection'
-import { UserExt } from '/both/models/userext.model'
-import { Extra } from '/both/models/extra.model'
-import { Extras } from '/both/collections/extras.collection'
 
 import template from './about-form.component.html'
 
@@ -18,8 +13,8 @@ import template from './about-form.component.html'
 
 export class AboutFormComponent implements OnInit, OnDestroy {
 
-    root: Observable<UserExt>
-    rootsub: Subscription
+    root
+    rootSub: Subscription
     aboutForm: FormGroup
 
     constructor(
@@ -29,38 +24,52 @@ export class AboutFormComponent implements OnInit, OnDestroy {
     ngOnInit() {
 
         if (!!Meteor.user()) {
-            if(this.rootsub)
-                this.rootsub.unsubscribe()
+            if(this.rootSub)
+                this.rootSub.unsubscribe()
 
-            this.rootsub = MeteorObservable.subscribe('root').subscribe(() => {
-                this.callRoot()
+            this.rootSub = MeteorObservable.subscribe('root').subscribe(() => {
+                MeteorObservable.autorun().subscribe(() => {
+                    this.callRoot()
+                })
                 this.printForm()
             })
         }
     }
 
     callRoot() {
-        this.root = UsersExt.findOne({ 'idOwner': Meteor.userId() })
+        MeteorObservable.call('userAdmin').subscribe((user) => {
+            this.root = user
+        })
     }
 
     printForm() {
         this.aboutForm = this.formBuilder.group({
-            post: ['', Validators.required],
-            lang: ['en', Validators.required]
+            image: [''],
+            name: ['', Validators.required],
+            lang: ['en', Validators.required],
+            company: [''],
+            jobName: [''],
+            mail: [''],
+            mobile: [''],
+            fix: [''],
+            fax: [''],
+            aboutMe: [''],
+            address: [''],
+            facebook: [''],
+            github: [''],
+            twitter: [''],
+            dotshare: [''],
+            imgur: [''],
+            reddit: ['']
         })
     }
 
     addPost() {
         if (this.aboutForm.valid) {
-            let defaultname = 'about'
-            let finalname = defaultname + this.aboutForm.value.lang
-            console.log('finalname = ' + finalname)
-
-            Extras.insert({
-                lastEdit: new Date(),
-                post: this.aboutForm.value.post,
-                lang: this.aboutForm.value.lang,
-                title: finalname
+            MeteorObservable.call('createAboutInfo', this.aboutForm.value).subscribe(() => {
+                alert('information has been register');
+            }, (err) => {
+                alert(`Cannot add information because: ${err}`)
             })
 
             this.aboutForm.reset()
@@ -68,8 +77,7 @@ export class AboutFormComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        if (this.rootsub)
-            this.rootsub.unsubscribe()
-
+        if (this.rootSub)
+            this.rootSub.unsubscribe()
     }
 }
