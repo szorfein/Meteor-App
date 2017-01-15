@@ -14,6 +14,9 @@ function buildAbout(about: AboutDetailForm, userId: string) {
         idOwner: userId,
         name: about.name,
         company: noneByDefault(about.company),
+        aboutCompany: [
+            { lang: noneByDefault(about.lang), yourCompany: noneByDefault(about.aboutCompany)}
+        ],
         jobName: [
             { lang: noneByDefault(about.lang), yourjob: noneByDefault(about.jobName) }
         ],
@@ -62,6 +65,11 @@ class ExtraLib {
         const about = giveThisForm(userId)
         return !!about
     }
+
+    public returnAboutForView() {
+        const about : AboutDetail = AboutsDetail.findOne()
+        return about
+    }
 }
-       
+
 export const extraLib = new ExtraLib()

@@ -1,0 +1,13 @@
+<div *ngIf="about">
+    <div class="row">
+        <h4>About me</h4>
+        <div class="col-md-4 separator">
+            <img class="img-fluid img-rounded" [attr.src]="about.image | previewImage">
+            <h3> {{ about.name || displayAbout }}</h3>
+            <p> {{ about.jobName[0].yourjob || displayAbout }} </p>
+        </div>
+        <div class="col-md-8 separator">
+            <p> {{ about.aboutYourSelf[0].yourself || displayAbout }} </p>
+        </div>
+    </div>
+</div>

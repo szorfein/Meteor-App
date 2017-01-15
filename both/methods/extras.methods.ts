@@ -17,11 +17,13 @@ Meteor.methods({
         console.log('Method will return about')
         return about
     },
-    sendAboutInfo: function() {
-
+    sendAboutForView: function() {
+        let about : AboutDetail
         if (Meteor.isServer) {
             const { extraLib } = require('/lib/server/extra')
+            about = extraLib.returnAboutForView()
         }
+        return about
     },
     createAboutInfo: function(about: AboutDetailForm) {
 
