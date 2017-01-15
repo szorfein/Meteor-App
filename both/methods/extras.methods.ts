@@ -1,16 +1,23 @@
-import { AboutDetailForm } from '/both/models/extra.model'
+import { AboutDetail, AboutDetailForm } from '/both/models/extra.model'
 import { Meteor } from 'meteor/meteor'
 import { check } from 'meteor/check'
 
 Meteor.methods({
 
-    sendAboutInfo: function() {
-
+    editOrAddAbout: function() {
+        let about : AboutDetail
         if (Meteor.isServer) {
             const { extraLib } = require('/lib/server/extra')
+            if (!extraLib.hasFound(this.userId)) {
+                console.log('Method will fail')
+                throw new Meteor.Error('404', 'Not found')
+            }
+            about = extraLib.returnAbout(this.userId)
         }
+        console.log('Method will return about')
+        return about
     },
-    editAboutInfo: function() {
+    sendAboutInfo: function() {
 
         if (Meteor.isServer) {
             const { extraLib } = require('/lib/server/extra')

@@ -19,6 +19,7 @@ import './imports/publications/comments'
 import './imports/publications/contact'
 import './imports/publications/images'
 import './imports/publications/captchas'
+import './imports/publications/extras'
 
 Meteor.startup(() => {
     loadArticles()

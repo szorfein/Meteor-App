@@ -15,6 +15,7 @@ export class AboutFormComponent implements OnInit, OnDestroy {
 
     root
     rootSub: Subscription
+    detailSub: Subscription
     aboutForm: FormGroup
 
     constructor(
@@ -23,6 +24,8 @@ export class AboutFormComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
+        this.detailSub = MeteorObservable.subscribe('pubAbout').subscribe()
+
         if (!!Meteor.user()) {
             if(this.rootSub)
                 this.rootSub.unsubscribe()
@@ -30,8 +33,8 @@ export class AboutFormComponent implements OnInit, OnDestroy {
             this.rootSub = MeteorObservable.subscribe('root').subscribe(() => {
                 MeteorObservable.autorun().subscribe(() => {
                     this.callRoot()
+                    this.printForm()
                 })
-                this.printForm()
             })
         }
     }
@@ -43,6 +46,38 @@ export class AboutFormComponent implements OnInit, OnDestroy {
     }
 
     printForm() {
+        MeteorObservable.call('editOrAddAbout').subscribe((about) => {
+            this.editForm(about)
+        }, () => {
+            this.addForm()
+        })
+    }
+
+    editForm(about) {
+        if (about) {
+            this.aboutForm = this.formBuilder.group({
+                image: [about.image],
+                name: [about.name, Validators.required],
+                lang: ['en', Validators.required],
+                company: [about.company],
+                jobName: [about.jobName[0].yourjob],
+                mail: [about.mail],
+                mobile: [about.telMobile],
+                fix: [about.telFix],
+                fax: [about.fax],
+                aboutMe: [about.aboutYourSelf[0].yourself],
+                address: [about.address],
+                facebook: [about.facebookLink],
+                github: [about.githubLink],
+                twitter: [about.twitterLink],
+                dotshare: [about.dotshareLink],
+                imgur: [about.imgurLink],
+                reddit: [about.redditLink]
+            })
+        }
+    }
+
+    addForm() {
         this.aboutForm = this.formBuilder.group({
             image: [''],
             name: ['', Validators.required],
@@ -77,7 +112,9 @@ export class AboutFormComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        if (this.rootSub)
+        if (this.rootSub) {
             this.rootSub.unsubscribe()
+        }
+        this.detailSub.unsubscribe()
     }
 }

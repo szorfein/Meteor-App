@@ -9,8 +9,7 @@ function noneByDefault(text: string) {
 }
 
 function buildAbout(about: AboutDetailForm, userId: string) {
-    let newAbout : AboutDetail
-    newAbout = {
+    const newAbout : AboutDetail = {
         image: noneByDefault(about.image),
         idOwner: userId,
         name: about.name,
@@ -36,13 +35,32 @@ function buildAbout(about: AboutDetailForm, userId: string) {
     return newAbout
 }
 
+function giveThisForm(userId: string) {
+    const about = AboutsDetail.findOne({ 'idOwner': userId })
+    return about
+}
+
 class ExtraLib {
 
     public addAbout(about: AboutDetailForm, userId: string) {
         const newAbout : AboutDetail = buildAbout(about, userId)
-        AboutsDetail.insert({
-            newAbout
-        })
+        if (this.hasFound(userId)) {
+            console.log('Formulaire will be update...')
+            AboutsDetail.update({'idOwner': userId}, newAbout)
+        } else {
+            console.log('We create a new about form')
+            AboutsDetail.insert(newAbout)
+        }
+    }
+
+    public returnAbout(userId: string) {
+        const about = giveThisForm(userId)
+        return about
+    }
+
+    public hasFound(userId: string) {
+        const about = giveThisForm(userId)
+        return !!about
     }
 }
        
