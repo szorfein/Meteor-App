@@ -60,7 +60,7 @@ export class AboutFormComponent implements OnInit, OnDestroy {
                 name: [about.name, Validators.required],
                 lang: ['en', Validators.required],
                 company: [about.company],
-                aboutCompany: [about.company[0].yourCompany],
+                aboutCompany: [about.aboutCompany[0].yourCompany],
                 jobName: [about.jobName[0].yourjob],
                 mail: [about.mail],
                 mobile: [about.telMobile],

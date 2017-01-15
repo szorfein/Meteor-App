@@ -14,7 +14,6 @@ Meteor.methods({
             }
             about = extraLib.returnAbout(this.userId)
         }
-        console.log('Method will return about')
         return about
     },
     sendAboutForView: function() {

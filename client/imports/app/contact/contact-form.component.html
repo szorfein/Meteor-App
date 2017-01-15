@@ -1,21 +1,37 @@
-<div *ngIf="root" class="form-container">
+<div class="form-container separator">
     <div class="container">
-        <form [formGroup]="contactForm" (ngSubmit)="addPost()">
-            <fieldset>
-                <div class="form-group">
-                    <label for="contact">Contact</label>
-                    <textarea class="form-control" rows="3"
-                        formControlName="post" name="contact">
-                    </textarea>
-                </div>
-                <div class="form-group">
-                    <label for="lang">Lang</label>
-                    <input class="form-control"
-                           type="text" formControlName="lang" name="lang">
-                </div>
-                <button class="btn btn-primary"
-                    type="submit">Add Contact</button>
-            </fieldset>
+        <h3>Contact Me</h3>
+        <form class="separator" [formGroup]="contactForm" (ngSubmit)="addPost()">
+
+            <div class="form-group">
+                <label class="sr-only" for="name">Name</label>
+                <input class="form-control" type="text" formControlName="name" name="name" placeholder="Your Name">
+            </div>
+
+            <div class="form-group">
+                <label class="sr-only" for="email">Email</label>
+                <input class="form-control"
+                       type="email" formControlName="email" name="email" placeholder="Your Email">
+            </div>
+
+            <div class="form-group">
+                <label class="sr-only" for="phone">Phone</label>
+                <input class="form-control" type="text" formControlName="phone" name="phone" placeholder="Your Phone">
+            </div>
+
+            <div class="form-group">
+                <label class="sr-only" for="subject">Subject</label>
+                <input class="form-control" type="text" formControlName="subject" name="subject" placeholder="Subject">
+            </div>
+
+            <div class="form-group">
+                <label class="sr-only" for="message">Message</label>
+                <textarea class="form-control" type="text" rows="4" formControlName="message" name="message" placeholder="Your Message">
+                </textarea>
+            </div>
+
+            <button class="btn btn-primary"
+                    type="submit">Send Message</button>
         </form>
     </div>
 </div>
