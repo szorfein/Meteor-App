@@ -1,10 +1,10 @@
 <div *ngIf="about">
     <div class="row">
-        <div class="col-md-3 about">
+        <div class="col-sm-3 about">
             <h4>{{ about.company | displayAbout }} </h4>
             <p class="text-justify">{{about.aboutCompany[0].yourCompany | displayAbout }}</p>
         </div>
-        <div class="col-md-3 pages">
+        <div class="col-sm-3 pages">
             <h4>Pages</h4>
             <ul class="list-unstyled">
                 <li><i class="fa fa-caret-right fa-fw"></i><a [routerLink]="['/']">Home</a></li>
@@ -15,7 +15,7 @@
                 <li><i class="fa fa-caret-right fa-fw"></i><a [routerLink]="['/contact']">Signup</a></li>
             </ul>
         </div>
-        <div class="col-md-3 contact-us">
+        <div class="col-sm-3 contact-us">
             <h4>Contact</h4>
             <p><i class="fa fa-map-pin fa-fw"></i>
             {{ about.address | displayAbout }}
@@ -30,7 +30,7 @@
             {{ about.mail | displayAbout }}
             </p>
         </div>
-        <div class="col-md-3 subscribe">
+        <div class="col-sm-3 subscribe">
             <h4>Subscribe</h4>
         </div>
     </div>

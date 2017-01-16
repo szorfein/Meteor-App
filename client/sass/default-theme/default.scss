@@ -14,21 +14,179 @@ body {
     background-color: #fff;
     color: #000;
     padding: 2rem 0;
-    .row {
-        margin: 2em 0;
+}
+
+/*
+* Bootstrap default not include in this version
+*/
+
+.mt-0 {
+    margin-top: 0!important;
+}
+
+.mr-3 {
+    margin-right: 1rem!important;
+}
+
+.align-self-start {
+    align-self: flex-start !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+
+.d-none {
+    display: none !important;
+}
+
+
+.media {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+}
+
+.media-body {
+    -webkit-box-flex: 1;
+    flex: 1 1 0%;
+}
+
+.fixed-top {
+    position: fixed; 
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+.carousel-control-prev {
+    left: 0;
+}
+.carousel-control-next {
+    right: 0;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 15%;
+    color: #fff;
+    text-align: center;
+    opacity: 0.5;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: transparent no-repeat center center;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M4 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+
+.carousel-indicators {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    left: 0;
+    z-index: 15;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-left: 0;
+    margin-right: 15%;
+    margin-left: 15%;
+    list-style: none;
+
+    .active {
+        height: 0;
+        width: 0;
+        margin: 0 3px;
+    }
+
+    li {
+        position: relative;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1 0 auto;
+        -ms-flex: 1 0 auto;
+        flex: 1 0 auto;
+        max-width: 30px;
+        height: 3px;
+        margin-right: 3px;
+        margin-left: 3px;
+        text-indent: -999px;
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.5);
+        &::before {
+            position: absolute;
+            top: -10px;
+            left: 0;
+            display: inline-block;
+            width: 100%;
+            height: 10px;
+            content: "";
+        }
+        &::after {
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            display: inline-block;
+            width: 100%;
+            height: 10px;
+            content: "";
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .d-md-block {
+        display: block !important;
     }
 }
 
 /*
-* Navbar
-*/
+ * Navbar
+ */
 
 .main-header {
 
     background-color: rgba(0,0,0,.9);
     position: fixed;
     width: 100%;
-    
+
     #nav-menu-collapse-1 {
         .nav-item {
             float: none;
@@ -139,6 +297,7 @@ body {
     border-top: 1px solid #fff;
     text-align: center;
     padding: 1.3em 0;
+    margin: 0 4em;
 }
 
 /*
