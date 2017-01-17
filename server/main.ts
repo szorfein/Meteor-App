@@ -11,6 +11,7 @@ import '/both/methods/comments.methods'
 import '/both/methods/captcha.methods'
 import '/both/methods/extras.methods'
 import '/both/methods/contacts.methods'
+import '/both/methods/articles.methods'
 
 // Publication
 import './imports/publications/articles'

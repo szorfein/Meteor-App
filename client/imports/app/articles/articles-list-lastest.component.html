@@ -1,0 +1,45 @@
+<div *ngIf="articleList">
+    <h3>Last articles</h3>
+    <div class="carousel slide" id="carouselIArticles" data-ride="carousel" 
+                                                       data-interval="false">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselIArticles" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselIArticles" data-slide-to="1"></li>
+            <li data-target="#carouselIArticles" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div *ngFor="let article of articleList | async | slice:0:1" class="carousel-item active">
+
+                <img class="d-block img-fluid" [attr.src]="article.image | previewImage" alt="last article">
+                <div class="carousel-caption d-none d-md-block">
+                    <h4>{{ article.bloc[0].title }}</h4>
+                    <p>{{ article.author }}
+                    {{ article.createdAt }}
+                    {{ article.bloc[0].description }}
+                    </p>
+                </div>
+            </div> <!-- End carousel-item -->
+            <div *ngFor="let article of articleList | async | slice:1" class="carousel-item">
+
+                <img class="d-block img-fluid" [attr.src]="article.image | previewImage" alt="last article">
+                <div class="carousel-caption d-none d-md-block">
+                    <h4>{{ article.bloc[0].title }}</h4>
+                    <p>{{ article.author }}
+                    {{ article.createdAt }}
+                    {{ article.bloc[0].description }}
+                    </p>
+                </div>
+            </div> <!-- End carousel-item -->
+        </div> <!-- End carousel-inner -->
+        <a class="carousel-control-prev" href="#carouselIArticles" role="button"
+                                                                   data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselIArticles" role="button"
+                                                                   data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div> <!-- End carousel -->
+</div>

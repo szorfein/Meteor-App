@@ -1,11 +1,27 @@
 <div *ngIf="about">
     <h4>About me</h4>
-    <div class="media">
-        <img class="d-flex align-self-start mr-3 img-fluid" [attr.src]="about.image | previewImage" alt="My head" style="width:96px;height:96px">
-        <div class="media-body">
-            <h3 class="mt-5"> {{ about.name || displayAbout }}</h3>
-            <p> {{ about.jobName[0].yourjob || displayAbout }} </p>
-            <p> {{ about.aboutYourSelf[0].yourself || displayAbout }} </p>
+    <div class="card text-center aboutme">
+
+        <div class="card-header">
+            <img class="rounded-circle mr-3 selfie" [attr.src]="about.image | previewImage" alt="My head">
+
+        </div>
+        <div class="card-block">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="card-title"> {{ about.name || displayAbout }}</h3>
+                        <p class="card-text"> {{ about.jobName[0].yourjob || displayAbout }} </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="card-text"> {{ about.aboutYourSelf[0].yourself || displayAbout }} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer text-muted">
+            <p class="text-left">Skill :</p>
         </div>
     </div>
 </div>

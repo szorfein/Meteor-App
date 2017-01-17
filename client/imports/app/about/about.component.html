@@ -1,15 +1,11 @@
 <div class="separator"></div>
 
-<about-detail-me></about-detail--me>
+<div class="container">
+    <about-detail-me></about-detail--me>
+</div>
 
 <div *ngIf="!extra">
     <about-form></about-form>
-</div>
-
-<div class="jumbotron">
-    <div class="container">
-        <p class="aboutme" *ngIf="extra" [innerHTML]="markdownDisplay"></p>
-    </div>
 </div>
 
 <div *ngIf="root">

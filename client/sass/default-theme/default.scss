@@ -20,6 +20,26 @@ body {
 * Bootstrap default not include in this version
 */
 
+.rounded-circle {
+    border-radius: 50%;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-justify {
+    text-align: justify !important;
+}
+
 .mt-0 {
     margin-top: 0!important;
 }
@@ -35,7 +55,6 @@ body {
 .d-flex {
     display: flex !important;
 }
-
 
 .d-none {
     display: none !important;
@@ -282,6 +301,25 @@ body {
 
 .separator {
     margin-top: 3em;
+}
+
+/*
+* About
+*/
+
+.aboutme {
+    border: 0;
+    .card-header {
+        background-color: transparent;
+    }
+    .card-footer {
+        background-color: transparent;
+    }
+}
+
+.selfie {
+    width: 256px;
+    height: 256px;
 }
 
 /*
