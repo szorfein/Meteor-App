@@ -246,6 +246,13 @@ body {
 * /index
 */
 
+#banner {
+    height: 450px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+} 
+
 #carouselBanner {
     margin-top: 20px;
 }
@@ -284,12 +291,15 @@ body {
 */
 
 .articles {
+    margin: 2em 0;
     &>.row.ma-filter {
         float: right;
     }
 }
 
 .blog {
+    height: 387px;
+    margin: 1em 0;
     h3.card-title>a {
         text-decoration: none;
         color: #222;

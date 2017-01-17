@@ -18,11 +18,3 @@ export interface Article extends CollectionObject {
     hate?: number,
     tags?: [ string ]   
 }
-
-export interface ArticleLimited {
-    author: string,
-    createdAt: Date,
-    image: string,
-    title: string,
-    description: string
-}

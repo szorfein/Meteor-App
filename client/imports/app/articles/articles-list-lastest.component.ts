@@ -26,7 +26,7 @@ export class ArticlesListLastestComponent implements OnInit, OnDestroy {
     }
 
    callArticles() {
-       this.articleList = Articles.find({},{sort:{createAt:-1},skip:0,limit:3}).zone()
+       this.articleList = Articles.find({},{sort:{createAt:-1},limit:3}).zone()
    }
 
     ngOnDestroy() {

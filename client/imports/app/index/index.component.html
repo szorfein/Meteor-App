@@ -1,39 +1,10 @@
-<div id="carouselBanner" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#carouselBanner" data-slide-to="0" class="active"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="carousel-item active">
-            <img class="d-block img-fluid" src="img/code-programming-no-talk.jpg" alt="Responsive">
-            <div class="carousel-caption d-none d-md-block">
-                <h3>Welcome</h3>
-                <p>blablabla</p>
-            </div>
-        </div>
-    </div>
-    <a class="carousel-control-prev" href="#carouselBanner" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselBanner" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
+<div id="banner" style="background-image:url(img/code-programming-no-talk.jpg);"></div>
+<div class="container-fluid index-head">
+    <nav></nav>
 </div>
-
-<div class="container-fluid index-head"></div>
 <div class="container index-body">
     <about-detail-me></about-detail-me>
     <contact-form></contact-form>
     <articles-list-lastest></articles-list-lastest>
 </div>
-
-<div *ngIf="root">
-    <div *ngIf="extra">
-        <form (submit)="saveIndex()">
-            <label for="post">Presentation</label>
-            <textarea [(ngModel)]="extra.post" name="post"></textarea>
-            <button type="submit">Change Msg</button>
-        </form>
-    </div>
-</div>
+<div class="separator"></div>
