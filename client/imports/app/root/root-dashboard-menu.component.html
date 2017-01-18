@@ -10,13 +10,19 @@
             aria-expanded="false">
             <i class="fa fa-edit"></i>
             <span>Form</span>
-            <span><i class="fa fa-angle-left pull-right"></i></span>
         </a>
         <div class="dropdown-menu">
             <a class="dropdown-item" 
                 data-toggle="modal" 
                 data-target="#form-blog" href="#">
-                + Article
+                <i class="fa fa-plus"></i>
+                <span>Article</span>
+            </a>
+            <a class="dropdown-item" 
+                data-toggle="modal" 
+                data-target="#form-about-edit" href="#">
+                <i class="fa fa-plus"></i>
+                <span>About Me</span>
             </a>
         </div>
         <a class="flex-md-fill text-md-center nav-link" href="#">Button 1</a>
@@ -25,26 +31,6 @@
         <a class="flex-md-fill text-md-center nav-link" href="#">Button 1</a>
     </nav>
 </div>
-<div class="modal fade" id="form-blog" 
-                        tabindex="-1" role="dialog" aria-labelledby="addArticle"
-                                                    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addArticle">Add article</h5>
 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <articles-form></articles-form>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
+<modal-article-add></modal-article-add>
+<modal-about-edit></modal-about-edit>
