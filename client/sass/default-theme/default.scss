@@ -13,7 +13,6 @@ body {
 .master {
     background-color: #fff;
     color: #000;
-    padding: 2rem 0;
 }
 
 /*
@@ -339,7 +338,7 @@ body {
 
 .main-header {
 
-    background-color: rgba(0,0,0,.9);
+    background-color: rgba(53,47,47,.85);
     position: fixed;
     width: 100%;
 
@@ -394,6 +393,9 @@ body {
         position: absolute;
         width: 100%;
     }
+    &.jumbotron {
+        margin: -5px;
+    }
 } 
 
 #carouselBanner {
@@ -402,14 +404,14 @@ body {
 
 .index-head {
     background-color: rgba(130,65,65,.9);
-    height: 130px;
-    margin-bottom: 2em;
-    position: absolute;
-    top: 482px;
+    height: 180px;
+    display: block;
     width: 100%;
 }
 
 .index-body {
+    margin-top: -7em;
+    padding-bottom: 4em;
     .myHead {
         .img-fluid {
             width: 100%;
@@ -457,7 +459,7 @@ body {
 }
 
 .separator {
-    margin-top: 3em;
+    margin-top: 59px;
 }
 
 /*
@@ -496,15 +498,30 @@ body {
 */
 
 .main-footer {
-    margin-top: 3em;
     padding-top: 2em;
+    background-color: rgba(80,79,79,.2);
 }
 
 .copyright {
-    border-top: 1px solid #fff;
-    text-align: center;
-    padding: 1.3em 0;
-    margin: 0 4em;
+    border-top: 1px solid #755151;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    height: 2.2em;
+    padding-top: 6.6px;
+}
+
+.white>li>a {
+    color: #aaa;
+    text-decoration: none;
+    &:hover {
+        color: #fff;
+    }
+}
+
+.social-bottom>ul>li {
+    display: inline-block;
+    padding: 0 .6em;
 }
 
 /*
