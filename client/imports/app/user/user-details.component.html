@@ -1,8 +1,7 @@
 <div *ngIf='userext'>
     <div [hidden]="!root">
-        <articles-form></articles-form>
+        <root-dashboard></root-dashboard>
+        <!--<articles-form></articles-form>-->
     </div>
-    Name: {{ userext.name }}
-    Profile: {{ userext.isPublic }}
 </div>
 <div *ngIf='!user'>Please log in</div>

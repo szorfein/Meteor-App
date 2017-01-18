@@ -22,6 +22,7 @@ import { ABOUT_DECLARATIONS } from './about'
 import { INDEX_DECLARATIONS } from './index'
 import { UPLOAD_DECLARATIONS } from './uploads'
 import { SHARED_DECLARATIONS } from './shared'
+import { ROOT_DECLARATIONS } from './root'
 
 import { MOBILE_DECLARATIONS } from './mobile'
 import { AppMobileComponent } from './mobile/app.component.mobile'
@@ -74,7 +75,8 @@ if (Meteor.isCordova) {
             ...CONTACT_DECLARATIONS,
             ...ABOUT_DECLARATIONS,
             ...INDEX_DECLARATIONS,
-            ...UPLOAD_DECLARATIONS
+            ...UPLOAD_DECLARATIONS,
+            ...ROOT_DECLARATIONS
         ],
         providers: [
             ...ROUTES_PROVIDERS

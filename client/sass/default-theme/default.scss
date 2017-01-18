@@ -20,6 +20,112 @@ body {
 * Bootstrap default not include in this version
 */
 
+.mt-3 {
+    margin-top: 1rem !important;
+}
+
+.mt-4 {
+    margin-top: 1.5rem !important;
+}
+
+.mt-5 {
+    margin-top: 3rem !important;
+}
+
+.dropup,
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 0.3em;
+    vertical-align: middle;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-left: 0.3em solid transparent;
+}
+
+.dropdown-toggle:focus {
+    outline: 0;
+}
+
+.dropup .dropdown-toggle::after {
+    border-top: 0;
+    border-bottom: 0.3em solid;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: #292b2c;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 3px 1.5rem;
+    clear: both;
+    font-weight: normal;
+    color: #292b2c;
+    text-align: inherit;
+    white-space: nowrap;
+    background: none;
+    border: 0;
+}
+
+.flex-md-row {
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: normal !important;
+    -webkit-flex-direction: row !important;
+    -ms-flex-direction: row !important;
+    flex-direction: row !important;
+}
+
+.nav-pills .nav-link {
+    border-radius: .25rem;
+    .nav-link.active .nav-item.show .nav-link {
+        color: #fff;
+        cursor: default;
+        background-color: #027d58;
+    }
+}
+
+.nav-fill .nav-item {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.nav {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
 .rounded-circle {
     border-radius: 50%;
 }
@@ -190,9 +296,40 @@ body {
     }
 }
 
+@media (max-width: 575px) {
+    .navbar-toggleable .navbar-nav .dropdown-menu {
+        position: static;
+        float: none;
+    }
+    .navbar-toggleable > .container {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar-toggleable-sm .navbar-nav .dropdown-menu {
+        position: static;
+        float: none;
+    }
+    .navbar-toggleable-sm > .container {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
 @media (min-width: 768px) {
     .d-md-block {
         display: block !important;
+    }
+    .text-md-left {
+        text-align: left !important;
+    }
+    .text-md-right {
+        text-align: right !important;
+    }
+    .text-md-center {
+        text-align: center !important;
     }
 }
 
@@ -251,15 +388,25 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+    color: #ddd;
+    &>.container {
+        top: 305px;
+        position: absolute;
+        width: 100%;
+    }
 } 
 
 #carouselBanner {
     margin-top: 20px;
 }
+
 .index-head {
-    background-color: rgba(0,0,0,.9);
-    height: 5em;
+    background-color: rgba(130,65,65,.9);
+    height: 130px;
     margin-bottom: 2em;
+    position: absolute;
+    top: 482px;
+    width: 100%;
 }
 
 .index-body {
@@ -333,6 +480,18 @@ body {
 }
 
 /*
+* Dashboard panel
+*/
+
+.dash-menu {
+    position: relative;
+    top: -17px;
+    //.flex-column {
+    //    -webkit-flex-direction: row!important;
+    //}
+}
+
+/*
 * Footer
 */
 
@@ -393,6 +552,17 @@ body {
     }
     #nav-menu-collapse-1.collapse {
         left: 40%;
+    }
+    .dash-menu {
+        position: relative;
+        left: -15px;
+        padding-left: .6em;
+        .flex-column {
+            -webkit-flex-direction: column!important;
+        }
+        .dropdown-menu {
+            position: relative;
+        }
     }
 }
 
