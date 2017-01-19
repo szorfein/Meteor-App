@@ -16,8 +16,8 @@ export class RootDashboardListComponent implements OnInit {
     }
 
     getip() {
-        MeteorObservable.call('getIp').subscribe(() => {
-            console.log('ip found')
+        MeteorObservable.call('registerAnalytic').subscribe(() => {
+            console.log('register')
         }, (err) => {
             console.log('cannot found ip')
         })

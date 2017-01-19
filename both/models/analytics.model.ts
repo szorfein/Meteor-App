@@ -6,4 +6,5 @@ export interface Analytic extends CollectionObject {
     httpHeader: Object;
     visitAt: Date;
     quitAt: Date;
+    articleRead?: string[];
 }
