@@ -1,29 +1,3 @@
 <div *ngIf="!extra">
     <contact-form></contact-form>
 </div>
-
-<div class="jumbotron">
-    <div class="container">
-        <p class="contact" *ngIf="extra" [innerHTML]="markdownDisplay"></p>
-    </div>
-</div>
-
-<div *ngIf="root">
-    <div *ngIf="extra">
-        <div class="form-container">
-            <div class="container">
-                <form (submit)="saveContact()">
-                    <fieldset>
-                        <div class="form-group">
-                            <label for="contact">Contact</label>
-                            <textarea class="form-control" rows="3"
-                                [(ngModel)]="extra.post" name="post"></textarea>
-                        </div>
-                        <button class="btn btn-primary"
-                                type="submit">Change Contact</button>
-                    </fieldset>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>

@@ -6,6 +6,7 @@ import { Meteor } from 'meteor/meteor'
 
 import '/both/methods/users.methods'
 import '/both/methods/captcha.methods'
+import '/both/methods/analytics.methods'
 
 import ionicSelector from 'ionic-selector'
 

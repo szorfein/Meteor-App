@@ -8,6 +8,5 @@ Meteor.methods({
             const { contactLib } = require('/lib/server/contact')
             contactLib.createNewContact(form)
         }
-        console.log('user has id -> ' + this.userId)
     }
 })

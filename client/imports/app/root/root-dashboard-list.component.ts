@@ -1,4 +1,5 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
+import { MeteorObservable } from 'meteor-rxjs'
 import template from './root-dashboard-list.component.html'
 
 @Component({
@@ -6,8 +7,19 @@ import template from './root-dashboard-list.component.html'
     template
 })
 
-export class RootDashboardListComponent {
+export class RootDashboardListComponent implements OnInit {
 
     constructor() {}
 
+    ngOnInit() {
+        this.getip()
+    }
+
+    getip() {
+        MeteorObservable.call('getIp').subscribe(() => {
+            console.log('ip found')
+        }, (err) => {
+            console.log('cannot found ip')
+        })
+    }
 }

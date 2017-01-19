@@ -6,7 +6,7 @@ export interface RegisterUser {
     email: string;
     password: string;
     username: string;
-    captcha?: string;
+    captcha: string;
 }
 
 export interface UserBar {
