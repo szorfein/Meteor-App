@@ -13,7 +13,7 @@
                 <img class="d-block img-fluid" [attr.src]="article.image | previewImage" alt="last article">
                 <div class="carousel-caption d-none d-md-block">
                     <h4>{{ article.bloc[0].title }}</h4>
-                    <p>{{ article.author }}
+                    <p>{{ article.author | displayNameWithId }}
                     {{ article.createdAt }}
                     {{ article.bloc[0].description }}
                     </p>
@@ -24,7 +24,7 @@
                 <img class="d-block img-fluid" [attr.src]="article.image | previewImage" alt="last article">
                 <div class="carousel-caption d-none d-md-block">
                     <h4>{{ article.bloc[0].title }}</h4>
-                    <p>{{ article.author }}
+                    <p>{{ article.author | displayNameWithId }}
                     {{ article.createdAt }}
                     {{ article.bloc[0].description }}
                     </p>

@@ -44,7 +44,7 @@
         <div class="container">
             <section *ngFor="let bloc of article.bloc">
                 <div class="page-header">
-                    <h1 class="h1">{{ bloc.title }} <small>by: {{article.author}}</small></h1>
+                    <h1 class="h1">{{ bloc.title }} <small>by: {{article.authorId | displayNameWithId }}</small></h1>
                 </div>
                 <p>le: {{ article.createdAt | date:"d MMMM y à H" }}h</p>
                 <img class="img-responsive" [src]="article | displayMainImage">

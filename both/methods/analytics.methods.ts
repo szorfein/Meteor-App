@@ -6,7 +6,7 @@ Meteor.methods({
     registerAnalytic: function() {
 
         if (Meteor.isServer) {
-            const analyticLib = require('/lib/server/analytic')
+            const { analyticLib } = require('/lib/server/analytic')
             Meteor.onConnection((connection) => {
                 connection.onClose(() => {
                     console.log('Client has quit')

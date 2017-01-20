@@ -1,19 +1,6 @@
-import { Captchas, CaptchasIndex } from '/both/collections/captchas.collection'
-import { Captcha, CaptchaIndex } from '/both/models/captcha.model'
-import { incrementIndex } from '/both/lib/captcha'
-
-export function loadCaptchaIndex() {
-    if(CaptchasIndex.find().cursor.count() === 0) {
-        const captchasIndex: CaptchaIndex[] = [
-            {
-                _id: 'captchaId',
-                seq: 0
-            }
-        ]
-        captchasIndex.forEach((captchaIndex: CaptchaIndex) => CaptchasIndex
-                              .insert(captchaIndex))
-    }
-}
+import { Captchas } from '/both/collections/captchas.collection'
+import { Captcha } from '/both/models/captcha.model'
+import { incIndex } from '/lib/index'
 
 export function loadCaptcha() {
 
@@ -32,7 +19,7 @@ export function loadCaptcha() {
                         response: '14'
                     }
                 ],
-                index: incrementIndex()
+                index: incIndex('captchaId')
             },
             {
                 bloc: [
@@ -47,7 +34,7 @@ export function loadCaptcha() {
                         response: 'Paris'
                     }
                 ],
-                index: incrementIndex()
+                index: incIndex('captchaId')
             },
             {
                 bloc: [
@@ -63,7 +50,7 @@ export function loadCaptcha() {
                         response: 'Russian'
                     }
                 ],
-                index: incrementIndex()
+                index: incIndex('captchaId')
             }
         ]
         captchas.forEach((captcha: Captcha) => Captchas.insert(captcha))

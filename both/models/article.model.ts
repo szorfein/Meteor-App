@@ -1,7 +1,6 @@
 import { CollectionObject } from './collection-object.model'
 
 export interface Article extends CollectionObject {
-    author: string,
     authorId: string,
     createdAt: Date,
     image: string,
@@ -16,5 +15,14 @@ export interface Article extends CollectionObject {
     isPublic: boolean,
     like?: number,
     hate?: number,
-    tags?: [ string ]   
+    tags?: Array<string>,
+    index: number
+}
+
+export interface ArticleForm {
+    title: string,
+    description: string,
+    lang: string,
+    article: string,
+    isPublic: boolean
 }

@@ -7,21 +7,15 @@ import { Subscription } from 'rxjs/Subscription'
 import { MeteorObservable } from 'meteor-rxjs'
 import { Observable } from 'rxjs/Observable'
 
-import { Articles } from '/both/collections/articles.collection'
 import { Tags } from '/both/collections/tags.collection'
 import { Tag } from '/both/models/tag.model'
-import { UserExt } from '/both/models/userext.model'
-import { UsersExt } from '/both/collections/usersext.collection'
 
 import MarkdownIt = require('markdown-it')
-
 import template from './articles-form.component.html'
-import style from './articles-form.component.scss'
 
 @Component({
     selector: 'articles-form',
-    template,
-    styles: [style]
+    template
 })
 
 @InjectUser('user')
@@ -29,17 +23,8 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
     addForm : FormGroup
     user : Meteor.User
 
-    root : Observable<UserExt>
+    root
     rootsub : Subscription
-
-    blocTmp: [{ 
-        title: string, 
-        lastEdit: Date,
-        lastEditOwner: string,
-        description: string,
-        lang: string, 
-        article: string
-    }]
 
     tags : Observable<Tag[]>
     tagsSub : Subscription
@@ -91,19 +76,20 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
     }
 
     callRoot() {
-        this.root = UsersExt.findOne({ 'idOwner': Meteor.userId() })
+        MeteorObservable.call('userAdmin').subscribe((root) => {
+            this.root = root
+        })
     }
 
     onImage(imageId : string) : void {
         this.image = imageId
-        console.log('Last image register -> ' + this.image)
     }
 
     printForm():void {
         this.addForm = this.formBuilder.group({
             title: ['', [Validators.required, Validators.minLength(2)] ],
             description: ['', Validators.required],
-            lang: ['en'],
+            lang: ['en', Validators.required],
             article: ['', Validators.required],
             isPublic: [false]
         })
@@ -120,35 +106,16 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
             this.arrayOfTags = []
     }
 
-    addArticle(): void {
-        this.arrayOfTags = Array.from(this.myTag)
-
-        if (!Meteor.userId()) {
-            alert('Please log in to add article')
-            return
-        }
-
+    addArticle() {
         if (this.addForm.valid) {
-            this.blocTmp = [ { 
-                title: this.addForm.value.title, 
-                lastEdit: new Date(),
-                lastEditOwner: Meteor.userId(),
-                description: this.addForm.value.description,
-                lang: this.addForm.value.lang,
-                article: this.addForm.value.article
-            } ]
+            this.arrayOfTags = Array.from(this.myTag)
 
-            Articles.insert({
-                createdAt: new Date(),
-                author: this.user.username,
-                authorId: Meteor.userId(), 
-                image: this.image,
-                bloc: this.blocTmp,
-                isPublic: this.addForm.value.isPublic,
-                tags: this.arrayOfTags
+            MeteorObservable.call('insArticle', this.addForm.value, this.image, this.arrayOfTags).subscribe(() => {
+                alert('Article has been created')
+            }, (err) => {
+                alert(`Cannot insert article cause ${err}`)
             })
-        
-            //this.tags 
+
             this.addForm.reset()
         }
     }

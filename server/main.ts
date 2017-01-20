@@ -1,9 +1,10 @@
 import { Meteor } from 'meteor/meteor'
 
+import { loadIndexes } from '/server/imports/fixtures/index'
 import { loadArticles } from '/server/imports/fixtures/articles'
 import { createRootAccount } from '/server/imports/fixtures/root'
 import { loadTags } from '/server/imports/fixtures/tags'
-import { loadCaptchaIndex, loadCaptcha } from '/server/imports/fixtures/captchas'
+import { loadCaptcha } from '/server/imports/fixtures/captchas'
 
 // Public method
 import '/both/methods/users.methods'
@@ -25,9 +26,9 @@ import './imports/publications/captchas'
 import './imports/publications/extras'
 
 Meteor.startup(() => {
+    loadIndexes()
     loadArticles()
     createRootAccount()
     loadTags()
-    loadCaptchaIndex()
     loadCaptcha()
 })

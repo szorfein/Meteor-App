@@ -1,7 +1,16 @@
 import { Meteor } from 'meteor/meteor'
-import { Articles } from '/both/collections/articles.collection'
-import { Article } from '/both/models/article.model'
-import { Observable } from 'rxjs/Observable'
+import { ArticleForm } from '/both/models/article.model'
+import { check } from 'meteor/check'
 
 Meteor.methods({
+
+    insArticle: function(article: ArticleForm, image: string, tags: Array<string>) {
+        check(image, String)
+        check(tags, [String])
+
+        if (Meteor.isServer) {
+            const { articleLib } = require('/lib/server/article')
+            articleLib.addArticle(article, image, tags)
+        }
+    }
 })

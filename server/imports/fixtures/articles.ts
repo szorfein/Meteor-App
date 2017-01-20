@@ -1,12 +1,12 @@
 import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
+import { incIndex } from '/lib/index'
 
 export function loadArticles() {
 
     if (Articles.find().cursor.count() === 0) {
         const articles: Article[] = [
             {
-                author: 'myroot',
                 authorId: 'jfoizefjigzoi',
                 createdAt: new Date(),
                 image: '/path/to/img',
@@ -21,10 +21,10 @@ export function loadArticles() {
                 isPublic: true,
                 like: 344,
                 hate: 11,
-                tags: [ 'linux', 'Windows', 'OSX' ]
+                tags: [ 'linux', 'Windows', 'OSX' ],
+                index: incIndex('articleId')
             },
             {
-                author: 'myroot',
                 authorId: 'ofjiozgjozjg',
                 createdAt: new Date(),
                 image: '/path/to/img',
@@ -38,10 +38,10 @@ export function loadArticles() {
                 } ],
                 isPublic: false,
                 like: 44,
-                hate: 11
+                hate: 11,
+                index: incIndex('articleId')
             },
             {
-                author: 'myroot',
                 authorId: 'jgoizjgzjij',
                 createdAt: new Date(),
                 image: '/path/to/img',
@@ -55,10 +55,10 @@ export function loadArticles() {
                 } ],
                 isPublic: false,
                 like: 644,
-                hate: 33
+                hate: 33,
+                index: incIndex('articleId')
             }
         ]
         articles.forEach((article: Article) => Articles.insert(article))
     }
-
 }
