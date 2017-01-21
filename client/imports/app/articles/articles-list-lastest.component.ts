@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { MeteorObservable } from 'meteor-rxjs'
-import { Observable } from 'rxjs/Observable'
-import { Subscription } from 'rxjs/Subscription'
-import { Meteor } from 'meteor/meteor'
+import { Subscription, Observable } from 'rxjs'
 import template from './articles-list-lastest.component.html'
 import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
@@ -34,6 +32,7 @@ export class ArticlesListLastestComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         if (this.articleSub)
             this.articleSub.unsubscribe()
+
         if (this.imageSub)
             this.imageSub.unsubscribe()
     }

@@ -1,27 +1,19 @@
-<div class="separator"></div>
-
+<div [hidden]="!root">
+    <nav class="navbar bg-faded">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link"
+                    data-toggle="modal"
+                    data-target="#form-about-edit" href="#">
+                    <i class="fa fa-edit"></i>
+                    <span>Edit</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <modal-about-edit></modal-about-edit>
+</div>
 <div class="container">
     <about-detail-me></about-detail--me>
 </div>
 
-<div *ngIf="!extra">
-    <about-form></about-form>
-</div>
-
-<div *ngIf="root">
-    <div *ngIf="extra">
-        <div class="container">
-            <form (submit)="saveAbout()">
-                <fieldset>
-                    <div class="form-group">
-                        <label for="aboutme">About Me</label>
-                        <textarea class="form-control" rows="3"
-                            [(ngModel)]="extra.post" name="aboutme"></textarea>
-                    </div>
-                    <button class="btn btn-primary"
-                        type="submit">Change About</button>
-                </fieldset>
-            </form>
-        </div>
-    </div>
-</div>

@@ -43,7 +43,7 @@
                         </h3>
                         <p class="card-text">
                             <i class="fa fa-user fa-fw"></i>
-                            <a [routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
+                            <a [attr.routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
                         </p>
                         <a [routerLink]="['/blog', article._id]">
                             <img class="card-img img-fluid" *ngIf="article.image" [src]="article | displayMainImage">
@@ -67,4 +67,8 @@
         </div>
     </div>
 </div>
-<pagination-controls (pageChange)="onPageChanged($event)"></pagination-controls>
+<div class="container">
+    <nav aria-label="Pagination">
+        <pagination-controls (pageChange)="onPageChanged($event)"></pagination-controls>
+    </nav>
+</div>

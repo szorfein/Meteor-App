@@ -1,90 +1,39 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { Subscription } from 'rxjs/Subscription'
+import { Subscription } from 'rxjs'
 import { MeteorObservable } from 'meteor-rxjs'
-import { Meteor } from 'meteor/meteor'
-import { Observable } from 'rxjs/Observable'
-
-import { Extra } from '/both/models/extra.model'
-import { Extras } from '/both/collections/extras.collection'
-import { UserExt } from '/both/models/userext.model'
-import { UsersExt } from '/both/collections/usersext.collection'
-import { isRoot } from '/lib/users'
-
-import MarkdownIt = require('markdown-it')
 import template from './about.component.html'
-import style from './about.component.scss'
 
 @Component({
     selector: 'about-me',
-    template,
-    styles: [style]
+    template
 })
 
 export class AboutComponent implements OnInit, OnDestroy {
 
-    extra: Extra
-    extrasub: Subscription
+    root
+    rootSub: Subscription
 
-    root: Observable<UserExt>
-    rootsub: Subscription
-
-    md = new MarkdownIt()
-
-    constructor(
-        private route: ActivatedRoute
-    ) {}
+    constructor( private route: ActivatedRoute ) {}
 
     ngOnInit() {
 
-        // TODO : give lang in cookie & set here automaticaly
-        if (this.extrasub)
-            this.extrasub.unsubscribe()
+        if (this.rootSub)
+            this.rootSub.unsubscribe()
 
-        this.extrasub = MeteorObservable.subscribe('about').subscribe(() => {
-            MeteorObservable.autorun().subscribe(() => {
-                this.callExtra()
-            })
+        this.rootSub = MeteorObservable.subscribe('root').subscribe(() => {
+            this.callRoot()
         })
-
-        if (!!Meteor.user()) {
-            if (this.rootsub)
-                this.rootsub.unsubscribe()
-
-            this.rootsub = MeteorObservable.subscribe('root').subscribe(() => {
-                this.callRoot()
-            })
-        }
-    }
-
-    callExtra() {
-        this.extra = Extras.findOne({ 'title': 'abouten' })
-    }
-
-    get markdownDisplay() {
-        if (this.extra)
-            return this.md.render(this.extra.post)
     }
 
     callRoot() {
-        this.root = UsersExt.findOne({'idOwner': Meteor.userId() })
-    }
-
-    /* can only update with id... */
-    saveAbout() {
-        if (isRoot(Meteor.userId())) {
-            if (this.extra) {
-                Extras.update(this.extra._id, {
-                    $set: {
-                        post: this.extra.post,
-                        lastEdit: new Date()
-                    }
-                })
-            }
-        }
+        MeteorObservable.call('userAdmin').subscribe((root) => {
+            this.root = root
+        })
     }
 
     ngOnDestroy() {
-
+        if (this.rootSub)
+            this.rootSub.unsubscribe()
     }
 }

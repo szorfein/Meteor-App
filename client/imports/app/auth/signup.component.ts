@@ -2,20 +2,16 @@ import { Component, OnInit, OnDestroy, NgZone } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Accounts } from 'meteor/accounts-base'
-import { Subscription } from 'rxjs/Subscription'
-import { Observable } from 'rxjs/Observable'
+import { Subscription, Observable } from 'rxjs'
 import { MeteorObservable } from 'meteor-rxjs'
-import { Counts } from 'meteor/tmeasday:publish-counts'
+import { getIndex } from '/lib/index'
 import { Meteor } from 'meteor/meteor'
 import { RegisterUser } from '/both/models/user.model'
-
 import template from './signup.component.html'
-import style from './signup.component.scss'
 
 @Component({
     selector: 'signup',
-    template,
-    styles: [style]
+    template
 })
 
 export class SignupComponent implements OnInit, OnDestroy {
@@ -28,6 +24,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     error: string
     captchaSub: Subscription
     captchaClick : boolean = false
+    indexSub : Subscription
 
     constructor(
         private router: Router,
@@ -36,6 +33,9 @@ export class SignupComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
+
+        this.indexSub = MeteorObservable.subscribe('captchaId').subscribe()
+
         if (this.captchaSub) 
             this.captchaSub.unsubscribe()
 
@@ -45,7 +45,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     }
 
     getCaptcha() {
-        let getCount = this.generateCount()
+        let getCount = getIndex('captchaId')
         MeteorObservable.call('secretCaptcha', getCount).subscribe((captcha) => {
             this.captcha = captcha
             this.printSignup()
@@ -60,11 +60,6 @@ export class SignupComponent implements OnInit, OnDestroy {
             this.captchaClick = false
         else
             this.captchaClick = true
-    }
-
-    generateCount() {
-        let nbCaptcha : number = Counts.get('numberOfCaptcha')
-        return nbCaptcha
     }
 
     printSignup():void {
@@ -124,5 +119,6 @@ export class SignupComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.captchaSub.unsubscribe()
+        this.indexSub.unsubscribe()
     }
 }

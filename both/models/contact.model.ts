@@ -10,9 +10,10 @@ export interface Contact extends CollectionObject {
 }
 
 export interface ContactForm {
-    name: string,
-    email: string,
-    phone: string,
-    subject: string,
+    name: string
+    email: string
+    phone: string
+    subject: string
     message: string
+    captcha: string
 }

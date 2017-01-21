@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Subscription } from 'rxjs/Subscription'
 import { MeteorObservable } from 'meteor-rxjs'
-import { Meteor } from 'meteor/meteor'
 import template from './about-detail-me.component.html'
 
 @Component({
@@ -29,7 +28,10 @@ export class AboutDetailMeComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.imageSub.unsubscribe()
-        this.aboutSub.unsubscribe()
+        if (this.imageSub)
+            this.imageSub.unsubscribe()
+
+        if (this.aboutSub)
+            this.aboutSub.unsubscribe()
     }
 }

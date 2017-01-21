@@ -1,4 +1,4 @@
-<div class="form-container separator">
+<div *ngIf="captcha" class="form-container separator">
     <div class="container">
         <h3>Contact Me</h3>
         <form class="separator" [formGroup]="contactForm" (ngSubmit)="addPost()">
@@ -28,6 +28,26 @@
                 <label class="sr-only" for="message">Message</label>
                 <textarea class="form-control" type="text" rows="4" formControlName="message" name="message" placeholder="Your Message">
                 </textarea>
+            </div>
+
+            <button *ngIf="captcha.hash"
+                  (click)="onClickCaptcha()" class="btn btn-default" type="button"
+                  data-toggle="collapse"
+                  [attr.data-target]="'#'+'captcha_'+captcha.hash"
+                  aria-expanded="false"
+                  [attr.aria-controls]="'captcha_'+captcha.hash">
+                Captcha
+            </button>
+
+            <div *ngIf="captchaClick && captcha.hash"
+                  class="collapse" [attr.id]="'captcha_'+captcha.hash">
+                <div class="form-group">
+                    <label [attr.for]="'captcha_'+captcha.hash">{{ captcha.question }}</label>
+                    <input class="form-control" 
+                           type="text" 
+                           formControlName="captcha"
+                           [attr.name]="'captcha_'+captcha.hash">
+                </div>
             </div>
 
             <button class="btn btn-primary"
