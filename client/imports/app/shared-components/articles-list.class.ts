@@ -1,21 +1,12 @@
-import { NgZone, OnInit, OnDestroy } from '@angular/core'
-import { Observable } from 'rxjs/Observable'
-import { Subscription } from 'rxjs/Subscription'
-import { Subject } from 'rxjs/Subject'
+import { OnInit, OnDestroy } from '@angular/core'
+import { Observable, Subscription, Subject } from 'rxjs'
 import { MeteorObservable } from 'meteor-rxjs'
 import { PaginationService } from 'ng2-pagination'
-
-import 'rxjs/add/operator/combineLatest'
-
+import { getIndex } from '/lib/index'
 import { InjectUser } from 'angular2-meteor-accounts-ui'
 import { Meteor } from 'meteor/meteor'
-import { Counts } from 'meteor/tmeasday:publish-counts'
-
 import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
-import { UserExt } from '/both/models/userext.model'
-import { UsersExt } from '/both/collections/usersext.collection'
-
 import MarkdownIt = require('markdown-it')
 
 interface Pagination {
@@ -29,30 +20,26 @@ interface Options extends Pagination {
 
 @InjectUser('user')
 export class ArticlesList implements OnInit, OnDestroy {
-    user: Meteor.User
     articles: Observable<Article[]>
     articlesSub: Subscription
-    optionsSub : Subscription
-    articlesSize: number = 0
-    autorunSub : Subscription
-
     pageSize : Subject<number> = new Subject<number>()
     curPage : Subject<number> = new Subject<number>()
     nameOrder : Subject<number> = new Subject<number>()
-
-    root: Observable<UserExt>
-    rootsub: Subscription
-    
-    md = new MarkdownIt()
+    optionsSub : Subscription
+    articlesSize: number = 0
+    autorunSub : Subscription
+    user: Meteor.User
     imageSub : Subscription
+    indexSub: Subscription
+    root
+    rootsub: Subscription
+    md = new MarkdownIt()
 
-    constructor(
-        private zone: NgZone,
-        private paginationService : PaginationService
-    ) {}
+    constructor( private paginationService : PaginationService ) {}
 
     ngOnInit() {
         this.imageSub = MeteorObservable.subscribe('images').subscribe()
+        this.indexSub = MeteorObservable.subscribe('indexArticle').subscribe()
 
         this.optionsSub = Observable.combineLatest(
             this.pageSize,
@@ -62,11 +49,11 @@ export class ArticlesList implements OnInit, OnDestroy {
             const options: Options = {
                 limit : pageSize as number,
                 skip : ((curPage as number) - 1) * (pageSize as number),
-                sort : { name : nameOrder as number }
+                sort : { createdAt : nameOrder as number }
             }
 
             this.paginationService.setCurrentPage(
-                this.paginationService.defaultId, 
+                this.paginationService.defaultId(), 
                 curPage as number
             )
 
@@ -84,20 +71,20 @@ export class ArticlesList implements OnInit, OnDestroy {
         })
 
         this.paginationService.register({
-            id: this.paginationService.defaultId,
+            id: this.paginationService.defaultId(),
             itemsPerPage: 6,
             currentPage: 1,
             totalItems: this.articlesSize
         })
 
-        this.pageSize.next(5)
+        this.pageSize.next(6)
         this.curPage.next(1)
         this.nameOrder.next(1)
 
         this.autorunSub = MeteorObservable.autorun().subscribe(() => {
-            this.articlesSize = Counts.get('numberOfArticles')
+            this.articlesSize = getIndex('articleId')
             this.paginationService.setTotalItems(
-                this.paginationService.defaultId,
+                this.paginationService.defaultId(),
                 this.articlesSize
             )
         })
@@ -109,18 +96,15 @@ export class ArticlesList implements OnInit, OnDestroy {
             this.rootsub = MeteorObservable.subscribe('root').subscribe(() => {
                 MeteorObservable.autorun().subscribe(() => {
                     this.callRoot()
-                }, (error) => {
-                    if (error) {
-                        this.zone.run(() => {
-                        })
-                    }
                 })
             })
         }
     }
     
     callRoot() {
-        this.root = UsersExt.findOne({ 'idOwner': Meteor.userId() })
+        MeteorObservable.call('userAdmin').subscribe((root) => {
+            this.root = root
+        })
     }
 
     markdownDisplay(text:string):string {
@@ -128,8 +112,12 @@ export class ArticlesList implements OnInit, OnDestroy {
             return this.md.render(text)
     }
 
-    removeArticle(article: Article): void {
-        Articles.remove(article._id)
+    removeArticle(article: Article) {
+        MeteorObservable.call('remArticle', article._id).subscribe(() => {
+            console.log('article has been destroy')
+        }, (err) => {
+            alert(`Cannot destroy article cause ${err}`)
+        })
     }
 
     search(value: string): void {
@@ -153,5 +141,8 @@ export class ArticlesList implements OnInit, OnDestroy {
         this.optionsSub.unsubscribe()
         this.imageSub.unsubscribe()
         this.autorunSub.unsubscribe()
+        this.indexSub.unsubscribe()
+        if (this.rootsub)
+            this.rootsub.unsubscribe()
     }
 }

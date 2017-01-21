@@ -24,6 +24,7 @@ import './imports/publications/contact'
 import './imports/publications/images'
 import './imports/publications/captchas'
 import './imports/publications/extras'
+import './imports/publications/indexes'
 
 Meteor.startup(() => {
     loadIndexes()

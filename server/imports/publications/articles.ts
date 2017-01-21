@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor'
 import { check } from 'meteor/check'
 import { Articles } from '/both/collections/articles.collection'
-import { Counts } from 'meteor/tmeasday:publish-counts'
 
 interface Options {
     [key: string]: any
@@ -9,11 +8,6 @@ interface Options {
 
 Meteor.publish('articles', function(options: Options) {
     const selector = buildQuery.call(this, null)
-
-    Counts.publish(this, 'numberOfArticles', Articles.collection.find(
-        buildQuery.call(this)
-    ), { noReady: true })
-
     return Articles.find(selector, options)
 })
 
