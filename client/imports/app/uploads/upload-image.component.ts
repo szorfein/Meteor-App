@@ -1,12 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core'
 import { upload } from '/both/methods/images.methods'
 import template from './upload-image.component.html'
-import style from './upload-image.component.scss'
 
 @Component({
     selector: 'upload-image',
-    template,
-    styles: [ style ]
+    template
 })
 
 export class UploadImageComponent {

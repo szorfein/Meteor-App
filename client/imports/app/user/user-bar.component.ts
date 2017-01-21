@@ -1,17 +1,14 @@
 import { Component, OnInit, OnDestroy, NgZone } from '@angular/core'
 import { Meteor } from 'meteor/meteor'
 import { MeteorObservable } from 'meteor-rxjs'
-import { Subscription } from 'rxjs/Subscription'
+import { Subscription, Observable } from 'rxjs'
 import { InjectUser } from 'angular2-meteor-accounts-ui'
 import { User, UserBar } from '/both/models/user.model'
-
 import template from './user-bar.component.html'
-import style from './user-bar.component.scss'
 
 @Component({
     selector: 'user-bar',
-    template,
-    styles: [style]
+    template
 })
 
 @InjectUser('user')

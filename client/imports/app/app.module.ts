@@ -8,7 +8,6 @@ import { Ng2PaginationModule } from 'ng2-pagination'
 import { AppComponent } from './app.component.web'
 import { routes, ROUTES_PROVIDERS } from './app.routes'
 import { FileDropModule } from 'angular2-file-drop'
-import { SidebarComponent } from './sidebar/sidebar.component'
 
 import { ARTICLES_DECLARATIONS } from './articles'
 import { HEADER_DECLARATIONS } from './header'
@@ -64,7 +63,6 @@ if (Meteor.isCordova) {
         ],
         declarations: [
             AppComponent,
-            SidebarComponent,
             ...SHARED_DECLARATIONS,
             ...COMMENTS_DECLARATIONS,
             ...ARTICLES_DECLARATIONS,

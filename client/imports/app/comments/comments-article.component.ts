@@ -1,23 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Meteor } from 'meteor/meteor'
-import { Subscription } from 'rxjs/Subscription'
+import { Subscription, Observable } from 'rxjs'
 import { ActivatedRoute } from '@angular/router'
-import { Observable } from 'rxjs/Observable'
 import { MeteorObservable } from 'meteor-rxjs'
-
 import { Comments } from '/both/collections/comments.collection'
 import { C0mment } from '/both/models/comment.model'
-
 import { InjectUser } from 'angular2-meteor-accounts-ui'
-
 import MarkdownIt = require('markdown-it')
 import template from './comments-article.component.html'
-import style from './comments-article.component.scss'
 
 @Component({
     selector: 'comment',
-    template,
-    styles: [style]
+    template
 })
 
 @InjectUser('user')

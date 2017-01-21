@@ -1,18 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Meteor } from 'meteor/meteor'
-import { Subscription } from 'rxjs/Subscription'
+import { Subscription, Observable } from 'rxjs'
 import { ActivatedRoute } from '@angular/router'
 import { MeteorObservable } from 'meteor-rxjs'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { InjectUser } from 'angular2-meteor-accounts-ui'
-
 import template from './comments-form.component.html'
-import style from './comments-form.component.scss'
 
 @Component({
     selector: 'comment-form',
-    template,
-    styles: [style]
+    template
 })
 
 @InjectUser('user')

@@ -34,7 +34,7 @@ export class SignupComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
-        this.indexSub = MeteorObservable.subscribe('captchaId').subscribe()
+        this.indexSub = MeteorObservable.subscribe('indexCaptcha').subscribe()
 
         if (this.captchaSub) 
             this.captchaSub.unsubscribe()
