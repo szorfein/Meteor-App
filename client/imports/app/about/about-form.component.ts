@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MeteorObservable } from 'meteor-rxjs'
 import { Subscription } from 'rxjs/Subscription'
 import { Meteor } from 'meteor/meteor'
-
 import template from './about-form.component.html'
 
 @Component({

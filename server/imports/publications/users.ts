@@ -1,19 +1,14 @@
 import { Meteor } from 'meteor/meteor'
 import { User } from '/both/models/user.model'
-import { Users } from '/both/collections/users.collection'
-import { UsersExt } from '/both/collections/usersext.collection'
+import { Users, UsersExt } from '/both/collections/users.collection'
 import { check } from 'meteor/check'
 
 Meteor.publish('userprofile', function(userName: string) {
     return UsersExt.find(buildQuery.call(this, userName))
 })
 
-Meteor.publish('userinfo', function() {
-    return Users.find({ '_id': this.userId })
-})
-
 Meteor.publish('userbar', function() {
-    return Users.find(this.userId)
+    return Users.find({ _id : this.userId },{ skip:0, limit:1 })
 })
 
 Meteor.publish('root', function() {
@@ -35,7 +30,7 @@ Meteor.publish('root', function() {
                 { 'idOwner': this.userId },
                 { 'admin': true }
             ]
-        })
+        },{skip:0,limit:1})
     }
 })
 

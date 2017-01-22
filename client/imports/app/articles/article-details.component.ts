@@ -8,8 +8,8 @@ import MarkdownIt = require('markdown-it')
 import 'rxjs/add/operator/map'
 import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
-import { UsersExt } from '/both/collections/usersext.collection'
-import { UserExt } from '/both/models/userext.model'
+import { UsersExt } from '/both/collections/users.collection'
+import { UserExt } from '/both/models/user.model'
 import { Images } from '/both/collections/images.collection'
 import template from './article-details.component.html'
 
@@ -47,7 +47,7 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
                 if (this.rootSub) 
                     this.rootSub.unsubscribe()
 
-                this.rootsub = MeteorObservable.subscribe('root').subscribe(() => {
+                this.rootSub = MeteorObservable.subscribe('root').subscribe(() => {
                     MeteorObservable.autorun().subscribe(() => {
                         this.callRoot()
                     })
@@ -91,5 +91,7 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.paramsSub.unsubscribe()
         this.imageSub.unsubscribe()
+        if (this.rootSub)
+            this.rootSub.unsubscribe()
     }
 }

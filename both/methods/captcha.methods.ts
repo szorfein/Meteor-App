@@ -8,9 +8,6 @@ Meteor.methods({
         check(getCount, Number)
         let captcha : SecretCaptcha = { hash: '', question: '' }
 
-        if (this.userId)
-            throw new Meteor.Error('403', 'Alrealy Logged')
-
         if (Meteor.isServer) {
             const { captchaLib } = require('/lib/server/captcha')
             let genId = captchaLib.randomCaptcha(getCount)
@@ -20,6 +17,7 @@ Meteor.methods({
 
         return captcha
     },
+
     checkValidHash: function(captcha: SecretCaptcha) {
         if (Meteor.isServer) {
             const { captchaLib } = require('/lib/server/captcha')
@@ -28,12 +26,10 @@ Meteor.methods({
             }
         }
     },
+
     controlResponse: function(captchaForm: CaptchaForm) {
         check(captchaForm.question, String)
         check(captchaForm.response, String)
-
-        if (this.userId)
-            throw new Meteor.Error('403', 'Alrealy Logged')
 
         if (Meteor.isServer) {
             const { captchaLib } = require('/lib/server/captcha')
@@ -42,13 +38,14 @@ Meteor.methods({
                 throw new Meteor.Error('400', 'Bad response')
         }
     },
+
     registerUserFrom: function(newNinja: RegisterUser, 
                                captcha: SecretCaptcha,
                                captchaForm: CaptchaForm) {
 
         Meteor.call('checkValidHash', captcha)
         Meteor.call('controlResponse', captchaForm)
-        Meteor.call('createNewNinja', newNinja)
+        Meteor.call('controlNewNinja', newNinja)
 
         return newNinja
     }

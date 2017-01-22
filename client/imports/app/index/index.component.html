@@ -1,9 +1,12 @@
-<div class="jumbotron jumbotron-fluid" id="banner" style="background-image:url(img/code-programming-no-talk.jpg);">
+<div *ngIf="home" class="jumbotron jumbotron-fluid" id="banner">
     <div class="container text-center">
+        <img href="#" [attr.src]="home.banner | previewImage" alt="banner">
         <h1 class="display-3">Fluid container</h1>
-        <p class="lead">blablabla</p>
+        <p class="lead">{{ home.welcome[0].message </p>
     </div>
 </div>
+
+<index-form></index-form>
 
 <div class="container-fluid index-head">
     <nav></nav>

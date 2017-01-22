@@ -48,3 +48,18 @@ export interface AboutDetailForm {
     imgur?: string,
     reddit?: string
 }
+
+export interface HomeDetail extends CollectionObject {
+    banner: string
+    welcome: [
+        { lang: string },
+        { message: string }
+    ],
+    idOwner: string
+}
+
+export interface HomeDetailForm {
+    banner_image : string
+    welcome_lang : string
+    welcome_message : string
+}

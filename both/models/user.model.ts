@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor'
+import { CollectionObject } from './collection-object.model'
 
 export interface User extends Meteor.User {}
 
@@ -11,4 +12,17 @@ export interface RegisterUser {
 
 export interface UserBar {
     username: string;
+}
+
+export interface UserExt extends CollectionObject {
+    idOwner: string,
+    admin: boolean,
+    ban: boolean,
+    created?: Date,
+    lastVisit?: Date,
+    objUser: { realName?: string, provider?: string, website?: string, img?: string },
+    like?: [ string ],
+    hate?: [ string ],
+    comment?: [ string ],
+    isPublic: boolean
 }

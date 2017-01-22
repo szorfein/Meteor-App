@@ -1,6 +1,6 @@
-import { User, RegisterUser, UserBar } from '/both/models/user.model'
-import { Users } from '/both/collections/users.collection'
-import { UsersExt } from '/both/collections/usersext.collection'
+import { Meteor } from 'meteor/meteor'
+import { User, UserExt, RegisterUser, UserBar } from '/both/models/user.model'
+import { Users, UsersExt } from '/both/collections/users.collection'
 
 function giveUser(userId: string):User {
     let user = Users.findOne({ '_id': userId })
@@ -38,38 +38,36 @@ function isFirstUser(userId: string):boolean {
     return (user === 1)
 }
 
-function sendUserBar(userId):UserBar {
+function sendUserBar(userId: string):UserBar {
     let user = UsersExt.findOne({ 'idOwner': userId })
     let userbar : UserBar = { username: '' }
-    if (user)
-        userbar = { username: user.username }
+    if (user) 
+        userbar.username = user.username
 
     return userbar
 }
 
-function isAdmin(userId: string):boolean {
-    let root = UsersExt.findOne({
-        $and: [
-            { 'idOwner': userId },
-            { 'admin': true },
-            { 'isPublic': false }
-        ]
-    })
-    return !!root
+function isLogged(userId: string) {
+    return !!userId
+}
+
+function isUserOrEmailAlrealyExist(newNinja : RegisterUser) {
+    const user = Users.find({ $or: [
+        { username: newNinja.username },
+        { 'emails.address': newNinja.email }
+    ]})
+    return !!(user && user.username || user.email)
 }
 
 class UserLib {
 
     public returnAdmin(userId: string) {
-        return isAdmin(userId)
-    }
+        let ninja : UserBar
 
-    public isAlrealyRegister(newNinja : RegisterUser) {
-        const user = Users.find({ $or: [
-            { username: newNinja.username },
-            { 'emails.address': newNinja.email }
-        ]})
-        return !!user
+        if (this.isAdmin(userId)) {
+            ninja = this.findUserInfoBar(userId)
+        }
+        return ninja
     }
 
     public findUserInfoBar(userId: string) {
@@ -77,6 +75,26 @@ class UserLib {
         tryFoundProfil(userId)
         let userBar = sendUserBar(userId)
         return userBar
+    }
+
+    //TODO : add filter for username, password and email
+    public ctrl(newNinja: RegisterUser) {
+        if (Meteor.userId())
+            throw new Meteor.Error('404', 'You are alrealy logged')
+
+        if (isUserOrEmailAlrealyExist(newNinja)) 
+            throw new Meteor.Error('404', 'username or email alrealy exist')
+    }
+
+    public isAdmin(userId: string):boolean {
+        let root = UsersExt.findOne({
+            $and: [
+                { 'idOwner': userId },
+                { 'admin': true },
+                { 'isPublic': false }
+            ]
+        })
+        return !!root
     }
 }
 

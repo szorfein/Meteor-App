@@ -1,14 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MeteorObservable } from 'meteor-rxjs'
-import { Observable } from 'rxjs/Observable'
-import { Subscription } from 'rxjs/Subscription'
+import { Subscription, Observable } from 'rxjs'
 import { Meteor } from 'meteor/meteor'
-import { UsersExt } from '/both/collections/usersext.collection'
-import { UserExt } from '/both/models/userext.model'
-import { Extra } from '/both/models/extra.model'
-import { Extras } from '/both/collections/extras.collection'
-
+import { HomeDetail } from '/both/models/extra.model'
 import template from './index-form.component.html'
 
 @Component({
@@ -18,58 +13,74 @@ import template from './index-form.component.html'
 
 export class IndexFormComponent implements OnInit, OnDestroy {
 
-    root: Observable<UserExt>
-    rootsub: Subscription
-    indexForm: FormGroup
+    root
+    rootSub: Subscription
+    homeForm: FormGroup
+    image : string
 
-    constructor(
-        private formBuilder: FormBuilder
-    ) {}
+    constructor( private formBuilder: FormBuilder ) {}
 
     ngOnInit() {
 
-        if (!!Meteor.user()) {
-            if(this.rootsub)
-                this.rootsub.unsubscribe()
+        if (this.rootSub)
+            this.rootSub.unsubscribe()
 
-            this.rootsub = MeteorObservable.subscribe('root').subscribe(() => {
+        this.rootSub = MeteorObservable.subscribe('root').subscribe(() => {
+            MeteorObservable.autorun().subscribe(() => {
                 this.callRoot()
                 this.printForm()
             })
-        }
-    }
-
-    callRoot() {
-        this.root = UsersExt.findOne({ 'idOwner': Meteor.userId() })
-    }
-
-    printForm() {
-        this.indexForm = this.formBuilder.group({
-            post: ['', Validators.required],
-            lang: ['en', Validators.required]
         })
     }
 
-    addPost() {
-        if (this.indexForm.valid) {
-            let defaultname = 'index'
-            let finalname = defaultname + this.indexForm.value.lang
-            console.log('finalname = ' + finalname)
+    callRoot() {
+        MeteorObservable.call('userAdmin').subscribe((root) => {
+            this.root = root
+        })
+    }
 
-            Extras.insert({
-                lastEdit: new Date(),
-                post: this.indexForm.value.post,
-                lang: this.indexForm.value.lang,
-                title: finalname
+    printForm() {
+        MeteorObservable.call('editOrAddHome').subscribe((home) => {
+            this.editForm(home)
+        }, () => {
+            this.addForm()
+        })
+    }
+
+    editForm(home: HomeDetail) {
+        this.image = home.banner
+        this.homeForm = this.formBuilder.group({
+            banner_image: [home.banner],
+            welcome_lang: [home.welcome[0].lang, Validators.required],
+            welcome_message: [home.welcome[0].message, Validators.required]
+        })
+    }
+
+    addForm() {
+        this.homeForm = this.formBuilder.group({
+            banner_image: [''],
+            welcome_lang: ['en', Validators.required],
+            welcome_message: ['', Validators.required]
+        })
+    }
+
+    addHome() {
+        if (this.homeForm.valid) {
+            MeteorObservable.call('homeDetail', this.homeForm.value, this.image).subscribe(() => {
+                alert('Successful update')
+            }, (err) => {
+                alert(`Cannot update home cause ${err}`)
             })
-
-            this.indexForm.reset()
+            this.homeForm.reset()
         }
     }
 
-    ngOnDestroy() {
-        if (this.rootsub)
-            this.rootsub.unsubscribe()
+    onImage(imageId: string) {
+        this.image = imageId
+    }
 
+    ngOnDestroy() {
+        if (this.rootSub)
+            this.rootSub.unsubscribe()
     }
 }

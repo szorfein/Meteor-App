@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor'
 import { MeteorObservable } from 'meteor-rxjs'
 import { Subscription, Observable } from 'rxjs'
 import { InjectUser } from 'angular2-meteor-accounts-ui'
-import { User, UserBar } from '/both/models/user.model'
+import { UserBar } from '/both/models/user.model'
 import template from './user-bar.component.html'
 
 @Component({
@@ -14,8 +14,8 @@ import template from './user-bar.component.html'
 @InjectUser('user')
 export class UserBarComponent implements OnInit, OnDestroy {
 
-    user
-    userSub: Subscription
+    user : UserBar
+    userSub : Subscription
 
     ngOnInit() {
 

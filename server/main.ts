@@ -14,6 +14,7 @@ import '/both/methods/extras.methods'
 import '/both/methods/contacts.methods'
 import '/both/methods/articles.methods'
 import '/both/methods/analytics.methods'
+import '/both/methods/homes.methods'
 
 // Publication
 import './imports/publications/articles'

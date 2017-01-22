@@ -1,9 +1,27 @@
-<div *ngIf="root">
-    <form [formGroup]="indexForm" (ngSubmit)="addPost()">
-        <label for="post">Presentation</label>
-        <textarea formControlName="post" name="post"></textarea>
-        <label for="lang">Lang</label>
-        <input type="text" formControlName="lang" name="lang">
-        <button type="submit">Add Presentation</button>
-    </form>
+<div *ngIf="root && homeForm">
+    <div class="container-fluid">
+        <form [formGroup]="homeForm" (ngSubmit)="addHome()">
+
+            <div class="form-group">
+                <label class="form-label" for="image">Image</label>
+                <input class="form-control" type="text" id="image" formControlName="banner_image" placeholder="image">
+                <upload-image #upload (onFile)="onImage($event)"></upload-image>
+            </div>
+
+            <div class="form-group">
+                <label class="sr-only" for="lang">Lang</label>
+                <input class="form-control"
+                       type="text" formControlName="welcome_lang" name="lang" placeholder="language">
+            </div>
+
+            <div class="form-group">
+                <label class="sr-only" for="message">Message</label>
+                <textarea class="form-control" type="text" rows="3" formControlName="welcome_message" placeholder="message">
+                </textarea>
+            </div>
+
+            <button class="btn btn-primary"
+                    type="submit">Update Home</button>
+        </form>
+    </div>
 </div>

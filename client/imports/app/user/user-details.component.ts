@@ -7,8 +7,8 @@ import { InjectUser } from 'angular2-meteor-accounts-ui'
 import { Meteor } from 'meteor/meteor'
 import { MeteorObservable } from 'meteor-rxjs'
 
-import { UserExt } from '/both/models/userext.model'
-import { UsersExt } from '/both/collections/usersext.collection'
+import { UserExt } from '/both/models/user.model'
+import { UsersExt } from '/both/collections/users.collection'
 
 import template from './user-details.component.html'
 
