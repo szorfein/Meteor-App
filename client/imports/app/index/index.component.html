@@ -1,15 +1,28 @@
 <div *ngIf="home" class="jumbotron jumbotron-fluid" id="banner">
-    <div class="container text-center">
-        <img href="#" [attr.src]="home.banner | previewImage" alt="banner">
-        <h1 class="display-3">Fluid container</h1>
-        <p class="lead">{{ home.welcome[0].message </p>
+    <div class="container-fluid">
+        <img href="#" [attr.src]="home.banner | previewImage" alt="banner" style="height:450px">
+        <div id="banner-text">
+            <p>{{ home.welcome[0].message }}</p>
+        </div>
     </div>
 </div>
 
-<index-form></index-form>
-
 <div class="container-fluid index-head">
-    <nav></nav>
+    <div [hidden]="!root">
+        <nav class="navbar navbar-dark">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link"
+                       data-toggle="modal"
+                       data-target="#form-home-edit" href="#">
+                        <i class="fa fa-edit"></i>
+                        <span>Edit home</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <modal-home-edit></modal-home-edit>
+    </div>
 </div>
 <div class="container index-body">
     <about-detail-me></about-detail-me>

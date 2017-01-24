@@ -4,10 +4,10 @@ import { HomesDetail } from '/both/collections/extras.collection'
 function buildNewForm(form: HomeDetailForm, userId: string, image: string) {
     const newForm : HomeDetail = {
         banner: image,
-        welcome: [
-            { lang: form.welcome_lang },
-            { message: form.welcome_message }
-        ],
+        welcome: [{ 
+            lang: form.welcome_lang,
+            message: form.welcome_message
+        }],
         idOwner: userId
     }
     return newForm
@@ -28,14 +28,24 @@ class HomeLib {
     public add(userId: string, form: HomeDetailForm, image: string) {
         let homeForm = this.give()
         if (homeForm && homeForm.banner) {
-            editForm(form, image)
+            console.log('update document')
+            editForm(form, userId, image)
         } else {
+            console.log('insert new document')
             addForm(form, userId, image)
         }
     }
 
     public give() {
         return HomesDetail.findOne({})
+    }
+
+    public isExist() {
+        const homeForm = this.give()
+        if (!homeForm)
+            throw new Meteor.Error('404', 'Not found')
+
+        return homeForm
     }
 }
 

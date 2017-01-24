@@ -3,16 +3,13 @@ import { HomeDetailForm } from '/both/models/extra.model'
 Meteor.methods({
    
     editOrAddHome: function() {
-
-        let homeForm : HomeDetail
-
+        Meteor.call('isRoot')
+        let formHome
         if (Meteor.isServer) {
-            Meteor.call('isRoot')
             const { homeLib } = require('/lib/server/home')
-            homeForm = homeLib.give()
+            formHome = homeLib.isExist()
         }
-
-        return homeForm
+        return formHome
     },
 
     homeDetail: function(form : HomeDetailForm, image: string) {

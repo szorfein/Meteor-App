@@ -41,19 +41,22 @@ export class IndexFormComponent implements OnInit, OnDestroy {
 
     printForm() {
         MeteorObservable.call('editOrAddHome').subscribe((home) => {
-            this.editForm(home)
+            if (home)
+                this.editForm(home)
         }, () => {
             this.addForm()
         })
     }
 
     editForm(home: HomeDetail) {
-        this.image = home.banner
-        this.homeForm = this.formBuilder.group({
-            banner_image: [home.banner],
-            welcome_lang: [home.welcome[0].lang, Validators.required],
-            welcome_message: [home.welcome[0].message, Validators.required]
-        })
+        if (home) {
+            this.image = home.banner
+            this.homeForm = this.formBuilder.group({
+                banner_image: [home.banner],
+                welcome_lang: [home.welcome[0].lang, Validators.required],
+                welcome_message: [home.welcome[0].message, Validators.required]
+            })
+        }
     }
 
     addForm() {
