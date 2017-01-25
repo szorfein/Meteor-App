@@ -1,9 +1,7 @@
-<div *ngIf="home" class="jumbotron jumbotron-fluid" id="banner">
-    <div class="container-fluid">
-        <img href="#" [attr.src]="home.banner | previewImage" alt="banner" style="height:450px">
-        <div id="banner-text">
-            <p>{{ home.welcome[0].message }}</p>
-        </div>
+<div *ngIf="home" id="banner">
+    <img href="#" [attr.src]="home.banner | previewImage" alt="banner" style="height:450px">
+    <div id="banner-text">
+        <p>{{ home.welcome[0].message }}</p>
     </div>
 </div>
 
