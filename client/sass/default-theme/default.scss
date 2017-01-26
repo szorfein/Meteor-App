@@ -178,11 +178,6 @@ body {
 */
 
 .dash-menu {
-    position: relative;
-    top: -17px;
-    //.flex-column {
-    //    -webkit-flex-direction: row!important;
-    //}
 }
 
 /*
@@ -251,15 +246,6 @@ body {
     }
 
     .dash-menu {
-        position: relative;
-        left: -15px;
-        padding-left: .6em;
-        .flex-column {
-            -webkit-flex-direction: column!important;
-        }
-        .dropdown-menu {
-            position: relative;
-        }
     }
 }
 

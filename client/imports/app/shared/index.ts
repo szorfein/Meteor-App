@@ -4,6 +4,7 @@ import { DisplayNamePipe } from './display-name.pipe'
 import { DisplayNameWithIdPipe } from './display-name-with-id.pipe'
 import { DisplayReplyCommentPipe } from './display-reply-comment.pipe'
 import { DisplayAboutPipe } from './display-about.pipe'
+import { DisplayUserImagePipe } from './display-user-image.pipe'
 
 export const SHARED_DECLARATIONS : any[] = [
     DisplayMainImagePipe,
@@ -11,5 +12,6 @@ export const SHARED_DECLARATIONS : any[] = [
     DisplayNamePipe,
     DisplayNameWithIdPipe,
     DisplayReplyCommentPipe,
-    DisplayAboutPipe
+    DisplayAboutPipe,
+    DisplayUserImagePipe
 ]

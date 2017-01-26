@@ -17,7 +17,8 @@ export const routes: Route[] = [
     { path: 'blog/:articleId', component: ArticleDetailsComponent },
     { path: 'about', component: AboutComponent },
     { path: 'contact', component: ContactComponent },
-    { path: 'user/:userName', component: UserDetailsComponent },
+    { path: 'user/:userName', component: UserDetailsComponent, 
+        canActivate: ['canActivateForLoggedIn'] },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'recover', component: RecoverComponent }

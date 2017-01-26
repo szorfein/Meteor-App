@@ -34,6 +34,13 @@ Meteor.publish('root', function() {
     }
 })
 
+Meteor.publish('lastRegistered', function() {
+    if (!this.userId)
+        return
+
+    return Users.find({},{skip:0,limit:3})
+})
+
 function buildQuery(userName: string) {
     check(userName, String)
     const validator = {

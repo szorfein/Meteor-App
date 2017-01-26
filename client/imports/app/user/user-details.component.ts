@@ -1,15 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
-import { Subscription } from 'rxjs/Subscription'
-import { Observable } from 'rxjs/Observable'
-
-import { InjectUser } from 'angular2-meteor-accounts-ui'
-import { Meteor } from 'meteor/meteor'
+import { ActivatedRoute, CanActivate } from '@angular/router'
+import { Subscription, Observable } from 'rxjs'
 import { MeteorObservable } from 'meteor-rxjs'
-
 import { UserExt } from '/both/models/user.model'
-import { UsersExt } from '/both/collections/users.collection'
-
 import template from './user-details.component.html'
 
 @Component({
@@ -17,17 +10,12 @@ import template from './user-details.component.html'
     template
 })
 
-@InjectUser('user')
-export class UserDetailsComponent implements OnInit, OnDestroy {
-
-    user: Meteor.User
-    userName: string
+export class UserDetailsComponent implements CanActivate, OnInit, OnDestroy {
+    userName : string = ''
     paramsSub: Subscription
-
-    root: Observable<UserExt>
+    root
     rootSub: Subscription
-
-    userext: Observable<UserExt>
+    userext
     userextsub: Subscription
 
     constructor( private route: ActivatedRoute ) {}
@@ -38,8 +26,6 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
         .subscribe(userName => {
             this.userName = userName
 
-            this.user
-
             if (this.userextsub) {
                 this.userextsub.unsubscribe()
             }
@@ -47,7 +33,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
             this.userextsub = MeteorObservable
             .subscribe('userprofile', this.userName)
             .subscribe(() => {
-                this.userext = UsersExt.findOne({ 'name': this.userName })
+                this.callUser()
             })
 
             if (this.rootSub) 
@@ -60,8 +46,26 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
         })
     }
 
+    callUser() {
+        MeteorObservable.call('isOwner', this.userName).subscribe((user) => {
+            this.userext = user
+        },(err) => {
+            alert(`Cannot acces to userprofile cause ${err}`)
+        })
+    }
+
     callRoot() {
-        this.root = UsersExt.findOne({'idOwner': Meteor.userId() })
+        MeteorObservable.call('userAdmin').subscribe((root) => {
+            this.root = root
+        })
+    }
+
+    canActivate() {
+        MeteorObservable.call('isOwner', this.userName).subscribe((user:UserExt) => {
+            return true
+        }, () => {
+            return false
+        })
     }
 
     ngOnDestroy() {

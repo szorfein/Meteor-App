@@ -42,5 +42,17 @@ Meteor.methods({
             if (!userLib.isAdmin(this.userId))
                 throw new Meteor.Error('404', 'No permission to do that !')
         }
+    },
+
+    isOwner : function(username: string) {
+        check(username, String)
+        let userext
+
+        if (Meteor.isServer) {
+            const { userLib } = require('/lib/server/user')
+            userext = userLib.isOwner(username, this.userId)
+        }
+
+        return userext
     }
 })

@@ -8,9 +8,8 @@ import MarkdownIt = require('markdown-it')
 import 'rxjs/add/operator/map'
 import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
-import { UsersExt } from '/both/collections/users.collection'
-import { UserExt } from '/both/models/user.model'
 import { Images } from '/both/collections/images.collection'
+import { UserBar } from '/both/models/user.model'
 import template from './article-details.component.html'
 
 @Component({
@@ -25,7 +24,7 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     user: Meteor.User
     articleId: string
     paramsSub: Subscription
-    root
+    root: Observable<UserBar>
     rootSub: Subscription
     article: Article
     articleSub: Subscription
@@ -56,7 +55,7 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     }
 
     callRoot() {
-        MeteorObservable.call('userAdmin').subscribe((root) => {
+        MeteorObservable.call('userAdmin').subscribe((root:UserBar) => {
             this.root = root
         })
     }

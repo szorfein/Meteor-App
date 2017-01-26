@@ -1,7 +1,6 @@
 <div *ngIf='userext'>
     <div [hidden]="!root">
         <root-dashboard></root-dashboard>
-        <!--<articles-form></articles-form>-->
     </div>
 </div>
-<div *ngIf='!user'>Please log in</div>
+<div *ngIf='!userext'>Please log in</div>

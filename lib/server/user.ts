@@ -96,6 +96,14 @@ class UserLib {
         })
         return !!root
     }
+
+    public isOwner(username: string, userId: string) {
+        let user = Users.findOne({'username': username})
+        if (!(user && user._id == userId))
+            throw new Meteor.Error('403', 'No permission')
+
+        return UsersExt.findOne({'idOwner': userId})
+    }
 }
 
 export const userLib = new UserLib()

@@ -1,0 +1,14 @@
+<div *ngIf="users">
+    <h4 class="card-title">Last registered</h4>
+    <div class="row">
+        <div class="col" *ngFor="let user of users | async">
+            <img [attr.src]="user | displayUserImage" alt="" class="rounded-circle">
+            <a href="#">{{ user.username }}</a>
+            <span>{{ user.createdAt }}</span>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!users">
+    <h4>Any users found...</h4>
+</div>
