@@ -5,26 +5,47 @@
     <p>articles: </p>
 </div>
 <div class="container-fluid">
+    <h2>Dashboard</h2>
     <div class="row">
-        <div class="md-8">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            CPU
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            LIKES
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            TOTAL ARTCLES
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            TOTAL MEMBERS
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
             <div class="row">
-                <div class="md-6">
+                <div class="col-md-12">
+                    <stat-user></stat-user>
+                    Visitor Report
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
                     <div class="card">
-                        <div class="card-block">
+                        <div class="card-block" style="padding:.5rem">
                             <user-last></user-last>
                         </div>
                     </div>
                 </div>
-                <div class="md-6">
+                <div class="col-md-6">
                     <div class="card">
-                        <div class="card-block">
+                        <div class="card-block" style="padding:.5rem">
                             last comment here
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="md-4">
+        <div class="col-md-4">
             stats inBlock
         </div>
     </div>

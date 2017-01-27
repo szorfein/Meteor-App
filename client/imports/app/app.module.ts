@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
 import { AccountsModule } from 'angular2-meteor-accounts-ui'
 import { Ng2PaginationModule } from 'ng2-pagination'
+import { ChartsModule } from 'ng2-charts'
 
 import { AppComponent } from './app.component.web'
 import { routes, ROUTES_PROVIDERS } from './app.routes'
@@ -23,6 +24,7 @@ import { UPLOAD_DECLARATIONS } from './uploads'
 import { SHARED_DECLARATIONS } from './shared'
 import { ROOT_DECLARATIONS } from './root'
 import { MODAL_DECLARATIONS } from './modal'
+import { STATISTICS_DECLARATIONS } from './statistics'
 
 import { MOBILE_DECLARATIONS } from './mobile'
 import { AppMobileComponent } from './mobile/app.component.mobile'
@@ -35,7 +37,7 @@ if (Meteor.isCordova) {
     moduleDefinition = {
         imports: [
             Ng2PaginationModule,
-            IonicModule.forRoot(AppMobileComponent)
+            IonicModule.forRoot(AppMobileComponent),
         ],
         declarations: [
             ...SHARED_DECLARATIONS,
@@ -59,7 +61,8 @@ if (Meteor.isCordova) {
             RouterModule.forRoot(routes),
             AccountsModule,
             Ng2PaginationModule,
-            FileDropModule
+            FileDropModule,
+            ChartsModule
         ],
         declarations: [
             AppComponent,
@@ -76,7 +79,8 @@ if (Meteor.isCordova) {
             ...INDEX_DECLARATIONS,
             ...UPLOAD_DECLARATIONS,
             ...ROOT_DECLARATIONS,
-            ...MODAL_DECLARATIONS
+            ...MODAL_DECLARATIONS,
+            ...STATISTICS_DECLARATIONS
         ],
         providers: [
             ...ROUTES_PROVIDERS

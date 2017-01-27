@@ -28,11 +28,12 @@ Currently again in development, try it with caution.
 
 change salt value, try generate an harder, and change root account too, it will be created at start.
 
-### 5 - Copy file require for bootstrap and font-awesome.
+### 5 - Copy file require for bootstrap, chart and font-awesome.
 
     $ mkdir public/{css,js}
     cp node_modules/{bootstrap,tether}/dist/js/{bootstrap,tether}.js public/js
     cp node_modules/jquery/dist/jquery.js public/js/
+    cp node_modules/chart.js/dist/Chart.bundle.js public/js
     cp node_modules/font-awesome/css/font-awesome.min.css public/css/
 
 ### 6 - Captcha
