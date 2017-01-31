@@ -37,7 +37,7 @@ if (Meteor.isCordova) {
     moduleDefinition = {
         imports: [
             Ng2PaginationModule,
-            IonicModule.forRoot(AppMobileComponent),
+            IonicModule.forRoot(AppMobileComponent)
         ],
         declarations: [
             ...SHARED_DECLARATIONS,

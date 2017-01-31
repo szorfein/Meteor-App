@@ -10,7 +10,7 @@
         <div class="carousel-inner" role="listbox">
             <div *ngFor="let article of articleList | async | slice:0:1" class="carousel-item active">
 
-                <img class="d-block img-fluid" [attr.src]="article.image | previewImage" alt="last article">
+                <img class="d-block img-fluid" [attr.src]="article.image | previewImage" alt="last article" style="height:450px">
                 <div class="carousel-caption d-none d-md-block">
                     <h4>{{ article.bloc[0].title }}</h4>
                     <p>{{ article.authorId | displayNameWithId }}
@@ -21,7 +21,7 @@
             </div> <!-- End carousel-item -->
             <div *ngFor="let article of articleList | async | slice:1" class="carousel-item">
 
-                <img class="d-block img-fluid" [attr.src]="article.image | previewImage" alt="last article">
+                <img class="d-block img-fluid" [attr.src]="article.image | previewImage" alt="last article" style="height:450px">
                 <div class="carousel-caption d-none d-md-block">
                     <h4>{{ article.bloc[0].title }}</h4>
                     <p>{{ article.authorId | displayNameWithId }}

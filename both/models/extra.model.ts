@@ -60,3 +60,12 @@ export interface HomeDetailForm {
     welcome_lang : string
     welcome_message : string
 }
+
+export interface SocialTag {
+    facebook : string
+    github : string
+    twitter : string
+    dotshare : string
+    imgur : string
+    reddit : string
+}

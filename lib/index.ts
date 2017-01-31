@@ -33,7 +33,6 @@ export function decIndex(idName: string) {
     }
 }
 
-
 export function getIndex(idName: string):number {
     if (isGoodParam(idName)) {
         let ret = Indexes.findOne({_id: idName})

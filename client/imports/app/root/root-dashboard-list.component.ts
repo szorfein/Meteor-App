@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { MeteorObservable } from 'meteor-rxjs'
+import { Subscription, Observable } from 'rxjs'
+import { Index } from '/both/models/index.model'
+import { getIndex } from '/lib/index'
 import template from './root-dashboard-list.component.html'
 
 @Component({
@@ -7,12 +10,19 @@ import template from './root-dashboard-list.component.html'
     template
 })
 
-export class RootDashboardListComponent implements OnInit {
+export class RootDashboardListComponent implements OnInit, OnDestroy {
+
+    indexArticle : number
+    indexArticleSub : Subscription
+    analyticsSub : Subscription
 
     constructor() {}
 
     ngOnInit() {
         this.getip()
+        this.indexArticleSub = MeteorObservable.subscribe('indexArticle').subscribe(() => {
+            this.indexArticle = getIndex('articleId')
+        })
     }
 
     getip() {
@@ -21,5 +31,9 @@ export class RootDashboardListComponent implements OnInit {
         }, (err) => {
             console.log('cannot found ip')
         })
+    }
+
+    ngOnDestroy() {
+        this.indexArticleSub.unsubscribe()
     }
 }

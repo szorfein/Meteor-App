@@ -1,4 +1,4 @@
-import { AboutDetail, AboutDetailForm } from '/both/models/extra.model'
+import { AboutDetail, AboutDetailForm, SocialTag } from '/both/models/extra.model'
 import { AboutsDetail } from '/both/collections/extras.collection'
 
 function noneByDefault(text: string) {
@@ -43,9 +43,21 @@ function giveThisForm(userId: string) {
     return about
 }
 
+function buildSocialList(social : AboutDetail) {
+    const socialTag : SocialTag = {
+        facebook : noneByDefault(social.facebookLink),
+        github : noneByDefault(social.githubLink),
+        twitter : noneByDefault(social.twitterLink),
+        dotshare : noneByDefault(social.dotshareLink),
+        imgur : noneByDefault(social.imgurLink),
+        reddit : noneByDefault(social.redditLink)
+    }
+    return socialTag
+}
+
 class ExtraLib {
 
-    public addAbout(about: AboutDetailForm, userId: string) {
+    public addAbout(about : AboutDetailForm, userId : string) {
         const newAbout : AboutDetail = buildAbout(about, userId)
         if (this.hasFound(userId)) {
             console.log('Formulaire will be update...')
@@ -56,12 +68,12 @@ class ExtraLib {
         }
     }
 
-    public returnAbout(userId: string) {
+    public returnAbout(userId : string) {
         const about = giveThisForm(userId)
         return about
     }
 
-    public hasFound(userId: string) {
+    public hasFound(userId : string) {
         const about = giveThisForm(userId)
         return !!about
     }
@@ -69,6 +81,11 @@ class ExtraLib {
     public returnAboutForView() {
         const about : AboutDetail = AboutsDetail.findOne()
         return about
+    }
+
+    public giveSocialList() : socialTag {
+        const socialList : AboutDetail = this.returnAboutForView()
+        return buildSocialList(socialList)
     }
 }
 

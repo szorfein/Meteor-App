@@ -26,6 +26,7 @@ import './imports/publications/images'
 import './imports/publications/captchas'
 import './imports/publications/extras'
 import './imports/publications/indexes'
+import './imports/publications/analytics'
 
 Meteor.startup(() => {
     loadIndexes()

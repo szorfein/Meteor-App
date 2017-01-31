@@ -8,3 +8,8 @@ export interface Analytic extends CollectionObject {
     quitAt: Date;
     articleRead?: string[];
 }
+
+export interface BrowserWeb extends CollectionObject {
+    name: string,
+    addresseIp: Array<string>,
+}

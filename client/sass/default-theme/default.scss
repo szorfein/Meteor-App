@@ -136,10 +136,10 @@ body {
     &>.row.ma-filter {
         float: right;
     }
+    background-color: #7d7683;
 }
 
 .blog {
-    height: 387px;
     margin: 1em 0;
     h3.card-title>a {
         text-decoration: none;
@@ -209,6 +209,14 @@ body {
 .social-bottom>ul>li {
     display: inline-block;
     padding: 0 .6em;
+}
+
+/*
+* Dashboard
+*/
+
+#statistic {
+    background-color: #efefef;
 }
 
 /*

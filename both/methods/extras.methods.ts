@@ -1,4 +1,4 @@
-import { AboutDetail, AboutDetailForm } from '/both/models/extra.model'
+import { AboutDetail, AboutDetailForm, SocialTag } from '/both/models/extra.model'
 import { Meteor } from 'meteor/meteor'
 import { check } from 'meteor/check'
 
@@ -30,5 +30,16 @@ Meteor.methods({
             const { extraLib } = require('/lib/server/extra')
             extraLib.addAbout(about, this.userId)
         }
+    },
+    socialList: function() {
+        let socialLst: SocialTag
+        
+        if (Meteor.isServer) {
+            const { extraLib } = require('/lib/server/extra')
+            socialLst = extraLib.giveSocialList()
+        }
+
+        return socialLst
+
     }
 })

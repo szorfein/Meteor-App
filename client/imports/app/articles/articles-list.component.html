@@ -1,5 +1,6 @@
 <div class="articles separator">
 
+    <!--
     <div class="row ma-filter">
         <div class="col-md-12">
             <button class="btn btn-default search" type="button" data-toggle="collapse"
@@ -26,6 +27,7 @@
             </div>
         </div>
     </div>
+    -->
 
     <div class="row">
         <div class="col-md-12">
@@ -35,34 +37,40 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6 articles-list" *ngFor="let article of articles | async">
-                <div class="card blog" *ngFor="let bl of article.bloc">
-                    <div class="card-block">
-                        <h3 class="card-title">
-                            <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
-                        </h3>
-                        <p class="card-text">
+            <!-- Start Article-List -->
+            <div class="col-xs-12 col-sm-8 col-md-8 articles-list">
+                <div *ngFor="let article of articles | async">
+                    <div class="card blog" *ngFor="let bl of article.bloc">
+                        <div class="card-block">
+                            <h3 class="card-title">
+                                <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
+                            </h3>
+                            <p class="card-text">
                             <i class="fa fa-user fa-fw"></i>
                             <a [attr.routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
-                        </p>
-                        <a [routerLink]="['/blog', article._id]">
-                            <img class="card-img img-fluid" *ngIf="article.image" [src]="article | displayMainImage">
-                        </a>
-                        <div class="card-text text-center" [innerHTML]="markdownDisplay(bl.description)"></div>
-                        <p>
-                        <a class="btn btn-default btn-sm"
-                           [routerLink]="['/blog', article._id]">Read more</a>
-                        </p>
-                        <p class="card-text">
-                        <i class="fa fa-user fa-fw"></i>
-                        <small>
-                            {{ article.createdAt | date:"d MMMM y à H" }}h
-                        </small>
-                        </p>
+                            </p>
+                            <a [routerLink]="['/blog', article._id]">
+                                <img class="card-img img-fluid" *ngIf="article.image" [src]="article | displayMainImage">
+                            </a>
+                            <div class="card-text text-center" [innerHTML]="markdownDisplay(bl.description)"></div>
+                            <p>
+                            <a class="btn btn-default btn-sm"
+                               [routerLink]="['/blog', article._id]">Read more</a>
+                            </p>
+                            <p class="card-text">
+                            <i class="fa fa-user fa-fw"></i>
+                            <small>
+                                {{ article.createdAt | date:"d MMMM y à H" }}h
+                            </small>
+                            </p>
+                        </div>
+                        <button [hidden]="!root" (click)="removeArticle(article)">
+                        </button>
                     </div>
-                    <button [hidden]="!root" (click)="removeArticle(article)">
-                    </button>
                 </div>
+            </div><!-- End Article List -->
+            <div class="col-xs-12 col-sm-4 col-md-4 sidebar">
+                <about-detail-me></about-detail-me>
             </div>
         </div>
     </div>
