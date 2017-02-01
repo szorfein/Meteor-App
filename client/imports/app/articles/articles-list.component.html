@@ -35,42 +35,69 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="articles-bloc">
         <div class="row">
             <!-- Start Article-List -->
-            <div class="col-xs-12 col-sm-8 col-md-8 articles-list">
+            <div class="col-xs-12 col-sm-12 col-md-8 articles-list">
                 <div *ngFor="let article of articles | async">
                     <div class="card blog" *ngFor="let bl of article.bloc">
                         <div class="card-block">
-                            <h3 class="card-title">
+                            <div class="card-text">
+                                <ul class="nav justify-content-center">
+                                    <li *ngFor="let tag of tags" class="nav-item">
+                                        {{ tag }}
+                                    </li>
+                                </ul>
+                            </div>
+                            <h3 class="card-title text-center">
                                 <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
                             </h3>
-                            <p class="card-text">
-                            <i class="fa fa-user fa-fw"></i>
-                            <a [attr.routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
-                            </p>
+                            <ul class="nav justify-content-center">
+                                <li class="nav-item">
+                                    <i class="fa fa-user fa-fw"></i>
+                                    <a [attr.routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <i class="fa fa-calendar fa-fw"></i>
+                                    <small>
+                                        {{ article.createdAt | date:"d MMMM y à H" }}h
+                                    </small>
+                                </li>
+                                <li class="nav-item">
+                                    <i class="fa fa-comments"></i>
+                                </li>
+                            </ul>
                             <a [routerLink]="['/blog', article._id]">
                                 <img class="card-img img-fluid" *ngIf="article.image" [src]="article | displayMainImage">
                             </a>
-                            <div class="card-text text-center" [innerHTML]="markdownDisplay(bl.description)"></div>
+                            <div class="card-text text-left post" [innerHTML]="markdownDisplay(bl.description)"></div>
                             <p>
-                            <a class="btn btn-default btn-sm"
-                               [routerLink]="['/blog', article._id]">Read more</a>
+                            <a class="read-more"
+                               [routerLink]="['/blog', article._id]">Continue Reading</a>
                             </p>
                             <p class="card-text">
-                            <i class="fa fa-user fa-fw"></i>
-                            <small>
-                                {{ article.createdAt | date:"d MMMM y à H" }}h
-                            </small>
+                            Share on:
                             </p>
                         </div>
-                        <button [hidden]="!root" (click)="removeArticle(article)">
-                        </button>
+                        <button [hidden]="!root" class="btn btn-primary" (click)="removeArticle(article)">Delete this post</button>
                     </div>
                 </div>
             </div><!-- End Article List -->
-            <div class="col-xs-12 col-sm-4 col-md-4 sidebar">
-                <about-detail-me></about-detail-me>
+            <div class="col-xs-12 col-sm-12 col-md-4 sidebar">
+                <div class="elements-sidebar">
+                    <h5>About Me</h5>
+                    <about-detail-me></about-detail-me>
+                </div>
+                <div class="elements-sidebar">
+                    <h5>Follow Us</h5>
+                    <social></social>
+                </div>
+                <div class="elements-sidebar">
+                    <h5>Popular Posts</h5>
+                </div>
+                <div class="elements-sidebar">
+                    <h5>Labels</h5>
+                </div>
             </div>
         </div>
     </div>

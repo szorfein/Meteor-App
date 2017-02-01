@@ -124,10 +124,35 @@ body {
 * Articles list
 */
 
-.bar-tags>ul>li>a {
+.sidebar {}
+
+.elements-sidebar {
+    margin: 1em auto;
+    background-color: #fff;
     color: #000;
-    &:hover {
-        border-bottom: 1px solid #222;
+    box-shadow: 0 0 5px 0 #e2e3e4;
+    padding: 25px;
+    border-radius: 1px 1px 1px 1px;
+    h5 {
+        font-size: 16px;
+        border-bottom: 1px solid #ecedee;
+        line-height: 20px;
+        font-weight: bold;
+    }
+}
+
+.articles-bloc {
+    margin: auto 1em;
+}
+
+.bar-tags {
+    background-color: #fff;
+    margin: auto 1em;
+    &>ul>li>a {
+        color: #000;
+        &:hover {
+            border-bottom: 1px solid #222;
+        }
     }
 }
 
@@ -137,6 +162,29 @@ body {
         float: right;
     }
     background-color: #7d7683;
+}
+
+.read-more {
+    display: block;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 13px;
+    text-transform: uppercase;
+    margin: 0;
+    font-weight: normal;
+    background-color: #652323;
+    border-radius: 2px;
+    color: #efefef;
+    &:hover {
+        color: #fff;
+        text-decoration: none;
+    }
+}
+
+.post {
+    box-shadow: 0 0 5px 0 #e2e3e4;
+    padding: 9px;
+    overflow: hidden;
 }
 
 .blog {
@@ -171,6 +219,15 @@ body {
 .selfie {
     width: 256px;
     height: 256px;
+}
+
+.social {
+    font-size: 24px;
+    padding: 10px;
+    color: #000;
+    &:hover {
+        color: #222;
+    }
 }
 
 /*
@@ -236,6 +293,10 @@ body {
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
+    .articles-bloc {
+        margin: auto 1em;
+    }
+
     .main-header {
         button.navbar-toggler {
             display:none;

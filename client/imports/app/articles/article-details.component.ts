@@ -24,7 +24,7 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     user: Meteor.User
     articleId: string
     paramsSub: Subscription
-    root: Observable<UserBar>
+    root: UserBar
     rootSub: Subscription
     article: Article
     articleSub: Subscription

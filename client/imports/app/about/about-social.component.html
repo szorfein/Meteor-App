@@ -1,1 +1,12 @@
-<h2>Follow Me...Or not</h2>
+<div *ngIf="social">
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="social nav-link" [attr.href]="social.github">
+                <i class="fa fa-github" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+<div *ngIf="!social">
+    <h3>user has not registered social link</h3>
+</div>

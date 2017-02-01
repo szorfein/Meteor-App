@@ -48,7 +48,7 @@ export class IndexFormComponent implements OnInit, OnDestroy {
         })
     }
 
-    editForm(home: HomeDetail) {
+    editForm(home) {
         if (home) {
             this.image = home.banner
             this.homeForm = this.formBuilder.group({

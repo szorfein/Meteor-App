@@ -17,6 +17,7 @@ export class UserDetailsComponent implements CanActivate, OnInit, OnDestroy {
     rootSub: Subscription
     userext
     userextsub: Subscription
+    isActivate : boolean = false
 
     constructor( private route: ActivatedRoute ) {}
 
@@ -60,12 +61,17 @@ export class UserDetailsComponent implements CanActivate, OnInit, OnDestroy {
         })
     }
 
-    canActivate() {
+    isOwner() {
         MeteorObservable.call('isOwner', this.userName).subscribe((user:UserExt) => {
-            return true
+            this.isActivate = true
         }, () => {
-            return false
+            this.isActivate = false
         })
+    }
+
+    canActivate() {
+        this.isOwner()
+        return this.isActivate
     }
 
     ngOnDestroy() {

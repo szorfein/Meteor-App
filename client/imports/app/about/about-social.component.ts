@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { Subscription, Observable } from 'rxjs'
+import { Subscription } from 'rxjs'
 import { MeteorObservable } from 'meteor-rxjs'
 import template from './about-social.component.html'
 
