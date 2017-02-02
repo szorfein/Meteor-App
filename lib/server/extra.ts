@@ -73,18 +73,21 @@ class ExtraLib {
         return about
     }
 
-    public hasFound(userId : string) {
+    public hasFound(userId : string) : boolean {
         const about = giveThisForm(userId)
         return !!about
     }
 
-    public returnAboutForView() {
+    public returnAboutForView() : AboutDetail {
         const about : AboutDetail = AboutsDetail.findOne()
         return about
     }
 
-    public giveSocialList() : socialTag {
+    public giveSocialList() : SocialTag {
         const socialList : AboutDetail = this.returnAboutForView()
+        if (!socialList)
+            throw new Meteor.Error('404', 'No social tag found')
+
         return buildSocialList(socialList)
     }
 }

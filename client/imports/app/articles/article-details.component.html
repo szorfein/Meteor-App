@@ -49,9 +49,9 @@
                 <p>le: {{ article.createdAt | date:"d MMMM y à H" }}h</p>
                 <img class="img-fluid" [src]="article | displayMainImage">
                 <div class="description"
-                    [innerHTML]="markdownDisplay(bloc.description)"></div>
+                    [innerHTML]="bloc.description | markdown"></div>
                 <div class="article"
-                    [innerHTML]="markdownDisplay(bloc.article)"></div>
+                    [innerHTML]="bloc.article | markdown"></div>
             </section>
         </div>
     </div>

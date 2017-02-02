@@ -62,10 +62,10 @@ export interface HomeDetailForm {
 }
 
 export interface SocialTag {
-    facebook : string
-    github : string
-    twitter : string
-    dotshare : string
-    imgur : string
-    reddit : string
+    facebook? : string
+    github? : string
+    twitter? : string
+    dotshare? : string
+    imgur? : string
+    reddit? : string
 }

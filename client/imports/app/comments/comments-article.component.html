@@ -13,7 +13,7 @@
             <div class="media-body">
                 <h3 class="h3 media-heading">{{ comment.poster }}
                     <small>>{{ comment.posted | date:"d MMMM y à H:M" }}</small></h3>
-                <div [innerHTML]="markdownDisplay(comment.post)"></div>
+                <div [innerHTML]="comment.post | markdown"></div>
                 <div *ngIf="user">
                     <comment-button 
                     [post]="comment" 

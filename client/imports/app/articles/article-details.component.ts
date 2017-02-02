@@ -4,7 +4,6 @@ import { Subscription, Observable } from 'rxjs'
 import { Meteor } from 'meteor/meteor'
 import { MeteorObservable } from 'meteor-rxjs'
 import { InjectUser } from 'angular2-meteor-accounts-ui'
-import MarkdownIt = require('markdown-it')
 import 'rxjs/add/operator/map'
 import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
@@ -28,7 +27,6 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     rootSub: Subscription
     article: Article
     articleSub: Subscription
-    md = new MarkdownIt()
 
     constructor(private route: ActivatedRoute) {}
 
@@ -72,11 +70,6 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
             })
         })
     }
-
-    markdownDisplay(text:string):string { 
-        if (this.article) 
-            return this.md.render(text)
-    } 
 
     saveArticle() {
         Articles.update(this.article._id, {

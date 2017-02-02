@@ -1,16 +1,11 @@
 import { Component, NgZone, OnInit, OnDestroy } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { InjectUser } from 'angular2-meteor-accounts-ui'
-
 import { Meteor } from 'meteor/meteor'
-import { Subscription } from 'rxjs/Subscription'
+import { Subscription, Observable } from 'rxjs'
 import { MeteorObservable } from 'meteor-rxjs'
-import { Observable } from 'rxjs/Observable'
-
 import { Tags } from '/both/collections/tags.collection'
 import { Tag } from '/both/models/tag.model'
-
-import MarkdownIt = require('markdown-it')
 import template from './articles-form.component.html'
 
 @Component({
@@ -22,17 +17,14 @@ import template from './articles-form.component.html'
 export class ArticlesFormComponent implements OnInit, OnDestroy {
     addForm : FormGroup
     user : Meteor.User
-
     root
     rootsub : Subscription
-
     tags : Observable<Tag[]>
     tagsSub : Subscription
     myTag = new Set()
     arrayOfTags : string[] = []
     image: string = ''
     imageSub : Subscription
-    md = new MarkdownIt()
 
     // TODO: Add test if tagValue exist in collection !
     addTag(tagValue: string): void {
@@ -68,11 +60,6 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
                 })
             })
         }
-    }
-
-    markdownDisplay(text: string):string {
-        if(text)
-            return this.md.render(text)
     }
 
     callRoot() {

@@ -7,7 +7,6 @@ import { InjectUser } from 'angular2-meteor-accounts-ui'
 import { Meteor } from 'meteor/meteor'
 import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
-import MarkdownIt = require('markdown-it')
 
 interface Pagination {
     limit: number;
@@ -33,7 +32,6 @@ export class ArticlesList implements OnInit, OnDestroy {
     indexSub: Subscription
     root
     rootsub: Subscription
-    md = new MarkdownIt()
 
     constructor( private paginationService : PaginationService ) {}
 
@@ -105,11 +103,6 @@ export class ArticlesList implements OnInit, OnDestroy {
         MeteorObservable.call('userAdmin').subscribe((root) => {
             this.root = root
         })
-    }
-
-    markdownDisplay(text:string):string {
-        if (this.articles)
-            return this.md.render(text)
     }
 
     removeArticle(article: Article) {

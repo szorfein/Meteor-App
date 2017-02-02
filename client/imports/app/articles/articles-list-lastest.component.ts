@@ -29,11 +29,11 @@ export class ArticlesListLastestComponent implements OnInit, OnDestroy {
        }).zone()
    }
 
-    ngOnDestroy() {
-        if (this.articleSub)
-            this.articleSub.unsubscribe()
+   ngOnDestroy() {
+       if (this.articleSub)
+           this.articleSub.unsubscribe()
 
-        if (this.imageSub)
-            this.imageSub.unsubscribe()
-    }
+       if (this.imageSub)
+           this.imageSub.unsubscribe()
+   }
 }

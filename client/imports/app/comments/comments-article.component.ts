@@ -6,7 +6,6 @@ import { MeteorObservable } from 'meteor-rxjs'
 import { Comments } from '/both/collections/comments.collection'
 import { C0mment } from '/both/models/comment.model'
 import { InjectUser } from 'angular2-meteor-accounts-ui'
-import MarkdownIt = require('markdown-it')
 import template from './comments-article.component.html'
 
 @Component({
@@ -24,8 +23,6 @@ export class CommentsArticleComponent implements OnInit, OnDestroy {
     comments: Observable<C0mment[]>
     commentsSub: Subscription
     comment: C0mment
-    
-    md = new MarkdownIt()
 
     constructor(private route: ActivatedRoute) {}
 
@@ -49,11 +46,6 @@ export class CommentsArticleComponent implements OnInit, OnDestroy {
                 })
             })
         })
-    }
-
-    markdownDisplay(text: string):string {
-        if (text)
-            return this.md.render(text)
     }
 
     ngOnDestroy() {

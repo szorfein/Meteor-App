@@ -205,6 +205,8 @@ body {
     h3.card-title>a {
         text-decoration: none;
         color: #222;
+        font-size: 30px;
+        font-weight: 400;
     }
 }
 .ng2-pagination {
@@ -343,7 +345,6 @@ body {
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
-
     .bar-tags {
         margin: auto 5em;
     }
@@ -351,5 +352,4 @@ body {
     .articles-bloc {
         margin: auto 5em;
     }
-
 }
