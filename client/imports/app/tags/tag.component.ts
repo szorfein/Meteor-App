@@ -18,8 +18,7 @@ export class TagComponent implements OnInit, OnDestroy {
     @Output() tagSelect : EventEmitter<string> = new EventEmitter<string>()
 
     ngOnInit() {
-        this.tagsSub = MeteorObservable.subscribe('tags')
-        .subscribe(() => {
+        this.tagsSub = MeteorObservable.subscribe('tags').subscribe(() => {
             this.tags = Tags.find({}).zone()
         })
     }

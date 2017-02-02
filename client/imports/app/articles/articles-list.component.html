@@ -71,13 +71,19 @@
                                 <img class="card-img img-fluid" *ngIf="article.image" [src]="article | displayMainImage">
                             </a>
                             <div class="card-text text-left post" [innerHTML]="markdownDisplay(bl.description)"></div>
-                            <p>
-                            <a class="read-more"
-                               [routerLink]="['/blog', article._id]">Continue Reading</a>
-                            </p>
-                            <p class="card-text">
-                            Share on:
-                            </p>
+                            <div class="row">
+                                <div class="col-md-4 flex-md-last">
+                                    <p>
+                                    <a class="read-more"
+                                       [routerLink]="['/blog', article._id]">Continue Reading</a>
+                                    </p>
+                                </div>
+                                <div class="col-md-8 flex-md-first">
+                                    <p class="card-text">
+                                    Share on:
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                         <button [hidden]="!root" class="btn btn-primary" (click)="removeArticle(article)">Delete this post</button>
                     </div>
@@ -102,8 +108,6 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <nav aria-label="Pagination">
-        <pagination-controls (pageChange)="onPageChanged($event)"></pagination-controls>
-    </nav>
-</div>
+<nav class="pagination justify-content-center pag" aria-label="Pagination">
+    <pagination-controls (pageChange)="onPageChanged($event)"></pagination-controls>
+</nav>

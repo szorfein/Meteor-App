@@ -1,8 +1,33 @@
 <div *ngIf="social">
     <ul class="nav justify-content-center">
         <li class="nav-item">
-            <a class="social nav-link" [attr.href]="social.github">
+            <a *ngIf="social.facebook" class="social nav-link" [attr.href]="social.facebook">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a *ngIf="social.github" class="social nav-link" [attr.href]="social.github">
                 <i class="fa fa-github" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a *ngIf="social.twitter" class="social nav-link" [attr.href]="social.twitter">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a *ngIf="social.dotshare" class="social nav-link" [attr.href]="social.dotshare">
+                <i class="fa fa-dot-circle-o" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a *ngIf="social.imgur" class="social nav-link" [attr.href]="social.imgur">
+                <i class="fa fa-imgur" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a *ngIf="social.reddit" class="social nav-link" [attr.href]="social.reddit">
+                <i class="fa fa-reddit" aria-hidden="true"></i>
             </a>
         </li>
     </ul>

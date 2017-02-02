@@ -16,6 +16,9 @@ export class AboutSocialComponent implements OnInit, OnDestroy {
     constructor() {}
 
     ngOnInit() {
+        if (this.socialSub)
+            this.socialSub.unsubscribe()
+
         this.socialSub = MeteorObservable.subscribe('pubAbout').subscribe(() => {
             this.callSocialList()
         })

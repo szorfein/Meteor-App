@@ -28,10 +28,16 @@ body {
  */
 
 .main-header {
-    .social-media {
+    .social-banner {
         position: fixed;
-        right: 1%;
-        top: 10px;
+        right: 2%;
+        top: 0;
+        &>ul>li>a {
+            color: #aaa;
+            &:hover {
+                color: #fff;
+            }
+        }
     }
 
     button.navbar-toggler {
@@ -148,6 +154,8 @@ body {
 .bar-tags {
     background-color: #fff;
     margin: auto 1em;
+    box-shadow: 0 0 5px 0 #e2e3e4;
+    border-radius: 2px;
     &>ul>li>a {
         color: #000;
         &:hover {
@@ -157,7 +165,7 @@ body {
 }
 
 .articles {
-    margin: 2em 0;
+    padding: .4em 0;
     &>.row.ma-filter {
         float: right;
     }
@@ -179,6 +187,11 @@ body {
         color: #fff;
         text-decoration: none;
     }
+}
+
+.pag {
+    padding-top: 1em;
+    background-color: rgba(16,9,9,.68);
 }
 
 .post {
@@ -285,7 +298,7 @@ body {
 
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
-    .social-media {
+    .social-banner {
         position: fixed;
         right: 5%;
     }
@@ -311,7 +324,6 @@ body {
         position: fixed;
         top: 8px;
         left: 26%;
-        width: 100%;
     }
 
     .dash-menu {
@@ -320,8 +332,24 @@ body {
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
+    .bar-tags {
+        margin: auto 3em;
+    }
+
+    .articles-bloc {
+        margin: auto 3em;
+    }
 }
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
+
+    .bar-tags {
+        margin: auto 5em;
+    }
+
+    .articles-bloc {
+        margin: auto 5em;
+    }
+
 }

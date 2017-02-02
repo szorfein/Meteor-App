@@ -47,7 +47,7 @@
                     <h1 class="h1">{{ bloc.title }} <small>by: {{article.authorId | displayNameWithId }}</small></h1>
                 </div>
                 <p>le: {{ article.createdAt | date:"d MMMM y à H" }}h</p>
-                <img class="img-responsive" [src]="article | displayMainImage">
+                <img class="img-fluid" [src]="article | displayMainImage">
                 <div class="description"
                     [innerHTML]="markdownDisplay(bloc.description)"></div>
                 <div class="article"

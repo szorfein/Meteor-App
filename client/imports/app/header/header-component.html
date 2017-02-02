@@ -28,22 +28,12 @@
                 </li>
             </ul>
         </div>
-        <div class="social-media">
+        <div class="social-banner">
             <div [hidden]="!user">
                 <user-bar></user-bar>
             </div>
             <div [hidden]="user">
-                <ul class="nav justify-content-end">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-facebook"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-twitter"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-dribbble"></i></a>
-                    </li>
-                </ul>
+                <social></social>
             </div>
         </div> <!-- end social media -->
     </div>
