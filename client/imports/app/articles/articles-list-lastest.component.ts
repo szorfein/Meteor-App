@@ -19,7 +19,9 @@ export class ArticlesListLastestComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.imageSub = MeteorObservable.subscribe('images').subscribe()
         this.articleSub = MeteorObservable.subscribe('articles').subscribe(() => {
-            this.callArticles()
+            MeteorObservable.autorun().subscribe(() => {
+                this.callArticles()
+            })
         })
     }
 

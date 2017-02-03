@@ -5,7 +5,20 @@
     </div>
 </div>
 
-<div class="container-fluid index-head">
+<div class="index-container index-head">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                Total article : 8
+            </div>
+            <div class="col">
+                Total follower : 8
+            </div>
+            <div class="col">
+                Total connection today : 8
+            </div>
+        </div>
+    </div>
     <div [hidden]="!root">
         <nav class="navbar navbar-dark">
             <ul class="navbar-nav mr-auto">
@@ -22,8 +35,20 @@
         <modal-home-edit></modal-home-edit>
     </div>
 </div>
-<div class="container index-body">
-    <about-detail-me></about-detail-me>
-    <contact-form></contact-form>
-    <articles-list-lastest></articles-list-lastest>
+<div class="index-container index-body">
+    <div class="index-article">
+        <h2 class="text-center">About</h2>
+    </div>
+    <div class="index-article bg-gray">
+        <h2 class="text-center">Lastest blog posts</h2>
+        <articles-list-lastest></articles-list-lastest>
+    </div>
+    <div class="index-article">
+        <h2 class="text-center">About Me</h2>
+        <about-detail-me></about-detail-me>
+    </div>
+    <div class="index-article bg-gray">
+        <h2 class="text-center">Contact Me</h2>
+        <contact-form></contact-form>
+    </div>
 </div>

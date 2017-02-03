@@ -1,6 +1,6 @@
 <div class="separator" *ngIf="articleList">
     <div class="row">
-        <div *ngFor="let article of articleList | async" class="col">
+        <div *ngFor="let article of articleList | async" class="col-md-6 col-lg-4">
             <div class="card blog" *ngFor="let bl of article.bloc">
                 <div class="card-block">
                     <div class="card-text">
@@ -32,19 +32,13 @@
                         <img class="card-img img-fluid" *ngIf="article.image" [src]="article | displayMainImage">
                     </a>
                     <div class="card-text text-left post" [innerHTML]="bl.description | markdown"></div>
-                    <div class="row">
-                        <div class="col-md-4 flex-md-last">
-                            <p>
-                            <a class="read-more"
-                               [routerLink]="['/blog', article._id]">Continue Reading</a>
-                            </p>
-                        </div>
-                        <div class="col-md-8 flex-md-first">
-                            <p class="card-text">
-                            Share on:
-                            </p>
-                        </div>
-                    </div>
+                    <p>
+                    <a class="read-more"
+                       [routerLink]="['/blog', article._id]">Continue Reading</a>
+                    </p>
+                    <p class="card-text">
+                    Share on:
+                    </p>
                 </div>
             </div>
         </div>

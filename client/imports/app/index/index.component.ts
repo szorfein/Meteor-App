@@ -26,7 +26,9 @@ export class IndexComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.imageSub = MeteorObservable.subscribe('images').subscribe()
         this.homeSub = MeteorObservable.subscribe('pubHome').subscribe(() => {
-            this.home = HomesDetail.findOne({})
+            MeteorObservable.autorun().subscribe(() => {
+                this.home = HomesDetail.findOne({})
+            })
         })
 
         this.rootSub = MeteorObservable.subscribe('root').subscribe(() => {
