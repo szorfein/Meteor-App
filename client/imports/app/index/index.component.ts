@@ -15,9 +15,8 @@ export class IndexComponent implements OnInit, OnDestroy {
 
     homeSub: Subscription
     imageSub : Subscription
-    rootSub : Subscription
     home
-    root
+    formular : string
 
     constructor(
         private route: ActivatedRoute
@@ -30,18 +29,7 @@ export class IndexComponent implements OnInit, OnDestroy {
                 this.home = HomesDetail.findOne({})
             })
         })
-
-        this.rootSub = MeteorObservable.subscribe('root').subscribe(() => {
-            MeteorObservable.autorun().subscribe(() => {
-                this.callRoot()
-            })
-        })
-    }
-
-    callRoot() {
-        MeteorObservable.call('userAdmin').subscribe((root) => {
-            this.root = root
-        })
+        this.formular = "index"
     }
 
     ngOnDestroy() {

@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Subscription } from 'rxjs'
 import { MeteorObservable } from 'meteor-rxjs'
+import { SocialTag } from '/both/models/extra.model'
 import template from './about-social.component.html'
 
 @Component({
@@ -10,24 +11,27 @@ import template from './about-social.component.html'
 
 export class AboutSocialComponent implements OnInit, OnDestroy {
 
-    socialSub: Subscription
     social
+    socialSub: Subscription
 
     constructor() {}
 
     ngOnInit() {
+
         if (this.socialSub)
             this.socialSub.unsubscribe()
 
         this.socialSub = MeteorObservable.subscribe('pubAbout').subscribe(() => {
-            this.callSocialList()
+            MeteorObservable.autorun().subscribe(() => {
+                this.callSocialList()
+            })
         })
     }
 
     callSocialList() {
-        MeteorObservable.call('socialList').subscribe((ssList) => {
+        MeteorObservable.call('socialList').subscribe((ssList : SocialTag) => {
             this.social = ssList
-        })
+        },() => {})
     }
 
     ngOnDestroy() {

@@ -140,6 +140,7 @@ body {
         text-transform: uppercase;
         font-weight: 700;
         font-size: 40px;
+        margin: .7em auto;
     }
 }
 
@@ -372,5 +373,12 @@ body {
 
     .articles-bloc {
         margin: auto 5em;
+    }
+
+    .index-container {
+        &>div {
+            padding-left: 5em;
+            padding-right: 5em;
+        }
     }
 }

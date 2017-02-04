@@ -1,7 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { Subscription } from 'rxjs'
-import { MeteorObservable } from 'meteor-rxjs'
 import template from './about.component.html'
 
 @Component({
@@ -9,31 +7,7 @@ import template from './about.component.html'
     template
 })
 
-export class AboutComponent implements OnInit, OnDestroy {
-
-    root
-    rootSub: Subscription
+export class AboutComponent {
 
     constructor( private route: ActivatedRoute ) {}
-
-    ngOnInit() {
-
-        if (this.rootSub)
-            this.rootSub.unsubscribe()
-
-        this.rootSub = MeteorObservable.subscribe('root').subscribe(() => {
-            this.callRoot()
-        })
-    }
-
-    callRoot() {
-        MeteorObservable.call('userAdmin').subscribe((root) => {
-            this.root = root
-        })
-    }
-
-    ngOnDestroy() {
-        if (this.rootSub)
-            this.rootSub.unsubscribe()
-    }
 }

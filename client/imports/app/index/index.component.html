@@ -19,22 +19,9 @@
             </div>
         </div>
     </div>
-    <div [hidden]="!root">
-        <nav class="navbar navbar-dark">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link"
-                       data-toggle="modal"
-                       data-target="#form-home-edit" href="#">
-                        <i class="fa fa-edit"></i>
-                        <span>Edit home</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <modal-home-edit></modal-home-edit>
-    </div>
+    <admin [form]="formular"></admin>
 </div>
+
 <div class="index-container index-body">
     <div class="index-article">
         <h2 class="text-center">About</h2>

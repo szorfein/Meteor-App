@@ -13,12 +13,16 @@ export class AboutDetailMeComponent implements OnInit, OnDestroy {
     imageSub: Subscription
     aboutSub: Subscription
     about
+    formular : string
 
     ngOnInit() {
         this.imageSub = MeteorObservable.subscribe('images').subscribe()
         this.aboutSub = MeteorObservable.subscribe('pubAbout').subscribe(() => {
-            this.callAbout()
+            MeteorObservable.autorun().subscribe(() => {
+                this.callAbout()
+            })
         })
+        this.formular = "about"
     }
 
     callAbout() {
