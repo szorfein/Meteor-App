@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { InjectUser } from 'angular2-meteor-accounts-ui'
 import { Meteor } from 'meteor/meteor'
@@ -17,8 +17,6 @@ import template from './articles-form.component.html'
 export class ArticlesFormComponent implements OnInit, OnDestroy {
     addForm : FormGroup
     user : Meteor.User
-    root
-    rootsub : Subscription
     tags : Observable<Tag[]>
     tagsSub : Subscription
     myTag = new Set()
@@ -37,35 +35,18 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
     }
 
     constructor(
-        private formBuilder: FormBuilder,
-        private zone: NgZone
+        private formBuilder: FormBuilder
     ) {}
 
     ngOnInit() {
         
         this.imageSub = MeteorObservable.subscribe('images').subscribe()
-        if (this.rootsub)
-            this.rootsub.unsubscribe()
 
         if (!!Meteor.user()) {
-            this.rootsub = MeteorObservable.subscribe('root').subscribe(() => {
-                MeteorObservable.autorun().subscribe(() => {
-                    this.callRoot()
-                    this.printForm()
-                }, (error) => {
-                    if (error) {
-                        this.zone.run(() => {
-                        })
-                    }
-                })
+            MeteorObservable.autorun().subscribe(() => {
+                this.printForm()
             })
         }
-    }
-
-    callRoot() {
-        MeteorObservable.call('userAdmin').subscribe((root) => {
-            this.root = root
-        })
     }
 
     onImage(imageId : string) : void {
@@ -111,9 +92,6 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
         if (this.tagsSub)
             this.tagsSub.unsubscribe()
         
-        if (this.rootsub)
-            this.rootsub.unsubscribe()
-
         this.imageSub.unsubscribe()
     }
 }

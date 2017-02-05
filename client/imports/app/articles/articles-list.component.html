@@ -37,6 +37,11 @@
 
     <div class="articles-bloc">
         <div class="row">
+            <div class="col mt-2">
+                <admin [form]="formular"></admin>
+            </div>
+        </div>
+        <div class="row">
             <!-- Start Article-List -->
             <div class="col-xs-12 col-sm-12 col-md-8 articles-list">
                 <div *ngFor="let article of articles | async">

@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MeteorObservable } from 'meteor-rxjs'
 import { Subscription } from 'rxjs/Subscription'
-import { Meteor } from 'meteor/meteor'
 import template from './about-form.component.html'
 
 @Component({
@@ -12,8 +11,6 @@ import template from './about-form.component.html'
 
 export class AboutFormComponent implements OnInit, OnDestroy {
 
-    root
-    rootSub: Subscription
     detailSub: Subscription
     aboutForm: FormGroup
 
@@ -22,25 +19,8 @@ export class AboutFormComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
-
-        this.detailSub = MeteorObservable.subscribe('pubAbout').subscribe()
-
-        if (!!Meteor.user()) {
-            if(this.rootSub)
-                this.rootSub.unsubscribe()
-
-            this.rootSub = MeteorObservable.subscribe('root').subscribe(() => {
-                MeteorObservable.autorun().subscribe(() => {
-                    this.callRoot()
-                    this.printForm()
-                })
-            })
-        }
-    }
-
-    callRoot() {
-        MeteorObservable.call('userAdmin').subscribe((user) => {
-            this.root = user
+        this.detailSub = MeteorObservable.subscribe('pubAbout').subscribe(() => {
+            this.printForm()
         })
     }
 
@@ -117,9 +97,7 @@ export class AboutFormComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        if (this.rootSub) {
-            this.rootSub.unsubscribe()
-        }
-        this.detailSub.unsubscribe()
+        if (this.detailSub)
+            this.detailSub.unsubscribe()
     }
 }

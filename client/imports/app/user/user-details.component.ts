@@ -15,8 +15,8 @@ export class UserDetailsComponent implements CanActivate, OnInit, OnDestroy {
     paramsSub: Subscription
     root
     rootSub: Subscription
-    userext
-    userextsub: Subscription
+    user
+    userSub: Subscription
     isActivate : boolean = false
 
     constructor( private route: ActivatedRoute ) {}
@@ -27,31 +27,20 @@ export class UserDetailsComponent implements CanActivate, OnInit, OnDestroy {
         .subscribe(userName => {
             this.userName = userName
 
-            if (this.userextsub) {
-                this.userextsub.unsubscribe()
+            if (this.userSub) {
+                this.userSub.unsubscribe()
             }
 
-            this.userextsub = MeteorObservable
-            .subscribe('userprofile', this.userName)
-            .subscribe(() => {
-                this.callUser()
+            this.userSub = MeteorObservable.subscribe('userprofile', this.userName).subscribe(() => {
+                this.isOwner()
             })
 
             if (this.rootSub) 
                 this.rootSub.unsubscribe()
 
-            this.rootSub = MeteorObservable
-            .subscribe('root').subscribe(() => {
+            this.rootSub = MeteorObservable.subscribe('root').subscribe(() => {
                 this.callRoot()
             })
-        })
-    }
-
-    callUser() {
-        MeteorObservable.call('isOwner', this.userName).subscribe((user) => {
-            this.userext = user
-        },(err) => {
-            alert(`Cannot acces to userprofile cause ${err}`)
         })
     }
 
@@ -62,20 +51,25 @@ export class UserDetailsComponent implements CanActivate, OnInit, OnDestroy {
     }
 
     isOwner() {
-        MeteorObservable.call('isOwner', this.userName).subscribe((user:UserExt) => {
+        MeteorObservable.call('isOwner', this.userName).subscribe((user : UserExt) => {
+            this.user = user
             this.isActivate = true
+            console.log('isOwner return true')
         }, () => {
             this.isActivate = false
+            console.log('isOwner return false')
         })
     }
 
     canActivate() {
-        this.isOwner()
         return this.isActivate
     }
 
     ngOnDestroy() {
-        this.userextsub.unsubscribe()
-        this.rootSub.unsubscribe()
+        if (this.userSub)
+            this.userSub.unsubscribe()
+
+        if (this.rootSub)
+            this.rootSub.unsubscribe()
     }
 }

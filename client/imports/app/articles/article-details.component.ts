@@ -8,7 +8,6 @@ import 'rxjs/add/operator/map'
 import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
 import { Images } from '/both/collections/images.collection'
-import { UserBar } from '/both/models/user.model'
 import template from './article-details.component.html'
 
 @Component({
@@ -23,8 +22,6 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     user: Meteor.User
     articleId: string
     paramsSub: Subscription
-    root: UserBar
-    rootSub: Subscription
     article: Article
     articleSub: Subscription
 
@@ -40,22 +37,7 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
 
                 this.user
                 this.printArticle()
-                
-                if (this.rootSub) 
-                    this.rootSub.unsubscribe()
-
-                this.rootSub = MeteorObservable.subscribe('root').subscribe(() => {
-                    MeteorObservable.autorun().subscribe(() => {
-                        this.callRoot()
-                    })
-                })
             })
-    }
-
-    callRoot() {
-        MeteorObservable.call('userAdmin').subscribe((root:UserBar) => {
-            this.root = root
-        })
     }
 
     printArticle() {
@@ -83,7 +65,5 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.paramsSub.unsubscribe()
         this.imageSub.unsubscribe()
-        if (this.rootSub)
-            this.rootSub.unsubscribe()
     }
 }

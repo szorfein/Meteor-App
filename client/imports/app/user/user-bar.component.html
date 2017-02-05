@@ -1,4 +1,4 @@
 <div class="user-bar" *ngIf="user">
     <a [routerLink]="['/user', user.username]">{{ user.username }}</a>
-    <button (click)="logout()">Logout</button>
+    <button class="btn btn-default" (click)="logout()">Logout</button>
 </div>

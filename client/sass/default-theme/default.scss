@@ -23,6 +23,11 @@ body {
     margin-top: 54px;
 }
 
+.no-social {
+    margin-top: 13px;
+    padding-bottom: 15px;
+}
+
 /*
  * Navbar
  */
@@ -57,6 +62,14 @@ body {
         &:hover {
             color: #ccc;
         }
+    }
+}
+
+.user-bar {
+    padding-top: 7px;
+    &>a {
+        color: #fff;
+        text-decoration: none;
     }
 }
 

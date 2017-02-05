@@ -32,10 +32,12 @@ export class ArticlesList implements OnInit, OnDestroy {
     indexSub: Subscription
     root
     rootsub: Subscription
+    formular : string
 
     constructor( private paginationService : PaginationService ) {}
 
     ngOnInit() {
+        this.formular = "article"
         this.imageSub = MeteorObservable.subscribe('images').subscribe()
         this.indexSub = MeteorObservable.subscribe('indexArticle').subscribe()
 

@@ -24,11 +24,28 @@
                        data-toggle="modal"
                        data-target="#form-about-edit" href="#">
                         <i class="fa fa-edit"></i>
-                        <span>Edit</span>
+                        <span>Edit about</span>
                     </a>
                 </li>
             </ul>
         </nav>
         <modal-about-edit></modal-about-edit>
+    </div>
+</div>
+<div *ngIf="article">
+    <div [hidden]="!root">
+        <nav class="navbar bg-faded">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link"
+                       data-toggle="modal"
+                       data-target="#form-blog" href="#">
+                        <i class="fa fa-edit"></i>
+                        <span>Add new article</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <modal-article-add></modal-article-add>
     </div>
 </div>

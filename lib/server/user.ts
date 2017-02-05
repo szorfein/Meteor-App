@@ -86,7 +86,7 @@ class UserLib {
             throw new Meteor.Error('404', 'username or email alrealy exist')
     }
 
-    public isAdmin(userId: string):boolean {
+    public isAdmin(userId: string) : boolean {
         let root = UsersExt.findOne({
             $and: [
                 { 'idOwner': userId },
@@ -98,11 +98,14 @@ class UserLib {
     }
 
     public isOwner(username: string, userId: string) {
-        let user = Users.findOne({'username': username})
-        if (!(user && user._id == userId))
-            throw new Meteor.Error('403', 'No permission')
+        let user = Users.findOne(userId)
+        if (!user)
+            throw new Meteor.Error('403', 'Any user found')
 
-        return UsersExt.findOne({'idOwner': userId})
+        if (user.username != username)
+            throw new Meteor.Error('403', 'youre not owner !')
+
+        return UsersExt.findOne({ 'idOwner': userId })
     }
 }
 

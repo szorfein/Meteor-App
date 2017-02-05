@@ -5,7 +5,7 @@ import { UserBar } from '/both/models/user.model'
 import template from './root.input.html'
 
 enum formular {
-    index , about 
+    index , about , article
 }
 
 @Component({
@@ -20,6 +20,7 @@ export class RootInput implements OnInit, OnDestroy {
     rootSub : Subscription
     index : boolean = false
     about : boolean = false
+    article : boolean = false
 
     constructor() {}
 
@@ -41,6 +42,8 @@ export class RootInput implements OnInit, OnDestroy {
                 this.index = true
             else if (this.form == 'about')
                 this.about = true
+            else if (this.form == 'article')
+                this.article = true
         }
     }
 

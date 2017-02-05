@@ -1,5 +1,10 @@
 <div class="separator" *ngIf="articleList">
     <div class="row">
+        <div class="col">
+            <admin [form]="formular"></admin>
+        </div>
+    </div>
+    <div class="row">
         <div *ngFor="let article of articleList | async" class="col-md-6 col-lg-4">
             <div class="card blog" *ngFor="let bl of article.bloc">
                 <div class="card-block">
