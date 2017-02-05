@@ -49,3 +49,20 @@
         <modal-article-add></modal-article-add>
     </div>
 </div>
+<div *ngIf="editArticle && edit">
+    <div [hidden]="!root">
+        <nav class="navbar bg-faded">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link"
+                       data-toggle="modal"
+                       data-target="#form-blog" href="#">
+                        <i class="fa fa-edit"></i>
+                        <span>Edit article</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <modal-article-add [article]="edit"></modal-article-add>
+    </div>
+</div>

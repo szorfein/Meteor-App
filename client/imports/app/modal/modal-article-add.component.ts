@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import template from './modal-article-add.component.html'
 
 @Component({
@@ -7,5 +7,6 @@ import template from './modal-article-add.component.html'
 })
 
 export class ModalArticleAddComponent {
+    @Input() article
     constructor() {}
 }

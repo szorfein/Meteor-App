@@ -1,7 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, Input, OnInit, OnDestroy } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import { InjectUser } from 'angular2-meteor-accounts-ui'
-import { Meteor } from 'meteor/meteor'
 import { Subscription, Observable } from 'rxjs'
 import { MeteorObservable } from 'meteor-rxjs'
 import { Tags } from '/both/collections/tags.collection'
@@ -13,10 +11,9 @@ import template from './articles-form.component.html'
     template
 })
 
-@InjectUser('user')
 export class ArticlesFormComponent implements OnInit, OnDestroy {
+    @Input() edit
     addForm : FormGroup
-    user : Meteor.User
     tags : Observable<Tag[]>
     tagsSub : Subscription
     myTag = new Set()
@@ -39,14 +36,8 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
-        
         this.imageSub = MeteorObservable.subscribe('images').subscribe()
-
-        if (!!Meteor.user()) {
-            MeteorObservable.autorun().subscribe(() => {
-                this.printForm()
-            })
-        }
+        this.printForm()
     }
 
     onImage(imageId : string) : void {
@@ -54,13 +45,25 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
     }
 
     printForm():void {
-        this.addForm = this.formBuilder.group({
-            title: ['', [Validators.required, Validators.minLength(2)] ],
-            description: ['', Validators.required],
-            lang: ['en', Validators.required],
-            article: ['', Validators.required],
-            isPublic: [false]
-        })
+        if (this.edit) {
+            this.image = this.edit.image
+            this.addForm = this.formBuilder.group({
+                title: [this.edit.bloc[0].title, [Validators.required, Validators.minLength(2)] ],
+                description: [this.edit.bloc[0].description, Validators.required],
+                lang: ['en', Validators.required],
+                article: [this.edit.bloc[0].article, Validators.required],
+                isPublic: [this.edit.isPublic]
+            })
+        } else {
+            this.addForm = this.formBuilder.group({
+                title: ['', [Validators.required, Validators.minLength(2)] ],
+                description: ['', Validators.required],
+                lang: ['en', Validators.required],
+                article: ['', Validators.required],
+                isPublic: [false]
+            })
+        }
+
         if (this.tagsSub)
             this.tagsSub.unsubscribe()
 
@@ -78,11 +81,19 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
         if (this.addForm.valid) {
             this.arrayOfTags = Array.from(this.myTag)
 
-            MeteorObservable.call('insArticle', this.addForm.value, this.image, this.arrayOfTags).subscribe(() => {
-                alert('Article has been created')
-            }, (err) => {
-                alert(`Cannot insert article cause ${err}`)
-            })
+            if (this.edit) {
+                MeteorObservable.call('updArticle', this.addForm.value, this.image, this.arrayOfTags, this.edit._id).subscribe(() => {
+                    alert('Article has been update')
+                }, (err) => {
+                    alert(`Cannot update article cause ${err}`)
+                })
+            } else {
+                MeteorObservable.call('insArticle', this.addForm.value, this.image, this.arrayOfTags).subscribe(() => {
+                    alert('Article has been created')
+                }, (err) => {
+                    alert(`Cannot insert article cause ${err}`)
+                })
+            }
 
             this.addForm.reset()
         }

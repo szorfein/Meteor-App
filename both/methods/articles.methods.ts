@@ -14,6 +14,17 @@ Meteor.methods({
         }
     },
 
+    updArticle: function(article: ArticleForm, image: string, tags: Array<string>, id:string) {
+        check(image, String)
+        check(tags, [String])
+        check(id, String)
+
+        if (Meteor.isServer) {
+            const { articleLib } = require('/lib/server/article')
+            articleLib.upd(article, image, tags, id)
+        }
+    },
+
     remArticle: function(articleId: string) {
         check(articleId, String)
 

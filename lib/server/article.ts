@@ -32,9 +32,26 @@ function isExist(articleId: string) {
 class ArticleLib {
 
     public addArticle(article: ArticleForm, imageId: string, tagsList: Array<string>) {
-
         const newArticle : Article = buildNewArticle(article, imageId, tagsList)
         Articles.insert(newArticle)
+    }
+
+    public upd(article : ArticleForm, imageId : string, tags : Array<string>, id : string) {
+        Articles.update(id, {
+            $set: {
+                image: imageId,
+                bloc: [{
+                    title: article.title,
+                    lastEdit: new Date(),
+                    lastEditOwner: Meteor.userId(),
+                    description: article.description,
+                    lang: article.lang,
+                    article: article.article
+                }],
+                isPublic: article.isPublic,
+                tags: tags,
+            }
+        })
     }
 
     public remove(articleId: string) {
