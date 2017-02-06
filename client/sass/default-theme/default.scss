@@ -1,6 +1,5 @@
 @import "./colors";
 
-
 /*
 * Base
 */
@@ -23,20 +22,13 @@ body {
     margin-top: 54px;
 }
 
-.no-social {
-    margin-top: 13px;
-    padding-bottom: 15px;
-}
-
 /*
  * Navbar
  */
 
 .main-header {
+
     .social-banner {
-        position: fixed;
-        right: 2%;
-        top: 0;
         &>ul>li>a {
             color: #aaa;
             &:hover {
@@ -50,10 +42,6 @@ body {
         left: 45%;
     }
 
-    background-color: rgba(53,47,47,.85);
-    position: fixed;
-    width: 100%;
-
     #navigation-menu>ul>li>a {
         color: #aaa;
         &.active {
@@ -66,7 +54,7 @@ body {
 }
 
 .user-bar {
-    padding-top: 7px;
+    margin-top: -7px;
     &>a {
         color: #fff;
         text-decoration: none;
@@ -93,18 +81,21 @@ body {
 }
 
 #banner-text {
-    position: absolute;
+    position: relative;
     text-align: center;
-    top: 320px;
-    width: 85%;
-    color: #000;
-    background-color: rgba(245,245,245,.3);
-    padding: .7em 0;
-    font-size: 1.3em;
-    left: 7%;
-    height: 7rem;
+    top: -108px;
+    color: #fff;
+    background-color: rgba(2,1,1,.52);
+    padding: 1.1em;
+    font-size: 25px; 
+    height: 0;
 }
 
+.ninja {
+    position: absolute;
+    top: 46px;
+    left: -88px;
+}
 
 .index-container {
     &>div {
@@ -114,8 +105,7 @@ body {
 }
 
 .index-head {
-    background-color: rgba(121,64,64,1); 
-    height: 180px;
+    background-color: $red;
     display: block;
     width: 100%;
 }
@@ -159,6 +149,16 @@ body {
 
 .bg-gray {
     background-color: #eee;
+}
+
+.index-stat {
+    color: #fff;
+    padding: 1em;
+    &>p>i {
+        font-size: 26px;
+        color: #113;
+        padding-top: .3em;
+    }
 }
 
 /*
@@ -215,7 +215,7 @@ body {
     text-transform: uppercase;
     margin: 0;
     font-weight: normal;
-    background-color: #652323;
+    background-color: $red;
     border-radius: 2px;
     color: #efefef;
     &:hover {
@@ -250,6 +250,8 @@ body {
 
 .separator {
     margin-top: 55px;
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 
 /*
@@ -293,16 +295,13 @@ body {
 
 .main-footer {
     padding-top: 2em;
-    background-color: rgba(80,79,79,.2);
+    background-color: $red;
 }
 
 .copyright {
+    background-color: $dark-bg;
     border-top: 1px solid #755151;
-    position: absolute;
-    width: 100%;
-    left: 0;
-    height: 2.2em;
-    padding-top: 6.6px;
+    padding: 1em;
 }
 
 .white>li>a {
@@ -337,7 +336,7 @@ body {
 @media (min-width: 576px) {
     .social-banner {
         position: fixed;
-        right: 5%;
+        right: 5em;
     }
 }
 
@@ -360,7 +359,7 @@ body {
         display: block;
         position: fixed;
         top: 8px;
-        left: 26%;
+        left: 34%;
     }
 
     .dash-menu {

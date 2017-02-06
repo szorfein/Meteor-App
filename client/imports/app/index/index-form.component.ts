@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MeteorObservable } from 'meteor-rxjs'
-import { Subscription, Observable } from 'rxjs'
-import { Meteor } from 'meteor/meteor'
 import { HomeDetail } from '/both/models/extra.model'
 import template from './index-form.component.html'
 
@@ -11,32 +9,15 @@ import template from './index-form.component.html'
     template
 })
 
-export class IndexFormComponent implements OnInit, OnDestroy {
+export class IndexFormComponent implements OnInit {
 
-    root
-    rootSub: Subscription
     homeForm: FormGroup
     image : string
 
     constructor( private formBuilder: FormBuilder ) {}
 
     ngOnInit() {
-
-        if (this.rootSub)
-            this.rootSub.unsubscribe()
-
-        this.rootSub = MeteorObservable.subscribe('root').subscribe(() => {
-            MeteorObservable.autorun().subscribe(() => {
-                this.callRoot()
-                this.printForm()
-            })
-        })
-    }
-
-    callRoot() {
-        MeteorObservable.call('userAdmin').subscribe((root) => {
-            this.root = root
-        })
+        this.printForm()
     }
 
     printForm() {
@@ -80,10 +61,5 @@ export class IndexFormComponent implements OnInit, OnDestroy {
 
     onImage(imageId: string) {
         this.image = imageId
-    }
-
-    ngOnDestroy() {
-        if (this.rootSub)
-            this.rootSub.unsubscribe()
     }
 }

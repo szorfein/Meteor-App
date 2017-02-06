@@ -4,22 +4,13 @@
         <p>{{ home.welcome[0].message }}</p>
     </div>
 </div>
-
 <div class="index-container index-head">
-    <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                Total article : 8
-            </div>
-            <div class="col text-center">
-                Total follower : 8
-            </div>
-            <div class="col text-center">
-                Total connection today : 8
-            </div>
-        </div>
+    <div class="ninja">
+        <admin [form]="formular"></admin>
     </div>
-    <admin [form]="formular"></admin>
+    <div class="container">
+        <stat-index></stat-index>
+    </div>
 </div>
 
 <div class="index-container index-body">

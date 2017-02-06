@@ -13,6 +13,7 @@ export class AboutFormComponent implements OnInit, OnDestroy {
 
     detailSub: Subscription
     aboutForm: FormGroup
+    image : string
 
     constructor(
         private formBuilder: FormBuilder
@@ -34,13 +35,15 @@ export class AboutFormComponent implements OnInit, OnDestroy {
 
     editForm(about) {
         if (about) {
+            this.image = about.image
             this.aboutForm = this.formBuilder.group({
-                image: [about.image],
+                image: [this.image],
                 name: [about.name, Validators.required],
                 lang: ['en', Validators.required],
                 company: [about.company],
                 aboutCompany: [about.aboutCompany[0].yourCompany],
                 jobName: [about.jobName[0].yourjob],
+                skill: [about.skill],
                 mail: [about.mail],
                 mobile: [about.telMobile],
                 fix: [about.telFix],
@@ -65,6 +68,7 @@ export class AboutFormComponent implements OnInit, OnDestroy {
             company: [''],
             aboutCompany: [''],
             jobName: [''],
+            skill: [''],
             mail: [''],
             mobile: [''],
             fix: [''],
@@ -82,7 +86,7 @@ export class AboutFormComponent implements OnInit, OnDestroy {
 
     addPost() {
         if (this.aboutForm.valid) {
-            MeteorObservable.call('createAboutInfo', this.aboutForm.value).subscribe(() => {
+            MeteorObservable.call('createAboutInfo', this.aboutForm.value, this.image).subscribe(() => {
                 alert('information has been register');
             }, (err) => {
                 alert(`Cannot add information because: ${err}`)
@@ -93,7 +97,7 @@ export class AboutFormComponent implements OnInit, OnDestroy {
     }
 
     onImage(imageId: string) {
-        this.aboutForm.value.image = imageId
+        this.image = imageId
     }
 
     ngOnDestroy() {

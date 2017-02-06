@@ -8,9 +8,9 @@ function noneByDefault(text: string) {
         return ''
 }
 
-function buildAbout(about: AboutDetailForm, userId: string) {
+function buildAbout(about: AboutDetailForm, userId: string, imageId: string) {
     const newAbout : AboutDetail = {
-        image: noneByDefault(about.image),
+        image: noneByDefault(imageId),
         idOwner: userId,
         name: about.name,
         company: noneByDefault(about.company),
@@ -20,6 +20,7 @@ function buildAbout(about: AboutDetailForm, userId: string) {
         jobName: [
             { lang: noneByDefault(about.lang), yourjob: noneByDefault(about.jobName) }
         ],
+        skill: noneByDefault(about.skill),
         mail: noneByDefault(about.mail),
         telMobile: noneByDefault(about.mobile),
         telFix: noneByDefault(about.fix),
@@ -57,8 +58,8 @@ function buildSocialList(social : AboutDetail) {
 
 class ExtraLib {
 
-    public addAbout(about : AboutDetailForm, userId : string) {
-        const newAbout : AboutDetail = buildAbout(about, userId)
+    public addAbout(about : AboutDetailForm, userId : string, imageId : string) {
+        const newAbout : AboutDetail = buildAbout(about, userId, imageId)
         if (this.hasFound(userId)) {
             console.log('Formulaire will be update...')
             AboutsDetail.update({'idOwner': userId}, newAbout)
@@ -89,6 +90,18 @@ class ExtraLib {
             throw new Meteor.Error('404', 'No social tag found')
 
         return buildSocialList(socialList)
+    }
+
+    public giveDomainName() : string {
+        const about = this.returnAboutForView()
+        if (!about)
+            throw new Meteor.Error('404', 'No found')
+
+        if (!about.company)
+            throw new Meteor.Error('404', 'Domain not registered')
+
+        return about.company
+
     }
 }
 

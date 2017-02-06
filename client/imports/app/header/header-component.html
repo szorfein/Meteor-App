@@ -1,5 +1,5 @@
-<nav class="main-header navbar fixed-top navbar-toggleable-xs navbar-inverse bg-faded">
-    <div class="">
+<nav class="main-header navbar fixed-top navbar-toggleable-xs navbar-inverse bg-inverse">
+    <div class="container">
         <button class="navbar-toggler" type="button"
                                        data-toggle="collapse"
                                        data-target="#navigation-menu"
@@ -8,11 +8,11 @@
                                        aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand nav-link" [routerLink]="['/']">WebSite</a>
+        <a *ngIf="domain" class="navbar-brand nav-link" [routerLink]="['/']">{{domain}}</a>
         <div class="collapse navbar-collapse" id="navigation-menu">
             <ul class="nav nav-pills flex-column flex-md-row">
                 <li class="nav-item">
-                    <a class="flex-sm-fill nav-link active" [routerLink]="['/blog']">blog</a>
+                    <a class="flex-sm-fill nav-link" [routerLink]="['/blog']">blog</a>
                 </li>
                 <li class="nav-item">
                     <a class="flex-sm-fill nav-link" [routerLink]="['/about']">about</a>
@@ -28,7 +28,7 @@
                 </li>
             </ul>
         </div>
-        <div class="social-banner">
+        <div class="navbar-text social-banner">
             <div [hidden]="!user">
                 <user-bar></user-bar>
             </div>
