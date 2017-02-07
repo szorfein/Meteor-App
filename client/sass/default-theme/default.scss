@@ -88,7 +88,7 @@ body {
     background-color: rgba(2,1,1,.52);
     padding: 1.1em;
     font-size: 25px; 
-    height: 0;
+    height: 108px;
 }
 
 .ninja {
@@ -162,10 +162,16 @@ body {
 }
 
 /*
-* Articles list
+* Articles
 */
 
-.sidebar {}
+.tag-main {
+
+}
+
+.tag-sidebar>tag-main>div>ul {
+    display: block;
+}
 
 .elements-sidebar {
     margin: 1em auto;
@@ -188,7 +194,6 @@ body {
 
 .bar-tags {
     background-color: #fff;
-    margin: auto 1em;
     box-shadow: 0 0 5px 0 #e2e3e4;
     border-radius: 2px;
     &>ul>li>a {
@@ -252,6 +257,16 @@ body {
     margin-top: 55px;
     padding-top: 1em;
     padding-bottom: 1em;
+}
+
+.article-detail {
+    h1 {
+        text-transform: uppercase;
+        font-size: 30px;
+        line-height: 35px;
+        font-weight: normal;
+        margin: 0 0 20px;
+    }
 }
 
 /*
@@ -368,7 +383,7 @@ body {
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
-    .bar-tags {
+    .tag-main {
         margin: auto 3em;
     }
 
@@ -379,7 +394,7 @@ body {
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
-    .bar-tags {
+    .tag-main {
         margin: auto 5em;
     }
 

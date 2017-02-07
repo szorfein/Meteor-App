@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor'
 import { Captchas } from '/both/collections/captchas.collection'
-import { Counts } from 'meteor/tmeasday:publish-counts'
 import { check } from 'meteor/check'
 
 Meteor.publish('captcha', function(forLang: string) {
@@ -9,8 +8,5 @@ Meteor.publish('captcha', function(forLang: string) {
     if (this.userId)
         return
 
-    Counts.publish(this, 'numberOfCaptcha', Captchas.collection
-                   .find({ 'bloc.lang': forLang }), { noReady: true })
-
-    return Captchas.find({ 'bloc.lang': forLang })
+    return Captchas.find({ 'bloc.lang': forLang },{skip:0,limit:0})
 })
