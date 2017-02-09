@@ -24,9 +24,11 @@ Currently again in development, try it with caution.
     $ cd Meteor-App
     $ meteor npm install
     
-### 4 - Edit ./server/main.config.ts
+### 4 - Rename ./server/main.config.ts_EXAMPLE and Edit this file. 
 
-change salt value, try generate an harder, and change root account too, it will be created at start.
+    $ mv ./server/main.config.ts_EXAMPLE ./server/main.config.ts
+
+And change salt value, admin account, imgur setting to your need.
 
 ### 5 - Copy file require for bootstrap, chart and font-awesome.
 

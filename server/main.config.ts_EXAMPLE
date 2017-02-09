@@ -6,8 +6,8 @@ export const Server = {
 
 // Admin setting
 // classic username, password, email
+// Password need to be encrypt here if anyone have solution.
 // Change value before launch for prod
-// TODO search solution for encrypt password here...
 function Ninja() {
     this.username = "myroot",
     this.password = "afroninja",
@@ -20,7 +20,7 @@ export const ninja = new Ninja()
 // For it work, you need register account here https://api.imgur.com/oauth2/addclient
 // you will receive your ID.
 export const Imgur = {
-    username : '',
-    clientId : '',
-    secretId : ''
+    username : 'username from imgur',
+    clientId : 'placeYourUserId here',
+    secretId : 'secretId'
 }

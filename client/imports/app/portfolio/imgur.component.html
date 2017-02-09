@@ -1,0 +1,10 @@
+<div *ngIf="image">
+    we have response
+    <div *ngFor="let img of image">
+        {{ img }}
+    </div>
+</div>
+
+<div *ngIf="!image">
+    We dont have response...
+</div>

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router'
 import { AccountsModule } from 'angular2-meteor-accounts-ui'
 import { Ng2PaginationModule } from 'ng2-pagination'
 import { ChartsModule } from 'ng2-charts'
+import { HttpModule } from '@angular/http'
 
 import { AppComponent } from './app.component.web'
 import { routes, ROUTES_PROVIDERS } from './app.routes'
@@ -25,11 +26,14 @@ import { SHARED_DECLARATIONS } from './shared'
 import { ROOT_DECLARATIONS } from './root'
 import { MODAL_DECLARATIONS } from './modal'
 import { STATISTICS_DECLARATIONS } from './statistics'
+import { PORTFOLIO_DECLARATIONS } from './portfolio'
 
 import { MOBILE_DECLARATIONS } from './mobile'
 import { AppMobileComponent } from './mobile/app.component.mobile'
 import { IonicModule, IonicApp } from 'ionic-angular'
 import { ArticlesListMobileComponent } from './mobile/articles-list.component.mobile'
+
+import { ImgurService } from './portfolio/imgur.service'
 
 let moduleDefinition
 
@@ -62,7 +66,8 @@ if (Meteor.isCordova) {
             AccountsModule,
             Ng2PaginationModule,
             FileDropModule,
-            ChartsModule
+            ChartsModule,
+            HttpModule
         ],
         declarations: [
             AppComponent,
@@ -80,10 +85,12 @@ if (Meteor.isCordova) {
             ...UPLOAD_DECLARATIONS,
             ...ROOT_DECLARATIONS,
             ...MODAL_DECLARATIONS,
-            ...STATISTICS_DECLARATIONS
+            ...STATISTICS_DECLARATIONS,
+            ...PORTFOLIO_DECLARATIONS
         ],
         providers: [
-            ...ROUTES_PROVIDERS
+            ...ROUTES_PROVIDERS,
+            ImgurService
         ],
         bootstrap: [
             AppComponent

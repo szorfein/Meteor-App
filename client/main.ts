@@ -8,6 +8,7 @@ import '/both/methods/users.methods'
 import '/both/methods/articles.methods'
 import '/both/methods/captcha.methods'
 import '/both/methods/analytics.methods'
+import '/both/methods/portfolio.methods'
 
 import ionicSelector from 'ionic-selector'
 

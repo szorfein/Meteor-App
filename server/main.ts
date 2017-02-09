@@ -6,7 +6,6 @@ import { createRootAccount } from '/server/imports/fixtures/root'
 import { loadTags } from '/server/imports/fixtures/tags'
 import { loadCaptcha } from '/server/imports/fixtures/captchas'
 
-// Public method
 import '/both/methods/users.methods'
 import '/both/methods/comments.methods'
 import '/both/methods/captcha.methods'
@@ -15,8 +14,8 @@ import '/both/methods/contacts.methods'
 import '/both/methods/articles.methods'
 import '/both/methods/analytics.methods'
 import '/both/methods/homes.methods'
+import '/both/methods/portfolio.methods'
 
-// Publication
 import './imports/publications/articles'
 import './imports/publications/tags'
 import './imports/publications/users'
