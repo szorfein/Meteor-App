@@ -35,6 +35,9 @@ body {
                 color: #fff;
             }
         }
+        position: absolute;
+        text-align: right;
+        right: 19px;
     }
 
     button.navbar-toggler {
@@ -159,6 +162,10 @@ body {
         color: #113;
         padding-top: .3em;
     }
+}
+
+.thumb {
+    margin-bottom: 2em;
 }
 
 /*
@@ -350,8 +357,7 @@ body {
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
     .social-banner {
-        position: fixed;
-        right: 5em;
+        right: 2em;
     }
 }
 
@@ -359,22 +365,6 @@ body {
 @media (min-width: 768px) {
     .articles-bloc {
         margin: auto 1em;
-    }
-
-    .main-header {
-        button.navbar-toggler {
-            display:none;
-        }
-        .navbar-toggler-icon {
-            display: none;
-        }
-    }
-
-    #navigation-menu.collapse {
-        display: block;
-        position: fixed;
-        top: 8px;
-        left: 34%;
     }
 
     .dash-menu {
@@ -390,6 +380,22 @@ body {
     .articles-bloc {
         margin: auto 3em;
     }
+
+    .main-header {
+        button.navbar-toggler {
+            display:none;
+        }
+        .navbar-toggler-icon {
+            display: none;
+        }
+
+        #navigation-menu.collapse {
+            display: block;
+            position: fixed;
+            left: 32%; 
+        }
+    }
+
 }
 
 // Extra large devices (large desktops, 1200px and up)
@@ -407,5 +413,9 @@ body {
             padding-left: 5em;
             padding-right: 5em;
         }
+    }
+
+    #navigation-menu.collapse {
+        left: 20em;
     }
 }

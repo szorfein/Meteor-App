@@ -1,10 +1,9 @@
-import { Imgur } from '/server/main.config.ts'
+import { Imgur } from '/server/main.config'
 
 class PortfolioLib {
 
    public setting() {
        const conf = Imgur
-       console.log('from secret -> ' + conf.username)
        return conf 
    }
 }

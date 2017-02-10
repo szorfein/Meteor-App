@@ -11,17 +11,26 @@ import template from './imgur.component.html'
 
 export class ImgurComponent implements OnInit {
 
-    image
+    images
+    albums
 
     constructor(private imgurService : ImgurService) {}
 
     ngOnInit() {
         this.loadImages()
+        this.loadAlbum()
     }
 
     loadImages() {
         MeteorObservable.call('imgurConfig').subscribe((setting: ImgurSetting) => {
-            this.imgurService.getImages(setting).subscribe(images => this.image = images
+            this.imgurService.getImages(setting).subscribe(images => this.images = images
+        , err => console.log(err))
+        })
+    }
+
+    loadAlbum() {
+        MeteorObservable.call('imgurConfig').subscribe((setting: ImgurSetting) => {
+            this.imgurService.getAlbum(setting).subscribe(albums => this.albums = albums 
         , err => console.log(err))
         })
     }

@@ -1,10 +1,9 @@
-<div *ngIf="image">
-    we have response
-    <div *ngFor="let img of image">
-        {{ img }}
+<div *ngIf="images" class="row">
+    <div *ngFor="let img of images" class="col-sm-6 col-md-6 col-xs-12 col-lg-4 thumb">
+        <img class="img-fluid" href="#" [attr.src]="img.link" alt="img">
     </div>
 </div>
 
-<div *ngIf="!image">
+<div *ngIf="!images">
     We dont have response...
 </div>

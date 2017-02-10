@@ -1,5 +1,5 @@
-<nav class="main-header navbar fixed-top navbar-toggleable-xs navbar-inverse bg-inverse">
-    <div class="container">
+<div class="container">
+    <nav class="main-header navbar fixed-top navbar-toggleable-xs navbar-inverse bg-inverse">
         <button class="navbar-toggler" type="button"
                                        data-toggle="collapse"
                                        data-target="#navigation-menu"
@@ -9,8 +9,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a *ngIf="domain" class="navbar-brand nav-link" [routerLink]="['/']">{{domain}}</a>
+        <a *ngIf="!domain" class="navbar-brand nav-link" [routerLink]="['/']">Website</a>
         <div class="collapse navbar-collapse" id="navigation-menu">
             <ul class="nav nav-pills flex-column flex-md-row">
+                <li class="nav-item">
+                    <a class="flex-sm-fill nav-link" [routerLink]="['/portfolio']">Portfolio</a>
+                </li>
                 <li class="nav-item">
                     <a class="flex-sm-fill nav-link" [routerLink]="['/blog']">blog</a>
                 </li>
@@ -36,5 +40,5 @@
                 <social></social>
             </div>
         </div> <!-- end social media -->
-    </div>
-</nav>
+    </nav>
+</div>
