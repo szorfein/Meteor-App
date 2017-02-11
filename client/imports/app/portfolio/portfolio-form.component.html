@@ -1,0 +1,12 @@
+<div class="container-fluid">
+    <p>Submit your image or album to imgur.com and post link here !</p>
+    <form [formGroup]="linkForm" (ngSubmit)="validForm()">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="link">Link</label>
+            <div clas="col-sm-10">
+                <input class="form-control" type="text" formControlName="link" placeholder="link from imgur like https://imgur.com/a/Zbe98">
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Add</button>
+    </form>
+</div>

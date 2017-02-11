@@ -7,30 +7,26 @@
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-8">
-                <div class="container">
 
-                    <section class="article-detail" *ngFor="let bloc of article.bloc">
-                        <div class="page-header">
-                            <h1>{{ bloc.title }}</h1>
-                        </div>
-                        <p>
-                        le: {{ article.createdAt | date:"d MMMM y à H" }}h by: {{ article.authorId | displayNameWithId }}
-                        </p>
-                        <img class="img-fluid" [src]="article | displayMainImage">
-                        <div class="description"
-                             [innerHTML]="bloc.description | markdown"></div>
-                        <div class="article"
-                             [innerHTML]="bloc.article | markdown"></div>
-                    </section>
+                <section class="article-detail" *ngFor="let bloc of article.bloc">
+                    <div class="page-header">
+                        <h1>{{ bloc.title }}</h1>
+                    </div>
+                    <p>
+                    le: {{ article.createdAt | date:"d MMMM y à H" }}h by: {{ article.authorId | displayNameWithId }}
+                    </p>
+                    <img class="img-fluid" [src]="article | displayMainImage">
+                    <div class="description"
+                         [innerHTML]="bloc.description | markdown"></div>
+                    <div class="article"
+                         [innerHTML]="bloc.article | markdown"></div>
+                </section>
+                <div class="col comments">
+                    <comment></comment>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 sidebar">
                 <sidebar></sidebar>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col comments">
-                <comment></comment>
             </div>
         </div>
     </div>

@@ -1,4 +1,5 @@
 import { ImgurSetting } from '/both/models/portfolio.model'
+import { check } from 'meteor/check'
 
 Meteor.methods({
 
@@ -12,5 +13,16 @@ Meteor.methods({
         }
 
         return setting
+    },
+
+    addPortfolioLink : (linkForm : string) => {
+        check(linkForm, String)
+
+        Meteor.call('isRoot')
+
+        if (Meteor.isServer) {
+            const { portfolioLib } = require('/lib/server/portfolio')
+            portfolioLib.add(linkForm)
+        }
     }
 })

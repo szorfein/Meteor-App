@@ -20,7 +20,7 @@ export const ninja = new Ninja()
 // For it work, you need register account here https://api.imgur.com/oauth2/addclient
 // you will receive your ID.
 export const Imgur = {
-    username : 's',
-    clientId : '6',
-    secretId : 'd'
+    username : 'szorfein',
+    clientId : '63a8da8f7d854ee',
+    secretId : 'd807a5fef44cea8983635d7a1e627a3071cdb735'
 }

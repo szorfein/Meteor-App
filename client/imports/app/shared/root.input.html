@@ -66,3 +66,20 @@
         <modal-article-add [article]="edit"></modal-article-add>
     </div>
 </div>
+<div *ngIf="portfolio">
+    <div [hidden]="!root">
+        <nav class="navbar bg-faded">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link"
+                       data-toggle="modal"
+                       data-target="#link-form" href="#">
+                        <i class="fa fa-edit"></i>
+                        <span>Add Link</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <modal-portfolio></modal-portfolio>
+    </div>
+</div>

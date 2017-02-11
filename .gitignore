@@ -4,4 +4,4 @@ npm-debug.log
 .meteor/local
 public
 TODOS
-server/main.config.ts
+main.config.ts

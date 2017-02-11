@@ -13,6 +13,7 @@ export class ImgurComponent implements OnInit {
 
     images
     albums
+    formular : string = 'portfolio'
 
     constructor(private imgurService : ImgurService) {}
 

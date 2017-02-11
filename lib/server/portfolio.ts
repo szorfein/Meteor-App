@@ -6,6 +6,10 @@ class PortfolioLib {
        const conf = Imgur
        return conf 
    }
+
+   public add(linkForm : string) {
+       console.log('linkform -> ' + linkForm)
+   }
 }
 
 export const portfolioLib = new PortfolioLib()

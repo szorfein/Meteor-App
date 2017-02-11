@@ -5,7 +5,7 @@ import { UserBar } from '/both/models/user.model'
 import template from './root.input.html'
 
 enum formular {
-    index , about , article , editArticle
+    index , about , article , editArticle , portfolio
 }
 
 @Component({
@@ -23,6 +23,7 @@ export class RootInput implements OnInit, OnDestroy {
     about : boolean = false
     article : boolean = false
     editArticle : boolean = false
+    portfolio : boolean = false
 
     constructor() {}
 
@@ -48,6 +49,8 @@ export class RootInput implements OnInit, OnDestroy {
                 this.article = true
             else if (this.form == 'editArticle')
                 this.editArticle = true
+            else if (this.form == 'portfolio')
+                this.portfolio = true
         }
     }
 
@@ -56,6 +59,7 @@ export class RootInput implements OnInit, OnDestroy {
             || this.form == formular[1]
             || this.form == formular[2]
             || this.form == formular[3]
+            || this.form == formular[4]
     }
 
     callRoot() {
