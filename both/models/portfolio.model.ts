@@ -6,8 +6,10 @@ export interface ImgurSetting {
     secretId : string
 }
 
-export interface ImgurSave extends CollectionObject {
+export interface ImgurLink extends CollectionObject {
+    submitAt : Date
+    owner : string
     link: string
-    linkFirstImage: string
     album : boolean
+    idImgur : string
 }

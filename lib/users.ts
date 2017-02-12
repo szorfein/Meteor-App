@@ -5,16 +5,16 @@ export function isLogged() {
     return !!Meteor.user()
 }
 
-export function isRoot(userid: string):boolean {
-    let newroot = UsersExt.findOne({ $and: [
+export function isRoot(userid : string):boolean {
+    const root = UsersExt.findOne({ $and: [
         { 'admin': true },
         { 'isPublic': false }
     ]})
 
-    return !!(newroot.idOwner === userid)
+    return !!(root.idOwner == userid)
 }
 
-export function isOwner(userId: string):boolean {
+export function isOwner(userId : string):boolean {
     let user = Users.findOne(userId)
     return !!user
 }

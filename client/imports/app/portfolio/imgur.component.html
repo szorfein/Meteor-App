@@ -1,15 +1,16 @@
 <admin [form]="formular"></admin>
-<div *ngIf="images" class="row">
-    <!--
-    <div *ngFor="let img of images" class="col-sm-6 col-md-6 col-xs-12 col-lg-4 thumb">
-        <img class="img-fluid" href="#" [attr.src]="img.link" alt="img">
+<div class="row">
+    <div *ngIf="image1" class="col-sm-6 col-md-6 col-xs-12 col-lg-4 thumb">
+        <img class="img-fluid" href="#" [attr.src]="image1.link" [attr.alt]="image1.id">
     </div>
-    -->
-    <div class="thumb">
-        <img class="img-fluid" href="#" [attr.src]="images[0].link" [attr.alt]="images[0].id">
+    <div *ngIf="image2" class="col-sm-6 col-md-6 col-xs-12 col-lg-4 thumb">
+        <img class="img-fluid" href="#" [attr.src]="image2.link" [attr.alt]="image2.id">
+    </div>
+    <div *ngIf="image3" class="col-sm-6 col-md-6 col-xs-12 col-lg-4 thumb">
+        <img class="img-fluid" href="#" [attr.src]="image3.link" [attr.alt]="image3.id">
     </div>
 </div>
 
-<div *ngIf="!images">
+<div *ngIf="!image1">
     We dont have response...
 </div>

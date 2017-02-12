@@ -7,6 +7,6 @@
                 <input class="form-control" type="text" formControlName="link" placeholder="link from imgur like https://imgur.com/a/Zbe98">
             </div>
         </div>
-        <button class="btn btn-primary" type="submit">Add</button>
+        <button class="btn btn-success" type="submit" [disabled]="!linkForm.valid">Add</button>
     </form>
 </div>

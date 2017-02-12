@@ -15,14 +15,14 @@ Meteor.methods({
         return setting
     },
 
-    addPortfolioLink : (linkForm : string) => {
+    addPortfolioLink : function(linkForm : string) {
         check(linkForm, String)
 
         Meteor.call('isRoot')
 
         if (Meteor.isServer) {
             const { portfolioLib } = require('/lib/server/portfolio')
-            portfolioLib.add(linkForm)
+            portfolioLib.add(linkForm, this.userId)
         }
     }
 })

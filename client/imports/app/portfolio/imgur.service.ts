@@ -8,35 +8,39 @@ import { ImgurSetting } from '/both/models/portfolio.model'
 @Injectable()
 export class ImgurService {
 
-    private imgurUrl = 'https://api.imgur.com/3/album/Zbe98/images'
+    private setting : ImgurSetting
 
     constructor(private http : Http) {}
 
-    getImages(setting : ImgurSetting) {
-        let options = this.buildRequestOptions(setting)
+    getImages(setting, link? : string) {
+        this.setting = setting
+        let imgurUrl = 'https://api.imgur.com/3/image/kc4PaUp'
+        let options = this.buildRequestOptions()
 
-        return this.http.get(this.imgurUrl, options)
+        return this.http.get(imgurUrl, options)
         .map(this.extractData)
         .catch((err: any) => Observable.throw(err.json() || 'Server Error'))
     }
 
-    getAlbum(setting : ImgurSetting) {
-        let options = this.buildRequestOptions(setting)
+    getAlbum(setting, link? : string) {
+        this.setting = setting
+        let imgurUrl = 'https://api.imgur.com/3/album/Zbe98/images'
+        let options = this.buildRequestOptions()
 
-        return this.http.get(this.imgurUrl, options)
+        return this.http.get(imgurUrl, options)
         .map(this.extractData)
         .catch((err: any) => Observable.throw(err.json() || 'Server Error'))
     }
 
     extractData(res) {
         let body = res.json()
-        return body.data || {}
+        return body.data || {}
     }
 
-    private buildRequestOptions(setting : ImgurSetting) {
-        if (setting) {
+    private buildRequestOptions() {
+        if (this.setting) {
             let headers = new Headers({
-                Authorization: 'Client-ID ' + setting.clientId,
+                Authorization: 'Client-ID ' + this.setting.clientId,
                 Accept: 'application/json'
             })
             return new RequestOptions({ headers: headers })

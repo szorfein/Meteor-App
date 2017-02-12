@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { MeteorObservable } from 'meteor-rxjs'
+import { ctrlImgurLink } from '/lib/validate'
 import template from './portfolio-form.component.html'
 
 @Component({
@@ -20,13 +21,13 @@ export class PortfolioFormComponent implements OnInit {
 
     printForm() {
         this.linkForm = this.formBuilder.group({
-            link: ['', Validators.required]
+            link: ['', ctrlImgurLink]
         })
     }
 
     validForm() {
         if (this.linkForm.valid) {
-            MeteorObservable.call('addPortfolioLink', this.linkForm.value).subscribe(() => {
+            MeteorObservable.call('addPortfolioLink', this.linkForm.value.link).subscribe(() => {
                 alert('Register link complete')
                 this.linkForm.reset()
             }, (err) => {
