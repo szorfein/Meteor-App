@@ -3,7 +3,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http'
 import { Observable } from 'rxjs'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
-import { ImgurSetting } from '/both/models/portfolio.model'
+import { ImgurSetting, ImgurLink } from '/both/models/portfolio.model'
 
 @Injectable()
 export class ImgurService {
@@ -12,24 +12,30 @@ export class ImgurService {
 
     constructor(private http : Http) {}
 
-    getImages(setting, link? : string) {
-        this.setting = setting
-        let imgurUrl = 'https://api.imgur.com/3/image/kc4PaUp'
-        let options = this.buildRequestOptions()
+    getImages(setting : ImgurSetting, imgur : ImgurLink) {
+        if (imgur && imgur.idImgur) {
+            console.log('getImages call with -> ' + imgur.idImgur)
+            this.setting = setting
+            let imgurUrl = 'https://api.imgur.com/3/image/'+imgur.idImgur
+            let options = this.buildRequestOptions()
 
-        return this.http.get(imgurUrl, options)
-        .map(this.extractData)
-        .catch((err: any) => Observable.throw(err.json() || 'Server Error'))
+            return this.http.get(imgurUrl, options)
+            .map(this.extractData)
+            .catch((err: any) => Observable.throw(err.json() || 'Server Error'))
+        }
     }
 
-    getAlbum(setting, link? : string) {
-        this.setting = setting
-        let imgurUrl = 'https://api.imgur.com/3/album/Zbe98/images'
-        let options = this.buildRequestOptions()
+    getAlbum(setting : ImgurSetting, imgur : ImgurLink) {
+        if (imgur && imgur.idImgur) {
+            console.log('getAlbum call with -> ' + imgur.idImgur)
+            this.setting = setting
+            let imgurUrl = 'https://api.imgur.com/3/album/'+imgur.idImgur+'/images'
+            let options = this.buildRequestOptions()
 
-        return this.http.get(imgurUrl, options)
-        .map(this.extractData)
-        .catch((err: any) => Observable.throw(err.json() || 'Server Error'))
+            return this.http.get(imgurUrl, options)
+            .map(this.extractData)
+            .catch((err: any) => Observable.throw(err.json() || 'Server Error'))
+        }
     }
 
     extractData(res) {

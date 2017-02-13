@@ -1,0 +1,6 @@
+<div *ngIf="image">
+    <img class="img-fluid" [attr.href]="image.link" [attr.src]="image.link" [attr.alt]="image.id">
+</div>
+<div *ngIf="album">
+    <img class="img-fluid" [attr.href]="album[0].link" [attr.src]="album[0].link" [attr.alt]="album[0].link">
+</div>

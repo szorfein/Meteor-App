@@ -36,6 +36,7 @@ class PortfolioLib {
             this.register(linkForm, userid, linkSplit[4])
         } else if (/https:\/\/i.imgur.com\/([\w]{7}).(png|jpeg)/i.test(linkForm)) {
             let linkSplit = linkForm.split(/\//)
+            this.isAlbum = false
             let imgSplit = linkSplit[3].split(/\./)
             this.register(linkForm, userid, imgSplit[0])
         } else
