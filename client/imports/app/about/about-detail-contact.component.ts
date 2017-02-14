@@ -1,7 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
-import { Subscription } from 'rxjs/Subscription'
-import { MeteorObservable } from 'meteor-rxjs'
-import { Meteor } from 'meteor/meteor'
+import { Component, Input } from '@angular/core'
+import { AboutDetail } from '/both/models/extra.model'
 import template from './about-detail-contact.component.html'
 
 @Component({
@@ -9,24 +7,6 @@ import template from './about-detail-contact.component.html'
     template
 })
 
-export class AboutDetailContactComponent implements OnInit, OnDestroy {
-
-    aboutSub: Subscription
-    about
-
-    ngOnInit() {
-        this.aboutSub = MeteorObservable.subscribe('pubAbout').subscribe(() => {
-            this.callAbout()
-        })
-    }
-
-    callAbout() {
-        MeteorObservable.call('sendAboutForView').subscribe((about) => {
-            this.about = about
-        })
-    }
-
-    ngOnDestroy() {
-        this.aboutSub.unsubscribe()
-    }
+export class AboutDetailContactComponent {
+    @Input() about : AboutDetail
 }

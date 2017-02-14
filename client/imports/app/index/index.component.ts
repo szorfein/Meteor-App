@@ -1,4 +1,4 @@
-import { Component,OnInit,OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Subscription, Observable } from 'rxjs'
 import { MeteorObservable } from 'meteor-rxjs'
@@ -15,8 +15,10 @@ export class IndexComponent implements OnInit, OnDestroy {
 
     homeSub: Subscription
     imageSub : Subscription
-    home
+    home : Observable<HomeDetail>
     formular : string
+    blog : string = 'blog'
+    me : string = 'me'
 
     constructor(
         private route: ActivatedRoute

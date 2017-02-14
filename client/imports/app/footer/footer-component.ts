@@ -7,5 +7,6 @@ import template from './footer-component.html'
 })
 
 export class FooterComponent {
+    about : string = 'footer'
     constructor() {}
 }

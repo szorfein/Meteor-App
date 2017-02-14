@@ -1,4 +1,4 @@
-import { AboutDetail, AboutDetailForm, SocialTag } from '/both/models/extra.model'
+import { AboutDetail, AboutDetailForm } from '/both/models/extra.model'
 import { AboutsDetail } from '/both/collections/extras.collection'
 
 function noneByDefault(text: string) {
@@ -29,12 +29,12 @@ function buildAbout(about: AboutDetailForm, userId: string, imageId: string) {
             { lang: noneByDefault(about.lang), yourself: noneByDefault(about.aboutMe) }
         ],
         address: noneByDefault(about.address),
-        facebookLink: noneByDefault(about.facebook),
-        githubLink: noneByDefault(about.github),
-        twitterLink: noneByDefault(about.twitter),
-        dotshareLink: noneByDefault(about.dotshare),
-        imgurLink: noneByDefault(about.imgur),
-        redditLink: noneByDefault(about.reddit)
+        facebook: noneByDefault(about.facebook),
+        github: noneByDefault(about.github),
+        twitter: noneByDefault(about.twitter),
+        dotshare: noneByDefault(about.dotshare),
+        imgur: noneByDefault(about.imgur),
+        reddit: noneByDefault(about.reddit)
     }
     return newAbout
 }
@@ -42,18 +42,6 @@ function buildAbout(about: AboutDetailForm, userId: string, imageId: string) {
 function giveThisForm(userId: string) {
     const about = AboutsDetail.findOne({ 'idOwner': userId })
     return about
-}
-
-function buildSocialList(social : AboutDetail) {
-    const socialTag : SocialTag = {
-        facebook : noneByDefault(social.facebookLink),
-        github : noneByDefault(social.githubLink),
-        twitter : noneByDefault(social.twitterLink),
-        dotshare : noneByDefault(social.dotshareLink),
-        imgur : noneByDefault(social.imgurLink),
-        reddit : noneByDefault(social.redditLink)
-    }
-    return socialTag
 }
 
 class ExtraLib {
@@ -84,14 +72,6 @@ class ExtraLib {
         return about
     }
 
-    public giveSocialList() : SocialTag {
-        const socialList : AboutDetail = this.returnAboutForView()
-        if (!socialList)
-            throw new Meteor.Error('404', 'No social tag found')
-
-        return buildSocialList(socialList)
-    }
-
     public giveDomainName() : string {
         const about = this.returnAboutForView()
         if (!about)
@@ -101,7 +81,6 @@ class ExtraLib {
             throw new Meteor.Error('404', 'Domain not registered')
 
         return about.company
-
     }
 }
 

@@ -18,6 +18,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     constructor() {}
 
     ngOnInit() {
+        this.callDomainName()
+    }
+
+    callDomainName() {
         this.domainSub = MeteorObservable.subscribe('pubAbout').subscribe(() => {
             MeteorObservable.call('domainName').subscribe((dd : string) => {
                 this.domain = dd

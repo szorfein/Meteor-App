@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, Input, OnInit, OnDestroy } from '@angular/core'
 import { Subscription } from 'rxjs/Subscription'
 import { MeteorObservable } from 'meteor-rxjs'
+import { AboutDetail } from '/both/models/extra.model'
 import template from './about-detail-me.component.html'
 
 @Component({
@@ -9,33 +10,16 @@ import template from './about-detail-me.component.html'
 })
 
 export class AboutDetailMeComponent implements OnInit, OnDestroy {
-
+    @Input() about : AboutDetail
     imageSub: Subscription
-    aboutSub: Subscription
-    about
-    formular : string
+    formular : string = 'about'
 
     ngOnInit() {
         this.imageSub = MeteorObservable.subscribe('images').subscribe()
-        this.aboutSub = MeteorObservable.subscribe('pubAbout').subscribe(() => {
-            MeteorObservable.autorun().subscribe(() => {
-                this.callAbout()
-            })
-        })
-        this.formular = "about"
-    }
-
-    callAbout() {
-        MeteorObservable.call('sendAboutForView').subscribe((about) => {
-            this.about = about
-        })
     }
 
     ngOnDestroy() {
         if (this.imageSub)
             this.imageSub.unsubscribe()
-
-        if (this.aboutSub)
-            this.aboutSub.unsubscribe()
     }
 }

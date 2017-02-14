@@ -1,12 +1,12 @@
-<div class="article-detail" *ngIf="article">
-    <div class="container">
+<div class="articles separator" *ngIf="article">
+    <div class="articles-bloc">
         <div class="row">
             <div class="col">
                 <admin [form]="formular" [edit]="article"></admin>
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8">
+            <div class="col-xs-12 col-sm-12 col-md-8 blog">
 
                 <section class="article-detail" *ngFor="let bloc of article.bloc">
                     <div class="page-header">
@@ -21,9 +21,7 @@
                     <div class="article"
                          [innerHTML]="bloc.article | markdown"></div>
                 </section>
-                <div class="col comments">
-                    <comment></comment>
-                </div>
+                <comment></comment>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 sidebar">
                 <sidebar></sidebar>

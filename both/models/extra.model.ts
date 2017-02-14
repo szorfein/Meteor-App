@@ -1,12 +1,5 @@
 import { CollectionObject } from './collection-object.model'
 
-export interface Extra extends CollectionObject {
-    lastEdit: Date,
-    post: string,
-    lang: string,
-    title: string
-}
-
 export interface AboutDetail {
     image?: string,
     idOwner: string,
@@ -21,12 +14,12 @@ export interface AboutDetail {
     fax?: string,
     aboutYourSelf?: [{ lang: string, yourself: string }],
     address?: string,
-    facebookLink?: string,
-    githubLink?: string,
-    twitterLink?: string,
-    dotshareLink?: string,
-    imgurLink?: string,
-    redditLink?: string
+    facebook?: string,
+    github?: string,
+    twitter?: string,
+    dotshare?: string,
+    imgur?: string,
+    reddit?: string
 }
 
 export interface AboutDetailForm {
@@ -61,13 +54,4 @@ export interface HomeDetailForm {
     banner_image : string
     welcome_lang : string
     welcome_message : string
-}
-
-export interface SocialTag {
-    facebook? : string
-    github? : string
-    twitter? : string
-    dotshare? : string
-    imgur? : string
-    reddit? : string
 }

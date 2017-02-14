@@ -1,0 +1,20 @@
+<div *ngIf="aboutMe">
+    <about-detail-me [about]="about"></about-detail-me>
+</div>
+
+<div *ngIf="aboutBlog">
+    <about-blog [about]="about"></about-blog>
+</div>
+
+<div *ngIf="aboutSocial">
+    <social [social]="about"></social>
+</div>
+
+<div *ngIf="aboutMix">
+    display all 
+</div>
+
+<div *ngIf="aboutFooter">
+    <about-detail-contact [about]="about"></about-detail-contact>
+    <social [social]="about"></social>
+</div>

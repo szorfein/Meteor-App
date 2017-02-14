@@ -3,7 +3,7 @@ import { DisplayPreviewImage } from './display-preview-image.pipe'
 import { DisplayNamePipe } from './display-name.pipe'
 import { DisplayNameWithIdPipe } from './display-name-with-id.pipe'
 import { DisplayReplyCommentPipe } from './display-reply-comment.pipe'
-import { DisplayAboutPipe } from './display-about.pipe'
+import { DisplayOrNonePipe } from './display-or-none.pipe'
 import { DisplayUserImagePipe } from './display-user-image.pipe'
 import { DisplayMarkdownPipe } from './display-markdown.pipe'
 import { RootInput } from './root.input.ts'
@@ -14,7 +14,7 @@ export const SHARED_DECLARATIONS : any[] = [
     DisplayNamePipe,
     DisplayNameWithIdPipe,
     DisplayReplyCommentPipe,
-    DisplayAboutPipe,
+    DisplayOrNonePipe,
     DisplayUserImagePipe,
     DisplayMarkdownPipe,
     RootInput

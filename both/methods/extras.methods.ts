@@ -1,5 +1,4 @@
-import { AboutDetail, AboutDetailForm, SocialTag } from '/both/models/extra.model'
-import { Meteor } from 'meteor/meteor'
+import { AboutDetail, AboutDetailForm } from '/both/models/extra.model'
 import { check } from 'meteor/check'
 
 Meteor.methods({
@@ -30,22 +29,10 @@ Meteor.methods({
     },
 
     createAboutInfo: function(about : AboutDetailForm, imageId : string) {
-        check(imageId, String)
-
         if (Meteor.isServer) {
             const { extraLib } = require('/lib/server/extra')
             extraLib.addAbout(about, this.userId, imageId)
         }
-    },
-
-    socialList: function() {
-        let socialLst: SocialTag
-        
-        if (Meteor.isServer) {
-            const { extraLib } = require('/lib/server/extra')
-            socialLst = extraLib.giveSocialList()
-        }
-        return socialLst
     },
 
     domainName: function() {

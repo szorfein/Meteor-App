@@ -14,22 +14,34 @@
     </div>
 </div>
 
-
 <div class="index-container index-body">
     <div class="index-article bg-gray">
         <h2 class="text-center">About</h2>
+        <about-display [element]="blog"></about-display>
+        <div class="button-link">
+            <a class="btn btn-primary btn-lg btn-uppercase" [routerLink]="['/about']">About</a>
+        </div>
     </div>
     <div class="index-article">
         <h2 class="text-center">Portfolio</h2>
         <imgur></imgur>
+        <div class="button-link">
+            <a class="btn btn-primary btn-lg btn-uppercase" [routerLink]="['/portfolio']">Portfolio</a>
+        </div>
     </div>
     <div class="index-article bg-gray">
         <h2 class="text-center">Lastest blog posts</h2>
         <articles-list-lastest></articles-list-lastest>
+        <div class="button-link">
+            <a class="btn btn-primary btn-lg btn-uppercase" [routerLink]="['/blog']">Blog</a>
+        </div>
     </div>
     <div class="index-article">
         <h2 class="text-center">About Me</h2>
-        <about-detail-me></about-detail-me>
+        <about-display [element]="me"></about-display>
+        <div class="button-link">
+            <a class="btn btn-primary btn-lg btn-uppercase" [routerLink]="['/about']">About</a>
+        </div>
     </div>
     <div class="index-article bg-gray">
         <h2 class="text-center">Contact Me</h2>

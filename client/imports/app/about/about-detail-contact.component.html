@@ -1,8 +1,7 @@
 <div *ngIf="about">
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-3 about">
-            <h4>{{ about.company | displayAbout }} </h4>
-            <p class="text-justify">{{about.aboutCompany[0].yourCompany | displayAbout }}</p>
+            <h4>{{ about.company | displayOrNone }} </h4>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-3 pages">
             <h4>Pages</h4>
@@ -18,16 +17,16 @@
         <div class="col-xs-6 col-sm-6 col-md-3 contact-us">
             <h4>Contact</h4>
             <p><i class="fa fa-map-pin fa-fw"></i>
-            {{ about.address | displayAbout }}
+            {{ about.address | displayOrNone }}
             </p>
             <p><i class="fa fa-phone fa-fw"></i>
-            {{ about.telMobile | displayAbout }}
+            {{ about.telMobile | displayOrNone }}
             </p>
             <p><i class="fa fa-phone fa-fw"></i>
-            {{ about.telFix | displayAbout }}
+            {{ about.telFix | displayOrNone }}
             </p>
             <p><i class="fa fa-envelope fa-fw"></i>
-            {{ about.mail | displayAbout }}
+            {{ about.mail | displayOrNone }}
             </p>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-3 subscribe">
