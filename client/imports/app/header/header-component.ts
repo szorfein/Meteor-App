@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     domain : string
     domainSub : Subscription
+    social : string = 'social'
 
     constructor() {}
 
