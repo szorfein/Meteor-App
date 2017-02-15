@@ -1,11 +1,12 @@
 <div class="container-fluid">
     <p>Submit your image or album to imgur.com and post link here !</p>
-    <form [formGroup]="linkForm" (ngSubmit)="validForm()">
+    <form [formGroup]="linkForm" (ngSubmit)="validForm()" novalidate>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label" for="link">Link</label>
-            <div clas="col-sm-10">
-                <input class="form-control" type="text" formControlName="link" placeholder="link from imgur like https://imgur.com/a/Zbe98">
+            <div class="col-sm-7">
+                <input class="form-control" type="text" name="link" required formControlName="link" placeholder="ex: https://imgur.com/a/Zbe98">
             </div>
+            <div [hidden]="!linkForm.get('link').errors || linkForm.get('link').hasError('required')" class="col-sm-3 alert alert-danger">No Valid</div>
         </div>
         <button class="btn btn-success" type="submit" [disabled]="!linkForm.valid">Add</button>
     </form>

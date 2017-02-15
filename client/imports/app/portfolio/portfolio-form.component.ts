@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { MeteorObservable } from 'meteor-rxjs'
-import { ctrlImgurLink } from '/lib/validate'
+import { imgurLink } from '/lib/validate'
 import template from './portfolio-form.component.html'
 
 @Component({
@@ -21,7 +21,7 @@ export class PortfolioFormComponent implements OnInit {
 
     printForm() {
         this.linkForm = this.formBuilder.group({
-            link: ['', ctrlImgurLink]
+            link: ['', imgurLink]
         })
     }
 

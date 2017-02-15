@@ -7,6 +7,7 @@ import { MeteorObservable } from 'meteor-rxjs'
 import { getIndex } from '/lib/index'
 import { Meteor } from 'meteor/meteor'
 import { RegisterUser } from '/both/models/user.model'
+import { name, forceMail, passwd } from '/lib/validate'
 import template from './signup.component.html'
 
 @Component({
@@ -65,18 +66,42 @@ export class SignupComponent implements OnInit, OnDestroy {
     printSignup():void {
         if (this.captcha) {
             this.signupForm = this.formBuilder.group({
-                email: ['', Validators.required],
-                password: ['', Validators.required],
-                username: ['', Validators.required],
+                email: ['', forceMail],
+                confirmEmail : ['', forceMail],
+                password: ['', passwd],
+                confirmPassword : ['', passwd],
+                username: ['', name],
                 captcha: ['', Validators.required]
             })
         }
     }
 
+    private checkEmail() {
+        if (this.signupForm.value.email == this.signupForm.value.confirmEmail)
+            return true
+        else {
+            alert('Emails are not sames')
+            return false
+        }
+    }
+
+    private checkPassword() {
+        if (this.signupForm.value.password == this.signupForm.value.password)
+            return true
+        else {
+            alert('Passwords are not sames')
+            return false
+        }
+    }
+
+    private checkConfirm() {
+        return this.checkPassword() && this.checkEmail()
+    }
+
     signup():void {
         this.captchaForm = { question: this.captcha.question,
             response: this.signupForm.value.captcha }
-        if (this.signupForm.valid && this.checkTimerValid()) {
+        if (this.signupForm.valid && this.checkTimerValid() && this.checkConfirm()) {
             MeteorObservable.call('registerUserFrom', 
                                   this.signupForm.value,
                                   this.captcha,
@@ -106,13 +131,13 @@ export class SignupComponent implements OnInit, OnDestroy {
     }
 
     // We estimate than complete form will give minimum 10 second !
-    initTimeOut():void {
+    private initTimeOut():void {
         this.timeOut = new Date()
         this.timeOut.setSeconds(this.timeOut.getSeconds() + 10)
     }
 
     // We estimate than complete form will give minimum 10 second !
-    checkTimerValid():boolean {
+    private checkTimerValid():boolean {
         let time : Date = new Date()
         return (time > this.timeOut)
     }

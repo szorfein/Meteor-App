@@ -2,6 +2,7 @@ import { Component, NgZone, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Meteor } from 'meteor/meteor'
+import { forceMail, passwd } from '/lib/validate'
 import template from './login.component.html'
 
 @Component({
@@ -19,10 +20,11 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder
     ) {}
 
+    // TODO , add 'passwd' before launch to prod !
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            email: ['', Validators.required],
-            password: ['', Validators.required]
+            email: ['', forceMail],
+            password: ['']
         })
         this.error = ''
     }

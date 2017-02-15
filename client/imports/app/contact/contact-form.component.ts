@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MeteorObservable } from 'meteor-rxjs'
 import { Subscription, Observable } from 'rxjs'
 import { getIndex } from '/lib/index'
+import { name, forceMail } from '/lib/validate'
 import template from './contact-form.component.html'
 
 @Component({
@@ -54,8 +55,8 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     printForm() {
         if (this.captcha) {
             this.contactForm = this.formBuilder.group({
-                name: ['', Validators.required],
-                email: ['', Validators.required],
+                name: ['', name],
+                email: ['', forceMail],
                 phone: ['', Validators.required],
                 subject: ['', Validators.required],
                 message: ['', Validators.required],

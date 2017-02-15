@@ -4,10 +4,12 @@ import { CollectionObject } from './collection-object.model'
 export interface User extends Meteor.User {}
 
 export interface RegisterUser {
-    email: string;
-    password: string;
-    username: string;
-    captcha: string;
+    email : string
+    confirmEmail : string
+    password : string
+    confirmPassword : string
+    username : string
+    captcha : string
 }
 
 export interface UserBar {

@@ -1,7 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MeteorObservable } from 'meteor-rxjs'
-import { Subscription } from 'rxjs/Subscription'
+import { Subscription } from 'rxjs'
+import { AboutDetail } from '/both/models/extra.model'
+import { AboutsDetail } from '/both/collections/extras.collection'
+import { facebook , git , twitter , dotshare , imgur , reddit , 
+    name , lang , mail , company } from '/lib/validate'
 import template from './about-form.component.html'
 
 @Component({
@@ -11,7 +15,8 @@ import template from './about-form.component.html'
 
 export class AboutFormComponent implements OnInit, OnDestroy {
 
-    detailSub: Subscription
+    about : AboutDetail
+    aboutSub: Subscription
     aboutForm: FormGroup
     image : string
 
@@ -20,67 +25,75 @@ export class AboutFormComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
-        this.detailSub = MeteorObservable.subscribe('pubAbout').subscribe(() => {
+        this.killSub()
+        this.aboutSub = MeteorObservable.subscribe('pubAbout').subscribe(() => {
             this.printForm()
         })
     }
 
-    printForm() {
-        MeteorObservable.call('editOrAddAbout').subscribe((about) => {
-            this.editForm(about)
-        }, () => {
-            this.addForm()
-        })
+    private killSub() {
+        if (this.aboutSub)
+            this.aboutSub.unsubscribe()
     }
 
-    editForm(about) {
-        if (about) {
-            this.image = about.image
+    private printForm() {
+       MeteorObservable.autorun().subscribe(() => {
+           this.about = AboutsDetail.findOne()
+           if (this.about)
+               this.editForm()
+           else
+               this.addForm()
+       })
+    }
+
+    private editForm() {
+        if (this.about) {
+            this.image = this.about.image
             this.aboutForm = this.formBuilder.group({
                 image: [this.image],
-                name: [about.name, Validators.required],
-                lang: ['en', Validators.required],
-                company: [about.company],
-                aboutCompany: [about.aboutCompany[0].yourCompany],
-                jobName: [about.jobName[0].yourjob],
-                skill: [about.skill],
-                mail: [about.mail],
-                mobile: [about.telMobile],
-                fix: [about.telFix],
-                fax: [about.fax],
-                aboutMe: [about.aboutYourSelf[0].yourself],
-                address: [about.address],
-                facebook: [about.facebookLink],
-                github: [about.githubLink],
-                twitter: [about.twitterLink],
-                dotshare: [about.dotshareLink],
-                imgur: [about.imgurLink],
-                reddit: [about.redditLink]
+                name: [this.about.name, name],
+                lang: ['en', lang],
+                company: [this.about.company, company],
+                aboutCompany: [this.about.aboutCompany[0].yourCompany],
+                jobName: [this.about.jobName[0].yourjob],
+                skill: [this.about.skill],
+                mail: [this.about.mail, mail],
+                mobile: [this.about.telMobile],
+                fix: [this.about.telFix],
+                fax: [this.about.fax],
+                aboutMe: [this.about.aboutYourSelf[0].yourself],
+                address: [this.about.address],
+                facebook: [this.about.facebook, facebook],
+                github: [this.about.github, git],
+                twitter: [this.about.twitter, twitter],
+                dotshare: [this.about.dotshare, dotshare],
+                imgur: [this.about.imgur, imgur],
+                reddit: [this.about.reddit, reddit]
             })
         }
     }
 
-    addForm() {
+    private addForm() {
         this.aboutForm = this.formBuilder.group({
             image: [''],
-            name: ['', Validators.required],
-            lang: ['en', Validators.required],
-            company: [''],
+            name: ['', name],
+            lang: ['en', lang],
+            company: ['', company],
             aboutCompany: [''],
             jobName: [''],
             skill: [''],
-            mail: [''],
+            mail: ['', mail],
             mobile: [''],
             fix: [''],
             fax: [''],
             aboutMe: [''],
             address: [''],
-            facebook: [''],
-            github: [''],
-            twitter: [''],
-            dotshare: [''],
-            imgur: [''],
-            reddit: ['']
+            facebook: ['', facebook],
+            github: ['', git],
+            twitter: ['', twitter],
+            dotshare: ['', dotshare],
+            imgur: ['', imgur],
+            reddit: ['', reddit]
         })
     }
 
@@ -101,7 +114,6 @@ export class AboutFormComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        if (this.detailSub)
-            this.detailSub.unsubscribe()
+        this.killSub()
     }
 }
