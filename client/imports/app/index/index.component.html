@@ -1,10 +1,16 @@
 <div *ngIf="home" id="banner">
-    <img href="#" [attr.src]="home.banner | previewImage" alt="banner" style="height:450px">
+    <!-- img size 1920 x 270 -->
+    <img href="#" [attr.src]="home.banner | previewImage" alt="banner" style="height:385px">
     <div id="banner-text">
-        <p>{{ home.welcome[0].message }}</p>
+        <div class="jumbotron">
+            <div class="container">
+                <p class="lead text-center">{{ home.welcome[0].message }}</p>
+            </div>
+        </div>
     </div>
 </div>
 
+<!--
 <div class="index-container index-head">
     <div class="ninja">
         <admin [form]="formular"></admin>
@@ -13,6 +19,7 @@
         <stat-index></stat-index>
     </div>
 </div>
+-->
 
 <div class="index-container index-body">
     <div class="index-article bg-gray">

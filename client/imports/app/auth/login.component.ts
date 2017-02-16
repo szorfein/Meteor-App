@@ -20,10 +20,10 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder
     ) {}
 
-    // TODO , add 'passwd' before launch to prod !
+    // TODO , add 'forceMail' & 'passwd' as validator before launch to prod !
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            email: ['', forceMail],
+            email: [''],
             password: ['']
         })
         this.error = ''
