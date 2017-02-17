@@ -5,8 +5,8 @@
         </div>
     </div>
     <div class="row">
-        <div *ngFor="let article of articleList | async" class="col-md-6 col-lg-4">
-            <div class="card blog" *ngFor="let bl of article.bloc">
+        <div *ngFor="let article of articleList | async" class="col-md-6 col-lg-4 articles-list">
+            <div class="card" *ngFor="let bl of article.bloc">
                 <div class="card-block">
                     <div class="card-text">
                         <ul class="nav justify-content-center">

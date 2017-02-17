@@ -3,18 +3,19 @@
     <img href="#" [attr.src]="home.banner | previewImage" alt="banner" style="height:385px">
     <div id="banner-text">
         <div class="jumbotron">
-            <div class="container">
-                <p class="lead text-center">{{ home.welcome[0].message }}</p>
+            <div class="container text-center">
+                <h1 class="display-3">{{ home.welcome[0].title }}</h1>
+                <p class="lead">{{ home.welcome[0].message }}</p>
             </div>
         </div>
     </div>
 </div>
+<div class="ninja">
+    <admin [form]="formular"></admin>
+</div>
 
 <!--
 <div class="index-container index-head">
-    <div class="ninja">
-        <admin [form]="formular"></admin>
-    </div>
     <div class="container">
         <stat-index></stat-index>
     </div>

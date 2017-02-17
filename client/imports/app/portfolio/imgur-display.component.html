@@ -1,6 +1,15 @@
 <div *ngIf="image">
-    <img class="img-fluid" [attr.href]="image.link" [attr.src]="imgm" [attr.alt]="image.id">
+    <div class="card">
+        <img class="card-img-top img-fluid" [attr.href]="image.link" [attr.src]="imgm" [attr.alt]="image.id">
+        <div class="card-block">
+        </div>
+    </div>
 </div>
+
 <div *ngIf="album">
-    <img class="img-fluid" [attr.href]="album[0].link" [attr.src]="imgm" [attr.alt]="album[0].link">
+    <div class="card">
+        <img class="card-img-top img-fluid" [attr.href]="album[0].link" [attr.src]="imgm" [attr.alt]="album[0].link">
+        <div class="card-block">
+        </div>
+    </div>
 </div>

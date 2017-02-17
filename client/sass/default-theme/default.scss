@@ -187,6 +187,10 @@ body {
 * Articles
 */
 
+.articles-list {
+    margin-top: 14px;
+}
+
 .tag-main {
 
 }
@@ -200,18 +204,25 @@ body {
     background-color: #fff;
     color: #000;
     box-shadow: 0 0 5px 0 #e2e3e4;
-    padding: 25px;
     border-radius: 1px 1px 1px 1px;
     h5 {
         font-size: 16px;
-        border-bottom: 1px solid #ecedee;
+        font-weight: 600;
         line-height: 20px;
-        font-weight: bold;
+        padding: 15px 20px;
+        background-color: $red;
+        color: #fff;
+        line-height: 1;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
     }
 }
 
 .articles-bloc {
     margin: auto 1em;
+    h1 {
+        padding: 40px 5%;
+    }
 }
 
 .bar-tags {
@@ -257,13 +268,14 @@ body {
 }
 
 .post {
-    box-shadow: 0 0 5px 0 #e2e3e4;
     padding: 9px;
     overflow: hidden;
 }
 
 .blog {
     margin: 1em 0;
+    background-color: #fff;
+    border-top: 6px solid $red;
     h3.card-title>a {
         text-decoration: none;
         color: #222;
@@ -395,7 +407,7 @@ body {
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
     .articles-bloc {
-        margin: auto 1em;
+        margin: auto 2rem;
     }
 
     .dash-menu {

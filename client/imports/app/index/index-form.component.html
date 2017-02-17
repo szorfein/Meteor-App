@@ -1,5 +1,6 @@
 <div *ngIf="homeForm">
     <div class="container-fluid">
+        <p>Image must have size : 1920 x 385 px.</p>
         <form [formGroup]="homeForm" (ngSubmit)="addHome()">
 
             <div class="form-group">
@@ -12,6 +13,11 @@
                 <label class="sr-only" for="lang">Lang</label>
                 <input class="form-control"
                        type="text" formControlName="welcome_lang" name="lang" placeholder="language">
+            </div>
+
+            <div class="form-group">
+                <label class="sr-only" for="title">Title</label>
+                <input class="form-control" type="text" rows="3" formControlName="welcome_title" placeholder="title">
             </div>
 
             <div class="form-group">

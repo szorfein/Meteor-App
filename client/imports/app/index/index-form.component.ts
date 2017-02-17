@@ -35,6 +35,7 @@ export class IndexFormComponent implements OnInit {
             this.homeForm = this.formBuilder.group({
                 banner_image: [home.banner],
                 welcome_lang: [home.welcome[0].lang],
+                welcome_title: [home.welcome[0].title],
                 welcome_message: [home.welcome[0].message]
             })
         }
@@ -44,6 +45,7 @@ export class IndexFormComponent implements OnInit {
         this.homeForm = this.formBuilder.group({
             banner_image: [''],
             welcome_lang: ['en'],
+            welcome_title: [''],
             welcome_message: ['']
         })
     }

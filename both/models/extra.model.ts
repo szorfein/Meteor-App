@@ -46,12 +46,13 @@ export interface AboutDetailForm {
 
 export interface HomeDetail extends CollectionObject {
     banner: string
-    welcome?: [{ lang?: string, message?: string }],
+    welcome?: [{ lang?: string, title?: string, message?: string }],
     idOwner: string
 }
 
 export interface HomeDetailForm {
     banner_image : string
     welcome_lang? : string
+    welcome_title? : string
     welcome_message? : string
 }

@@ -6,6 +6,7 @@ function buildNewForm(form: HomeDetailForm, userId: string, image: string) {
         banner: image,
         welcome: [{ 
             lang: form.welcome_lang,
+            title: form.welcome_title,
             message: form.welcome_message
         }],
         idOwner: userId
