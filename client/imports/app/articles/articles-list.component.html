@@ -43,55 +43,10 @@
         </div>
         <div class="row">
             <!-- Start Article-List -->
-            <div class="col-xs-12 col-sm-12 col-md-8 articles-list">
+            <div class="col-xs-12 col-sm-12 col-md-8 blog">
                 <div *ngFor="let article of articles | async">
-                    <div class="card" *ngFor="let bl of article.bloc">
-                        <div class="card-block">
-                            <div class="card-text">
-                                <ul class="nav justify-content-center">
-                                    <li *ngFor="let tag of tags" class="nav-item">
-                                        {{ tag }}
-                                    </li>
-                                </ul>
-                            </div>
-                            <h3 class="card-title text-center">
-                                <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
-                            </h3>
-                            <ul class="nav justify-content-center">
-                                <li class="nav-item">
-                                    <i class="fa fa-user fa-fw"></i>
-                                    <a [attr.routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <i class="fa fa-calendar fa-fw"></i>
-                                    <small>
-                                        {{ article.createdAt | date:"d MMMM y à H" }}h
-                                    </small>
-                                </li>
-                                <li class="nav-item">
-                                    <i class="fa fa-comments"></i>
-                                </li>
-                            </ul>
-                            <a [routerLink]="['/blog', article._id]">
-                                <img class="card-img img-fluid" *ngIf="article.image" [src]="article | displayMainImage">
-                            </a>
-                            <div class="card-text text-left post" [innerHTML]="bl.description | markdown"></div>
-                            <div class="row">
-                                <div class="col-md-4 flex-md-last">
-                                    <p>
-                                    <a class="read-more"
-                                       [routerLink]="['/blog', article._id]">Continue Reading</a>
-                                    </p>
-                                </div>
-                                <div class="col-md-8 flex-md-first">
-                                    <p class="card-text">
-                                    Share on:
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <button [hidden]="!root" class="btn btn-primary" (click)="removeArticle(article)">Delete this post</button>
-                    </div>
+                    <display-article-list [article]="article" [display]="card"></display-article-list>
+                    <button [hidden]="!root" class="btn btn-primary" (click)="removeArticle(article)">Delete this post</button>
                 </div>
             </div><!-- End Article List -->
             <div class="col-xs-12 col-sm-12 col-md-4 sidebar">

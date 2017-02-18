@@ -7,6 +7,7 @@ import { DisplayOrNonePipe } from './display-or-none.pipe'
 import { DisplayUserImagePipe } from './display-user-image.pipe'
 import { DisplayMarkdownPipe } from './display-markdown.pipe'
 import { RootInput } from './root.input.ts'
+import { DisplayArticleList } from './display-article-list.component'
 
 export const SHARED_DECLARATIONS : any[] = [
     DisplayMainImagePipe,
@@ -17,5 +18,6 @@ export const SHARED_DECLARATIONS : any[] = [
     DisplayOrNonePipe,
     DisplayUserImagePipe,
     DisplayMarkdownPipe,
-    RootInput
+    RootInput,
+    DisplayArticleList
 ]

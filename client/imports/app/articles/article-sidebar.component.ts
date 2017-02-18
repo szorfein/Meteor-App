@@ -7,5 +7,6 @@ import template from './article-sidebar.component.html'
 })
 
 export class ArticleSidebarComponent {
+    sidebarM : string = 'sidebar'
     constructor() {}
 }

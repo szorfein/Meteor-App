@@ -33,6 +33,7 @@ export class ArticlesList implements OnInit, OnDestroy {
     root
     rootsub: Subscription
     formular : string
+    card : string = 'card'
 
     constructor( private paginationService : PaginationService ) {}
 

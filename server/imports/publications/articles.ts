@@ -15,6 +15,11 @@ Meteor.publish('article', function(articleId: string) {
     return Articles.find(buildQuery.call(this, articleId))
 })
 
+Meteor.publish('articlesNb', function(nb : number) {
+    const selector = buildQuery.call(this, null)
+    return Articles.find(selector, {skip:0,limit:nb,sort: {'bloc.lastEdit': -1}})
+})
+
 function buildQuery(articleId?: string) : Object {
 
     if(articleId) 

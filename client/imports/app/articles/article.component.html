@@ -1,0 +1,26 @@
+<div *ngIf="elemList">
+    <div *ngFor="let article of articles | async" class="col-md-6 col-lg-4 articles-list">
+        <display-article-list [article]="article" [display]="card"></display-article-list>
+    </div>
+</div>
+
+<div *ngIf="elemDetail">
+    Detail
+</div>
+
+<div *ngIf="elemIndex && articles">
+    <div class="row">
+        <admin [form]="formular"></admin>
+    </div>
+    <div class="row">
+        <div *ngFor="let article of articles | async" class="col-md-6 col-lg-4 articles-list">
+            <display-article-list [article]="article" [display]="card"></display-article-list>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="elemSidebar && articles">
+    <div *ngFor="let article of articles | async">
+        <display-article-list [article]="article" [display]="inline"></display-article-list>
+    </div>
+</div>

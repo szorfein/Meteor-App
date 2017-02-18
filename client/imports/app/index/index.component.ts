@@ -19,6 +19,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     formular : string
     blog : string = 'blog'
     me : string = 'me'
+    index : string = 'index'
 
     constructor(
         private route: ActivatedRoute

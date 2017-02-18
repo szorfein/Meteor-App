@@ -28,9 +28,7 @@ export class RootInput implements OnInit, OnDestroy {
     constructor() {}
 
     ngOnInit() {
-        if (this.rootSub)
-            this.rootSub.unsubscribe()
-
+        this.kill()
         this.rootSub = MeteorObservable.subscribe('root').subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
                 this.callRoot()
@@ -54,6 +52,11 @@ export class RootInput implements OnInit, OnDestroy {
         }
     }
 
+    private kill() {
+        if (this.rootSub)
+            this.rootSub.unsubscribe()
+    }
+
     lookArg() : boolean {
         return this.form == formular[0]
             || this.form == formular[1]
@@ -69,7 +72,6 @@ export class RootInput implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        if (this.rootSub)
-            this.rootSub.unsubscribe()
+        this.kill()
     }
 }
