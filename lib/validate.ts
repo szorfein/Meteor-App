@@ -131,3 +131,7 @@ export function passwd(v : FormControl) {
     console.log('bad pass :-() ' + res)
     return v.status = 'INVALID'
 }
+
+export function tag(tagName : string) {
+    return /^[a-z]{3,9}$/i.test(tagName)
+}

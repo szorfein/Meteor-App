@@ -8,6 +8,7 @@ import { DisplayUserImagePipe } from './display-user-image.pipe'
 import { DisplayMarkdownPipe } from './display-markdown.pipe'
 import { RootInput } from './root.input.ts'
 import { DisplayArticleList } from './display-article-list.component'
+import { DisplayTagsComponent } from './display-tags.component'
 
 export const SHARED_DECLARATIONS : any[] = [
     DisplayMainImagePipe,
@@ -19,5 +20,6 @@ export const SHARED_DECLARATIONS : any[] = [
     DisplayUserImagePipe,
     DisplayMarkdownPipe,
     RootInput,
-    DisplayArticleList
+    DisplayArticleList,
+    DisplayTagsComponent
 ]

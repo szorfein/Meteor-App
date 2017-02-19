@@ -12,6 +12,7 @@ import { UserDetailsComponent } from './user/user-details.component'
 import { LoginComponent } from './auth/login.component'
 import { SignupComponent } from './auth/signup.component'
 import { RecoverComponent } from './auth/recover.component'
+import { TagArticlesListComponent } from './tags/tag-articles-list.component'
 
 export const routes: Route[] = [
     { path: '', component: IndexComponent },
@@ -19,6 +20,7 @@ export const routes: Route[] = [
     { path: 'portfolio/:id', component: PortfolioDetailComponent },
     { path: 'blog', component: ArticlesListComponent },
     { path: 'blog/:articleId', component: ArticleDetailsComponent },
+    { path: 'blog/category/:tag', component: TagArticlesListComponent},
     { path: 'about', component: AboutComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'user/:userName', component: UserDetailsComponent, 

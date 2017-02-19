@@ -1,0 +1,10 @@
+<div *ngIf="tag && displayBloc">
+
+</div>
+<div *ngIf="tag && displayInline">
+    <p class="justify-content-center">
+        <span *ngFor="let t of tag">
+            <a [routerLink]="['/blog/category', t]">{{t}}</a> 
+        </span>
+    </p>
+</div>

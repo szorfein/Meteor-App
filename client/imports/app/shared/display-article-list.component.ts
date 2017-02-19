@@ -16,6 +16,7 @@ export class DisplayArticleList implements OnInit {
     @Input() display : string
     cardDisplay : boolean = false
     inlineDisplay : boolean = false
+    inline : string = 'inline'
 
     constructor() {}
 
@@ -25,10 +26,11 @@ export class DisplayArticleList implements OnInit {
 
     private setDisplay() {
         if (this.testDisplay()) {
-            if (this.display == Display[0])
+            if (this.display == Display[0]) {
                 this.cardDisplay = true
-            else if (this.display == Display[1])
+            } else if (this.display == Display[1]) {
                 this.inlineDisplay = true
+            } 
         }
     }
 

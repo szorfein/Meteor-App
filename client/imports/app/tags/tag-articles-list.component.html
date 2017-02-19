@@ -1,0 +1,17 @@
+<div *ngIf="articles" class="articles">
+    <div class="articles-bloc">
+        <div class="row">
+            <admin [form]="formular"></admin>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-8 blog">
+                <div *ngFor="let article of articles | async">
+                    <display-article-list [article]="article" [display]="card"></display-article-list>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 sidebar">
+                <sidebar></sidebar>
+            </div>
+        </div>
+    </div>
+</div>

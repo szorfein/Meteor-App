@@ -6,7 +6,7 @@ import { Articles } from '/both/collections/articles.collection'
 import template from './article.component.html'
 
 enum Elements {
-    list , detail , index , sidebar
+    list , sidebar , index
 }
 
 @Component({
@@ -23,7 +23,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
     imagesSub : Subscription
     articles : Observable<Article[]>
     elemList : boolean = false
-    elemDetail : boolean = false
     elemIndex : boolean = false
     elemSidebar : boolean = false
     inline : string = 'inline'
@@ -44,17 +43,13 @@ export class ArticleComponent implements OnInit, OnDestroy {
                 this.nbElems = 6
                 this.formular = ''
             } else if (this.element == Elements[1]) {
-                this.elemDetail = true
-                this.nbElems = 1
-                this.formular = ''
+                this.elemSidebar = true
+                this.nbElems = 5
             } else if (this.element == Elements[2]) {
                 this.elemIndex = true
                 this.nbElems = 3
                 this.formular = 'article'
-            } else if (this.element == Elements[3]) {
-                this.elemSidebar = true
-                this.nbElems = 5
-            }
+            } 
         }
     }
 
@@ -62,7 +57,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
         return this.element == Elements[0]
             || this.element == Elements[1]
             || this.element == Elements[2]
-            || this.element == Elements[3]
     }
 
     private kill() {

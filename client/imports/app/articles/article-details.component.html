@@ -13,7 +13,7 @@
                         <h1>{{ bloc.title }}</h1>
                     </div>
                     <p>
-                    le: {{ article.createdAt | date:"d MMMM y à H" }}h by: {{ article.authorId | displayNameWithId }}
+                    le: {{ article.createdAt | date:"d MMMM y à H" }}h by: {{ article.authorId | displayNameWithId }}
                     </p>
                     <img class="img-fluid" [src]="article | displayMainImage">
                     <div class="description"

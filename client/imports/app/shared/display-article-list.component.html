@@ -2,11 +2,6 @@
     <div class="card" *ngFor="let bl of article.bloc">
         <div class="card-block">
             <div class="card-text">
-                <ul class="nav justify-content-center">
-                    <li *ngFor="let tag of tags" class="nav-item">
-                        {{ tag }}
-                    </li>
-                </ul>
             </div>
             <h3 class="card-title text-center">
                 <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
@@ -26,6 +21,7 @@
                     <i class="fa fa-comments"></i>
                 </li>
             </ul>
+            <display-tags [tag]="article.tags" [display]="inline"></display-tags>
             <a [routerLink]="['/blog', article._id]">
                 <img class="card-img img-fluid" *ngIf="article.image" [attr.src]="article | displayMainImage">
             </a>
@@ -40,6 +36,7 @@
         </div>
     </div>
 </div>
+
 <div *ngIf="article && inlineDisplay">
     <ul class="sidebar-widget">
         <li>
@@ -50,6 +47,7 @@
                 <a [routerLink]="['/blog', article._id]">{{article.bloc[0].title}}</a>
                 <div class="post-meta">
                     <span class="updated">{{ article.createdAt | date:"d MMMM y" }}h</span>
+                    <display-tags [tag]="article.tags" [display]="inline"></display-tags>
                 </div>
             </div>
         </li>
