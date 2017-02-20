@@ -6,8 +6,12 @@
     <about-blog [about]="about"></about-blog>
 </div>
 
-<div *ngIf="aboutSocial">
-    <social [social]="about"></social>
+<div *ngIf="aboutSocial && displayInline">
+    <social [social]="about" [display]="inline"></social>
+</div>
+
+<div *ngIf="aboutSocial && displayBloc">
+    <social [social]="about" [display]="bloc"></social>
 </div>
 
 <div *ngIf="aboutMix">
@@ -16,5 +20,9 @@
 
 <div *ngIf="aboutFooter">
     <about-detail-contact [about]="about"></about-detail-contact>
-    <social [social]="about"></social>
+    <social [social]="about" [display]="inline"></social>
+</div>
+
+<div *ngIf="aboutSidebar">
+    <about-detail-me [about]="about" [display]="inline"></about-detail-me>
 </div>

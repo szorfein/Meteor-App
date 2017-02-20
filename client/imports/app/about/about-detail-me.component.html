@@ -1,5 +1,7 @@
-<admin [form]="formular"></admin>
-<div *ngIf="about">
+<div *ngIf="bloc">
+    <admin [form]="formular"></admin>
+</div>
+<div *ngIf="about && bloc">
     <div class="card text-center aboutme">
 
         <div class="card-header">
@@ -22,6 +24,17 @@
         </div>
     </div>
 </div>
-<div *ngIf="!about">
-    Information about Author not found...
+<div *ngIf="about && inline">
+    <ul class="sidebar-widget">
+        <li>
+            <a [routerLink]="['/about']" class="d-flex align-self-center">
+                <img class="rounded-circle mr-3 img-fluid" [attr.src]="about.image | previewImage" alt="My head" style="height:400;width:400">
+            </a>
+            <div class="post-meta">
+                <a [routerLink]="['/about']">
+                    <h4 class="mt-0">{{ about.name | displayOrNone }}</h4>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>

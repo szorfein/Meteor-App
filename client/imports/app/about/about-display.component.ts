@@ -5,8 +5,12 @@ import { AboutDetail } from '/both/models/extra.model'
 import { AboutsDetail } from '/both/collections/extras.collection'
 import template from './about-display.component.html'
 
-enum elements {
-    me , blog , social , mix , footer
+enum Display {
+    bloc , inline
+}
+
+enum Elements {
+    me , blog , social , mix , footer , sidebar
 }
 
 @Component({
@@ -16,6 +20,7 @@ enum elements {
 
 export class AboutDisplayComponent implements OnInit, OnDestroy {
     @Input() element : string
+    @Input() display : string
     about : Observable<AboutDetail>
     aboutSub : Subscription
     aboutMe : boolean = false
@@ -23,12 +28,18 @@ export class AboutDisplayComponent implements OnInit, OnDestroy {
     aboutSocial : boolean = false
     aboutMix : boolean = false
     aboutFooter : boolean = false
+    aboutSidebar : boolean = false
+    displayInline : boolean = false
+    displayBloc : boolean = false
+    bloc : string = 'bloc'
+    inline : string = 'inline'
 
     constructor() {}
 
     ngOnInit() {
         this.killSub()
         this.callAbout()
+        this.setDisplay()
         this.loadElement()
     }
 
@@ -41,24 +52,25 @@ export class AboutDisplayComponent implements OnInit, OnDestroy {
     }
 
     private loadElement() {
-        if (this.element == 'mix')
-            this.aboutMix = true
-        else if (this.element == 'me')
+        if (this.element == Elements[0])
             this.aboutMe = true
-        else if (this.element == 'blog')
+        else if (this.element == Elements[1])
             this.aboutBlog = true
-        else if (this.element == 'social')
+        else if (this.element == Elements[2])
             this.aboutSocial = true
-        else if (this.element == 'footer')
+        else if (this.element == Elements[3])
+            this.aboutMix = true
+        else if (this.element == Elements[4])
             this.aboutFooter = true
+        else if (this.element == Elements[5])
+            this.aboutSidebar = true
     }
 
-    private ctrlElement() {
-        return this.element == elements[0]
-            || this.element == elements[1]
-            || this.element == elements[2]
-            || this.element == elements[3]
-            || this.element == elements[4]
+    private setDisplay() {
+        if (this.display == Display[0])
+            this.displayBloc = true
+        else if (this.display == Display[1])
+            this.displayInline = true
     }
 
     private killSub() {

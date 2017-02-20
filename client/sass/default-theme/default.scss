@@ -199,6 +199,14 @@ body {
     display: block;
 }
 
+.title {
+    display: inline-block;
+    padding: 3px 0;
+    color: rgba(0,0,0,.75);
+    font-size: 14px;
+    font-weight: 600;
+}
+
 .sidebar-widget {
     list-style: none;
     padding: 0;
@@ -213,13 +221,34 @@ body {
         line-height: 1.3em;
         &>a {
             text-decoration: none;
-            color: 666;
+            color: #666;
             width: 50px;
             max-width: 50px;
             height: 50px;
             margin: 0 10px 0 0;
             vertical-align: top;
             overflow: hidden;
+            &:hover {
+                color: #111;
+            }
+        }
+    }
+    h4 {
+        font-size: 14px;
+        font-weight: 600;
+        color: rgba(0,0,0,.75);
+        text-transform: uppercase;
+    }
+}
+
+.sidebar-widget-list {
+    list-style: none;
+    word-wrap: break-word;
+    a {
+        color: #222;
+        text-decoration: none;
+        &:hover {
+            color: #000;
         }
     }
 }
@@ -354,6 +383,22 @@ body {
 .selfie {
     width: 256px;
     height: 256px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 37px;
+    margin: 0 10px 0 0;
+    border-radius: 100%;
+    line-height: 40px;
+    text-align: center;
+    a {
+        color: #666;
+        &:hover {
+            color: #000;
+        }
+    }
 }
 
 .social {

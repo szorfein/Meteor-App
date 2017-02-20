@@ -7,7 +7,7 @@
 </div>
 <div class="elements-sidebar">
     <h5 class="sidebar-title">Follow Us</h5>
-    <social></social>
+    <about-display [element]="social" [display]="bloc"></about-social>
 </div>
 <div class="elements-sidebar">
     <h5 class="sidebar-title">Popular Posts</h5>
@@ -17,11 +17,11 @@
 </div>
 <div class="elements-sidebar">
     <h5 class="sidebar-title">About me</h5>
-    <about-detail-me></about-detail-me>
+    <about-display [element]="sidebar"></about-display>
 </div>
 <div class="elements-sidebar">
     <h5 class="sidebar-title">Labels</h5>
     <div class="tag-sidebar">
-        <tag-main></tag-main>
+        <tag-main [display]="bloc"></tag-main>
     </div>
 </div>

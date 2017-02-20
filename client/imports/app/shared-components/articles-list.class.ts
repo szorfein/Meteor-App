@@ -34,6 +34,7 @@ export class ArticlesList implements OnInit, OnDestroy {
     rootsub: Subscription
     formular : string
     card : string = 'card'
+    inline : string = 'inline'
 
     constructor( private paginationService : PaginationService ) {}
 

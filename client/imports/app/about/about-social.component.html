@@ -1,4 +1,4 @@
-<div *ngIf="social">
+<div *ngIf="social && inline">
     <ul class="nav justify-content-center">
         <li class="nav-item">
             <a *ngIf="social.facebook" class="social nav-link" [attr.href]="social.facebook">
@@ -32,6 +32,43 @@
         </li>
     </ul>
 </div>
-<div *ngIf="!social" class="no-social">
-    No link found
+<div *ngIf="social && bloc">
+    <ul class="sidebar-widget">
+        <li *ngIf="social.facebook">
+            <a class="social-icon" [attr.href]="social.facebook">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+                <a [attr.href]="social.facebook" alt="facebook"><h3 class="title">facebook</h3></a>
+            </a>
+        </li>
+        <li *ngIf="social.github">
+            <a class="social-icon" [attr.href]="social.github">
+                <i class="fa fa-github" aria-hidden="true"></i>
+            </a>
+            <a [attr.href]="social.github" alt="github"><h3 class="title">github</h3></a>
+        </li>
+        <li *ngIf="social.twitter">
+            <a class="social-icon" [attr.href]="social.twitter">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+            <a [attr.href]="social.twitter" alt="twitter"><h3 class="title">twitter</h3></a>
+        </li>
+        <li *ngIf="social.dotshare">
+            <a class="social-icon" [attr.href]="social.dotshare">
+                <i class="fa fa-dot-circle-o" aria-hidden="true"></i>
+            </a>
+            <a [attr.href]="social.dotshare" alt="dotshare"><h3 class="title">dotshare</h3></a>
+        </li>
+        <li *ngIf="social.imgur">
+            <a class="social-icon" [attr.href]="social.imgur">
+                <i class="fa fa-imgur" aria-hidden="true"></i>
+            </a>
+            <a [attr.href]="social.imgur" alt="imgur"><h3 class="title">imgur</h3></a>
+        </li>
+        <li *ngIf="social.reddit">
+            <a class="social-icon" [attr.href]="social.reddit">
+                <i class="fa fa-reddit" aria-hidden="true"></i>
+            </a>
+            <a [attr.href]="social.reddit" alt="reddit"><h3 class="title">reddit</h3></a>
+        </li>
+    </ul>
 </div>

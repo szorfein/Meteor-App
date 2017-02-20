@@ -4,6 +4,10 @@ import { MeteorObservable } from 'meteor-rxjs'
 import { AboutDetail } from '/both/models/extra.model'
 import template from './about-detail-me.component.html'
 
+enum Display {
+    bloc , inline
+}
+
 @Component({
     selector: 'about-detail-me',
     template
@@ -11,11 +15,22 @@ import template from './about-detail-me.component.html'
 
 export class AboutDetailMeComponent implements OnInit, OnDestroy {
     @Input() about : AboutDetail
+    @Input() display : string
     imageSub: Subscription
     formular : string = 'about'
+    bloc : boolean = false
+    inline : boolean = false
 
     ngOnInit() {
+        this.setDisplay()
         this.imageSub = MeteorObservable.subscribe('images').subscribe()
+    }
+
+    private setDisplay() {
+        if (this.display == Display[0])
+            this.bloc = true
+        else if (this.display == Display[1])
+            this.inline = true
     }
 
     ngOnDestroy() {
