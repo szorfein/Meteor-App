@@ -45,7 +45,7 @@
             <!-- Start Article-List -->
             <div class="col-xs-12 col-sm-12 col-md-8 blog">
                 <div *ngFor="let article of articles | async">
-                    <display-article-list [article]="article" [display]="card"></display-article-list>
+                    <display-article-list [article]="article" [display]="blog"></display-article-list>
                     <button [hidden]="!root" class="btn btn-primary" (click)="removeArticle(article)">Delete this post</button>
                 </div>
             </div><!-- End Article List -->

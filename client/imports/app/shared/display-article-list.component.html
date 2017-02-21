@@ -1,38 +1,24 @@
 <div *ngIf="article && cardDisplay">
     <div class="card" *ngFor="let bl of article.bloc">
-        <div class="card-block">
-            <div class="card-text">
-            </div>
-            <h3 class="card-title text-center">
-                <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
-            </h3>
-            <ul class="nav justify-content-center">
-                <li class="nav-item">
-                    <i class="fa fa-user fa-fw"></i>
-                    <a [routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
-                </li>
-                <li class="nav-item">
-                    <i class="fa fa-calendar fa-fw"></i>
-                    <small>
-                        {{ article.createdAt | date:"d MMMM y à H" }}h
-                    </small>
-                </li>
-                <li class="nav-item">
-                    <i class="fa fa-comments"></i>
+        <div class="card-text">
+            <ul class="nav">
+                <li *ngFor="let tag of article.tags" class="nav-item">
+                    <a class="nav-link" [routerLink]="['/blog/category', tag]">{{tag}}</a>
                 </li>
             </ul>
-            <display-tags [tag]="article.tags" [display]="inline"></display-tags>
-            <a [routerLink]="['/blog', article._id]">
-                <img class="card-img img-fluid" *ngIf="article.image" [attr.src]="article | displayMainImage">
-            </a>
-            <div class="card-text text-left post" [innerHTML]="bl.description | markdown"></div>
-            <p>
-            <a class="read-more"
-               [routerLink]="['/blog', article._id]">Continue Reading</a>
+        </div>
+        <a [routerLink]="['/blog', article._id]">
+            <img class="card-img-top img-fluid" *ngIf="article.image" [attr.src]="article | displayMainImage">
+        </a>
+        <div class="card-block">
+            <h3 class="title card-title">
+                <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
+            </h3>
+            <p class="card-text small">
+            by <a [routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
+            | {{ article.createdAt | date:"d MMMM y à H" }}h
             </p>
-            <p class="card-text">
-            Share on:
-            </p>
+            <p class="card-text" [innerHTML]="bl.description | markdown"></p>
         </div>
     </div>
 </div>
@@ -52,4 +38,29 @@
             </div>
         </li>
     </ul>
+</div>
+
+<div class="blog-element" *ngIf="article && blogDisplay">
+    <div class="card mt-3" *ngFor="let bl of article.bloc">
+        <div class="row">
+            <div class="col">
+                <a [routerLink]="['/blog', article._id]">
+                    <img class="img-fluid card-img" *ngIf="article.image" [attr.src]="article | displayMainImage">
+                </a>
+            </div>
+            <div class="col">
+                <div class="media-body blog-post">
+                    <h5 class="card-title"><a [routerLink]="['/blog', article._id]">{{ article.bloc[0].title }}</a></h5>
+                    <p class="card-text small">
+                    by <a [routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
+                    | {{ article.createdAt | date:"d MMMM y à H" }}h
+                    </p>
+                    <p class="card-text" [innerHTML]="bl.description | markdown"></p>
+                    <p>
+                    <a class="btn" [routerLink]="['/blog', article._id]">read more</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -8,9 +8,25 @@
     <div class="row">
         <admin [form]="formular"></admin>
     </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div *ngFor="let article of articles | async" class="col-md-6 col-lg-4 articles-list">
+                <display-article-list [article]="article" [display]="card"></display-article-list>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="elemBlog && articles">
     <div class="row">
-        <div *ngFor="let article of articles | async" class="col-md-6 col-lg-4 articles-list">
-            <display-article-list [article]="article" [display]="card"></display-article-list>
+        <admin [form]="formular"></admin>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div *ngFor="let article of articles | async" class="">
+                <display-article-list [article]="article" [display]="blog">
+                </display-article-list>
+            </div>
         </div>
     </div>
 </div>

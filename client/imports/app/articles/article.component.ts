@@ -27,6 +27,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     elemSidebar : boolean = false
     inline : string = 'inline'
     card : string = 'card'
+    blog : string = 'blog'
 
     constructor() {}
 
@@ -37,26 +38,18 @@ export class ArticleComponent implements OnInit, OnDestroy {
     }
 
     private loadComponent() {
-        if (this.testComponent()) {
-            if (this.element == Elements[0]) {
-                this.elemList = true
-                this.nbElems = 6
-                this.formular = ''
-            } else if (this.element == Elements[1]) {
-                this.elemSidebar = true
-                this.nbElems = 5
-            } else if (this.element == Elements[2]) {
-                this.elemIndex = true
-                this.nbElems = 3
-                this.formular = 'article'
-            } 
-        }
-    }
-
-    private testComponent() {
-        return this.element == Elements[0]
-            || this.element == Elements[1]
-            || this.element == Elements[2]
+        if (this.element == Elements[0]) {
+            this.elemList = true
+            this.nbElems = 6
+            this.formular = ''
+        } else if (this.element == Elements[1]) {
+            this.elemSidebar = true
+            this.nbElems = 5
+        } else if (this.element == Elements[2]) {
+            this.elemIndex = true
+            this.nbElems = 3
+            this.formular = 'article'
+        } 
     }
 
     private kill() {
