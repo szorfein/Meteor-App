@@ -8,5 +8,6 @@ import template from './about-detail-contact.component.html'
 })
 
 export class AboutDetailContactComponent {
+    sidebar : string = 'sidebar'
     @Input() about : AboutDetail
 }

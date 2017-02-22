@@ -1,30 +1,20 @@
-<div *ngIf="bloc">
-    <admin [form]="formular"></admin>
-</div>
-<div *ngIf="about && bloc">
+<admin [form]="formular"></admin>
+
+<div class="container" *ngIf="about && displayBloc">
     <div class="card text-center aboutme">
-
-        <div class="card-header">
-            <img class="rounded-circle mr-3 selfie img-fluid" [attr.src]="about.image | previewImage" alt="My head">
-
-        </div>
+        <img class="card-img rounded-circle selfie img-fluid" [attr.src]="about.image | previewImage" alt="My head">
         <div class="card-block">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3 class="card-title"> {{ about.name | displayOrNone }}</h3>
-                        <p class="card-text">{{ about.jobName[0].yourjob | displayOrNone }}</p>
-                    </div>
-                </div>
-            </div>
+            <h3 class="card-title"> {{ about.name | displayOrNone }}</h3>
+            <p class="card-text">{{ about.aboutYourSelf[0].yourself | displayOrNone }}</p>
+            <p class="card-text">Skill : {{ about.skill | displayOrNone }}</p>
         </div>
-
-        <div class="card-footer text-muted">
-            <p class="text-left">Skill : {{ about.skill | displayOrNone }}</p>
+        <div class="card-footer">
+            <about-display [element]="social" [display]="inline"></about-display>
         </div>
     </div>
 </div>
-<div *ngIf="about && inline">
+
+<div *ngIf="about && displayInline">
     <ul class="sidebar-widget">
         <li>
             <a [routerLink]="['/about']" class="d-flex align-self-center">
@@ -32,7 +22,7 @@
             </a>
             <div class="post-meta">
                 <a [routerLink]="['/about']">
-                    <h4 class="mt-0">{{ about.name | displayOrNone }}</h4>
+                    <h4 class="title">{{ about.name | displayOrNone }}</h4>
                 </a>
             </div>
         </div>

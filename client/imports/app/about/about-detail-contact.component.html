@@ -1,12 +1,10 @@
 <div *ngIf="about">
     <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-3 about">
-            <h4>{{ about.company | displayOrNone }} </h4>
-        </div>
         <div class="col-xs-6 col-sm-6 col-md-3 pages">
-            <h4>Pages</h4>
+            <h5>Pages</h5>
             <ul class="list-unstyled white">
                 <li><i class="fa fa-caret-right fa-fw"></i><a [routerLink]="['/']">Home</a></li>
+                <li><i class="fa fa-caret-right fa-fw"></i><a [routerLink]="['/portfolio']">Portfolio</a></li>
                 <li><i class="fa fa-caret-right fa-fw"></i><a [routerLink]="['/blog']">Blog</a></li>
                 <li><i class="fa fa-caret-right fa-fw"></i><a [routerLink]="['/about']">About</a></li>
                 <li><i class="fa fa-caret-right fa-fw"></i><a [routerLink]="['/contact']">Contact</a></li>
@@ -15,22 +13,21 @@
             </ul>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-3 contact-us">
-            <h4>Contact</h4>
-            <p><i class="fa fa-map-pin fa-fw"></i>
-            {{ about.address | displayOrNone }}
-            </p>
-            <p><i class="fa fa-phone fa-fw"></i>
-            {{ about.telMobile | displayOrNone }}
-            </p>
-            <p><i class="fa fa-phone fa-fw"></i>
-            {{ about.telFix | displayOrNone }}
-            </p>
-            <p><i class="fa fa-envelope fa-fw"></i>
-            {{ about.mail | displayOrNone }}
-            </p>
+            <h5>Docs</h5>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 footer-blog">
+            <h5>Recent post</h5>
+            <div class="elements-sidebar">
+                <article [element]="sidebar"></article>
+            </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-3 subscribe">
-            <h4>Subscribe</h4>
+            <div class="row">
+                <h5>Donate</h5>
+            </div>
+            <div class="row">
+                <h5>Subscribe</h5>
+            </div>
         </div>
     </div>
 </div>

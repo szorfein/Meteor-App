@@ -1,11 +1,11 @@
-<admin [form]="formular"></admin>
-<div *ngIf="portfolio">
-    <div class="row">
-        <div class="col-sm-6 col-md-6 col-xs-12 col-lg-4 thumb" *ngFor="let img of portfolio | async">
+<div class="container-fluid">
+    <admin [form]="formular"></admin>
+
+    <div *ngIf="portfolio">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-xs-12 col-lg-4 thumb" *ngFor="let img of portfolio | async">
             <imgur-display [imgur]="img"></imgur-display>
+            </div>
         </div>
     </div>
-</div>
-<div *ngIf="!portfolio">
-    We dont have response...
 </div>

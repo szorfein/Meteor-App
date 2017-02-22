@@ -1,20 +1,22 @@
-<div *ngIf="aboutMe">
-    <about-detail-me [about]="about"></about-detail-me>
+<div class="container-fluid" *ngIf="aboutMe">
+    <about-detail-me [about]="about" [display]="bloc"></about-detail-me>
 </div>
 
-<div *ngIf="aboutBlog">
-    <about-blog [about]="about"></about-blog>
+<div class="container-fluid" *ngIf="aboutBlog">
+    <div class="container">
+        <about-blog [about]="about"></about-blog>
+    </div>
 </div>
 
-<div *ngIf="aboutSocial && displayInline">
+<div class="container-fluid" *ngIf="aboutSocial && displayInline">
     <social [social]="about" [display]="inline"></social>
 </div>
 
-<div *ngIf="aboutSocial && displayBloc">
+<div class="container-fluid" *ngIf="aboutSocial && displayBloc">
     <social [social]="about" [display]="bloc"></social>
 </div>
 
-<div *ngIf="aboutMix">
+<div class="container-fluid" *ngIf="aboutMix">
     display all 
 </div>
 

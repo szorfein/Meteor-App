@@ -5,26 +5,33 @@
                 <admin [form]="formular" [edit]="article"></admin>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8 blog">
-
-                <section class="article-detail" *ngFor="let bloc of article.bloc">
-                    <div class="page-header">
-                        <h1>{{ bloc.title }}</h1>
-                    </div>
-                    <p>
-                    le: {{ article.createdAt | date:"d MMMM y à H" }}h by: {{ article.authorId | displayNameWithId }}
-                    </p>
-                    <img class="img-fluid" [src]="article | displayMainImage">
-                    <div class="description"
-                         [innerHTML]="bloc.description | markdown"></div>
-                    <div class="article"
-                         [innerHTML]="bloc.article | markdown"></div>
-                </section>
-                <comment></comment>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 sidebar">
-                <sidebar></sidebar>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-8 blog card">
+                    <section class="article-detail" *ngFor="let bloc of article.bloc">
+                        <div class="card-block">
+                            <div class="blog-header text-center">
+                                <h1 class="card-title">{{ bloc.title }}</h1>
+                                <h6 class="card-subtitle mb-2 text-muted"> 
+                                    by: {{ article.authorId | displayNameWithId }} | {{ article.createdAt | date:"d MMMM y à H" }}h
+                                </h6>
+                            </div>
+                        </div>
+                        <img class="card-img img-fluid" [src]="article | displayMainImage">
+                        <div class="card-block">
+                            <div class="card-text">
+                                <div class="description" [innerHTML]="bloc.description | markdown">
+                                </div>
+                                <div class="article" [innerHTML]="bloc.article | markdown">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <comment></comment>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 sidebar">
+                    <sidebar></sidebar>
+                </div>
             </div>
         </div>
     </div>

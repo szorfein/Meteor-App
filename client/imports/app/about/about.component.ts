@@ -1,5 +1,7 @@
-import { Component } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
+import { MeteorObservable } from 'meteor-rxjs'
+import { Subscription } from 'rxjs'
 import template from './about.component.html'
 
 @Component({
@@ -7,7 +9,17 @@ import template from './about.component.html'
     template
 })
 
-export class AboutComponent {
+export class AboutComponent implements OnInit, OnDestroy {
+    me : string = 'me'
+    imageSub : Subscription
 
     constructor( private route: ActivatedRoute ) {}
+
+    ngOnInit() {
+        this.imageSub = MeteorObservable.subscribe('images').subscribe()
+    }
+
+    ngOnDestroy() {
+        this.imageSub.unsubscribe()
+    }
 }

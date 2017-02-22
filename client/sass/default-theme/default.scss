@@ -146,12 +146,12 @@ body {
 }
 
 .index-article {
-    margin: 2em auto;
+    margin: 0 auto;
     padding-top: 1em;
     padding-bottom: 1em;
     &>h2 {
         text-transform: uppercase;
-        font-weight: 700;
+        font-weight: 500;
         font-size: 40px;
         margin: .7em auto;
     }
@@ -209,10 +209,11 @@ body {
 
 .title {
     display: inline-block;
-    padding: 3px 0;
+    padding: 12px 0;
     color: rgba(0,0,0,.75);
     font-size: 14px;
     font-weight: 600;
+    text-transform: uppercase;
 }
 
 .sidebar-widget {
@@ -235,7 +236,7 @@ body {
             height: 50px;
             margin: 0 10px 0 0;
             vertical-align: top;
-            overflow: hidden;
+            overflow: visible;
             &:hover {
                 color: #111;
             }
@@ -282,9 +283,6 @@ body {
 
 .articles-bloc {
     margin: auto 1em;
-    h1 {
-        padding: 40px 5%;
-    }
 }
 
 .bar-tags {
@@ -360,17 +358,16 @@ body {
 }
 
 .article-detail {
-    background-color: #fff;
-    padding-top: 2em;
-    padding-bottom: 2em;
-    padding-left: 1em;
-    padding-right: 1em;
+
     h1 {
         text-transform: uppercase;
-        font-size: 30px;
+        font-size: 26px;
         line-height: 35px;
-        font-weight: normal;
-        margin: 0 0 20px;
+        font-weight: 600;
+    }
+
+    .blog-header {
+        padding: 40px;
     }
 }
 
@@ -380,6 +377,9 @@ body {
 
 .aboutme {
     border: 0;
+    margin: 1em auto;
+    padding-top: 2em;
+    background-color: rgba(234,233,234,.17);
     .card-header {
         background-color: transparent;
     }
@@ -389,8 +389,9 @@ body {
 }
 
 .selfie {
-    width: 256px;
-    height: 256px;
+    width: 171px;
+    height: 171px;
+    margin: auto;
 }
 
 .social-icon {
@@ -430,11 +431,33 @@ body {
 */
 
 .main-footer {
-    padding-top: 2em;
+    background-color: rgba(0,0,0,.5);
+    padding-top: 3em;
+    font-size: 14px;
+    h5 {
+        margin-bottom: 15px;
+    }
+    .footer-blog>.elements-sidebar {
+        background-color: transparent;
+        box-shadow: none;
+        color: #eee;
+        margin: 0;
+        a {
+            color: #aaa;
+            &:hover {
+                color: #fff;
+            }
+        }
+        li {
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+    }
 }
 
 .copyright {
-    background-color: $dark-bg;
+    background-color: rgba(0,0,0,.3);
     border-top: 2px solid $red;
     padding: 1em;
 }

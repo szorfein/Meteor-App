@@ -18,8 +18,11 @@ export class AboutDetailMeComponent implements OnInit, OnDestroy {
     @Input() display : string
     imageSub: Subscription
     formular : string = 'about'
-    bloc : boolean = false
-    inline : boolean = false
+    displayBloc : boolean = false
+    displayInline : boolean = false
+    bloc : string = 'bloc'
+    inline : string = 'inline'
+    social : string = 'social'
 
     ngOnInit() {
         this.setDisplay()
@@ -28,9 +31,9 @@ export class AboutDetailMeComponent implements OnInit, OnDestroy {
 
     private setDisplay() {
         if (this.display == Display[0])
-            this.bloc = true
+            this.displayBloc = true
         else if (this.display == Display[1])
-            this.inline = true
+            this.displayInline = true
     }
 
     ngOnDestroy() {
