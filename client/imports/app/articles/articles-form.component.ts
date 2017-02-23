@@ -52,7 +52,8 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
                 description: [this.edit.bloc[0].description, Validators.required],
                 lang: ['en', Validators.required],
                 article: [this.edit.bloc[0].article, Validators.required],
-                isPublic: [this.edit.isPublic]
+                isPublic: [this.edit.isPublic],
+                toFooter: [this.edit.pastToFooter]
             })
         } else {
             this.addForm = this.formBuilder.group({
@@ -60,7 +61,8 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
                 description: ['', Validators.required],
                 lang: ['en', Validators.required],
                 article: ['', Validators.required],
-                isPublic: [false]
+                isPublic: [false],
+                toFooter: [false]
             })
         }
 

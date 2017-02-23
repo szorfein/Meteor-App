@@ -22,6 +22,20 @@ body {
     margin-top: 54px;
 }
 
+.form-container {
+    .col {
+        padding: 0 .5rem;
+    }
+}
+
+.big-title {
+    margin: 1rem;
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 32px;
+    text-transform: capitalize;
+}
+
 /*
  * Navbar
  */
@@ -324,7 +338,7 @@ body {
 
 .pag {
     padding-top: 1em;
-    background-color: rgba(16,9,9,.68);
+    margin: auto;
 }
 
 .post {
@@ -515,7 +529,22 @@ body {
         margin: auto 2rem;
     }
 
-    .dash-menu {
+    .main-header {
+        button.navbar-toggler {
+            display:none;
+        }
+
+        .navbar-toggler-icon {
+            display: none;
+        }
+
+        #navigation-menu.collapse {
+            display: block;
+            position: relative;
+            margin: auto;
+            height: 0;
+            top: -40px;
+        }
     }
 }
 
@@ -528,22 +557,6 @@ body {
     .articles-bloc {
         margin: auto 3em;
     }
-
-    .main-header {
-        button.navbar-toggler {
-            display:none;
-        }
-        .navbar-toggler-icon {
-            display: none;
-        }
-
-        #navigation-menu.collapse {
-            display: block;
-            position: fixed;
-            left: 32%; 
-        }
-    }
-
 }
 
 // Extra large devices (large desktops, 1200px and up)
@@ -561,9 +574,5 @@ body {
             padding-left: 5em;
             padding-right: 5em;
         }
-    }
-
-    #navigation-menu.collapse {
-        left: 20em;
     }
 }

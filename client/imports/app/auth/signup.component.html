@@ -1,34 +1,44 @@
 <div *ngIf="captcha" class="signup separator">
     <div class="container">
-        <h3>Create an account</h3>
+        <h2 class="big-title">Sign up</h2>
         <form [formGroup]="signupForm" (ngSubmit)="signup()" novalidate>
             <fieldset>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input class="form-control" 
-                           type="email" name="email" required formControlName="email" placeholder="Email">
+                <div class="form-group row">
+                    <label class="col-2 col-form-label" for="email">Email</label>
+                    <div class="col-10">
+                        <input class="form-control" 
+                               type="email" name="email" required formControlName="email" placeholder="Email *">
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="confirm-email">Confirm Email</label>
-                    <input class="form-control" type="email" required formControlName="confirmEmail" placeholder="Confirm email">
+                <div class="form-group row">
+                    <label class="col-2 col-form-label" for="confirm-email">Confirm Email</label>
+                    <div class="col-10">
+                        <input class="form-control" type="email" required formControlName="confirmEmail" placeholder="Confirm Email *">
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input class="form-control"
-                           type="text" name="username" required formControlName="username">
+                <div class="form-group row">
+                    <label class="col-2 col-form-label" for="username">Username</label>
+                    <div class="col-10">
+                        <input class="form-control"
+                               type="text" name="username" required formControlName="username" placeholder="Username *">
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input class="form-control"
-                           type="password" name="password" required formControlName="password">
+                <div class="form-group row">
+                    <label class="col-2 col-form-label" for="password">Password</label>
+                    <div class="col-10">
+                        <input class="form-control"
+                               type="password" name="password" required formControlName="password" placeholder="Password *">
+                    </div>
                 </div>
                
-                <div class="form-group">
-                    <label for="confirm-password">Confirm password</label>
-                    <input class="form-control" type="password" required formControlName="confirmPassword" placeholder="Confirm password">
+                <div class="form-group row">
+                    <label class="col-2 col-form-label" for="confirm-password">Confirm password</label>
+                    <div class="col-10">
+                        <input class="form-control" type="password" required formControlName="confirmPassword" placeholder="Confirm password *">
+                    </div>
                 </div>
 
                 <button *ngIf="captcha.hash"

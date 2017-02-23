@@ -1,19 +1,25 @@
 <div class="login separator">
+    <h2 class="big-title">Log in</h2>
     <div class="container">
-        <h2>Log in to Website</h2>
         <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
             <fieldset>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input class="form-control"
-                           type="email" required formControlName="email">
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label" for="email">Email</label>
+                    <div class="col-10">
+                        <input class="form-control"
+                               type="email" required formControlName="email" placeholder="Email *">
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input class="form-control" 
-                           type="password" required formControlName="password">
+                <div class="form-group row">
+                    <label class="col-2 col-form-label" for="password">Password</label>
+                    <div class="col-10">
+                        <input class="form-control" 
+                               type="password" required formControlName="password" placeholder="Password *">
+                    </div>
                 </div>
+
                 <button class="btn btn-success" type="submit" [disabled]="!loginForm.valid">Login</button>
             </fieldset>
         </form>

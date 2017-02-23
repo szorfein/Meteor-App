@@ -29,6 +29,10 @@ Meteor.publish('articlesTag', function(tagName : string) {
     throw new Meteor.Error('404', 'Tag not found')
 })
 
+Meteor.publish('articlesDoc', function() {
+    return Articles.find({ 'pastToFooter' : true }, { skip:0,limit:6,sort:{ 'createdAt':-1 }})
+})
+
 function buildQuery(articleId?: string) : Object {
 
     if(articleId) 

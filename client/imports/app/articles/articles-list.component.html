@@ -43,18 +43,21 @@
         </div>
         <div class="row">
             <!-- Start Article-List -->
-            <div class="col-xs-12 col-sm-12 col-md-8 blog">
-                <div *ngFor="let article of articles | async">
-                    <display-article-list [article]="article" [display]="blog"></display-article-list>
-                    <button [hidden]="!root" class="btn btn-primary" (click)="removeArticle(article)">Delete this post</button>
-                </div>
-            </div><!-- End Article List -->
+            <div class="col-xs-12 col-sm-12 col-md-8">
+                <div class="blog">
+                    <h2 class="big-title">Articles</h2>
+                    <div *ngFor="let article of articles | async">
+                        <display-article-list [article]="article" [display]="blog"></display-article-list>
+                        <button [hidden]="!root" class="btn btn-primary" (click)="removeArticle(article)">Delete this post</button>
+                    </div>
+                </div><!-- End Article List -->
+                <nav class="pagination justify-content-center pag" aria-label="Pagination">
+                    <pagination-controls (pageChange)="onPageChanged($event)"></pagination-controls>
+                </nav>
+            </div>
             <div class="col-xs-12 col-sm-12 col-md-4 sidebar">
                 <sidebar></sidebar>
             </div>
         </div>
     </div>
 </div>
-<nav class="pagination justify-content-center pag" aria-label="Pagination">
-    <pagination-controls (pageChange)="onPageChanged($event)"></pagination-controls>
-</nav>

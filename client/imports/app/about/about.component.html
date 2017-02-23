@@ -3,8 +3,13 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-8 blog">
-                    <h2>About</h2>
-                    <about-display [element]="me"></about-display>
+                    <h2 class="big-title">About</h2>
+                    <div class="blog-element">
+                        <about-display [element]="blog"></about-display>
+                    </div>
+                    <div class="blog-element">
+                        <about-display [element]="me"></about-display>
+                    </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-4 sidebar">
                     <sidebar></sidebar>

@@ -16,7 +16,8 @@ export interface Article extends CollectionObject {
     like?: number,
     hate?: number,
     tags?: Array<string>,
-    index: number
+    index: number,
+    pastToFooter?: boolean
 }
 
 export interface ArticleForm {
@@ -25,4 +26,5 @@ export interface ArticleForm {
     lang: string,
     article: string,
     isPublic: boolean
+    toFooter: boolean
 }

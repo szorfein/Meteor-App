@@ -18,7 +18,8 @@ function buildNewArticle(article: ArticleForm, imageId: string, tagsList: Array<
         }],
         isPublic: article.isPublic,
         tags: tagsList,
-        index: incIndex('articleId')
+        index: incIndex('articleId'),
+        pastToFooter: article.toFooter
     }
     return newArticle
 }
@@ -50,6 +51,7 @@ class ArticleLib {
                 }],
                 isPublic: article.isPublic,
                 tags: tags,
+                pastToFooter: article.toFooter
             }
         })
     }

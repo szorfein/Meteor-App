@@ -41,9 +41,11 @@
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" 
-                                           formControlName="isPublic">
-                                    Public
-                                </label>
+                                           formControlName="isPublic">Public</label>
+
+                                <label>
+                                    <input type="checkbox"
+                                           formControlName="toFooter">toFooter?</label>
 
                                 <div *ngFor="let t of tags | async">
                                     <label>

@@ -11,6 +11,7 @@ import template from './about.component.html'
 
 export class AboutComponent implements OnInit, OnDestroy {
     me : string = 'me'
+    blog : string = 'blog'
     imageSub : Subscription
 
     constructor( private route: ActivatedRoute ) {}
