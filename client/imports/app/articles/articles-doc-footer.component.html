@@ -1,6 +1,6 @@
 <div *ngIf="articles">
-    <ul>
-        <li class="list-unstyled" *ngFor="let article of articles | async">
+    <ul class="list-unstyled">
+        <li *ngFor="let article of articles | async">
             <i class="fa fa-caret-right fa-fw"></i>
             <a [routerLink]="['/blog', article._id]">{{ article.bloc[0].title }}</a>
         </li>

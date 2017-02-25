@@ -13,6 +13,7 @@ import { LoginComponent } from './auth/login.component'
 import { SignupComponent } from './auth/signup.component'
 import { RecoverComponent } from './auth/recover.component'
 import { TagArticlesListComponent } from './tags/tag-articles-list.component'
+import { SitemapComponent } from './sitemap/sitemap.component'
 
 export const routes: Route[] = [
     { path: '', component: IndexComponent },
@@ -27,7 +28,8 @@ export const routes: Route[] = [
         canActivate: ['canActivateForLoggedIn'] },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
-    { path: 'recover', component: RecoverComponent }
+    { path: 'recover', component: RecoverComponent },
+    { path: 'sitemap', component: SitemapComponent }
 ]
 
 export const ROUTES_PROVIDERS = [{

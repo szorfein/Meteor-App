@@ -3,6 +3,10 @@
         <about-display [element]="about" [display]="inline"></about-detail-contact>
     </div>
     <div class="copyright">
-        <p class="text-center">Souce Code | Copyright | Sitemap</p>
+        <p class="text-center">
+        <a href="https://github.com/szorfein/Meteor-App">Souce Code</a>
+        | Copyright | 
+        <a [routerLink]="['/sitemap']">Sitemap</a>
+        </p>
     </div>
 </footer>
