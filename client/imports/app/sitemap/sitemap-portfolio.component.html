@@ -1,1 +1,8 @@
-<div> Sitemap portfolio </div>
+<div *ngIf="portfolios">
+    <h5>Portfolio</h5>
+    <ul>
+        <li *ngFor="let portfolio of portfolios | async">
+            <a [attr.href]="portfolio.link">{{portfolio.link}}</a>
+        </li>
+    </ul>
+</div>
