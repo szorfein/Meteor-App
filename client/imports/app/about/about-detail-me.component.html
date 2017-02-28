@@ -28,3 +28,25 @@
         </div>
     </div>
 </div>
+
+<div *ngIf="about && displayBlog">
+    <div class="card mt-3 about-blog">
+        <div class="card-header">
+            <h5 class="upper">About the author</h5>
+        </div>
+        <div class="row">
+            <div class="col">
+                <img class="img-fluid card-img img-blog" *ngIf="about.image" [attr.src]="about.image | previewImage" alt="My Head" style="height:150px;width:150px">
+            </div>
+            <div class="col-sm-8">
+                <div class="media-body blog-post card-block">
+                    <h5 class="card-title">{{ about.name | displayOrNone }}</h5>
+                    <p class="card-text">{{ about.aboutYourSelf[0].yourself | displayOrNone }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <about-display [element]="social" [display]="inline"></about-display>
+        </div>
+    </div>
+</div>

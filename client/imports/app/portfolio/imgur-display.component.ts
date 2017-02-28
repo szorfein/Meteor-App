@@ -15,6 +15,7 @@ export class ImgurDisplayComponent implements OnInit {
     image
     album
     imgm : string
+    votes
 
     constructor(private imgurService : ImgurService) {}
 
@@ -42,6 +43,15 @@ export class ImgurDisplayComponent implements OnInit {
             this.imgurService.getImages(setting, this.imgur).subscribe((img) => {
                 this.image = img 
                 this.imgm = rebuildUrlWithSize(img.link, 'l')
+            }, (err) => { console.log(err) })
+        })
+    }
+
+    // TODO: look how make a gallery with imgur...
+    loadVotes() {
+        MeteorObservable.call('imgurConfig').subscribe((setting: ImgurSetting) => {
+            this.imgurService.getVotes(setting, this.imgur).subscribe((votes) => {
+                this.votes = votes
             }, (err) => { console.log(err) })
         })
     }

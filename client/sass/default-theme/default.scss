@@ -36,6 +36,13 @@ body {
     text-transform: capitalize;
 }
 
+.upper {
+    text-transform: uppercase;
+}
+
+.markdown {
+}
+
 /*
  * Navbar
  */
@@ -194,7 +201,10 @@ body {
 }
 
 .thumb {
-    margin-bottom: 2em;
+    margin: 1em 0;
+    .col {
+        margin: 0;
+    }
 }
 
 /*
@@ -385,6 +395,11 @@ body {
     }
 }
 
+.img-blog {
+    margin-left: 25px;
+    margin-top: 20px;
+}
+
 /*
 * About
 */
@@ -394,6 +409,15 @@ body {
     margin: 1em auto;
     padding-top: 2em;
     background-color: rgba(234,233,234,.17);
+    .card-header {
+        background-color: transparent;
+    }
+    .card-footer {
+        background-color: transparent;
+    }
+}
+
+.about-blog {
     .card-header {
         background-color: transparent;
     }

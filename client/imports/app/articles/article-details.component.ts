@@ -22,6 +22,8 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     article: Observable<Article>
     articleId: string
     formular : string
+    me : string = 'me'
+    blog : string = 'blog'
 
     constructor(private route: ActivatedRoute) {}
 

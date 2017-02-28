@@ -1,5 +1,9 @@
-<div class="container-fluid" *ngIf="aboutMe">
+<div class="container-fluid" *ngIf="aboutMe && !displayBlog">
     <about-detail-me [about]="about" [display]="bloc"></about-detail-me>
+</div>
+
+<div *ngIf="aboutMe && displayBlog">
+    <about-detail-me [about]="about" [display]="blog"></about-detail-me>
 </div>
 
 <div class="container-fluid" *ngIf="aboutBlog">

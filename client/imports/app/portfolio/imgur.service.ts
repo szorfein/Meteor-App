@@ -38,6 +38,18 @@ export class ImgurService {
         }
     }
 
+    getVotes(setting : ImgurSetting, imgur : ImgurLink) {
+        if (imgur && imgur.idImgur) {
+            this.setting = setting
+            let imgurUrl = 'https://api.imgur.com/3/gallery/'+imgur.idImgur+'/votes'
+            let options = this.buildRequestOptions()
+
+            return this.http.get(imgurUrl, options)
+            .map(this.extractData)
+            .catch((err: any) => Observable.throw(err.json() || 'Server Error'))
+        }
+    }
+    
     extractData(res) {
         let body = res.json()
         return body.data || {}

@@ -43,7 +43,7 @@
         </div>
         <div class="row">
             <!-- Start Article-List -->
-            <div class="col-xs-12 col-sm-12 col-md-8">
+            <div class="col-xs-12 col-sm-12 col-lg-9">
                 <div class="blog">
                     <h2 class="big-title">Articles</h2>
                     <div *ngFor="let article of articles | async">
@@ -55,7 +55,7 @@
                     <pagination-controls (pageChange)="onPageChanged($event)"></pagination-controls>
                 </nav>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 sidebar">
+            <div class="col-xs-12 col-sm-12 col-lg-3 sidebar">
                 <sidebar></sidebar>
             </div>
         </div>

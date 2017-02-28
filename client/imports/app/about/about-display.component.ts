@@ -6,7 +6,7 @@ import { AboutsDetail } from '/both/collections/extras.collection'
 import template from './about-display.component.html'
 
 enum Display {
-    bloc , inline
+    bloc , inline , blog
 }
 
 enum Elements {
@@ -31,8 +31,10 @@ export class AboutDisplayComponent implements OnInit, OnDestroy {
     aboutSidebar : boolean = false
     displayInline : boolean = false
     displayBloc : boolean = false
+    displayBlog : boolean = false
     bloc : string = 'bloc'
     inline : string = 'inline'
+    blog : string = 'blog'
 
     constructor() {}
 
@@ -71,6 +73,8 @@ export class AboutDisplayComponent implements OnInit, OnDestroy {
             this.displayBloc = true
         else if (this.display == Display[1])
             this.displayInline = true
+        else if (this.display == Display[2])
+            this.displayBlog = true
     }
 
     private killSub() {

@@ -14,10 +14,12 @@
             <h3 class="title card-title">
                 <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
             </h3>
-            <p class="card-text small">
-            by <a [routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
-            | {{ article.createdAt | date:"d MMMM y à H" }}h
-            </p>
+            <div class="card-subtitle mb-2">
+                <small class="text-muted">
+                    by <a [routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
+                    | {{ article.createdAt | date:"d MMMM y à H" }}h
+                </small>
+            </div>
             <p class="card-text" [innerHTML]="bl.description | markdown"></p>
         </div>
     </div>
@@ -51,12 +53,14 @@
             <div class="col">
                 <div class="media-body blog-post">
                     <h5 class="card-title"><a [routerLink]="['/blog', article._id]">{{ article.bloc[0].title }}</a></h5>
-                    <p class="card-text small">
-                    by <a [routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
-                    | {{ article.createdAt | date:"d MMMM y à H" }}h
-                    </p>
+                    <div class="card-subtitle mb-2">
+                        <small class="text-muted">
+                            by <a [routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
+                            | {{ article.createdAt | date:"d MMMM y à H" }}h
+                        </small>
+                    </div>
                     <p class="card-text" [innerHTML]="bl.description | markdown"></p>
-                    <p>
+                    <p class="text-right">
                     <a class="btn" [routerLink]="['/blog', article._id]">read more</a>
                     </p>
                 </div>

@@ -5,7 +5,7 @@ import { AboutDetail } from '/both/models/extra.model'
 import template from './about-detail-me.component.html'
 
 enum Display {
-    bloc , inline
+    bloc , inline , blog
 }
 
 @Component({
@@ -20,6 +20,7 @@ export class AboutDetailMeComponent implements OnInit, OnDestroy {
     formular : string = 'about'
     displayBloc : boolean = false
     displayInline : boolean = false
+    displayBlog : boolean = false
     bloc : string = 'bloc'
     inline : string = 'inline'
     social : string = 'social'
@@ -34,6 +35,8 @@ export class AboutDetailMeComponent implements OnInit, OnDestroy {
             this.displayBloc = true
         else if (this.display == Display[1])
             this.displayInline = true
+        else if (this.display == Display[2])
+            this.displayBlog = true
     }
 
     ngOnDestroy() {

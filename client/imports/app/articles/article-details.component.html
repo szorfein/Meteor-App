@@ -7,32 +7,46 @@
         </div>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-8 blog card">
-                    <section class="article-detail" *ngFor="let bloc of article.bloc">
-                        <div class="card-block">
-                            <div class="blog-header text-center">
-                                <h1 class="card-title">{{ bloc.title }}</h1>
-                                <h6 class="card-subtitle mb-2 text-muted"> 
-                                    by: {{ article.authorId | displayNameWithId }} | {{ article.createdAt | date:"d MMMM y à H" }}h
-                                </h6>
-                            </div>
-                        </div>
-                        <img class="card-img img-fluid" [src]="article | displayMainImage">
-                        <div class="card-block">
-                            <div class="card-text">
-                                <div class="description" [innerHTML]="bloc.description | markdown">
+                <div class="col-xs-12 col-sm-12 col-lg-8">
+                    <div class="card">
+                        <div class="article-detail" *ngFor="let bloc of article.bloc">
+                            <div class="card-block">
+                                <div class="blog-header text-center">
+                                    <h1 class="card-title">{{ bloc.title }}</h1>
+                                    <p class="card-subtitle">
+                                    <small class="mb-2 text-muted"> 
+                                        by: {{ article.authorId | displayNameWithId }} | {{ article.createdAt | date:"d MMMM y à H" }}h
+                                    </small>
+                                    </p>
                                 </div>
-                                <div class="article" [innerHTML]="bloc.article | markdown">
+                            </div> <!-- End card block -->
+                            <img class="card-img img-fluid" [src]="article | displayMainImage">
+                            <div class="card-block">
+                                <div class="card-text">
+                                    <div class="description markdown" [innerHTML]="bloc.description | markdown">
+                                    </div>
+                                    <div class="article markdown" [innerHTML]="bloc.article | markdown">
+                                    </div>
                                 </div>
-                            </div>
+                            </div> 
+                        </div> <!-- End card block -->
+                        <div class="card-footer">
+                            share it on:
                         </div>
-                    </section>
-                    <comment></comment>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-4 sidebar">
+                    </div> <!-- End card -->
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <about-display [element]="me" [display]="blog"></about-display>  
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <comment></comment>
+                        </div>
+                    </div>
+                </div> <!-- End col blog -->
+                <div class="col-xs-12 col-sm-12 col-lg-4 sidebar">
                     <sidebar></sidebar>
                 </div>
-            </div>
+            </div> <!-- End row blog post -->
         </div>
     </div>
 </div>
