@@ -67,8 +67,8 @@
                 <div class="thumbnail">
                     <img *ngIf="image" class="img-fluid" [src]="image | previewImage">
                     <div class="caption">
-                        <div [innerHTML]="addForm.value.description | markdown"></div>
-                        <div [innerHTML]="addForm.value.article | markdown"></div>
+                        <div class="markdown" [innerHTML]="addForm.value.description | markdown"></div>
+                        <div class="markdown" [innerHTML]="addForm.value.article | markdown"></div>
 
                     </div>
                 </div>

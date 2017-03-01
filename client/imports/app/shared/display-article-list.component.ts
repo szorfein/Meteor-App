@@ -3,7 +3,7 @@ import { Article } from '/both/models/article.model'
 import template from './display-article-list.component.html'
 
 enum Display {
-    card , inline , blog
+    card , inline , blog , thumbnail
 }
 
 @Component({
@@ -17,6 +17,7 @@ export class DisplayArticleList implements OnInit {
     cardDisplay : boolean = false
     inlineDisplay : boolean = false
     blogDisplay : boolean = false
+    thumbnailDisplay : boolean = false
     inline : string = 'inline'
 
     constructor() {}
@@ -32,6 +33,8 @@ export class DisplayArticleList implements OnInit {
             this.inlineDisplay = true
         } else if (this.display == Display[2]) {
             this.blogDisplay = true
+        } else if (this.display == Display[3]) {
+            this.thumbnailDisplay = true
         }
     }
 }
