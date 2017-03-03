@@ -1,0 +1,11 @@
+<div class="media-left">
+    <a class="d-flex align-self-start mr-3" href="#" alt="img">
+        <img [attr.src]="comment.posterId | displayUserImage" style="height:64px;width:64px">
+    </a>
+</div>
+<div class="media-body">
+    <h5 class="mt-0">
+        {{ comment.poster }}
+    </h5>
+    <span><small> | {{ comment.posted | date:"d MMMM y à H:M" }}</small></span>
+    <div class="markdown" [innerHTML]="comment.post | markdown"></div>

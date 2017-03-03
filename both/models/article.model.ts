@@ -18,6 +18,7 @@ export interface Article extends CollectionObject {
     tags?: Array<string>,
     index: number,
     pastToFooter?: boolean
+    commentNb?: number
 }
 
 export interface ArticleForm {

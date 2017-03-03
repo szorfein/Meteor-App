@@ -1,98 +1,59 @@
-<div class="article-detail" *ngIf="comments">
+<div class="article-detail mt-3" *ngIf="comments">
 
+    <div class="container">
     <!-- comment -->
-    <ul class="media-list">
-        <li class="media" *ngFor="let comment of comments | async; let i=index">
-            <div class="media-left">
-                <a href="#">
-                    <img class="media-object" src="" alt="">
-                </a>
+        <div class="media row" *ngFor="let comment of comments | async; let i=index">
+            <display-comment [comment]="comment"></display-comment>
+            <div *ngIf="user">
+                <comment-button 
+            [post]="comment" 
+            [articleId]="articleId"
+            [index]="i"></comment-button>
             </div>
-            <!-- Media Body from father -->
-            <div class="media-body">
-                <h3 class="h3 media-heading">{{ comment.poster }}
-                    <small>>{{ comment.posted | date:"d MMMM y à H:M" }}</small></h3>
-                <div [innerHTML]="comment.post | markdown"></div>
+
+            <!-- Reply 1 -->
+            <div class="media row" *ngFor="let reply of (comment | displayReplyComment) | async; let i=index"> 
+                <display-comment [comment]="reply"></display-comment>
                 <div *ngIf="user">
                     <comment-button 
-                    [post]="comment" 
-                    [articleId]="articleId"
-                    [index]="i"></comment-button>
+                [post]="reply" 
+                [articleId]="articleId"
+                [index]="i"></comment-button>
                 </div>
 
-                <!-- Reply 1 -->
-                <div class="media" *ngFor="let reply of (comment | displayReplyComment) | async; let i=index"> 
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object" src="" alt="">
-                        </a>
+                <!-- Reply 2 -->
+                <div class="media row" *ngFor="let reply1 of (reply | displayReplyComment) | async; let i=index"> 
+                    <display-comment [comment]="reply1"></display-comment>
+                    <div *ngIf="user">
+                        <comment-button 
+                    [post]="reply1" 
+                    [articleId]="articleId"
+                    [index]="i"></comment-button>
                     </div>
 
-                    <!-- media-body 1 -->
-                    <div class="media-body">
-                        <h3 class="h3 media-heading">{{ reply.poster }}
-                            <small>>{{ reply.posted | date:"d MMMM y à H:M" }}</small></h3>
-                        <div [innerHTML]="markdownDisplay(reply.post)"></div>
-
+                    <!-- Reply 3 -->
+                    <div class="media row" *ngFor="let reply2 of (reply1 | displayReplyComment) | async; let i=index"> 
+                        <display-comment [comment]="reply2"></display-comment>
                         <div *ngIf="user">
                             <comment-button 
-                            [post]="reply" 
-                            [articleId]="articleId"
-                            [index]="i"></comment-button>
+                        [post]="reply2" 
+                        [articleId]="articleId"
+                        [index]="i"></comment-button>
                         </div>
 
-                        <!-- Reply 2 -->
-                        <div class="media" *ngFor="let reply1 of (reply | displayReplyComment) | async; let i=index"> 
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src="" alt="">
-                                </a>
-                            </div>
-
-                            <!-- media-body 2 -->
-                            <div class="media-body">
-                                <h3 class="h3 media-heading">{{ reply1.poster }}
-                                    <small>>{{ reply.posted | date:"d MMMM y à H:M" }}</small></h3>
-                                <div [innerHTML]="markdownDisplay(reply1.post)"></div>
-
-                                <div *ngIf="user">
-                                    <comment-button 
-                                    [post]="reply1" 
-                                    [articleId]="articleId"
-                                    [index]="i"></comment-button>
-                                </div>
-
-                                <!-- Reply 3 -->
-                                <div class="media" *ngFor="let reply2 of (reply1 | displayReplyComment) | async; let i=index"> 
-                                    <div class="media-left">
-                                        <a href="#">
-                                            <img class="media-object" src="" alt="">
-                                        </a>
-                                    </div>
-
-                                    <!-- media-body 3 -->
-                                    <div class="media-body">
-                                        <h3 class="h3 media-heading">{{ reply2.poster }}
-                                            <small>>{{ reply2.posted | date:"d MMMM y à H:M" }}</small></h3>
-                                        <div [innerHTML]="markdownDisplay(reply2.post)"></div>
-
-                                        <div *ngIf="user">
-                                            <comment-button 
-                                            [post]="reply2" 
-                                            [articleId]="articleId"
-                                            [index]="i"></comment-button>
-                                        </div>
-
-                                    </div> <!-- End media body 3 -->
-                                </div> <!-- End reply 3 -->
-                            </div> <!-- End media body 2 -->
-                        </div> <!-- End reply 2 -->
-                    </div>  <!--</div> End media Body 1 -->
+                        </div> <!-- End media body 3 -->
+                    </div> <!-- End reply 3 -->
+                </div> <!-- End media body 2 -->
+                </div> <!-- End reply 2 -->
+            </div>  <!--</div> End media Body 1 -->
             </div>  <!--</div> End reply 1 -->
-        </li> <!-- End Comment -->
-    </ul>
-</div> <!-- End media -->
+        </div>
+        </div> <!-- End Comment -->
+
+        </div>
+
+</div>
 <div [hidden]="!user">
     <h3>New post</h3>
-    <comment-form></comment-form>
+    <comment-form [article]="articleId"></comment-form>
 </div>

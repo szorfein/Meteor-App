@@ -8,16 +8,17 @@ import { User } from '/both/models/user.model'
 })
 
 export class DisplayUserImagePipe implements PipeTransform {
-    transform(user: User) {
-        if (!user)
-            return ''
+    transform(userId: string) {
 
-        let users = UsersExt.findOne({ 'idOwner': user._id })
-        let image : string = ''
+        let image : string = '/img/anonyme_user.png'
 
-        if (users) {
+        if (!userId)
+            return image
+
+        let users = UsersExt.findOne({ 'idOwner': userId })
+
+        if (users)
             image = users.objUser.img
-        }
 
         return image
     }

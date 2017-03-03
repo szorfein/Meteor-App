@@ -5,6 +5,6 @@
         <textarea class="form-control" rows="3"
             formControlName="post" name="post"></textarea>
         </div>
-        <button class="btn btn-primary" type="submit">Add Comment</button>
+        <button class="btn btn-success" type="submit" [disabled]="!addForm.valid">Add Comment</button>
     </fieldset>
 </form>

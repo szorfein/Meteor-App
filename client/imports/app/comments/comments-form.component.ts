@@ -1,7 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { Meteor } from 'meteor/meteor'
-import { Subscription, Observable } from 'rxjs'
-import { ActivatedRoute } from '@angular/router'
 import { MeteorObservable } from 'meteor-rxjs'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { InjectUser } from 'angular2-meteor-accounts-ui'
@@ -13,44 +11,53 @@ import template from './comments-form.component.html'
 })
 
 @InjectUser('user')
-export class CommentsFormComponent implements OnInit, OnDestroy {
+export class CommentsFormComponent implements OnInit {
+    @Input() article : string
 
     user: Meteor.User
-    articleId: string
-    urlparam: Subscription
     addForm: FormGroup
 
-    constructor(private route: ActivatedRoute, 
-                private formBuilder: FormBuilder) {}
+    constructor(private formBuilder: FormBuilder) {}
 
     ngOnInit() {
-        this.addForm = this.formBuilder.group({
-            post: ['', Validators.required]
-        })
-
-        this.urlparam = this.route.params
-        .map(params => params['articleId'])
-        .subscribe(articleId => {
-            this.articleId = articleId
+        if (this.article) {
+            this.makeForm()
             this.user
-        })
-    }
-
-    addComment():void {
-        if (this.addForm.valid) {
-            MeteorObservable.call('AddComment', 
-                                  this.articleId, 
-                                  this.user.username,
-                                  this.addForm.value.post)
-            .subscribe(() => {
-                console.log('Add Comment From ' + this.user.username + ' Success')
-            }, (error) => { console.log(`Failed Add Comment cause -> $(error)`) })
-
-            this.addForm.reset()
         }
     }
 
-    ngOnDestroy() {
-        this.urlparam.unsubscribe()
+    private makeForm() {
+        if (Meteor.userId()) {
+            this.addForm = this.formBuilder.group({
+                post: ['', Validators.required]
+            })
+        } else {
+            this.addForm = this.formBuilder.group({
+                post: ['', Validators.required],
+                username: ['', Validators.required],
+                email: ['', Validators.required],
+                website: [''],
+                captcha: ['', Validators.required]
+            })
+        }
+    }
+
+    addComment():void {
+        if (this.addForm.valid && Meteor.userId()) {
+
+            MeteorObservable.call('AddComment', this.article, this.user.username, this.addForm.value.post).subscribe(() => {
+                console.log('Add Comment From ' + this.user.username + ' Success')
+            }, (error) => {
+                console.log(`Failed Add Comment cause -> $(error)`) 
+            })
+
+        } else if (this.addForm.valid && !Meteor.userId()) {
+
+            MeteorObservable.call('AddCommentWithoutRegister', this.article, this.addForm.value).subscribe(() => {
+                console.log('Add Comment From ' + this.user.username + ' Success')
+            }, (error) => { console.log(`Failed Add Comment cause -> $(error)`) })
+        }
+
+        this.addForm.reset()
     }
 }
