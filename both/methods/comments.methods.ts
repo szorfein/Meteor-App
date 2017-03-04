@@ -15,20 +15,16 @@ function giveTitle(articleId: string, lang: string) {
     throw new Meteor.Error('404', 'Article not found')
 }
 
-function newComment(articleId: string, post: string) {
+function newComment(articleId : string, post : string, subId : string) {
+    console.log('NewComment userid -> ' + Meteor.userId())
     Comments.insert({
         poster: Meteor.userId(),
         posted: new Date(),
         lastposted: new Date(),
         father: articleId,
-        son: '',
+        son: subId,
         post: post
     })
-}
-
-function ctrlArgs(articleId : string, post : string) {
-    check(articleId, String)
-    check(post, String)
 }
 
 function editUserProfile(articleId : string) {
@@ -60,13 +56,17 @@ function newCommentWithoutForm(articleId : string, form : CommentFormWithoutLogg
 }
 
 Meteor.methods({
-    AddComment: function(articleId : string, post : string) : void {
 
-        if (!ctrlArgs(articleId, post))
-            throw new Meteor.Error('404', 'Arguments problem')
+    AddComment: function(articleId : string, post : string, son? : string) : void {
+        let sub = son ? son : ''
+        check(articleId, String)
+        check(post, String)
+        if (son) {
+            check(son, String)
+        }
 
         if (Meteor.isServer) {
-            newComment(articleId, post)
+            newComment(articleId, post, sub)
             editUserProfile(articleId)
         }
     },
@@ -82,6 +82,22 @@ Meteor.methods({
         }
     },
 
+    EditComment: function(postId : string, newPost : string) {
+        check(postId, String)
+        check(newPost, String)
+
+        Comments.update(postId, {
+            $set: {
+                lastposted: new Date(),
+                post: newPost
+            }
+        })
+    },
+
     DelComment: function(articleId: string) {
+        check(articleId, String)
+
+        if (Meteor.isServer) 
+            Comments.remove(articleId)
     }
 })

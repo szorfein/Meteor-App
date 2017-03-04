@@ -13,7 +13,6 @@ import template from './comments-form.component.html'
 @InjectUser('user')
 export class CommentsFormComponent implements OnInit {
     @Input() article : string
-
     user: Meteor.User
     addForm: FormGroup
 
@@ -45,7 +44,7 @@ export class CommentsFormComponent implements OnInit {
     addComment():void {
         if (this.addForm.valid && Meteor.userId()) {
 
-            MeteorObservable.call('AddComment', this.article, this.user.username, this.addForm.value.post).subscribe(() => {
+            MeteorObservable.call('AddComment', this.article, this.addForm.value.post).subscribe(() => {
                 console.log('Add Comment From ' + this.user.username + ' Success')
             }, (error) => {
                 console.log(`Failed Add Comment cause -> $(error)`) 

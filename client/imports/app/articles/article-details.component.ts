@@ -18,8 +18,8 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     imageSub : Subscription
     paramsSub: Subscription
     articleSub: Subscription
-
     article: Observable<Article>
+
     articleId: string
     formular : string
     me : string = 'me'
@@ -28,10 +28,9 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     constructor(private route: ActivatedRoute) {}
 
     ngOnInit() {
+        this.kill()
         this.formular = "editArticle"
-        this.paramsSub = this.route.params
-        .map(params => params['articleId'])
-        .subscribe(articleId => {
+        this.paramsSub = this.route.params.map(params => params['articleId']).subscribe(articleId => {
             this.articleId = articleId
             this.imageSub = MeteorObservable.subscribe('images').subscribe()
             this.printArticle()
@@ -39,20 +38,25 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     }
 
     printArticle() {
-        if (this.articleSub)
-            this.articleSub.unsubscribe()
-
-        this.articleSub = MeteorObservable
-        .subscribe('article', this.articleId)
-        .subscribe(() => {
+        this.articleSub = MeteorObservable.subscribe('article', this.articleId).subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
                 this.article = Articles.findOne({ '_id': this.articleId })
             })
         })
     }
 
+    private kill() {
+        if (this.imageSub)
+            this.imageSub.unsubscribe()
+
+        if (this.paramsSub)
+            this.paramsSub.unsubscribe()
+
+        if (this.articleSub)
+            this.articleSub.unsubscribe()
+    }
+
     ngOnDestroy() {
-        this.paramsSub.unsubscribe()
-        this.imageSub.unsubscribe()
+        this.kill()
     }
 }

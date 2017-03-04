@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, Input, OnInit, OnDestroy } from '@angular/core'
 import { Meteor } from 'meteor/meteor'
 import { Subscription, Observable } from 'rxjs'
-import { ActivatedRoute } from '@angular/router'
 import { MeteorObservable } from 'meteor-rxjs'
 import { Comments } from '/both/collections/comments.collection'
 import { C0mment } from '/both/models/comment.model'
@@ -15,41 +14,45 @@ import template from './comments-article.component.html'
 
 @InjectUser('user')
 export class CommentsArticleComponent implements OnInit, OnDestroy {
-
+    @Input() articleId : string
     user: Meteor.User
-    articleId: string
-    urlparam: Subscription
-
     comments: Observable<C0mment[]>
     commentsSub: Subscription
-    comment: C0mment
+    imagesSub : Subscription
 
-    constructor(private route: ActivatedRoute) {}
+    constructor() {}
 
     ngOnInit() {
-        this.urlparam = this.route.params
-        .map(params => params['articleId'])
-        .subscribe(articleId => {
-            this.articleId = articleId
-            this.user
+        this.kill()
+        this.user
+        this.imagesSub = MeteorObservable.subscribe('images').subscribe()
 
-            if (this.commentsSub)
-                this.commentsSub.unsubscribe()
+        if (this.articleId)
+            this.callComments()
+    }
 
-            this.commentsSub = MeteorObservable.subscribe('comments', articleId)
-            .subscribe(() => {
+    private callComments() {
+        this.commentsSub = MeteorObservable.subscribe('comments', this.articleId).subscribe(() => {
+            MeteorObservable.autorun().subscribe(() => {
                 this.comments = Comments.find({ 
                     $and: [
                         { 'father': this.articleId },
-                        { 'son': null }
+                        { 'son': '' }
                     ]
-                })
+                }).zone()
             })
         })
     }
 
+    private kill() {
+        if (this.commentsSub)
+            this.commentsSub.unsubscribe()
+
+        if (this.imagesSub)
+            this.imagesSub.unsubscribe()
+    }
+
     ngOnDestroy() {
-        this.urlparam.unsubscribe()
-        this.commentsSub.unsubscribe()
+        this.kill()
     }
 }

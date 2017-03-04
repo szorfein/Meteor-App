@@ -1,30 +1,27 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Meteor } from 'meteor/meteor'
-import { Comments } from '/both/collections/comments.collection'
-import { C0mment } from '/both/models/comment.model'
 import { InjectUser } from 'angular2-meteor-accounts-ui'
+import { MeteorObservable } from 'meteor-rxjs'
 import template from './comment-button.component.html'
 
 @Component({
-    moduleId: module.id,
     selector: 'comment-button',
     template
 })
 
 @InjectUser('user')
 export class CommentButtonComponent implements OnInit {
+    @Input() post: C0mment
+    @Input() articleId: string
+    @Input() index: number
     replyForm: FormGroup
     editForm: FormGroup
     user: Meteor.User
 
-    @Input() post: C0mment
-    @Input() articleId: string
-    @Input() index: number
-
     constructor(private formBuilder: FormBuilder) {}
-    ngOnInit() {
 
+    ngOnInit() {
         this.user
         this.printReplyForm()
         this.printEditForm()
@@ -43,32 +40,27 @@ export class CommentButtonComponent implements OnInit {
     }
 
     edit(post: C0mment):void {
-        if (this.editForm.valid && post && this.articleId && this.user) {
-            Comments.update(post._id, {
-                $set: {
-                    lastposted: new Date(),
-                    post: this.editForm.value.post
-                }
-            })
+        if (this.editForm.valid && post && this.articleId) {
+            MeteorObservable.call('EditComment', post._id, this.editForm.value.post).subscribe(() => {
+                console.log('Successfuly edit')
+            }, (err) => { console.log(`Fail edit comment -> ${err}`) })
         }
     }
 
-    reply(post: C0mment):void {
-        if (this.replyForm.valid && post && this.articleId && this.user) {
-            Comments.insert({
-                poster: this.user.username,
-                posted: new Date(),
-                post: this.replyForm.value.post,
-                lastposted: new Date(),
-                father: this.articleId,
-                son: post._id
-            })
-            this.replyForm.reset()
+    reply(post: C0mment) {
+        if (this.replyForm.valid && post && this.articleId) {
+            MeteorObservable.call('AddComment', this.articleId, this.replyForm.value.post, post._id).subscribe(() => {
+                console.log('comment add to -> ' + post._id)
+                this.replyForm.reset()
+            }, (err) => { console.log(`Error with comment -> ${err}`) })
         }
     }
 
     remove(post: C0mment):void {
-        if (post)
-            Comments.remove(post._id)
+        if (post) {
+            MeteorObservable.call('DelComment', post._id).subscribe(() => {
+                console.log('Comment has been delete')
+            },(err) => { console.log(`Comment cannot been delete cause ${err}`) })
+        }
     }
 }
