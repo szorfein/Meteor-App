@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Meteor } from 'meteor/meteor'
 import { InjectUser } from 'angular2-meteor-accounts-ui'
+import { C0mment } from '/both/models/comment.model'
 import { MeteorObservable } from 'meteor-rxjs'
 import template from './comment-button.component.html'
 
@@ -14,7 +15,6 @@ import template from './comment-button.component.html'
 export class CommentButtonComponent implements OnInit {
     @Input() post: C0mment
     @Input() articleId: string
-    @Input() index: number
     replyForm: FormGroup
     editForm: FormGroup
     user: Meteor.User

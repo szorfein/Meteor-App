@@ -1,58 +1,58 @@
-<div class="article-detail mt-3" *ngIf="comments">
+<div class="article-detail mt-4 mb-4" *ngIf="comments">
 
     <div class="container">
-    <!-- comment -->
-        <div class="media row" *ngFor="let comment of comments | async; let i=index">
-            <display-comment [comment]="comment"></display-comment>
-            <div *ngIf="user">
-                <comment-button 
-            [post]="comment" 
-            [articleId]="articleId"
-            [index]="i"></comment-button>
-            </div>
-
-            <!-- Reply 1 -->
-            <div class="media row" *ngFor="let reply of (comment | displayReplyComment) | async; let i=index"> 
-                <display-comment [comment]="reply"></display-comment>
-                <div *ngIf="user">
-                    <comment-button 
-                [post]="reply" 
-                [articleId]="articleId"
-                [index]="i"></comment-button>
-                </div>
-
-                <!-- Reply 2 -->
-                <div class="media row" *ngFor="let reply1 of (reply | displayReplyComment) | async; let i=index"> 
-                    <display-comment [comment]="reply1"></display-comment>
-                    <div *ngIf="user">
-                        <comment-button 
-                    [post]="reply1" 
-                    [articleId]="articleId"
-                    [index]="i"></comment-button>
+        <ul class="list-unstyled">
+            <!-- comment -->
+            <div class="" *ngFor="let comment of comments | async; let i=index">
+                <span># {{i}} </span>
+                <display-comment [comment]="comment"></display-comment>
+                <comment-button [post]="comment" [articleId]="articleId"></comment-button>
+                <!-- Reply 1 -->
+                <div class="" *ngFor="let reply of (comment | displayReplyComment) | async"> 
+                    <div class="ml-2">
+                        <display-comment [comment]="reply"></display-comment>
+                        <comment-button [post]="reply" [articleId]="articleId"></comment-button>
                     </div>
 
-                    <!-- Reply 3 -->
-                    <div class="media row" *ngFor="let reply2 of (reply1 | displayReplyComment) | async; let i=index"> 
-                        <display-comment [comment]="reply2"></display-comment>
-                        <div *ngIf="user">
-                            <comment-button 
-                        [post]="reply2" 
-                        [articleId]="articleId"
-                        [index]="i"></comment-button>
+                    <!-- Reply 2 -->
+                    <div class="" *ngFor="let reply1 of (reply | displayReplyComment) | async"> 
+                        <div class="ml-4">
+                            <display-comment [comment]="reply1"></display-comment>
+                            <comment-button [post]="reply1" [articleId]="articleId"></comment-button>
                         </div>
 
-                        </div> <!-- End media body 3 -->
-                    </div> <!-- End reply 3 -->
-                </div> <!-- End media body 2 -->
-                </div> <!-- End reply 2 -->
-            </div>  <!--</div> End media Body 1 -->
-            </div>  <!--</div> End reply 1 -->
-        </div>
-        </div> <!-- End Comment -->
+                        <!-- Reply 3 -->
+                        <div class="" *ngFor="let reply2 of (reply1 | displayReplyComment) | async"> 
+                            <div class="ml-5">
+                                <display-comment [comment]="reply2"></display-comment>
 
-        </div>
+                                <comment-button [post]="reply2" [articleId]="articleId"></comment-button>
+                            </div>
 
+                            <!-- Reply 4 -->
+                            <div class="" *ngFor="let reply3 of (reply2 | displayReplyComment) | async"> 
+                                <div class="ml-6">
+                                    <display-comment [comment]="reply3"></display-comment>
+                                    <comment-button [post]="reply3" [articleId]="articleId"></comment-button>
+                                </div>
+
+                                <!-- Reply 5 -->
+                                <div class="" *ngFor="let reply4 of (reply3 | displayReplyComment) | async"> 
+                                    <div class="ml-7">
+                                        <display-comment [comment]="reply4"></display-comment>
+                                        <comment-button [post]="reply4" [articleId]="articleId"></comment-button>
+                                    </div>
+
+                                </div> <!-- End reply 5 -->
+                            </div> <!-- End reply 4 -->
+                        </div> <!-- End reply 3 -->
+                    </div> <!-- End reply 2 -->
+                </div>  <!-- End reply 1 -->
+            </div> <!-- End Comment -->
+        </ul>
+    </div>
 </div>
+
 <div [hidden]="!user">
     <h3>New post</h3>
     <comment-form [article]="articleId"></comment-form>

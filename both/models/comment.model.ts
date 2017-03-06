@@ -1,7 +1,7 @@
 import { CollectionObject } from './collection-object.model'
 
 export interface C0mment extends CollectionObject {
-    posterId: string, 
+    poster: string, 
     posted: Date, 
     lastposted?: Date,
     father: string,
