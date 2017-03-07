@@ -81,7 +81,7 @@ export function mail(v : FormControl) {
     return v.status = 'INVALID'
 }
 
-export function asicString(v : FormControl) {
+export function basicString(v : FormControl) {
     if (testOrNone(/^[\w]{2,20}$/i, v.value)) {
         return null
     }
@@ -133,5 +133,9 @@ export function passwd(v : FormControl) {
 }
 
 export function tag(tagName : string) {
-    return /^[a-z]{3,9}$/i.test(tagName)
+    return /^[a-z]{3,12}$/i.test(tagName)
+}
+
+export function isMeteorId(name : string) {
+    return /^[a-z0-9]{17}$/i.test(name)
 }

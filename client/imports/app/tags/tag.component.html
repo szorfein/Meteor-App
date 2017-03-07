@@ -1,7 +1,7 @@
 <div *ngIf="displayInline && tags" class="bar-tags">
     <ul class="nav justify-content-center">
         <li class="nav-item" *ngFor="let tag of tags | async">
-            <a class="nav-link" [attr.alt]="tag.name" (click)="tagSelected(tag.name)">{{tag.name}}</a>
+            <a class="dark-link nav-link" [attr.alt]="tag.name" (click)="tagSelected(tag.name)">{{tag.name}}</a>
         </li>
     </ul>
 </div>
@@ -9,7 +9,7 @@
 <div *ngIf="displayBlock && tags">
     <ul class="sidebar-widget-list d-flex align-content-stretch flex-wrap p-3">
         <li class="" *ngFor="let tag of tags | async">
-            <a class="p-2" [routerLink]="['/blog/category', tag.name]">{{tag.name}}</a></div>
+            <a class="p-2 dark-link" [routerLink]="['/blog/category', tag.name]">{{tag.name}}</a></div>
         </li>
     </ul>
 </div>

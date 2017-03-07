@@ -2,6 +2,7 @@ import { Articles } from '/both/collections/articles.collection'
 import { Article, ArticleForm } from '/both/models/article.model'
 import { Meteor } from 'meteor/meteor'
 import { incIndex, decIndex } from '/lib/index'
+import { isMeteorId } from '../validate'
             
 function buildNewArticle(article: ArticleForm, imageId: string, tagsList: Array<string>) {
     let newArticle : Article = {
@@ -24,13 +25,16 @@ function buildNewArticle(article: ArticleForm, imageId: string, tagsList: Array<
     return newArticle
 }
 
-function isExist(articleId: string) {
-    const article : Article = Articles.findOne(articleId)
-    if (!article)
-        throw new Meteor.Error('404', 'Article unknown...')
-}
-
 class ArticleLib {
+
+    public isExist(articleId: string) : boolean {
+        let article : Article
+
+        if (isMeteorId(articleId)) 
+            article = Articles.findOne(articleId)
+
+        return !!article
+    }
 
     public addArticle(article: ArticleForm, imageId: string, tagsList: Array<string>) {
         const newArticle : Article = buildNewArticle(article, imageId, tagsList)
@@ -57,9 +61,10 @@ class ArticleLib {
     }
 
     public remove(articleId: string) {
-        isExist(articleId)
-        Articles.remove(articleId)
-        decIndex('articleId')
+        if (this.isExist(articleId)) {
+            Articles.remove(articleId)
+            decIndex('articleId')
+        }
     }
 }
 

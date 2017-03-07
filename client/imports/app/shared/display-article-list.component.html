@@ -3,7 +3,7 @@
         <div class="card-text">
             <ul class="nav">
                 <li *ngFor="let tag of article.tags" class="nav-item">
-                    <a class="nav-link" [routerLink]="['/blog/category', tag]">{{tag}}</a>
+                    <a class="dark-link nav-link" [routerLink]="['/blog/category', tag]">{{tag}}</a>
                 </li>
             </ul>
         </div>
@@ -12,12 +12,14 @@
         </a>
         <div class="card-block">
             <h3 class="title card-title">
-                <a [routerLink]="['/blog', article._id]">{{bl.title}}</a>
+                <a class="dark-link" [routerLink]="['/blog', article._id]">{{bl.title}}</a>
             </h3>
             <div class="card-subtitle mb-2">
                 <small class="text-muted">
-                    by <a [routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
+                    by <a class="dark-link" [routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
                     | {{ article.createdAt | date:"d MMMM y à H" }}h
+                    | <i class="fa fa-comments" aria-hidden="true"></i>
+                    {{ article.commentNb }}
                 </small>
             </div>
             <p class="card-text" [innerHTML]="bl.description | markdown"></p>
@@ -32,7 +34,7 @@
                 <img class="img-fluid" *ngIf="article.image" [attr.src]="article | displayMainImage" style="height:50px">
             </a>
             <div class="post-info">
-                <a [routerLink]="['/blog', article._id]">{{article.bloc[0].title}}</a>
+                <a class="dark-link" [routerLink]="['/blog', article._id]">{{article.bloc[0].title}}</a>
                 <div class="post-meta">
                     <span class="updated">{{ article.createdAt | date:"d MMMM y" }}h</span>
                     <display-tags [tag]="article.tags" [display]="inline"></display-tags>
@@ -48,8 +50,8 @@
             <img class="img-fluid card-img-top" *ngIf="article.image" [attr.src]="article | displayMainImage">
         </a>
         <div class="card-block">
-            <a [routerLink]="['/blog', article._id]">
-                <h4 class="card-title">{{ article.bloc[0].title }}</h4>
+            <a class="dark-link" [routerLink]="['/blog', article._id]">
+                <h5 class="card-title">{{ article.bloc[0].title }}</h5>
             </a>
             <p class="card-text"><small class="text-muted">{{ article.createdAt | date:"d MMMM y" }}h</p>
         </div>
@@ -66,11 +68,13 @@
             </div>
             <div class="col">
                 <div class="media-body blog-post">
-                    <h5 class="card-title"><a [routerLink]="['/blog', article._id]">{{ article.bloc[0].title }}</a></h5>
+                    <h5 class="card-title"><a class="dark-link" [routerLink]="['/blog', article._id]">{{ article.bloc[0].title }}</a></h5>
                     <div class="card-subtitle mb-2">
                         <small class="text-muted">
-                            by <a [routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
+                            by <a class="dark-link" [routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
                             | {{ article.createdAt | date:"d MMMM y à H" }}h
+                            | <i class="fa fa-comments" aria-hidden="true"></i>
+                            {{ article.commentNb }}
                         </small>
                     </div>
                     <p class="card-text" [innerHTML]="bl.description | markdown"></p>

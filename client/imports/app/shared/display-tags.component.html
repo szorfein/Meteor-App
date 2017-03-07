@@ -3,7 +3,7 @@
 <div *ngIf="tag && displayInline">
     <p class="justify-content-center">
         <span *ngFor="let t of tag">
-            <a [routerLink]="['/blog/category', t]">{{t}}</a> 
+            <a class="dark-link" [routerLink]="['/blog/category', t]">{{t}}</a> 
         </span>
     </p>
 </div>

@@ -1,12 +1,23 @@
 import { Indexes } from '/both/collections/indexes.collection'
+import { tag , isMeteorId } from './validate'
 
-enum indexName { captchaId, articleId }
-
-function isGoodParam(idName: string) {
-    return (idName == indexName[0] || idName == indexName[1])
+enum indexName { 
+    captchaId, articleId
 }
 
-// Meteor don't have findAndModify()
+function isGoodParam(idName: string) : boolean {
+    if (tag(idName)) {
+        console.log('param for index is normal')
+        return (idName == indexName[0] || idName == indexName[1])
+    } else if (isMeteorId(idName)) {
+        console.log('param comment with ID')
+        return true
+    } 
+
+    return false
+}
+
+// Meteor don't have findAndModify() from mongo
 export function incIndex(idName: string):number {
     if (isGoodParam(idName)) {
 

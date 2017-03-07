@@ -1,7 +1,7 @@
 <div class="form-container">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 col-xs-6 form-part">
+            <div class="col-md-12 col-lg-6 form-part">
                 <form [formGroup]="addForm" (ngSubmit)="addArticle(); onReset()">
 
                     <fieldset>
@@ -32,7 +32,7 @@
 
                         <div class="form-group">
                             <label for="article">Article</label>
-                            <textarea class="form-control" rows="6"
+                            <textarea class="form-control" rows="20"
                                                            formControlName="article" placeholder="article">
                             </textarea>
                         </div>
@@ -61,7 +61,7 @@
                     </fieldset>
                 </form>
             </div>
-            <div class="col-md-6 col-xs-6 preview">
+            <div class="col-md-12 col-lg-6 preview">
                 <h2>Preview</h2>
                 <h3>{{ addForm.value.title }}</h3>
                 <div class="thumbnail">

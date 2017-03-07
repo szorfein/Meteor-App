@@ -51,6 +51,28 @@ body {
     margin-left: 5rem !important;
 }
 
+a.dark-link {
+    color: #000;
+    text-decoration: none;
+    &:hover {
+        color: #222;
+    }
+    &:visited {
+        color: #555;
+    }
+}
+
+a.grey-link {
+    color: #aaa;
+    text-decoration: none;
+    &:hover {
+        color: #eee;
+    }
+    &:visited {
+        color: #fff;
+    }
+}
+
 /*
  * Navbar
  */
@@ -257,7 +279,7 @@ body {
         display: -ms-flexbox;
         border-bottom: 1px solid rgba(0,0,0,.1);
         margin: 0;
-        padding: 15px 20px;
+        padding: 3px 20px;
         font-size: 12px;
         line-height: 1.3em;
         &>a {
@@ -406,6 +428,12 @@ body {
 .img-blog {
     margin-left: 36px;
     margin-top: 20px;
+}
+
+.preview {
+    height: 55rem;
+    overflow: auto;
+    text-overflow: ellipsis;
 }
 
 /*

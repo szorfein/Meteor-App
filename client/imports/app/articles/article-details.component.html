@@ -15,7 +15,14 @@
                                     <h1 class="card-title">{{ bloc.title }}</h1>
                                     <p class="card-subtitle">
                                     <small class="mb-2 text-muted"> 
-                                        by: {{ article.authorId | displayNameWithId }} | {{ article.createdAt | date:"d MMMM y à H" }}h
+                                        by: {{ article.authorId | displayNameWithId }} 
+                                        | {{ article.createdAt | date:"d MMMM y à H" }}h
+                                        | <span *ngFor="let tag of article.tags">
+                                                                    <a class="dark-link" [routerLink]="['/blog/category', tag]"> {{tag}}</a>
+                                                                                        </span>
+                                        | <i class="fa fa-comments" aria-hidden="true"></i>
+                                        {{ article.commentNb }}
+
                                     </small>
                                     </p>
                                 </div>

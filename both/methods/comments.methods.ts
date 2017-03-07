@@ -6,6 +6,7 @@ import { UsersExt } from '/both/collections/users.collection'
 import { UserExt } from '/both/models/user.model'
 import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
+import { incIndex, decIndex } from '/lib/index'
 
 function giveTitle(articleId: string, lang: string) {
     const article = Articles.findOne({ $and: [{'_id':articleId}, {'bloc.lang':lang}] })
@@ -24,6 +25,11 @@ function newComment(articleId : string, post : string, subId : string) {
         father: articleId,
         son: subId,
         post: post
+    })
+    Articles.update(articleId, {
+        $set: {
+            commentNb: incIndex(articleId)
+        }
     })
 }
 
@@ -66,6 +72,8 @@ Meteor.methods({
         }
 
         if (Meteor.isServer) {
+            const { commentLib } = require('/lib/server/comment')
+            commentLib.add(articleId)
             newComment(articleId, post, sub)
             editUserProfile(articleId)
         }
@@ -97,7 +105,10 @@ Meteor.methods({
     DelComment: function(articleId: string) {
         check(articleId, String)
 
-        if (Meteor.isServer) 
+        if (Meteor.isServer) {
             Comments.remove(articleId)
+            decIndex(articleId)
+        }
+
     }
 })
