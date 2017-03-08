@@ -8,3 +8,24 @@
         <button class="btn btn-success" type="submit" [disabled]="!addForm.valid">Add Comment</button>
     </fieldset>
 </form>
+<form *ngIf="!user" [formGroup]="formAnonym" (ngSubmit)="addComment()">
+    <div class="form-group">
+        <label for="post">Post</label>
+        <textarea class="form-control" rows="6" formControlName="post" placeholder="Your post *">
+        </textarea>
+    </div>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input class="form-control" formControlName="username" placeholder="Username *">
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input class="form-control" formControlName="email" placeholder="Email *">
+    </div>
+    <div class="form-group">
+        <label for="website">Website</label>
+        <input class="form-control" formControlName="website" placeholder="website">
+    </div>
+    <button class="btn" type="submit" [disabled]="!formAnonym.valid">Post</button>
+</form>
+<captcha (complete)="handleResult($event)"></captcha>

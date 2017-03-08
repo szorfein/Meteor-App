@@ -17,7 +17,6 @@ function giveTitle(articleId: string, lang: string) {
 }
 
 function newComment(articleId : string, post : string, subId : string) {
-    console.log('NewComment userid -> ' + Meteor.userId())
     Comments.insert({
         poster: Meteor.userId(),
         posted: new Date(),
@@ -25,11 +24,6 @@ function newComment(articleId : string, post : string, subId : string) {
         father: articleId,
         son: subId,
         post: post
-    })
-    Articles.update(articleId, {
-        $set: {
-            commentNb: incIndex(articleId)
-        }
     })
 }
 
@@ -57,10 +51,6 @@ function giveCommentList(newtitle : string) {
     return Array.from(newList)
 }
             
-function newCommentWithoutForm(articleId : string, form : CommentFormWithoutLoggin) {
-
-}
-
 Meteor.methods({
 
     AddComment: function(articleId : string, post : string, son? : string) : void {
@@ -102,13 +92,13 @@ Meteor.methods({
         })
     },
 
-    DelComment: function(articleId: string) {
+    DelComment: function(postId : string, articleId : string) {
+        check(postId, String)
         check(articleId, String)
 
         if (Meteor.isServer) {
-            Comments.remove(articleId)
-            decIndex(articleId)
+            const { commentLib } = require('/lib/server/comment')
+            commentLib.remove(postId, articleId)
         }
-
     }
 })

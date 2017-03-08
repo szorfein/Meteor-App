@@ -15,6 +15,8 @@ export class CommentsFormComponent implements OnInit {
     @Input() article : string
     user: Meteor.User
     addForm: FormGroup
+    formAnonym : FormGroup
+    captchaRes : boolean = false
 
     constructor(private formBuilder: FormBuilder) {}
 
@@ -31,14 +33,17 @@ export class CommentsFormComponent implements OnInit {
                 post: ['', Validators.required]
             })
         } else {
-            this.addForm = this.formBuilder.group({
+            this.formAnonym = this.formBuilder.group({
                 post: ['', Validators.required],
                 username: ['', Validators.required],
                 email: ['', Validators.required],
-                website: [''],
-                captcha: ['', Validators.required]
+                website: ['']
             })
         }
+    }
+
+    handleResult(res) {
+        this.captchaRes = res
     }
 
     addComment():void {
@@ -50,13 +55,14 @@ export class CommentsFormComponent implements OnInit {
                 console.log(`Failed Add Comment cause -> $(error)`) 
             })
 
-        } else if (this.addForm.valid && !Meteor.userId()) {
+        } else if (this.formAnonym.valid && !Meteor.userId() && this.captchaRes) {
 
-            MeteorObservable.call('AddCommentWithoutRegister', this.article, this.addForm.value).subscribe(() => {
-                console.log('Add Comment From ' + this.user.username + ' Success')
+            MeteorObservable.call('AddCommentWithoutRegister', this.article, this.formAnonym.value).subscribe(() => {
+                console.log('Add Comment From ' + this.formAnonym.value.username + ' Success')
             }, (error) => { console.log(`Failed Add Comment cause -> $(error)`) })
         }
 
         this.addForm.reset()
+        this.formAnonym.reset()
     }
 }

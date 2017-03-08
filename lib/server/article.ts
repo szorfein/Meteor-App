@@ -3,6 +3,7 @@ import { Article, ArticleForm } from '/both/models/article.model'
 import { Meteor } from 'meteor/meteor'
 import { incIndex, decIndex } from '/lib/index'
 import { isMeteorId } from '../validate'
+import { indexLib } from './index'
             
 function buildNewArticle(article: ArticleForm, imageId: string, tagsList: Array<string>) {
     let newArticle : Article = {
@@ -64,6 +65,16 @@ class ArticleLib {
         if (this.isExist(articleId)) {
             Articles.remove(articleId)
             decIndex('articleId')
+        }
+    }
+
+    public updateComment(idArticle : string) {
+        if (isMeteorId(idArticle)) {
+            Articles.update(idArticle, {
+                $set: {
+                    commentNb: indexLib.returnIndex(idArticle)
+                }
+            })
         }
     }
 }

@@ -58,7 +58,7 @@ export class CommentButtonComponent implements OnInit {
 
     remove(post: C0mment):void {
         if (post) {
-            MeteorObservable.call('DelComment', post._id).subscribe(() => {
+            MeteorObservable.call('DelComment', post._id, this.articleId).subscribe(() => {
                 console.log('Comment has been delete')
             },(err) => { console.log(`Comment cannot been delete cause ${err}`) })
         }

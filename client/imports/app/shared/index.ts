@@ -9,6 +9,7 @@ import { DisplayMarkdownPipe } from './display-markdown.pipe'
 import { RootInput } from './root.input.ts'
 import { DisplayArticleList } from './display-article-list.component'
 import { DisplayTagsComponent } from './display-tags.component'
+import { CaptchaComponent } from './captcha.component'
 
 export const SHARED_DECLARATIONS : any[] = [
     DisplayMainImagePipe,
@@ -21,5 +22,6 @@ export const SHARED_DECLARATIONS : any[] = [
     DisplayMarkdownPipe,
     RootInput,
     DisplayArticleList,
-    DisplayTagsComponent
+    DisplayTagsComponent,
+    CaptchaComponent
 ]

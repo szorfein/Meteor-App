@@ -1,22 +1,42 @@
 import { tag , isMeteorId } from '/lib/validate'
-import { incIndex , decIndex } from '/lib/index'
 import { articleLib } from './article'
 import { indexLib } from './index'
+import { C0mment } from '/both/models/comment.model'
+import { Comments } from '/both/collections/comments.collection'
 
 class CommentLib {
     
     public add(idArticle : string) {
         this.checkCommentIndex(idArticle)
+        indexLib.incIndex(idArticle)
+        articleLib.updateComment(idArticle)
     }
 
-    public remove(idArticle : string) {
+    public remove(postId : string, idArticle : string) {
+        this.hasSon(postId)
         indexLib.decIndex(idArticle)
+        this.del(postId)
+        articleLib.updateComment(idArticle)
     }
 
     private checkCommentIndex(idArticle : string) {
         if (articleLib.isExist(idArticle)) {
             indexLib.create(idArticle)
         }
+    }
+
+    private del(idArticle : string) {
+        Comments.remove(idArticle)
+    }
+
+    private hasSon(postId : string) {
+        let post : C0mment
+        if (isMeteorId(postId)) {
+            post = Comments.findOne({ son : postId })
+        }
+        
+        if (!!post)
+            throw new Meteor.Error('404','This post has somes childs and cannot be delete')
     }
 }
 

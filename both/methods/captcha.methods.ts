@@ -48,5 +48,14 @@ Meteor.methods({
         Meteor.call('controlNewNinja', newNinja)
 
         return newNinja
+    },
+
+    validCaptcha: function(captcha : SecretCaptcha, res : string) {
+        check(res, String)
+
+        const captchaForm = { question: captcha.question , response: res }
+
+        Meteor.call('checkValidHash', captcha)
+        Meteor.call('controlResponse', captchaForm)
     }
 })
