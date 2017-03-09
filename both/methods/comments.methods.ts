@@ -16,9 +16,9 @@ function giveTitle(articleId: string, lang: string) {
     throw new Meteor.Error('404', 'Article not found')
 }
 
-function newComment(articleId : string, post : string, subId : string) {
+function newComment(articleId : string, post : string, subId : string, user : string) {
     Comments.insert({
-        poster: Meteor.userId(),
+        poster: user,
         posted: new Date(),
         lastposted: new Date(),
         father: articleId,
@@ -53,8 +53,9 @@ function giveCommentList(newtitle : string) {
             
 Meteor.methods({
 
-    AddComment: function(articleId : string, post : string, son? : string) : void {
+    AddComment: function(articleId : string, post : string, son? : string, user? : string) : void {
         let sub = son ? son : ''
+        const username = this.userId ? this.userId : user
         check(articleId, String)
         check(post, String)
         if (son) {
@@ -64,8 +65,9 @@ Meteor.methods({
         if (Meteor.isServer) {
             const { commentLib } = require('/lib/server/comment')
             commentLib.add(articleId)
-            newComment(articleId, post, sub)
-            editUserProfile(articleId)
+            newComment(articleId, post, sub, username)
+            if (this.userId)
+                editUserProfile(articleId)
         }
     },
 
@@ -75,9 +77,7 @@ Meteor.methods({
         if (this.userId)
             throw new Meteor.Error('404', 'bad form, user alrealy logged')
 
-        if (Meteor.isServer) {
-            newCommentWithoutForm(articleId, form)
-        }
+        Meteor.call('AddComment', articleId, form.post, '', form.username)
     },
 
     EditComment: function(postId : string, newPost : string) {

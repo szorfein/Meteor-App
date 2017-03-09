@@ -14,5 +14,4 @@ export interface CommentFormWithoutLoggin {
     username: string
     email: string
     website?: string
-    captcha: string
 }

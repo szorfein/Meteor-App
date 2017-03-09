@@ -1,4 +1,4 @@
-<div *ngIf="captcha" class="signup separator">
+<div class="signup separator">
     <div class="container">
         <h2 class="big-title">Sign up</h2>
         <form [formGroup]="signupForm" (ngSubmit)="signup()" novalidate>
@@ -41,28 +41,9 @@
                     </div>
                 </div>
 
-                <button *ngIf="captcha.hash"
-                     (click)="onClickCaptcha()" class="btn btn-default" type="button" 
-                     data-toggle="collapse"
-                     [attr.data-target]="'#'+'captcha_'+captcha.hash"
-                     aria-expanded="false"
-                     [attr.aria-controls]="'captcha_'+captcha.hash">
-                    Captcha
-                </button>
-
-                <div *ngIf="captchaClick && captcha.hash"
-                    class="collapse" [attr.id]="'captcha_'+captcha.hash">
-                    <div class="form-group">
-                        <label [attr.for]="'captcha_'+captcha.hash">{{ captcha.question }}</label>
-                        <input class="form-control" 
-                               type="text" 
-                               formControlName="captcha"
-                               [attr.name]="'captcha_'+captcha.hash">
-                    </div>
-                </div>
-
-                <button *ngIf="checkTimerValid" class="btn btn-success" type="submit" [disabled]="!signupForm.valid">Sign Up</button>
+                <button class="btn btn-success" type="submit" [disabled]="!signupForm.valid">Sign Up</button>
             </fieldset>
         </form>
     </div>
 </div>
+<captcha (complete)="handleResult($event)"><captcha>

@@ -9,7 +9,6 @@ export interface RegisterUser {
     password : string
     confirmPassword : string
     username : string
-    captcha : string
 }
 
 export interface UserBar {

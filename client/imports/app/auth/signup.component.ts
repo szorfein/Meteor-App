@@ -1,10 +1,8 @@
-import { Component, OnInit, OnDestroy, NgZone } from '@angular/core'
+import { Component, OnInit, NgZone } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Accounts } from 'meteor/accounts-base'
-import { Subscription, Observable } from 'rxjs'
 import { MeteorObservable } from 'meteor-rxjs'
-import { getIndex } from '/lib/index'
 import { Meteor } from 'meteor/meteor'
 import { RegisterUser } from '/both/models/user.model'
 import { name, forceMail, passwd } from '/lib/validate'
@@ -15,17 +13,11 @@ import template from './signup.component.html'
     template
 })
 
-export class SignupComponent implements OnInit, OnDestroy {
+export class SignupComponent implements OnInit {
 
-    captcha 
-    captchaForm
-    timer : Date = new Date()
-    timeOut : Date
     signupForm : FormGroup
-    error: string
-    captchaSub: Subscription
-    captchaClick : boolean = false
-    indexSub : Subscription
+    captchaRes : boolean = false
+    error : string
 
     constructor(
         private router: Router,
@@ -34,46 +26,17 @@ export class SignupComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
+        this.printSignup()
+    }
 
-        this.indexSub = MeteorObservable.subscribe('indexCaptcha').subscribe()
-
-        if (this.captchaSub) 
-            this.captchaSub.unsubscribe()
-
-        this.captchaSub = MeteorObservable.subscribe('captcha','en').subscribe(() => {
-            this.getCaptcha()
+    private printSignup() {
+        this.signupForm = this.formBuilder.group({
+            email: ['', forceMail],
+            confirmEmail : ['', forceMail],
+            password: ['', passwd],
+            confirmPassword : ['', passwd],
+            username: ['', name],
         })
-    }
-
-    getCaptcha() {
-        let getCount = getIndex('captchaId')
-        MeteorObservable.call('secretCaptcha', getCount).subscribe((captcha) => {
-            this.captcha = captcha
-            this.printSignup()
-            this.initTimeOut()
-        }, (err) => {
-            alert(`cannot create captcha cause ${err}`)
-        })
-    }
-
-    onClickCaptcha() {
-        if (this.captchaClick)
-            this.captchaClick = false
-        else
-            this.captchaClick = true
-    }
-
-    printSignup():void {
-        if (this.captcha) {
-            this.signupForm = this.formBuilder.group({
-                email: ['', forceMail],
-                confirmEmail : ['', forceMail],
-                password: ['', passwd],
-                confirmPassword : ['', passwd],
-                username: ['', name],
-                captcha: ['', Validators.required]
-            })
-        }
     }
 
     private checkEmail() {
@@ -99,13 +62,8 @@ export class SignupComponent implements OnInit, OnDestroy {
     }
 
     signup():void {
-        this.captchaForm = { question: this.captcha.question,
-            response: this.signupForm.value.captcha }
-        if (this.signupForm.valid && this.checkTimerValid() && this.checkConfirm()) {
-            MeteorObservable.call('registerUserFrom', 
-                                  this.signupForm.value,
-                                  this.captcha,
-                                  this.captchaForm)
+        if (this.signupForm.valid && this.captchaRes && this.checkConfirm()) {
+            MeteorObservable.call('registerUserFrom', this.signupForm.value)
             .subscribe((newNinja: RegisterUser) => {
                 if (newNinja) {
                     Accounts.createUser({
@@ -122,28 +80,14 @@ export class SignupComponent implements OnInit, OnDestroy {
                         }
                     })
                 }
+                this.signupForm.reset()
             }, (err) => {
                 alert(`You cannot been register cause ${err}`)
-                this.getCaptcha()
             })
-           this.signupForm.reset()
         }
     }
 
-    // We estimate than complete form will give minimum 10 second !
-    private initTimeOut():void {
-        this.timeOut = new Date()
-        this.timeOut.setSeconds(this.timeOut.getSeconds() + 10)
-    }
-
-    // We estimate than complete form will give minimum 10 second !
-    private checkTimerValid():boolean {
-        let time : Date = new Date()
-        return (time > this.timeOut)
-    }
-
-    ngOnDestroy() {
-        this.captchaSub.unsubscribe()
-        this.indexSub.unsubscribe()
+    handleResult(res : boolean) {
+        this.captchaRes = res
     }
 }

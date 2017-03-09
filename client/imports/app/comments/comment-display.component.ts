@@ -12,10 +12,12 @@ import template from './comment-display.component.html'
 export class CommentDisplayComponent implements OnInit {
     @Input() comment : C0mment
     imageSub : Subscription
+    usersSub : Subscription
 
     constructor() {}
 
     ngOnInit() {
         this.imageSub = MeteorObservable.subscribe('images').subscribe()
+        this.usersSub = MeteorObservable.subscribe('userbar').subscribe()
     }
 }

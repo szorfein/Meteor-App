@@ -139,3 +139,10 @@ export function tag(tagName : string) {
 export function isMeteorId(name : string) {
     return /^[a-z0-9]{17}$/i.test(name)
 }
+
+export function domain(v : FormControl) {
+    if (testOrNone(/^([a-z]{2,15}.)?([a-z]{2,15}.)+(com|eu|org|fr|it)$/i, v.value)) {
+        return null
+    }
+    return v.status = 'Invalid domain'
+}

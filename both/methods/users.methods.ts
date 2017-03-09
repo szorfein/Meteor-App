@@ -54,5 +54,13 @@ Meteor.methods({
         }
 
         return userext
+    },
+
+    registerUserFrom: function(newNinja: RegisterUser) { 
+
+        Meteor.call('controlNewNinja', newNinja)
+
+        return newNinja
     }
+
 })

@@ -1,7 +1,7 @@
 import { tag , isMeteorId } from '/lib/validate'
 import { articleLib } from './article'
 import { indexLib } from './index'
-import { C0mment } from '/both/models/comment.model'
+import { C0mment, CommentFormWithoutLoggin } from '/both/models/comment.model'
 import { Comments } from '/both/collections/comments.collection'
 
 class CommentLib {

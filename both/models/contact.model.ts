@@ -15,5 +15,4 @@ export interface ContactForm {
     phone: string
     subject: string
     message: string
-    captcha: string
 }

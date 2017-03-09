@@ -37,32 +37,23 @@ export class RootInput implements OnInit, OnDestroy {
         })
     }
 
-    loadForm() {
-        if (this.lookArg) {
-            if (this.form == 'index')
-                this.index = true
-            else if (this.form == 'about')
-                this.about = true
-            else if (this.form == 'article')
-                this.article = true
-            else if (this.form == 'editArticle')
-                this.editArticle = true
-            else if (this.form == 'portfolio')
-                this.portfolio = true
+    private loadForm() {
+        if (this.form == formular[0]){
+            this.index = true
+        } else if (this.form == formular[1]) {
+            this.about = true
+        } else if (this.form == formular[2]) {
+            this.article = true
+        } else if (this.form == formular[3]) {
+            this.editArticle = true
+        } else if (this.form == formular[4]) {
+            this.portfolio = true
         }
     }
 
     private kill() {
         if (this.rootSub)
             this.rootSub.unsubscribe()
-    }
-
-    lookArg() : boolean {
-        return this.form == formular[0]
-            || this.form == formular[1]
-            || this.form == formular[2]
-            || this.form == formular[3]
-            || this.form == formular[4]
     }
 
     callRoot() {

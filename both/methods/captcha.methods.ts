@@ -1,6 +1,4 @@
-import { Meteor } from 'meteor/meteor'
 import { SecretCaptcha, CaptchaForm } from '/both/models/captcha.model'
-import { RegisterUser } from '/both/models/user.model'
 
 Meteor.methods({
 
@@ -37,17 +35,6 @@ Meteor.methods({
             if (!captchaLib.ctrlCaptchaForm(captchaForm))
                 throw new Meteor.Error('400', 'Bad response')
         }
-    },
-
-    registerUserFrom: function(newNinja: RegisterUser, 
-                               captcha: SecretCaptcha,
-                               captchaForm: CaptchaForm) {
-
-        Meteor.call('checkValidHash', captcha)
-        Meteor.call('controlResponse', captchaForm)
-        Meteor.call('controlNewNinja', newNinja)
-
-        return newNinja
     },
 
     validCaptcha: function(captcha : SecretCaptcha, res : string) {

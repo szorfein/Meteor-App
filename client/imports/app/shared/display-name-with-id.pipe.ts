@@ -1,4 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core'
+import { isMeteorId, tag } from '/lib/validate'
+import { User } from '/both/models/user.model'
 import { Users } from '/both/collections/users.collection'
 
 @Pipe({
@@ -12,10 +14,15 @@ export class DisplayNameWithIdPipe implements PipeTransform {
             return ''
 
         let username : string = ''
-        let user = Users.findOne(userId)
+        let user : User
 
-        if (user)
-            username = user.username
+        if (isMeteorId(userId)) {
+            user = Users.findOne(userId)
+            if (user)
+                username = user.username
+        } else if (tag(userId)) {
+            username = userId
+        }
 
         return username
     }

@@ -1,31 +1,36 @@
-<form *ngIf="user" [formGroup]="addForm" (ngSubmit)="addComment()">
-    <fieldset>
+<div *ngIf="user">
+    <form [formGroup]="addForm" (ngSubmit)="addComment()" novalidate>
+        <fieldset>
+            <div class="form-group">
+                <label for="comment">Comment</label>
+                <textarea class="form-control" rows="3" required
+                                               formControlName="post" name="post"></textarea>
+            </div>
+            <button class="btn btn-success" type="submit" [disabled]="!addForm.valid">Add Comment</button>
+        </fieldset>
+    </form>
+</div>
+<div *ngIf="!user">
+    <form [formGroup]="formAnonym" (ngSubmit)="addAnonym()" novalidate>
         <div class="form-group">
-        <label for="comment">Comment</label>
-        <textarea class="form-control" rows="3"
-            formControlName="post" name="post"></textarea>
+            <label for="post">Post</label>
+            <textarea class="form-control" rows="6" required formControlName="post" placeholder="Your post *">
+            </textarea>
         </div>
-        <button class="btn btn-success" type="submit" [disabled]="!addForm.valid">Add Comment</button>
-    </fieldset>
-</form>
-<form *ngIf="!user" [formGroup]="formAnonym" (ngSubmit)="addComment()">
-    <div class="form-group">
-        <label for="post">Post</label>
-        <textarea class="form-control" rows="6" formControlName="post" placeholder="Your post *">
-        </textarea>
-    </div>
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input class="form-control" formControlName="username" placeholder="Username *">
-    </div>
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input class="form-control" formControlName="email" placeholder="Email *">
-    </div>
-    <div class="form-group">
-        <label for="website">Website</label>
-        <input class="form-control" formControlName="website" placeholder="website">
-    </div>
-    <button class="btn" type="submit" [disabled]="!formAnonym.valid">Post</button>
-</form>
-<captcha (complete)="handleResult($event)"></captcha>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input class="form-control" required formControlName="username" placeholder="Username *">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input class="form-control" required formControlName="email" placeholder="Email *">
+        </div>
+        <div class="form-group">
+            <label for="website">Website</label>
+            <input class="form-control" formControlName="website" placeholder="website">
+        </div>
+        <div [hidden]="!formAnonym.get('website').errors" class="btn btn-danger">No valid domain</div>
+        <button class="btn" type="submit" [disabled]="!formAnonym.valid">Post</button>
+    </form>
+    <captcha (complete)="handleResult($event)"></captcha>
+</div>
