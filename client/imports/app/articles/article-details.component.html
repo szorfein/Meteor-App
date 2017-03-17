@@ -7,7 +7,7 @@
         </div>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-lg-8">
+                <div class="col-xs-12 col-sm-12 col-lg-9">
                     <div class="card">
                         <div class="article-detail" *ngFor="let bloc of article.bloc">
                             <div class="card-block">
@@ -22,6 +22,7 @@
                                                                                         </span>
                                         | <i class="fa fa-comments" aria-hidden="true"></i>
                                         {{ article.commentNb }}
+                                        | <stat-article-view [article]="article._id"></stat-article-view>
 
                                     </small>
                                     </p>
@@ -53,7 +54,7 @@
                         </div>
                     </div>
                 </div> <!-- End col blog -->
-                <div class="col-xs-12 col-sm-12 col-lg-4 sidebar">
+                <div class="col-xs-12 col-sm-12 col-lg-3 sidebar">
                     <sidebar></sidebar>
                 </div>
             </div> <!-- End row blog post -->

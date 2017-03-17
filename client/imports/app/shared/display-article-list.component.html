@@ -20,6 +20,7 @@
                     | {{ article.createdAt | date:"d MMMM y à H" }}h
                     | <i class="fa fa-comments" aria-hidden="true"></i>
                     {{ article.commentNb }}
+                    | <stat-article-view [article]="article._id"></stat-article-view>
                 </small>
             </div>
             <p class="card-text" [innerHTML]="bl.description | markdown"></p>
@@ -75,6 +76,7 @@
                             | {{ article.createdAt | date:"d MMMM y à H" }}h
                             | <i class="fa fa-comments" aria-hidden="true"></i>
                             {{ article.commentNb }}
+                            | <stat-article-view [article]="article._id"></stat-article-view>
                         </small>
                     </div>
                     <p class="card-text" [innerHTML]="bl.description | markdown"></p>

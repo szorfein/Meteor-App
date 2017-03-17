@@ -34,14 +34,24 @@ function setQuitAt(connection) {
         }})
 }
 
+// for look httpHeaders -> JSON.stringify(connection.httpHeaders))
 class AnalyticLib {
 
     public register(connection) {
+        console.log('address ip -> '+ connection.clientAddress)
+        console.log('user-agent -> ' + connection.httpHeaders["user-agent"])
+        console.log('accept-lang -> ' + connection.httpHeaders["accept-language"])
+        
         insertIntoDatabase(connection)
     }
 
     public end(connection) {
         setQuitAt(connection)
+    }
+
+    public isNewView(connection, articleId : string) {
+        this.register(connection)
+
     }
 }
 

@@ -11,26 +11,34 @@
     </form>
 </div>
 <div *ngIf="!user">
+    <h5 class="title">Leave a reply</h5>
     <form [formGroup]="formAnonym" (ngSubmit)="addAnonym()" novalidate>
+        <p><small>
+            Your email address will not be published. Required fields are marked *
+        </small></p>
         <div class="form-group">
-            <label for="post">Post</label>
+            <label class="sr-only" for="post">Post</label>
             <textarea class="form-control" rows="6" required formControlName="post" placeholder="Your post *">
             </textarea>
         </div>
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input class="form-control" required formControlName="username" placeholder="Username *">
+        <div class="row">
+            <div class="col form-group">
+                <label class="sr-only" for="username">Username</label>
+                <input class="form-control" type="text" required formControlName="username" placeholder="Username *">
+            </div>
+            <div class="col form-group">
+                <label class="sr-only" for="email">Email</label>
+                <input class="form-control" type="email" required formControlName="email" placeholder="Email *">
+            </div>
+            <div class="col form-group">
+                <label class="sr-only" for="website">Website</label>
+                <input class="form-control" type="text" formControlName="website" placeholder="website">
+            </div>
+            <div [hidden]="!formAnonym.get('website').errors" class="btn btn-danger">No valid domain</div>
         </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input class="form-control" required formControlName="email" placeholder="Email *">
+        <div class="row">
+            <button class="upper btn" type="submit" [disabled]="!formAnonym.valid">Post comment</button>
         </div>
-        <div class="form-group">
-            <label for="website">Website</label>
-            <input class="form-control" formControlName="website" placeholder="website">
-        </div>
-        <div [hidden]="!formAnonym.get('website').errors" class="btn btn-danger">No valid domain</div>
-        <button class="btn" type="submit" [disabled]="!formAnonym.valid">Post</button>
     </form>
     <captcha (complete)="handleResult($event)"></captcha>
-</div>
+        </div>

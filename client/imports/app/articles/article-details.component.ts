@@ -34,6 +34,7 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
             this.articleId = articleId
             this.imageSub = MeteorObservable.subscribe('images').subscribe()
             this.printArticle()
+            this.isNewView()
         })
     }
 
@@ -43,6 +44,12 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
                 this.article = Articles.findOne({ '_id': this.articleId })
             })
         })
+    }
+            
+    private isNewView() {
+        MeteorObservable.call('newViewToArticle', this.articleId).subscribe(() => {
+            console.log('new ip add to view')
+        }, (err) => { console.log(`Error -> ${err}`)})
     }
 
     private kill() {
