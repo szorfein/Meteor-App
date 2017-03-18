@@ -1,57 +1,83 @@
-import { Analytic } from '/both/models/analytics.model'
+import { Analytic, Connection } from '/both/models/analytics.model'
 import { Analytics } from '/both/collections/analytics.collections'
+import { articleLib } from './article'
+import { isMeteorId } from '/lib/validate'
 import { Meteor } from 'meteor/meteor'
 
-function insertIntoDatabase(connection) {
-    if (!checkDatabase(connection))
+function insertIntoDatabase(connection : Connection) {
+    if (!checkDatabase(connection)) {
         createNew(connection)
-    else
-        return
+        console.log('new ip has insert to database')
+    } else {
+        console.log('ip alrealy registered')
+    }
 }
 
-function checkDatabase(connection) {
-    let data : Analytic = Analytics.find({ $or: [
-        { uniqueId: connection.id },
-        { addressIp: connection.clientAddress }
-    ]})
+function checkDatabase(connection : Connection) {
+    const data = Analytics.findOne({ addressIp: connection.addressIp })
     return !!data
 }
 
-function createNew(connection) {
+function createNew(connection : Connection) {
     Analytics.insert({
-        uniqueId: connection.id,
-        addressIp: connection.clientAddress,
-        httpHeader: connection.httpHeaders,
-        visitAt: new Date(),
-        quitAt: new Date()
+        addressIp: connection.addressIp,
+        userAgent: connection.userAgent,
+        preferLang: connection.accepLang,
+        quitAt: new Date(),
+        userId: '',
+        hasVisitArticle: [],
+        hasPostComment: []
     })
 }
 
-function setQuitAt(connection) {
-    Analytics.update({ 'uniqueId': connection.id }, {
+function setQuitAt(connection : Connection) {
+    Analytics.update({ addressIp: connection.addressIp }, {
         $set: {
             quitAt: new Date()
-        }})
+        }
+    })
 }
 
 // for look httpHeaders -> JSON.stringify(connection.httpHeaders))
 class AnalyticLib {
 
-    public register(connection) {
-        console.log('address ip -> '+ connection.clientAddress)
-        console.log('user-agent -> ' + connection.httpHeaders["user-agent"])
-        console.log('accept-lang -> ' + connection.httpHeaders["accept-language"])
-        
+    public register(connection : Connection) {
         insertIntoDatabase(connection)
     }
 
-    public end(connection) {
+    public end(connection : Connection) {
         setQuitAt(connection)
     }
 
-    public isNewView(connection, articleId : string) {
+    public isNewView(connection : Connection, articleId : string) {
         this.register(connection)
+        if (isMeteorId(articleId)) {
+            this.pushToView(connection, articleId)
+        } else
+            throw new Meteor.Error('404','arg no valid')
+    }
 
+    private pushToView(connection : Connection, articleId : string) {
+        if (articleLib.isExist(articleId)) {
+            this.newView(connection, articleId)
+        } else
+            throw new Meteor.Error('404', 'article is unknow...')
+    }
+
+    private newView(connection : Connection, articleId : string) {
+        let newData : Array<string> = []
+        newData = this.retrieveOldVisitArticle(connection)
+        newData.push(articleId)
+        Analytics.update({ addressIp: connection.addressIp }, {
+            $set: {
+                hasVisitArticle: newData
+            }
+        })
+    }
+
+    private retrieveOldVisitArticle(connection : Connection) {
+        const data = Analytics.findOne({ addressIp : connection.addressIp })
+        return data ? data.hasVisitArticle : []
     }
 }
 

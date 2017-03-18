@@ -32,9 +32,9 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
         this.formular = "editArticle"
         this.paramsSub = this.route.params.map(params => params['articleId']).subscribe(articleId => {
             this.articleId = articleId
+            this.isNewView()
             this.imageSub = MeteorObservable.subscribe('images').subscribe()
             this.printArticle()
-            this.isNewView()
         })
     }
 

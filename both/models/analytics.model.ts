@@ -1,15 +1,17 @@
 import { CollectionObject } from './collection-object.model'
 
 export interface Analytic extends CollectionObject {
-    uniqueId: string;
-    addressIp: string;
-    httpHeader: Object;
-    visitAt: Date;
-    quitAt: Date;
-    articleRead?: string[];
+    addressIp: string
+    userAgent: string
+    preferLang: string
+    quitAt: Date
+    userId?: string
+    hasVisitArticle?: Array<string>
+    hasPostComment?: Array<string>
 }
 
-export interface BrowserWeb extends CollectionObject {
-    name: string,
-    addresseIp: Array<string>,
+export interface Connection {
+    addressIp : string
+    userAgent : string
+    accepLang : string
 }
