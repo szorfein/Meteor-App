@@ -7,14 +7,21 @@ import { Meteor } from 'meteor/meteor'
 function insertIntoDatabase(connection : Connection) {
     if (!checkDatabase(connection)) {
         createNew(connection)
-        console.log('new ip has insert to database')
-    } else {
-        console.log('ip alrealy registered')
     }
 }
 
 function checkDatabase(connection : Connection) {
     const data = Analytics.findOne({ addressIp: connection.addressIp })
+    return !!data
+}
+
+function checkIfAlrealyView(connection : Connection, articleId : string) {
+    const data = Analytics.findOne({ 
+        $and: [
+            { addressIp: connection.addressIp },
+            { hasVisitArticle: articleId }
+        ]
+    })
     return !!data
 }
 
@@ -50,9 +57,14 @@ class AnalyticLib {
     }
 
     public isNewView(connection : Connection, articleId : string) {
-        this.register(connection)
+        insertIntoDatabase(connection)
         if (isMeteorId(articleId)) {
-            this.pushToView(connection, articleId)
+            if (checkIfAlrealyView(connection, articleId)) {
+                return
+            } else {
+                this.pushToView(connection, articleId)
+                articleLib.incViewArticle(articleId)
+            }
         } else
             throw new Meteor.Error('404','arg no valid')
     }

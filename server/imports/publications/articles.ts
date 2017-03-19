@@ -35,10 +35,13 @@ Meteor.publish('articlesRelated', function(tags: Array<string>) {
             if (!/^[a-z]{3,10}$/i.test(tags[i]))
                 throw new Meteor.Error('404', 'not valid tag')
         }
-        return Articles.find({ $or : [
-            { 'tags': tags[0] },
-            { 'tags': tags[1] }
-        ]}, {skip:0,limit:3,sort: {'createdAt':-1}})
+        return Articles.find({ 
+            $or : [
+                { 'tags': tags[0] },
+                { 'tags': tags[1] },
+                { $and: [ { isPublic: true } ] },
+            ]
+        }, { skip:0,limit:3,sort: {'createdAt':-1} })
     }
     throw new Meteor.Error('404', 'Bad tags parameter')
 })

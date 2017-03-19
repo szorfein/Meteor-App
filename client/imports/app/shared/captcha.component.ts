@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Subscription } from 'rxjs'
 import { Captcha, SecretCaptcha } from '/both/models/captcha.model'
 import { MeteorObservable } from 'meteor-rxjs'
-import { getIndex } from '/lib/index'
 import template from './captcha.component.html'
 
 @Component({
@@ -30,8 +29,7 @@ export class CaptchaComponent implements OnInit, OnDestroy {
     }
 
     private getCaptcha() {
-        const getCount = getIndex('captchaId')
-        MeteorObservable.call('secretCaptcha', getCount).subscribe((captcha : SecretCaptcha) => {
+        MeteorObservable.call('secretCaptcha').subscribe((captcha : SecretCaptcha) => {
             this.captcha = captcha
             this.printForm()
         }, (err) => {

@@ -2,6 +2,7 @@ import { Md5 } from 'ts-md5/dist/md5'
 import { Captcha, SecretCaptcha, CaptchaForm } from '/both/models/captcha.model'
 import { Captchas } from '/both/collections/captchas.collection'
 import { Server } from '/server/main.config.ts'
+import { indexLib } from './index'
 import { Meteor } from 'meteor/meteor'
 
 function randomIntFromInterval(min,max) {
@@ -51,8 +52,9 @@ class CaptchaLib {
             return captcha.bloc[1].question
     }
 
-    public randomCaptcha(index: number) {
-        return randomIntFromInterval(1,index)
+    public randomCaptcha() {
+        let n : number = indexLib.returnIndex('captchaId')
+        return randomIntFromInterval(1,n)
     }
 
     public ctrlCaptchaForm(captchaForm: CaptchaForm) {

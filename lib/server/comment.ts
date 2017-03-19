@@ -8,20 +8,20 @@ class CommentLib {
     
     public add(idArticle : string) {
         this.checkCommentIndex(idArticle)
-        indexLib.incIndex(idArticle)
+        indexLib.incIndex('comm_'+idArticle)
         articleLib.updateComment(idArticle)
     }
 
     public remove(postId : string, idArticle : string) {
         this.hasSon(postId)
-        indexLib.decIndex(idArticle)
+        indexLib.decIndex('comm_'+idArticle)
         this.del(postId)
         articleLib.updateComment(idArticle)
     }
 
     private checkCommentIndex(idArticle : string) {
         if (articleLib.isExist(idArticle)) {
-            indexLib.create(idArticle)
+            indexLib.create('comm_'+idArticle)
         }
     }
 

@@ -2,13 +2,12 @@ import { SecretCaptcha, CaptchaForm } from '/both/models/captcha.model'
 
 Meteor.methods({
 
-    secretCaptcha: function(getCount: number) {
-        check(getCount, Number)
+    secretCaptcha: function() {
         let captcha : SecretCaptcha = { hash: '', question: '' }
 
         if (Meteor.isServer) {
             const { captchaLib } = require('/lib/server/captcha')
-            let genId = captchaLib.randomCaptcha(getCount)
+            let genId = captchaLib.randomCaptcha()
             captcha.hash = captchaLib.hash(genId)
             captcha.question = captchaLib.question(genId)
         }

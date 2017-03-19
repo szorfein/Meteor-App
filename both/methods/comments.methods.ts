@@ -45,7 +45,6 @@ function giveCommentList(newtitle : string) {
         throw new Meteor.Error('404', 'GiveComment -> Not Found')
 
     if (!newList.has(newtitle)) {
-        console.log('newlist do not contain '+newtitle)
         newList.add(newtitle)
     }
     return Array.from(newList)

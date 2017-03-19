@@ -72,10 +72,26 @@ class ArticleLib {
         if (isMeteorId(idArticle)) {
             Articles.update(idArticle, {
                 $set: {
-                    commentNb: indexLib.returnIndex(idArticle)
+                    commentNb: indexLib.returnIndex('comm_'+idArticle)
                 }
             })
         }
+    }
+
+    public incViewArticle(idArticle : string) {
+        if (isMeteorId(idArticle)) {
+            indexLib.create('view_'+idArticle)
+            indexLib.incIndex('view_'+idArticle)
+            this.updateView(idArticle)
+        }
+    }
+
+    private updateView(idArticle : string) {
+        Articles.update(idArticle, {
+            $set: {
+                view: indexLib.returnIndex('view_'+idArticle)
+            }
+        })
     }
 }
 

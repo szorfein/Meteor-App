@@ -5,6 +5,9 @@ import { isMeteorId, tag } from '../validate'
 enum indexName {
     captchaId, articleId
 }
+enum indexNew {
+    view , comm
+}
 
 class IndexLib {
 
@@ -14,7 +17,6 @@ class IndexLib {
                 _id : meteorId,
                 seq : 0
             })
-            console.log('from secret Index, insert new -> ' + meteorId)
         }
     }
 
@@ -23,9 +25,6 @@ class IndexLib {
             Indexes.update({ _id: meteorId }, {
                 $inc: { seq: -1 }
             })
-            console.log('Index have successfully decrease')
-        } else {
-            console.log('decIndex has fail')
         }
     }
 
@@ -48,18 +47,21 @@ class IndexLib {
     }
 
     private isExist(meteorId : string) : boolean {
-        let indexes : Index
-
-        if (isMeteorId(meteorId)) {
-            indexes = Indexes.findOne(meteorId)
-            console.log('isExist work has passed isMeteorId -> ' + meteorId)
-        } else if (tag(meteorId)) {
-            console.log('isExist has passed tag validate -> ' + meteorId)
-            return meteorId == indexName[0] || meteorId == indexName[1]
-        }
-
-        console.log('isExist will return '+ !!indexes)
+        this.ctrlArg(meteorId)
+        const indexes = Indexes.findOne(meteorId)
         return !!indexes
+    }
+
+    private ctrlArg(meteorId : string) {
+
+        if (tag(meteorId)) {
+            return meteorId == indexName[0] || meteorId == indexName[1]
+        } else if (meteorId.length >= 20) {
+            let split = meteorId.split(/_/)
+            return split[0] == indexNew[0] && isMeteorId(split[1])
+        } else {
+            throw new Meteor.Error('404', 'Bad arg')
+        }
     }
 }
 

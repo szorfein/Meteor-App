@@ -6,7 +6,6 @@ enum Keyword {
 }
 
 Meteor.publish('index', function(meteorId : string, keyword : string) {
-    console.log('index assemble -> ' + Keyword[0] + meteorId)
     if (isMeteorId(meteorId)) {
         if (keyword == Keyword[0]) {
             return Indexes.find( { _id: Keyword[0]+meteorId },{skip:0,limit:1})

@@ -7,10 +7,8 @@ enum indexName {
 
 function isGoodParam(idName: string) : boolean {
     if (tag(idName)) {
-        console.log('param for index is normal')
         return (idName == indexName[0] || idName == indexName[1])
     } else if (isMeteorId(idName)) {
-        console.log('param comment with ID')
         return true
     } 
 

@@ -19,6 +19,7 @@ export interface Article extends CollectionObject {
     index: number,
     pastToFooter?: boolean
     commentNb?: number
+    view?: number
 }
 
 export interface ArticleForm {
