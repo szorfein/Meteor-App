@@ -1,4 +1,4 @@
-import { isMeteorId } from '/lib/validate'
+import { isMeteorId, agent } from '/lib/validate'
 
 Meteor.methods({
 
@@ -15,6 +15,8 @@ Meteor.methods({
         
         if (isMeteorId(articleId)) {
             if (Meteor.isServer) {
+                console.log(this.connection.httpHeaders['user-agent'])
+                console.log(agent(this.connection.httpHeaders['user-agent']))
                 const { analyticLib } = require('/lib/server/analytic')
                 const conn = buildConnection.call(this)
                 analyticLib.isNewView(conn, articleId)

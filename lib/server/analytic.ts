@@ -1,7 +1,7 @@
 import { Analytic, Connection } from '/both/models/analytics.model'
 import { Analytics } from '/both/collections/analytics.collections'
 import { articleLib } from './article'
-import { isMeteorId } from '/lib/validate'
+import { isMeteorId, agent } from '/lib/validate'
 import { Meteor } from 'meteor/meteor'
 
 function insertIntoDatabase(connection : Connection) {

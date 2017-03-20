@@ -27,10 +27,7 @@ export class ArticlesRelatedComponent implements OnInit, OnDestroy {
 
     private callArticles() {
         this.articlesSub = MeteorObservable.subscribe('articlesRelated', this.tags).subscribe(() => {
-            this.articles = Articles.find({ $or: [
-                { 'tags': this.tags[0] },
-                { 'tags': this.tags[1] }
-            ]}).zone()
+            this.articles = Articles.find().zone()
         }, (err) => { console.log(err) })
     }
 

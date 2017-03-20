@@ -242,6 +242,9 @@ a.grey-link {
 * Articles
 */
 
+.related {
+}
+
 .blog-element {
     border-bottom: 2px solid rgba(0,0,0,.1);
     padding: 20px;
@@ -390,6 +393,7 @@ a.grey-link {
 .blog {
     margin: 1em 0;
     background-color: #fff;
+    padding-bottom: 3em;
     border-top: 6px solid $red;
     h3.card-title>a {
         text-decoration: none;
@@ -567,7 +571,7 @@ a.grey-link {
 }
 
 .ng-invalid:not(form)  {
-    border-left: 5px solid #a94442; /* red */
+    border-left: 5px solid #e1dcdc; /* red */
 }
 
 /*

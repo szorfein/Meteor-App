@@ -54,7 +54,7 @@ class CaptchaLib {
 
     public randomCaptcha() {
         let n : number = indexLib.returnIndex('captchaId')
-        return randomIntFromInterval(1,n)
+        return randomIntFromInterval(0,n)
     }
 
     public ctrlCaptchaForm(captchaForm: CaptchaForm) {

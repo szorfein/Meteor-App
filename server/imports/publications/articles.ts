@@ -36,10 +36,12 @@ Meteor.publish('articlesRelated', function(tags: Array<string>) {
                 throw new Meteor.Error('404', 'not valid tag')
         }
         return Articles.find({ 
-            $or : [
-                { 'tags': tags[0] },
-                { 'tags': tags[1] },
-                { $and: [ { isPublic: true } ] },
+            $and : [
+                { isPublic: true },
+                { $or : [
+                    { 'tags': tags[0] },
+                    { 'tags': tags[1] },
+                ]}
             ]
         }, { skip:0,limit:3,sort: {'createdAt':-1} })
     }

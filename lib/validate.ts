@@ -146,3 +146,82 @@ export function domain(v : FormControl) {
     }
     return v.status = 'Invalid domain'
 }
+
+export function agent(v : string) {
+    let r : string
+    r = agentMobile.any(v)
+    r = r ? r : agentDesktop.any(v)
+    return r ? r : 'Other'
+}
+
+let agentMobile = {
+    Android: function(v : string) {
+        return /Android/i.test(v)
+    },
+    BlackBerry: function(v : string) {
+        return /BlackBerry/i.test(v)
+    },
+    iOS: function(v : string) {
+        return /iPhone|iPad|iPod/i.test(v)
+    },
+    Opera: function(v : string) {
+        return /Opera Mini/i.test(v)
+    },
+    Windows: function(v : string) {
+        return /IEMobile/i.test(v)
+    },
+    any: function(v : string) {
+        if (agentMobile.Android(v))
+            return 'Android'
+        else if (agentMobile.BlackBerry(v))
+            return 'BlackBerry'
+        else if (agentMobile.iOS(v))
+            return 'iOS'
+        else if (agentMobile.Opera(v))
+            return 'Opera Mini'
+        else if (agentMobile.Windows(v))
+            return 'IEMobile'
+    }
+}
+
+// Internet Explorer info: https://msdn.microsoft.com/library/ms537503.aspx
+let agentDesktop = {
+    Firefox: function(v : string) {
+        return /Firefox/i.test(v)
+    },
+    Vivaldi: function(v : string) {
+        return /Vivaldi/i.test(v)
+    },
+    Safari: function(v : string) {
+        return /Safari/i.test(v)
+    },
+    Opera: function(v : string) {
+        return /Opera/i.test(v)
+    },
+    Trident: function(v : string) {
+        return /Trident\/7.0/i.test(v)
+    },
+    IETen: function(v : string) {
+        return /Trident\/6.0/i.test(v)
+
+    },
+    IENine: function(v : string) {
+        return /Trident\/5.0/i.test(v)
+    },
+    any: function(v : string) {
+        if (agentDesktop.Firefox(v))
+            return 'Firefox'
+        else if (agentDesktop.Vivaldi(v))
+            return 'Vivaldi'
+        else if (agentDesktop.Safari(v))
+            return 'Safari'
+        else if (agentDesktop.Opera(v))
+            return 'Opera'
+        else if (agentDesktop.Trident(v))
+            return 'IE 11'
+        else if (agentDesktop.IETen(v))
+            return 'IE 10'
+        else if (agentDesktop.IENine(v))
+            return 'IE 9'
+    }
+}

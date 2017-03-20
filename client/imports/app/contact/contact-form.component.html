@@ -36,6 +36,6 @@
 
             <button class="btn btn-success" type="submit" [disabled]="!contactForm.valid">Send Message</button>
         </form>
+        <captcha (complete)="handleResult($event)"></captcha>
     </div>
 </div>
-<captcha (complete)="handleResult($event)"></captcha>

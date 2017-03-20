@@ -24,7 +24,6 @@ export class AboutSocialComponent implements OnInit {
     }
 
     private setDisplay() {
-        console.log('social component call with ' + this.display)
         if (this.display == Display[0])
             this.bloc = true
         else if (this.display == Display[1])

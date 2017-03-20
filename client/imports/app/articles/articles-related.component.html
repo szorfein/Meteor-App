@@ -3,7 +3,7 @@
         <div class="card-header">
             <h5 class="upper">Article related</h5>
         </div>
-        <div class="row card-block">
+        <div class="row card-block related">
             <div class="col" *ngFor="let article of articles | async">
                 <display-article-list [article]="article" [display]="thumbnail"></display-article-list>
             </div>
