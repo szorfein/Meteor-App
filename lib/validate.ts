@@ -133,7 +133,7 @@ export function passwd(v : FormControl) {
 }
 
 export function tag(tagName : string) {
-    return /^[a-z]{3,12}$/i.test(tagName)
+    return /^[a-z]{3,16}$/i.test(tagName)
 }
 
 export function isMeteorId(name : string) {

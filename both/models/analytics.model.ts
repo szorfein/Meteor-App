@@ -8,6 +8,7 @@ export interface Analytic extends CollectionObject {
     userId?: string
     hasVisitArticle?: Array<string>
     hasPostComment?: Array<string>
+    connected: boolean
 }
 
 export interface Connection {

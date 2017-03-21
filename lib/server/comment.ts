@@ -8,13 +8,13 @@ class CommentLib {
     
     public add(idArticle : string) {
         this.checkCommentIndex(idArticle)
-        indexLib.incIndex('comm_'+idArticle)
+        indexLib.inc('comm_'+idArticle)
         articleLib.updateComment(idArticle)
     }
 
     public remove(postId : string, idArticle : string) {
         this.hasSon(postId)
-        indexLib.decIndex('comm_'+idArticle)
+        indexLib.dec('comm_'+idArticle)
         this.del(postId)
         articleLib.updateComment(idArticle)
     }

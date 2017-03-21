@@ -15,14 +15,26 @@ Meteor.methods({
         
         if (isMeteorId(articleId)) {
             if (Meteor.isServer) {
-                console.log(this.connection.httpHeaders['user-agent'])
-                console.log(agent(this.connection.httpHeaders['user-agent']))
+                Meteor.call('visitor')
                 const { analyticLib } = require('/lib/server/analytic')
                 const conn = buildConnection.call(this)
                 analyticLib.isNewView(conn, articleId)
             }
         } else 
             throw new Meteor.Error('404', 'error to add view')
+    },
+
+    visitor: function() {
+
+        if (Meteor.isServer) {
+            const { analyticLib } = require('/lib/server/analytic')
+            const conn = buildConnection.call(this)
+            analyticLib.visit(conn)
+            this.connection.onClose(() => {
+                analyticLib.end(conn)
+                console.log('visitor has left -> ' + this.connection.clientAddress)
+            })
+        }
     }
 })
 

@@ -1,13 +1,25 @@
 import { Analytic, Connection } from '/both/models/analytics.model'
 import { Analytics } from '/both/collections/analytics.collections'
 import { articleLib } from './article'
+import { indexLib } from './index'
 import { isMeteorId, agent } from '/lib/validate'
 import { Meteor } from 'meteor/meteor'
 
 function insertIntoDatabase(connection : Connection) {
     if (!checkDatabase(connection)) {
         createNew(connection)
+        indexLib.inc('visitor')
     }
+    searchConnected(connection)
+}
+
+function searchConnected(connection : Connection) {
+    const data = Analytics.findOne({ 
+        $and: [
+            { addressIp: connection.addressIp },
+            { connected: true }
+        ]
+    })
 }
 
 function checkDatabase(connection : Connection) {
@@ -33,14 +45,16 @@ function createNew(connection : Connection) {
         quitAt: new Date(),
         userId: '',
         hasVisitArticle: [],
-        hasPostComment: []
+        hasPostComment: [],
+        connected: true
     })
 }
 
 function setQuitAt(connection : Connection) {
     Analytics.update({ addressIp: connection.addressIp }, {
         $set: {
-            quitAt: new Date()
+            quitAt: new Date(),
+            connected: false
         }
     })
 }
@@ -54,6 +68,13 @@ class AnalyticLib {
 
     public end(connection : Connection) {
         setQuitAt(connection)
+        indexLib.dec('visitorConnected')
+    }
+
+    public visit(connection : Connection) {
+        indexLib.create('visitor')
+        indexLib.create('visitorConnected')
+        this.register(connection)
     }
 
     public isNewView(connection : Connection, articleId : string) {

@@ -1,11 +1,11 @@
 import { Articles } from '/both/collections/articles.collection'
 import { Article, ArticleForm } from '/both/models/article.model'
 import { Meteor } from 'meteor/meteor'
-import { incIndex, decIndex } from '/lib/index'
 import { isMeteorId } from '../validate'
 import { indexLib } from './index'
             
 function buildNewArticle(article: ArticleForm, imageId: string, tagsList: Array<string>) {
+    indexLib.inc('articleId')
     let newArticle : Article = {
         createdAt: new Date(),
         authorId: Meteor.userId(),
@@ -20,7 +20,7 @@ function buildNewArticle(article: ArticleForm, imageId: string, tagsList: Array<
         }],
         isPublic: article.isPublic,
         tags: tagsList,
-        index: incIndex('articleId'),
+        index: indexLib.returnIndex('articleId'),
         pastToFooter: article.toFooter
     }
     return newArticle
@@ -64,7 +64,7 @@ class ArticleLib {
     public remove(articleId: string) {
         if (this.isExist(articleId)) {
             Articles.remove(articleId)
-            decIndex('articleId')
+            indexLib.dec('articleId')
         }
     }
 
@@ -81,7 +81,7 @@ class ArticleLib {
     public incViewArticle(idArticle : string) {
         if (isMeteorId(idArticle)) {
             indexLib.create('view_'+idArticle)
-            indexLib.incIndex('view_'+idArticle)
+            indexLib.inc('view_'+idArticle)
             this.updateView(idArticle)
         }
     }

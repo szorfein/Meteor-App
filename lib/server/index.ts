@@ -3,8 +3,9 @@ import { Index } from '/both/models/index.model'
 import { isMeteorId, tag } from '../validate'
 
 enum indexName {
-    captchaId, articleId
+    captchaId, articleId, visitor, visitorConnected
 }
+
 enum indexNew {
     view , comm
 }
@@ -20,7 +21,7 @@ class IndexLib {
         }
     }
 
-    public decIndex(meteorId : string) {
+    public dec(meteorId : string) {
         if (this.isExist(meteorId)) {
             Indexes.update({ _id: meteorId }, {
                 $inc: { seq: -1 }
@@ -28,7 +29,7 @@ class IndexLib {
         }
     }
 
-    public incIndex(meteorId : string) {
+    public inc(meteorId : string) {
         if (this.isExist(meteorId)) {
             Indexes.update({ _id: meteorId}, {
                 $inc: { seq: 1 }
@@ -55,7 +56,10 @@ class IndexLib {
     private ctrlArg(meteorId : string) {
 
         if (tag(meteorId)) {
-            return meteorId == indexName[0] || meteorId == indexName[1]
+            return meteorId == indexName[0] 
+                || meteorId == indexName[1]
+                || meteorId == indexName[2]
+                || meteorId == indexName[3]
         } else if (meteorId.length >= 20) {
             let split = meteorId.split(/_/)
             return split[0] == indexNew[0] && isMeteorId(split[1])
