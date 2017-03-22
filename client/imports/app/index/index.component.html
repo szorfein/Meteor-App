@@ -4,7 +4,7 @@
     <div id="banner-text">
         <div class="jumbotron">
             <div class="container text-center">
-                <h1 class="display-3">{{ home.welcome[0].title }}</h1>
+                <h1 class="display-4">{{ home.welcome[0].title }}</h1>
                 <p class="lead">{{ home.welcome[0].message }}</p>
             </div>
         </div>
@@ -53,6 +53,13 @@
     </div>
     <div class="index-article bg-gray">
         <h2 class="text-center">Contact Me</h2>
-        <contact-form></contact-form>
+        <div class="row contact">
+            <div class="col-xs-12 col-sm-4">
+                <about-display [element]="address"></about-display>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <contact-form></contact-form>
+            </div>
+        </div>
     </div>
 </div>

@@ -1,0 +1,13 @@
+<div *ngIf="about">
+    <h3>Contacts</h3>
+    <address>
+        E-mail: <a [attr.href]="'mailto'+about.email">{{about.email}}</a><br />
+        Phone: {{ about.fix }}<br />
+        Mobile: {{ about.mobile }}<br />
+        Fax: {{ about.fax }}<br />
+    </address>
+    <h3>Address</h3>
+    <address>
+        {{ about.address }}
+    </address>
+</div>

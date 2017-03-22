@@ -24,6 +24,10 @@
     display all 
 </div>
 
+<div *ngIf="aboutAddress">
+    <about-address [about]="about"></about-address>
+</div>
+
 <div *ngIf="aboutFooter">
     <about-detail-contact [about]="about"></about-detail-contact>
     <social [social]="about" [display]="inline"></social>

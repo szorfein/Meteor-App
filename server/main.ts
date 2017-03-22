@@ -5,6 +5,7 @@ import { loadArticles } from '/server/imports/fixtures/articles'
 import { createRootAccount } from '/server/imports/fixtures/root'
 import { loadTags } from '/server/imports/fixtures/tags'
 import { loadCaptcha } from '/server/imports/fixtures/captchas'
+import { loadAbout, loadHome } from '/server/imports/fixtures/about'
 
 import '/both/methods/users.methods'
 import '/both/methods/comments.methods'
@@ -28,9 +29,11 @@ import './imports/publications/analytics'
 import './imports/publications/portfolios'
 
 Meteor.startup(() => {
+    createRootAccount()
     loadIndexes()
     loadArticles()
-    createRootAccount()
     loadTags()
     loadCaptcha()
+    loadAbout()
+    loadHome()
 })

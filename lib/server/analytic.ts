@@ -14,12 +14,13 @@ function insertIntoDatabase(connection : Connection) {
 }
 
 function searchConnected(connection : Connection) {
-    const data = Analytics.findOne({ 
-        $and: [
-            { addressIp: connection.addressIp },
-            { connected: true }
-        ]
-    })
+    if (checkDatabase(connection)) {
+        Analytics.update({ addressIp: connection.addressIp }, {
+            $set: {
+                connected: true 
+            }
+        })
+    }
 }
 
 function checkDatabase(connection : Connection) {

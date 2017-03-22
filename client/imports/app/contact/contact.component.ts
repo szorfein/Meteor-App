@@ -8,6 +8,7 @@ import template from './contact.component.html'
 })
 
 export class ContactComponent {
+    address : string = 'address'
 
     constructor(
         private route: ActivatedRoute

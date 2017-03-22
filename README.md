@@ -55,3 +55,12 @@ You probably want change couple question/response in file bellow before start...
 
     # paxctl-ng -Em ~/.meteor/packages/meteor-tool/.1.4.2.1r0536n++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/bin/node
     # paxctl-ng -Em ~/.meteor/packages/meteor-tool/.1.4.2.1r0536n++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/mongodb/bin/mongo 
+
+### Error after update.
+
+You need reset project, simply with:
+
+```
+$ meteor reset && meteor 
+
+```

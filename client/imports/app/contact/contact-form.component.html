@@ -1,41 +1,40 @@
+<h3>Send a message</h3>
 <div class="form-container">
-    <div class="container">
-        <form class="separator" [formGroup]="contactForm" (ngSubmit)="addPost()" novalidate>
-            <div class="row">
-                <div class="col form-group">
-                    <label class="sr-only" for="name">Name</label>
-                    <input class="form-control" type="text" required formControlName="name" name="name" placeholder="Your Name *">
-                </div>
-
-                <div class="col form-group">
-                    <label class="sr-only" for="email">Email</label>
-                    <input class="form-control"
-                           type="email" formControlName="email" required name="email" placeholder="Your Email *">
-                </div>
-
-                <div class="col form-group">
-                    <label class="sr-only" for="phone">Phone</label>
-                    <input class="form-control" type="text" required formControlName="phone" name="phone" placeholder="Your Phone">
-                </div>
+    <form [formGroup]="contactForm" (ngSubmit)="addPost()" novalidate>
+        <div class="row">
+            <div class="col form-group">
+                <label class="sr-only" for="name">Name</label>
+                <input class="form-control" type="text" required formControlName="name" name="name" placeholder="Name *">
             </div>
 
-            <div class="row">
-                <div class="col form-group">
-                    <label class="sr-only" for="subject">Subject</label>
-                    <input class="form-control" type="text" required formControlName="subject" name="subject" placeholder="Subject *">
-                </div>
+            <div class="col form-group">
+                <label class="sr-only" for="email">Email</label>
+                <input class="form-control"
+                       type="email" formControlName="email" required name="email" placeholder="Email *">
             </div>
 
-            <div class="row">
-                <div class="col form-group">
-                    <label class="sr-only" for="message">Message</label>
-                    <textarea class="form-control" type="text" rows="4" required formControlName="message" name="message" placeholder="Your Message *">
-                    </textarea>
-                </div>
+            <div class="col form-group">
+                <label class="sr-only" for="phone">Phone</label>
+                <input class="form-control" type="text" required formControlName="phone" name="phone" placeholder="Phone">
             </div>
+        </div>
 
-            <button class="btn btn-success" type="submit" [disabled]="!contactForm.valid">Send Message</button>
-        </form>
-        <captcha (complete)="handleResult($event)"></captcha>
-    </div>
+        <div class="row">
+            <div class="col form-group">
+                <label class="sr-only" for="subject">Subject</label>
+                <input class="form-control" type="text" required formControlName="subject" name="subject" placeholder="Subject *">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col form-group">
+                <label class="sr-only" for="message">Message</label>
+                <textarea class="form-control" type="text" rows="4" required formControlName="message" name="message" placeholder="Message *">
+                </textarea>
+            </div>
+        </div>
+
+        <button class="btn btn-success" type="submit" [disabled]="!contactForm.valid">Send Message</button>
+    </form>
+    <captcha (complete)="handleResult($event)"></captcha>
 </div>

@@ -10,7 +10,7 @@ enum Display {
 }
 
 enum Elements {
-    me , blog , social , mix , footer , sidebar
+    me , blog , social , mix , footer , sidebar , address
 }
 
 @Component({
@@ -29,6 +29,7 @@ export class AboutDisplayComponent implements OnInit, OnDestroy {
     aboutMix : boolean = false
     aboutFooter : boolean = false
     aboutSidebar : boolean = false
+    aboutAddress : boolean = false
     displayInline : boolean = false
     displayBloc : boolean = false
     displayBlog : boolean = false
@@ -45,7 +46,7 @@ export class AboutDisplayComponent implements OnInit, OnDestroy {
         this.loadElement()
     }
 
-    callAbout() {
+    private callAbout() {
         this.aboutSub = MeteorObservable.subscribe('pubAbout').subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
                 this.about = AboutsDetail.findOne()
@@ -66,6 +67,8 @@ export class AboutDisplayComponent implements OnInit, OnDestroy {
             this.aboutFooter = true
         else if (this.element == Elements[5])
             this.aboutSidebar = true
+        else if (this.element == Elements[6])
+            this.aboutAddress = true
     }
 
     private setDisplay() {

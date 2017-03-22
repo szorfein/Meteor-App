@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { User, UserExt, RegisterUser, UserBar } from '/both/models/user.model'
 import { Users, UsersExt } from '/both/collections/users.collection'
+import { ninja } from '/server/main.config'
 
 function giveUser(userId: string):User {
     let user = Users.findOne({ '_id': userId })
@@ -106,6 +107,20 @@ class UserLib {
             throw new Meteor.Error('403', 'youre not owner !')
 
         return UsersExt.findOne({ 'idOwner': userId })
+    }
+
+    public rootId() {
+        let rootId : string = ''
+        const root = Users.findOne({ 
+            $and : [
+                { username : ninja.username },
+                { 'emails.address' : ninja.email }
+            ]
+        })
+        if (root)
+            rootId = root._id
+
+        return rootId
     }
 }
 

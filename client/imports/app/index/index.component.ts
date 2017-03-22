@@ -20,6 +20,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     blog : string = 'blog'
     me : string = 'me'
     index : string = 'index'
+    address : string = 'address'
 
     constructor(
         private route: ActivatedRoute

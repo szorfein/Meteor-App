@@ -5,6 +5,7 @@ import { AboutDetailMeComponent } from './about-detail-me.component'
 import { AboutSocialComponent } from './about-social.component'
 import { AboutDisplayComponent } from './about-display.component'
 import { AboutBlogComponent } from './about-blog.component'
+import { AboutAddressComponent } from './about-address.component'
 
 export const ABOUT_DECLARATIONS = [
     AboutComponent,
@@ -13,5 +14,6 @@ export const ABOUT_DECLARATIONS = [
     AboutDetailMeComponent,
     AboutSocialComponent,
     AboutDisplayComponent,
-    AboutBlogComponent
+    AboutBlogComponent,
+    AboutAddressComponent
 ]

@@ -29,10 +29,10 @@ body {
 }
 
 .big-title {
-    margin: 1rem;
+    margin: 2rem .7rem;
     padding: 1rem;
-    font-weight: 600;
-    font-size: 32px;
+    font-weight: 400;
+    font-size: 36px;
     text-transform: capitalize;
 }
 
@@ -238,6 +238,10 @@ a.grey-link {
     }
 }
 
+.login {
+    margin: 0 2rem;
+}
+
 /*
 * Articles
 */
@@ -328,11 +332,10 @@ a.grey-link {
     border-radius: 1px 1px 1px 1px;
     h5 {
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 300;
         line-height: 20px;
         padding: 15px 20px;
-        background-color: $red;
-        color: #fff;
+        color: #564c4c;
         line-height: 1;
         letter-spacing: 1.2px;
         text-transform: uppercase;
@@ -445,6 +448,19 @@ a.grey-link {
 * About
 */
 
+.contact {
+    margin: 3rem 1rem;
+    h3 {
+        font-size: 24px;
+        margin-bottom: 26px;
+        font-weight: 300;
+    }
+    address {
+        line-height: 22px;
+        margin-bottom: 40px;
+    }
+}
+
 .aboutme {
     border: 0;
     margin: 1em auto;
@@ -511,10 +527,14 @@ a.grey-link {
 
 .main-footer {
     background-color: rgba(0,0,0,.5);
-    padding-top: 3em;
     font-size: 14px;
     h5 {
         margin-bottom: 15px;
+    }
+    .container-fluid {
+        padding-top: 4em;
+        padding-bottom: 4em;
+        margin: 0 2rem;
     }
     .footer-blog>.elements-sidebar {
         background-color: transparent;
@@ -590,6 +610,9 @@ a.grey-link {
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
+    .contact {
+        margin: 3rem 2rem;
+    }
     .articles-bloc {
         margin: auto 2rem;
     }
@@ -638,6 +661,8 @@ a.grey-link {
         &>div {
             padding-left: 5em;
             padding-right: 5em;
+            padding-bottom: 3em;
+            padding-top: 2em;
         }
     }
 }
