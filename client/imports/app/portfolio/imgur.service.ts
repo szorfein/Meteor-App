@@ -38,10 +38,11 @@ export class ImgurService {
         }
     }
 
-    getVotes(setting : ImgurSetting, imgur : ImgurLink) {
+    getGallery(setting : ImgurSetting, imgur : ImgurLink) {
         if (imgur && imgur.idImgur) {
+            console.log('getGallery call with -> ' + imgur.idImgur)
             this.setting = setting
-            let imgurUrl = 'https://api.imgur.com/3/gallery/'+imgur.idImgur+'/votes'
+            let imgurUrl = 'https://api.imgur.com/3/gallery/album/'+imgur.idImgur
             let options = this.buildRequestOptions()
 
             return this.http.get(imgurUrl, options)

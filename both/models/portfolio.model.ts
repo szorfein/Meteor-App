@@ -10,6 +10,5 @@ export interface ImgurLink extends CollectionObject {
     submitAt : Date
     owner : string
     link: string
-    album : boolean
     idImgur : string
 }

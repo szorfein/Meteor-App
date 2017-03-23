@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core'
 import { ImgurService } from './imgur.service'
 import { ImgurSetting } from '/both/models/portfolio.model'
 import { MeteorObservable } from 'meteor-rxjs'
-import { rebuildUrlWithSize } from '/lib/image'
+import { isGallery, isAlbum, isImage } from '/lib/validate'
 import template from './imgur-display.component.html'
 
 @Component({
@@ -14,26 +14,27 @@ export class ImgurDisplayComponent implements OnInit {
     @Input() imgur
     image
     album
-    imgm : string
-    votes
+    gallery
+    display : string = ''
 
     constructor(private imgurService : ImgurService) {}
 
     ngOnInit() {
-        if (this.imgur && this.imgur.album) {
+        if (this.imgur && isAlbum(this.imgur.link))
             this.loadAlbum()
-        }
 
-        if (this.imgur && !this.imgur.album) {
+        if (this.imgur && isImage(this.imgur.link))
             this.loadImage()
-        }
+
+        if (this.imgur && isGallery(this.imgur.link))
+            this.loadGallery()
     }
 
     loadAlbum() {
         MeteorObservable.call('imgurConfig').subscribe((setting: ImgurSetting) => {
             this.imgurService.getAlbum(setting, this.imgur).subscribe((alb) => {
                 this.album = alb
-                this.imgm = rebuildUrlWithSize(alb[0].link, 'l')
+                this.display = 'album'
             }, (err) => console.log(err))
         })
     }
@@ -42,16 +43,16 @@ export class ImgurDisplayComponent implements OnInit {
         MeteorObservable.call('imgurConfig').subscribe((setting: ImgurSetting) => {
             this.imgurService.getImages(setting, this.imgur).subscribe((img) => {
                 this.image = img 
-                this.imgm = rebuildUrlWithSize(img.link, 'l')
+                this.display = 'image'
             }, (err) => { console.log(err) })
         })
     }
 
-    // TODO: look how make a gallery with imgur...
-    loadVotes() {
+    loadGallery() {
         MeteorObservable.call('imgurConfig').subscribe((setting: ImgurSetting) => {
-            this.imgurService.getVotes(setting, this.imgur).subscribe((votes) => {
-                this.votes = votes
+            this.imgurService.getGallery(setting, this.imgur).subscribe((gallery) => {
+                this.gallery = gallery
+                this.display = 'gallery'
             }, (err) => { console.log(err) })
         })
     }

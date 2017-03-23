@@ -5,7 +5,7 @@ function testOrNone(regex : RegExp, v : string) {
 }
 
 export function imgurLink(v : FormControl) {
-    if (/^https:\/\/imgur.com\/a\/([\w]{5})$|^https:\/\/i.imgur.com\/([\w]{7})[.]{1}(png|jpeg)$/i.test(v.value)) {
+    if (isGallery(v.value) || isAlbum(v.value) || isImage(v.value)) {
         return null
     }
     return v.status = 'INVALID'
@@ -224,4 +224,16 @@ let agentDesktop = {
         else if (agentDesktop.IENine(v))
             return 'IE 9'
     }
+}
+
+export function isGallery(v : string) {
+    return /^https:\/\/imgur.com\/gallery\/[\w]{5}$/i.test(v)
+}
+
+export function isAlbum(v : string) {
+    return /^https:\/\/imgur.com\/a\/([\w]{5})$/i.test(v)
+}
+
+export function isImage(v : string) {
+    return /^https:\/\/i.imgur.com\/([\w]{7}).(png|jpeg)$/i.test(v)
 }

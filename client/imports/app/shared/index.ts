@@ -10,6 +10,7 @@ import { RootInput } from './root.input.ts'
 import { DisplayArticleList } from './display-article-list.component'
 import { DisplayTagsComponent } from './display-tags.component'
 import { CaptchaComponent } from './captcha.component'
+import { DisplayImgurComponent } from './display-imgur.component'
 
 export const SHARED_DECLARATIONS : any[] = [
     DisplayMainImagePipe,
@@ -23,5 +24,6 @@ export const SHARED_DECLARATIONS : any[] = [
     RootInput,
     DisplayArticleList,
     DisplayTagsComponent,
-    CaptchaComponent
+    CaptchaComponent,
+    DisplayImgurComponent
 ]

@@ -1,31 +1,11 @@
-<div *ngIf="image" class="card">
-    <div class="card-text">
-        <ul class="nav">
-            <li class="nav-item">
-                <p>{{image.views}} |</p>
-            </li>
-            <li class="nav-item">
-                <p>{{image.name}}</p>
-            </li>
-        </ul>
-    </div>
-    <img class="card-img-top img-fluid" [attr.href]="image.link" [attr.src]="imgm" [attr.alt]="image.id">
-    <div class="card-block">
-    </div>
+<div *ngIf="image">
+    <display-imgur [imgur]="image" [display]="display"></display-imgur>
 </div>
 
-<div *ngIf="album" class="card">
-    <div class="card-text">
-        <ul class="nav">
-            <li class="nav-item">
-                <p>{{ album[0].name }}</p>
-            </li>
-            <li class="nav-item">
-                <p>{{ album[0].views}} |</p>
-            </li>
-        </ul>
-    </div>
-    <img class="card-img-top img-fluid" [attr.href]="album[0].link" [attr.src]="imgm" [attr.alt]="album[0].link">
-    <div class="card-block">
-    </div>
+<div *ngIf="album">
+    <display-imgur [imgur]="album" [display]="display"></display-imgur>
+</div>
+
+<div *ngIf="gallery">
+    <display-imgur [imgur]="gallery" [display]="display"></display-imgur>
 </div>
