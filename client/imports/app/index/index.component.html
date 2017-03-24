@@ -1,5 +1,4 @@
 <div *ngIf="home" id="banner">
-    <!-- img size 1920 x 270 -->
     <img href="#" [attr.src]="home.banner | previewImage" alt="banner" style="height:385px">
     <div id="banner-text">
         <div class="jumbotron">
@@ -13,14 +12,6 @@
 <div class="ninja">
     <admin [form]="formular"></admin>
 </div>
-
-<!--
-<div class="index-container index-head">
-    <div class="container">
-        <stat-index></stat-index>
-    </div>
-</div>
--->
 
 <div class="index-container index-body">
     <div class="index-article bg-gray">
@@ -53,12 +44,16 @@
     </div>
     <div class="index-article bg-gray">
         <h2 class="text-center">Contact Me</h2>
-        <div class="row contact">
-            <div class="col-xs-12 col-sm-4">
-                <about-display [element]="address"></about-display>
-            </div>
-            <div class="col-xs-12 col-sm-8">
-                <contact-form></contact-form>
+        <div class="contact">
+            <div class="container-inner">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <about-display [element]="address"></about-display>
+                    </div>
+                    <div class="col-xs-12 col-sm-8">
+                        <contact-form></contact-form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

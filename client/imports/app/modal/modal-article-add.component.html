@@ -1,4 +1,4 @@
-<div class="modal fade" id="form-blog" 
+<div *ngIf="!article" class="modal fade" id="form-blog" 
                         tabindex="-1" role="dialog" aria-labelledby="addArticle"
                                                     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -11,12 +11,28 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div *ngIf="article">
-                    <articles-form [edit]="article"></articles-form>
-                </div>
-                <div *ngIf="!article">
-                    <articles-form></articles-form>
-                </div>
+                <articles-form></articles-form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="article" class="modal fade" [attr.id]="'edit_'+article._id" 
+                        tabindex="-1" role="dialog" [attr.aria-labelledby]="'editLabel_'+article._id"
+                                                    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" [attr.id]="'editLabel_'+article._id">Edit Article</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <articles-form [edit]="article"></articles-form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>

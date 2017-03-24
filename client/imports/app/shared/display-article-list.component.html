@@ -1,5 +1,6 @@
 <div *ngIf="article && cardDisplay">
     <div class="card" *ngFor="let bl of article.bloc">
+        <article-panel [article]="article"></article-panel>
         <div class="card-text">
             <ul class="nav">
                 <li *ngFor="let tag of article.tags" class="nav-item">
@@ -61,6 +62,7 @@
 
 <div class="blog-element" *ngIf="article && blogDisplay">
     <div class="card mt-3" *ngFor="let bl of article.bloc">
+        <article-panel [article]="article"></article-panel>
         <div class="row">
             <div class="col">
                 <a [routerLink]="['/blog', article._id]">
@@ -68,12 +70,12 @@
                 </a>
             </div>
             <div class="col">
-                <div class="media-body blog-post">
+                <div class="media-body blog-post card-block">
                     <h5 class="card-title"><a class="dark-link" [routerLink]="['/blog', article._id]">{{ article.bloc[0].title }}</a></h5>
                     <div class="card-subtitle mb-2">
                         <small class="text-muted">
                             by <a class="dark-link" [routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
-                            | {{ article.createdAt | date:"d MMMM y à H" }}h
+                            | {{ article.createdAt | date:"d MMMM y" }}
                             | <i class="fa fa-comments" aria-hidden="true"></i>
                             {{ article.commentNb }}
                             | {{ article.view }} view

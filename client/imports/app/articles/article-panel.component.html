@@ -1,0 +1,23 @@
+<div [hidden]="!root">
+    <div *ngIf="article">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active">
+                <a class="dark-link" data-toggle="modal" data-target="#form-blog" href="#">
+                    <i class="fa fa-edit"></i><span>New</span>
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a class="dark-link" data-toggle="modal" [attr.data-target]="'#edit_'+article._id" href="#">
+                    <i class="fa fa-edit"></i><span>Edit</span>
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a class="dark-link" (click)="remove()">
+                    <i class="fa fa-edit"></i><span>Delete</span>
+                </a>
+            </li>
+        </ol>
+        <modal-article-add></modal-article-add>
+        <modal-article-add [article]="article"></modal-article-add>
+    </div>
+</div>

@@ -44,12 +44,9 @@
         <div class="row">
             <!-- Start Article-List -->
             <div class="col-xs-12 col-sm-12 col-lg-9">
-                <div class="blog">
-                    <div *ngFor="let article of articles | async">
-                        <display-article-list [article]="article" [display]="blog"></display-article-list>
-                        <button [hidden]="!root" class="btn btn-primary" (click)="removeArticle(article)">Delete this post</button>
-                    </div>
-                </div><!-- End Article List -->
+                <div class="blog" *ngFor="let article of articles | async">
+                    <display-article-list [article]="article" [display]="blog"></display-article-list>
+                </div>
                 <nav class="pagination justify-content-center pag" aria-label="Pagination">
                     <pagination-controls (pageChange)="onPageChanged($event)"></pagination-controls>
                 </nav>

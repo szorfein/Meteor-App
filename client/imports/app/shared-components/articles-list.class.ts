@@ -3,8 +3,6 @@ import { Observable, Subscription, Subject } from 'rxjs'
 import { MeteorObservable } from 'meteor-rxjs'
 import { PaginationService } from 'ng2-pagination'
 import { getIndex } from '/lib/index'
-import { InjectUser } from 'angular2-meteor-accounts-ui'
-import { Meteor } from 'meteor/meteor'
 import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
 
@@ -17,7 +15,6 @@ interface Options extends Pagination {
     [key: string]: any
 }
 
-@InjectUser('user')
 export class ArticlesList implements OnInit, OnDestroy {
     articles: Observable<Article[]>
     articlesSub: Subscription
@@ -27,11 +24,8 @@ export class ArticlesList implements OnInit, OnDestroy {
     optionsSub : Subscription
     articlesSize: number = 0
     autorunSub : Subscription
-    user: Meteor.User
     imageSub : Subscription
     indexSub: Subscription
-    root
-    rootsub: Subscription
     formular : string
     blog : string = 'blog'
     inline : string = 'inline'
@@ -90,33 +84,8 @@ export class ArticlesList implements OnInit, OnDestroy {
                 this.articlesSize
             )
         })
-
-        if (this.rootsub)
-            this.rootsub.unsubscribe()
-
-        if (!!Meteor.user()) {
-            this.rootsub = MeteorObservable.subscribe('root').subscribe(() => {
-                MeteorObservable.autorun().subscribe(() => {
-                    this.callRoot()
-                })
-            })
-        }
     }
     
-    callRoot() {
-        MeteorObservable.call('userAdmin').subscribe((root) => {
-            this.root = root
-        })
-    }
-
-    removeArticle(article: Article) {
-        MeteorObservable.call('remArticle', article._id).subscribe(() => {
-            console.log('article has been destroy')
-        }, (err) => {
-            alert(`Cannot destroy article cause ${err}`)
-        })
-    }
-
     search(value: string): void {
         console.log('search value : ' + value.length)
 
@@ -139,7 +108,5 @@ export class ArticlesList implements OnInit, OnDestroy {
         this.imageSub.unsubscribe()
         this.autorunSub.unsubscribe()
         this.indexSub.unsubscribe()
-        if (this.rootsub)
-            this.rootsub.unsubscribe()
     }
 }

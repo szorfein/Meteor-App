@@ -5,6 +5,7 @@ import { ArticleSidebarComponent } from './article-sidebar.component'
 import { ArticleComponent } from './article.component'
 import { ArticlesDocFooterComponent } from './articles-doc-footer.component'
 import { ArticlesRelatedComponent } from './articles-related.component'
+import { ArticlePanelComponent } from './article-panel.component'
 
 export const ARTICLES_DECLARATIONS = [
     ArticlesFormComponent,
@@ -13,5 +14,6 @@ export const ARTICLES_DECLARATIONS = [
     ArticleSidebarComponent,
     ArticleComponent,
     ArticlesDocFooterComponent,
-    ArticlesRelatedComponent
+    ArticlesRelatedComponent,
+    ArticlePanelComponent
 ]

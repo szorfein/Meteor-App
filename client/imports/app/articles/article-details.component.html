@@ -1,14 +1,10 @@
 <div class="articles separator" *ngIf="article">
     <div class="articles-bloc">
-        <div class="row">
-            <div class="col">
-                <admin [form]="formular" [edit]="article"></admin>
-            </div>
-        </div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-lg-9">
                     <div class="card">
+                        <article-panel [article]="article"></article-panel>
                         <div class="article-detail" *ngFor="let bloc of article.bloc">
                             <div class="card-block">
                                 <div class="blog-header text-center">

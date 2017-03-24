@@ -75,7 +75,15 @@ a.grey-link {
 }
 
 .container-inner {
-    margin: 3rem 2rem;
+    padding: 3rem 2rem;
+}
+
+.breadcrumb {
+    background-color: #fbfbfb;
+}
+
+.card-header .card-footer {
+    background-color: #fff;
 }
 
 /*
@@ -212,6 +220,12 @@ a.grey-link {
         margin: .7em auto;
     }
     .about-blog {}
+    .about-me {
+        .card-block.card-title {
+            margin-bottom: 2.70rem;
+            margin-top: 1rem;
+        }
+    }
     .button-link {
         margin: 3em auto;
         text-align: center;
@@ -326,7 +340,7 @@ a.grey-link {
 
 .elements-sidebar {
     margin-top: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     background-color: #fff;
     color: #000;
     box-shadow: 0 0 5px 0 #e2e3e4;
@@ -348,13 +362,14 @@ a.grey-link {
 }
 
 .bar-tags {
-    background-color: #fff;
-    box-shadow: 0 0 5px 0 #e2e3e4;
-    border-radius: 2px;
     &>ul>li>a {
         color: #000;
+        font-weight: 300;
+        font-size: 19px;
+        margin-left: .7em;
+        text-transform: capitalize;
         &:hover {
-            border-bottom: 1px solid #222;
+            background-color: #e4dfdf;
         }
     }
 }
@@ -398,7 +413,6 @@ a.grey-link {
     margin: 1em 0;
     background-color: #fff;
     padding-bottom: 3em;
-    border-top: 6px solid $red;
     border-radius: 3px;
     h3.card-title>a {
         text-decoration: none;
@@ -451,7 +465,6 @@ a.grey-link {
 */
 
 .contact {
-    margin: 3rem 1rem;
     h3 {
         font-size: 24px;
         margin-bottom: 26px;
@@ -486,8 +499,8 @@ a.grey-link {
 }
 
 .selfie {
-    width: 171px;
-    height: 171px;
+    width: 190px;
+    height: 190px;
     margin: auto;
 }
 
@@ -613,10 +626,7 @@ a.grey-link {
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
     .container-inner {
-        margin: 3rem 3rem;
-    }
-    .contact {
-        margin: 3rem 2rem;
+        padding: 3rem 3rem;
     }
     .articles-bloc {
         margin: auto 2rem;
@@ -644,7 +654,7 @@ a.grey-link {
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
     .container-inner {
-        margin: 3rem 4rem;
+        padding: 3rem 4rem;
     }
     .tag-main {
         margin: auto 3em;
@@ -658,7 +668,7 @@ a.grey-link {
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
     .container-inner {
-        margin: 3rem 5rem;
+       padding: 3rem 5rem;
     }
 
     .tag-main {
