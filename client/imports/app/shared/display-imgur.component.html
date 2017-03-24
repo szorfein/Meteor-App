@@ -1,4 +1,49 @@
-<div *ngIf="imgur">
+<div *ngIf="imgur && album">
+    <ul class="nav">
+        <li class="nav-item">
+            <p>t {{imgur[0].title}}</p>
+        </li>
+        <li class="nav-item">
+            <p>{{imgur[0].width}}x{{imgur[0].height}}</p>
+        </li>
+    </ul>
+    <a href="#" data-toggle="modal" [attr.data-target]="'#imgurModal'+imgur[0].id">
+        <img class="card-img-top img-fluid" [attr.src]="buildLink(imgur[0].link)" [attr.alt]="imgur[0].id">
+    </a>
+    <div class="modal fade" [attr.id]="'imgurModal'+imgur[0].id" tabindex="-1" role="dialog" [attr.aria-labelledby]="'imgurLabel'+imgur[0].id" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document" (window:resize)="onResize($event)">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" [attr.id]="'imgurLabel'+imgur[0].id">{{imgur[0].title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div *ngIf="album" class="modal-body">
+                    <div [attr.id]="'carousel'+imgur[0].id" class="carousel slide" data-ride="carousel" data-interval="false">
+                        <div class="carousel-inner" role="listbox">
+                            <div *ngFor="let image of imgur; let index = index" [class.active]="index === 0" class="carousel-item">
+                                <img class="d-block img-fluid" [attr.src]="buildLink(image.link)">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" [attr.href]="'#carousel'+imgur[0].id" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" [attr.href]="'#carousel'+imgur[0].id" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="imgur && !album">
     <div class="card">
         <div class="card-text">
             <ul *ngIf="image" class="nav">
@@ -7,14 +52,6 @@
                 </li>
                 <li class="nav-item">
                     <p>{{imgur.width}}x{{imgur.height}}</p>
-                </li>
-            </ul>
-            <ul *ngIf="album" class="nav">
-                <li class="nav-item">
-                    <p>t {{imgur[0].title}}</p>
-                </li>
-                <li class="nav-item">
-                    <p>{{imgur[0].width}}x{{imgur[0].height}}</p>
                 </li>
             </ul>
             <ul *ngIf="gallery" class="nav">
@@ -27,9 +64,6 @@
             </ul>
         </div>
         <a *ngIf="image" href="#" data-toggle="modal" [attr.data-target]="'#imgurModal'+imgur.id">
-            <img class="card-img-top img-fluid" [attr.src]="buildLink(imgur.link)" [attr.alt]="imgur.id">
-        </a>
-        <a *ngIf="album" href="#" data-toggle="modal" [attr.data-target]="'#imgurModal'+imgur.id">
             <img class="card-img-top img-fluid" [attr.src]="buildLink(imgur.link)" [attr.alt]="imgur.id">
         </a>
         <a *ngIf="gallery" href="#" data-toggle="modal" [attr.data-target]="'#imgurModal'+imgur.id">
@@ -52,23 +86,6 @@
                     <a href="imgur.link">
                         <img class="card-img-top img-fluid" [attr.href]="imgur.link" [attr.src]="buildLink(imgur.link)" [attr.alt]="imgur.id">
                     </a>
-                </div>
-                <div *ngIf="album" class="modal-body">
-                    <div [attr.id]="'carousel'+imgur.id" class="carousel slide" data-ride="carousel" data-interval="false">
-                        <div class="carousel-inner" role="listbox">
-                            <div *ngFor="let image of imgur.images; let index = index" [class.active]="index === 0" class="carousel-item">
-                                <img class="d-block img-fluid" [attr.src]="buildLink(image.link)">
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" [attr.href]="'#carousel'+imgur.id" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" [attr.href]="'#carousel'+imgur.id" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
                 </div>
                 <div *ngIf="gallery" class="modal-body">
                     <div [attr.id]="'carousel'+imgur.id" class="carousel slide" data-ride="carousel" data-interval="false">
