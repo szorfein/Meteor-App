@@ -4,8 +4,9 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-lg-9">
                     <div class="blog">
-                        <h2 class="big-title">Log in</h2>
-                        <login-form></login-form>
+                        <div [hidden]="user">
+                            <login-form></login-form>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-lg-3">

@@ -1,0 +1,48 @@
+<div class="container-fluid">
+    <div class="container-inner">
+        <form [formGroup]="signupForm" (ngSubmit)="signup()" novalidate>
+            <fieldset>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label" for="email">Email</label>
+                    <div class="col-10">
+                        <input class="form-control" 
+                               type="email" name="email" required formControlName="email" placeholder="Email *">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label" for="confirm-email">Confirm Email</label>
+                    <div class="col-10">
+                        <input class="form-control" type="email" required formControlName="confirmEmail" placeholder="Confirm Email *">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label" for="username">Username</label>
+                    <div class="col-10">
+                        <input class="form-control"
+                               type="text" name="username" required formControlName="username" placeholder="Username *">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label" for="password">Password</label>
+                    <div class="col-10">
+                        <input class="form-control"
+                               type="password" name="password" required formControlName="password" placeholder="Password *">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label" for="confirm-password">Confirm password</label>
+                    <div class="col-10">
+                        <input class="form-control" type="password" required formControlName="confirmPassword" placeholder="Confirm password *">
+                    </div>
+                </div>
+
+                <button class="btn btn-success" type="submit" [disabled]="!signupForm.valid">Sign Up</button>
+            </fieldset>
+        </form>
+        <captcha (complete)="handleResult($event)"><captcha>
+    </div>
+</div>

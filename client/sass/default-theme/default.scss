@@ -74,6 +74,10 @@ a.grey-link {
     }
 }
 
+.container-inner {
+    margin: 3rem 2rem;
+}
+
 /*
  * Navbar
  */
@@ -238,10 +242,6 @@ a.grey-link {
     }
 }
 
-.login {
-    margin: 0 2rem;
-}
-
 /*
 * Articles
 */
@@ -399,6 +399,7 @@ a.grey-link {
     background-color: #fff;
     padding-bottom: 3em;
     border-top: 6px solid $red;
+    border-radius: 3px;
     h3.card-title>a {
         text-decoration: none;
         color: #222;
@@ -611,6 +612,9 @@ a.grey-link {
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
+    .container-inner {
+        margin: 3rem 3rem;
+    }
     .contact {
         margin: 3rem 2rem;
     }
@@ -639,6 +643,9 @@ a.grey-link {
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
+    .container-inner {
+        margin: 3rem 4rem;
+    }
     .tag-main {
         margin: auto 3em;
     }
@@ -650,6 +657,10 @@ a.grey-link {
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
+    .container-inner {
+        margin: 3rem 5rem;
+    }
+
     .tag-main {
         margin: auto 5em;
     }

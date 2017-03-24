@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { Router } from '@angular/router'
+import { InjectUser } from 'angular2-meteor-accounts-ui'
 import template from './login.component.html'
 
 @Component({
@@ -7,10 +7,7 @@ import template from './login.component.html'
     template
 })
 
+@InjectUser('user')
 export class LoginComponent {
-
-    constructor(
-        private router: Router, 
-    ) {}
-
+    constructor() {}
 }
