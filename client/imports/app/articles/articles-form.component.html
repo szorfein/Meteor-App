@@ -25,9 +25,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="lang">Language</label>
-                            <input class="form-control" 
-                                   type="text" formControlName="lang" placeholder="lang">
+                            <form-lang (langSelect)="langSelected($event)"></form-lang>
                         </div>
 
                         <div class="form-group">

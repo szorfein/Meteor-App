@@ -28,6 +28,7 @@ import { MODAL_DECLARATIONS } from './modal'
 import { STATISTICS_DECLARATIONS } from './statistics'
 import { PORTFOLIO_DECLARATIONS } from './portfolio'
 import { SITEMAP_DECLARATIONS } from './sitemap'
+import { SHARED_COMPONENTS_DECLARATIONS } from './shared-components'
 
 import { MOBILE_DECLARATIONS } from './mobile'
 import { AppMobileComponent } from './mobile/app.component.mobile'
@@ -88,7 +89,8 @@ if (Meteor.isCordova) {
             ...MODAL_DECLARATIONS,
             ...STATISTICS_DECLARATIONS,
             ...PORTFOLIO_DECLARATIONS,
-            ...SITEMAP_DECLARATIONS
+            ...SITEMAP_DECLARATIONS,
+            ...SHARED_COMPONENTS_DECLARATIONS
         ],
         providers: [
             ...ROUTES_PROVIDERS,

@@ -1,19 +1,28 @@
 import { CollectionObject } from './collection-object.model'
 
+// retrieve lang : AboutDetail.lang[retLang('en')].aboutYou
 export interface AboutDetail {
-    image?: string,
+    imageOfYou?: string,
     idOwner: string,
     name: string,
     company?: string,
-    aboutCompany?: [{ lang: string, yourCompany: string }],
-    jobName?: [{ lang: string, yourjob: string }],
-    skill?: string,
-    mail?: string,
-    telMobile?: string,
-    telFix?: string,
+    lang?: [
+        {
+            aboutCompany? : string,
+            job? : string,
+            aboutYou? : string,
+            skills? : string
+        }
+    ],
+    email?: string,
+    mobile?: string,
+    fix?: string,
     fax?: string,
-    aboutYourSelf?: [{ lang: string, yourself: string }],
-    address?: string,
+    address?: { 
+        street? : string,
+        cp? : string,
+        city? : string
+    },
     facebook?: string,
     github?: string,
     twitter?: string,
@@ -34,8 +43,10 @@ export interface AboutDetailForm {
     mobile?: string,
     fix?: string,
     fax?: string,
-    aboutMe?: string,
-    address?: string,
+    aboutYou?: string,
+    street? : string,
+    cp? : string,
+    city? : string
     facebook?: string,
     github?: string,
     twitter?: string,
@@ -44,15 +55,21 @@ export interface AboutDetailForm {
     reddit?: string
 }
 
+// retrieve lang : HomeDetail.lang[retLang('en')].title
 export interface HomeDetail extends CollectionObject {
-    banner: string
-    welcome?: [{ lang?: string, title?: string, message?: string }],
+    banner?: string
+    lang?: [
+        {
+            title? : string,
+            message? : string
+        }
+    ],
     idOwner: string
 }
 
 export interface HomeDetailForm {
-    banner_image : string
-    welcome_lang? : string
-    welcome_title? : string
-    welcome_message? : string
+    imageBanner? : string
+    lang? : string
+    title? : string
+    message? : string
 }

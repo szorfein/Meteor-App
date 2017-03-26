@@ -4,25 +4,25 @@
         <form [formGroup]="homeForm" (ngSubmit)="addHome()">
 
             <div class="form-group">
-                <label class="form-label" for="image">Image</label>
-                <input class="form-control" type="text" id="image" formControlName="banner_image" placeholder="image">
+                <label class="form-label" for="imageBanner">Image</label>
+                <input class="form-control" type="text" id="imageBanner" formControlName="imageBanner" placeholder="image">
                 <upload-image #upload (onFile)="onImage($event)"></upload-image>
             </div>
 
             <div class="form-group">
                 <label class="sr-only" for="lang">Lang</label>
                 <input class="form-control"
-                       type="text" formControlName="welcome_lang" name="lang" placeholder="language">
+                       type="text" formControlName="lang" name="lang" placeholder="language">
             </div>
 
             <div class="form-group">
                 <label class="sr-only" for="title">Title</label>
-                <input class="form-control" type="text" rows="3" formControlName="welcome_title" placeholder="title">
+                <input class="form-control" type="text" rows="3" formControlName="title" placeholder="title">
             </div>
 
             <div class="form-group">
                 <label class="sr-only" for="message">Message</label>
-                <textarea class="form-control" type="text" rows="3" formControlName="welcome_message" placeholder="message">
+                <textarea class="form-control" type="text" rows="3" formControlName="message" placeholder="message">
                 </textarea>
             </div>
 

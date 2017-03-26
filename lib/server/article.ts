@@ -2,6 +2,7 @@ import { Articles } from '/both/collections/articles.collection'
 import { Article, ArticleForm } from '/both/models/article.model'
 import { Meteor } from 'meteor/meteor'
 import { isMeteorId } from '../validate'
+import { retLang } from '/lib/lang'
 import { indexLib } from './index'
             
 function buildNewArticle(article: ArticleForm, imageId: string, tagsList: Array<string>) {
@@ -9,19 +10,19 @@ function buildNewArticle(article: ArticleForm, imageId: string, tagsList: Array<
     let newArticle : Article = {
         createdAt: new Date(),
         authorId: Meteor.userId(),
+        lastEdit: new Date(),
+        lastEditOwner: Meteor.userId(),
         image: imageId,
-        bloc: [{
-            title: article.title,
-            lastEdit: new Date(),
-            lastEditOwner: Meteor.userId(),
-            description: article.description,
-            lang: article.lang,
-            article: article.article
-        }],
+        lang: [{}],
         isPublic: article.isPublic,
         tags: tagsList,
         index: indexLib.returnIndex('articleId'),
         pastToFooter: article.toFooter
+    }
+    newArticle.lang[retLang(article.lang)] = {
+        title: article.title,
+        description: article.description,
+        article: article.article
     }
     return newArticle
 }
@@ -43,17 +44,23 @@ class ArticleLib {
     }
 
     public upd(article : ArticleForm, imageId : string, tags : Array<string>, id : string) {
+        const articleOld = Articles.findOne(id)
+        if (!articleOld)
+            throw new Meteor.Error('404', 'Article not found !')
+
+        const updLang = articleOld.lang
+        updLang[retLang(article.lang)] = {
+            title: article.title,
+            description: article.description,
+            article: article.article
+        }
+
         Articles.update(id, {
             $set: {
+                lastEdit: new Date(),
+                lastEditOwner: Meteor.userId(),
                 image: imageId,
-                bloc: [{
-                    title: article.title,
-                    lastEdit: new Date(),
-                    lastEditOwner: Meteor.userId(),
-                    description: article.description,
-                    lang: article.lang,
-                    article: article.article
-                }],
+                lang: updLang,
                 isPublic: article.isPublic,
                 tags: tags,
                 pastToFooter: article.toFooter

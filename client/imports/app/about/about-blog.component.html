@@ -1,4 +1,4 @@
 <admin [form]="formular"></admin>
-<div *ngIf="about && about.aboutCompany" class="text-center about-blog">
-    <p>{{ about.aboutCompany[0].yourCompany }}</p>
+<div *ngIf="about && about.lang" class="text-center about-blog">
+    <p>{{ about.lang[0].aboutCompany | displayOrNone }}</p>
 </div>

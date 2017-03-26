@@ -1,5 +1,5 @@
 <div *ngIf="displayInline && tags" class="bar-tags">
-    <ul class="nav justify-content-center">
+    <ul class="nav justify-content-center d-flex align-content-stretch flex-wrap p-3">
         <li class="nav-item" *ngFor="let tag of tags | async">
             <a class="dark-link nav-link" [attr.alt]="tag.name" (click)="tagSelected(tag.name)">{{tag.name}}</a>
         </li>

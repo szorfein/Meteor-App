@@ -6,6 +6,7 @@ import { AboutDetail } from '/both/models/extra.model'
 import { AboutsDetail } from '/both/collections/extras.collection'
 import { facebook , git , twitter , dotshare , imgur , reddit , 
     name , lang , mail , company } from '/lib/validate'
+import { retLang } from '/lib/lang'
 import template from './about-form.component.html'
 
 @Component({
@@ -48,21 +49,23 @@ export class AboutFormComponent implements OnInit, OnDestroy {
 
     private editForm() {
         if (this.about) {
-            this.image = this.about.image
+            this.image = this.about.imageOfYou
             this.aboutForm = this.formBuilder.group({
                 image: [this.image],
                 name: [this.about.name, name],
                 lang: ['en', lang],
                 company: [this.about.company, company],
-                aboutCompany: [this.about.aboutCompany[0].yourCompany],
-                jobName: [this.about.jobName[0].yourjob],
-                skill: [this.about.skill],
-                mail: [this.about.mail, mail],
-                mobile: [this.about.telMobile],
-                fix: [this.about.telFix],
+                aboutCompany: [this.about.lang[retLang('en')].aboutCompany],
+                jobName: [this.about.lang[retLang('en')].job],
+                aboutYou: [this.about.lang[retLang('en')].aboutYou],
+                skill: [this.about.lang[retLang('en')].skills],
+                mail: [this.about.email, mail],
+                mobile: [this.about.mobile],
+                fix: [this.about.fix],
                 fax: [this.about.fax],
-                aboutMe: [this.about.aboutYourSelf[0].yourself],
-                address: [this.about.address],
+                street: [this.about.address.street],
+                cp: [this.about.address.cp],
+                city: [this.about.address.city],
                 facebook: [this.about.facebook, facebook],
                 github: [this.about.github, git],
                 twitter: [this.about.twitter, twitter],
@@ -86,8 +89,10 @@ export class AboutFormComponent implements OnInit, OnDestroy {
             mobile: [''],
             fix: [''],
             fax: [''],
-            aboutMe: [''],
-            address: [''],
+            aboutYou: [''],
+            street: [''],
+            cp: [''],
+            city: [''],
             facebook: ['', facebook],
             github: ['', git],
             twitter: ['', twitter],

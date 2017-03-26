@@ -4,6 +4,7 @@ import { Subscription, Observable } from 'rxjs'
 import { MeteorObservable } from 'meteor-rxjs'
 import { Tags } from '/both/collections/tags.collection'
 import { Tag } from '/both/models/tag.model'
+import { retLang } from '/lib/lang'
 import template from './articles-form.component.html'
 
 @Component({
@@ -20,6 +21,7 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
     arrayOfTags : string[] = []
     image: string = ''
     imageSub : Subscription
+    lang : string = 'en'
 
     // TODO: Add test if tagValue exist in collection !
     addTag(tagValue: string): void {
@@ -48,10 +50,10 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
         if (this.edit) {
             this.image = this.edit.image
             this.addForm = this.formBuilder.group({
-                title: [this.edit.bloc[0].title, [Validators.required, Validators.minLength(2)] ],
-                description: [this.edit.bloc[0].description, Validators.required],
-                lang: ['en', Validators.required],
-                article: [this.edit.bloc[0].article, Validators.required],
+                title: [this.edit.lang[retLang(this.lang)].title, [Validators.required, Validators.minLength(2)] ],
+                description: [this.edit.lang[retLang(this.lang)].description, Validators.required],
+                lang: [this.lang, Validators.required],
+                article: [this.edit.lang[retLang(this.lang)].article, Validators.required],
                 isPublic: [this.edit.isPublic],
                 toFooter: [this.edit.pastToFooter]
             })
@@ -59,7 +61,7 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
             this.addForm = this.formBuilder.group({
                 title: ['', [Validators.required, Validators.minLength(2)] ],
                 description: ['', Validators.required],
-                lang: ['en', Validators.required],
+                lang: [this.lang, Validators.required],
                 article: ['', Validators.required],
                 isPublic: [false],
                 toFooter: [false]
@@ -82,6 +84,7 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
     addArticle() {
         if (this.addForm.valid) {
             this.arrayOfTags = Array.from(this.myTag)
+            this.addForm.value.lang = this.lang
 
             if (this.edit) {
                 MeteorObservable.call('updArticle', this.addForm.value, this.image, this.arrayOfTags, this.edit._id).subscribe(() => {
@@ -98,6 +101,12 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
             }
 
             this.addForm.reset()
+        }
+    }
+
+    langSelected(lang : string) {
+        if (/^(en|fr)$/i.test(lang)) {
+            this.lang = lang
         }
     }
 

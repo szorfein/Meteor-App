@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MeteorObservable } from 'meteor-rxjs'
 import { HomeDetail } from '/both/models/extra.model'
+import { retLang } from '/lib/lang'
 import template from './index-form.component.html'
 
 @Component({
@@ -33,20 +34,20 @@ export class IndexFormComponent implements OnInit {
         if (home) {
             this.image = home.banner
             this.homeForm = this.formBuilder.group({
-                banner_image: [home.banner],
-                welcome_lang: [home.welcome[0].lang],
-                welcome_title: [home.welcome[0].title],
-                welcome_message: [home.welcome[0].message]
+                imageBanner: [this.image],
+                lang: ['en'],
+                title: [home.lang[retLang('en')].title],
+                message: [home.lang[retLang('en')].message]
             })
         }
     }
 
     addForm() {
         this.homeForm = this.formBuilder.group({
-            banner_image: [''],
-            welcome_lang: ['en'],
-            welcome_title: [''],
-            welcome_message: ['']
+            imageBanner: [''],
+            lang: ['en'],
+            title: [''],
+            message: ['']
         })
     }
 

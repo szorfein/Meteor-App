@@ -1,5 +1,5 @@
 <div *ngIf="article && cardDisplay">
-    <div class="card" *ngFor="let bl of article.bloc">
+    <div class="card">
         <article-panel [article]="article"></article-panel>
         <div class="card-text">
             <ul class="nav">
@@ -13,7 +13,7 @@
         </a>
         <div class="card-block">
             <h3 class="title card-title">
-                <a class="dark-link" [routerLink]="['/blog', article._id]">{{bl.title}}</a>
+                <a class="dark-link" [routerLink]="['/blog', article._id]">{{article.lang[0].title}}</a>
             </h3>
             <div class="card-subtitle mb-2">
                 <small class="text-muted">
@@ -24,7 +24,7 @@
                     | {{ article.view }} view
                 </small>
             </div>
-            <p class="card-text" [innerHTML]="bl.description | markdown"></p>
+            <p class="card-text" [innerHTML]="article.lang[0].description | markdown"></p>
         </div>
     </div>
 </div>
@@ -36,7 +36,7 @@
                 <img class="img-fluid" *ngIf="article.image" [attr.src]="article | displayMainImage" style="height:50px">
             </a>
             <div class="post-info">
-                <a class="dark-link" [routerLink]="['/blog', article._id]">{{article.bloc[0].title}}</a>
+                <a class="dark-link" [routerLink]="['/blog', article._id]">{{article.lang[0].title}}</a>
                 <div class="post-meta">
                     <span class="updated">{{ article.createdAt | date:"d MMMM y" }}h</span>
                     <display-tags [tag]="article.tags" [display]="inline"></display-tags>
@@ -53,7 +53,7 @@
         </a>
         <div class="card-block">
             <a class="dark-link" [routerLink]="['/blog', article._id]">
-                <h5 class="card-title">{{ article.bloc[0].title }}</h5>
+                <h5 class="card-title">{{ article.lang[0].title }}</h5>
             </a>
             <p class="card-text"><small class="text-muted">{{ article.createdAt | date:"d MMMM y" }}h</p>
         </div>
@@ -61,7 +61,7 @@
 </div>
 
 <div class="blog-element" *ngIf="article && blogDisplay">
-    <div class="card mt-3" *ngFor="let bl of article.bloc">
+    <div class="card mt-3">
         <article-panel [article]="article"></article-panel>
         <div class="row">
             <div class="col">
@@ -71,7 +71,7 @@
             </div>
             <div class="col">
                 <div class="media-body blog-post card-block">
-                    <h5 class="card-title"><a class="dark-link" [routerLink]="['/blog', article._id]">{{ article.bloc[0].title }}</a></h5>
+                    <h5 class="card-title"><a class="dark-link" [routerLink]="['/blog', article._id]">{{ article.lang[0].title }}</a></h5>
                     <div class="card-subtitle mb-2">
                         <small class="text-muted">
                             by <a class="dark-link" [routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
@@ -81,7 +81,7 @@
                             | {{ article.view }} view
                         </small>
                     </div>
-                    <p class="card-text" [innerHTML]="bl.description | markdown"></p>
+                    <p class="card-text" [innerHTML]="article.lang[0].description | markdown"></p>
                     <p class="text-right">
                     <a class="btn" [routerLink]="['/blog', article._id]">read more</a>
                     </p>

@@ -1,5 +1,7 @@
 import { AboutDetail, AboutDetailForm } from '/both/models/extra.model'
 import { AboutsDetail } from '/both/collections/extras.collection'
+import { Lang } from '/both/enums/lang.enum'
+import { retLang } from '/lib/lang'
 
 function noneByDefault(text: string) {
     if (text)
@@ -10,25 +12,19 @@ function noneByDefault(text: string) {
 
 function buildAbout(about: AboutDetailForm, userId: string, imageId: string) {
     const newAbout : AboutDetail = {
-        image: noneByDefault(imageId),
+        imageOfYou: noneByDefault(imageId),
         idOwner: userId,
         name: about.name,
         company: noneByDefault(about.company),
-        aboutCompany: [
-            { lang: noneByDefault(about.lang), yourCompany: noneByDefault(about.aboutCompany)}
-        ],
-        jobName: [
-            { lang: noneByDefault(about.lang), yourjob: noneByDefault(about.jobName) }
-        ],
-        skill: noneByDefault(about.skill),
-        mail: noneByDefault(about.mail),
-        telMobile: noneByDefault(about.mobile),
-        telFix: noneByDefault(about.fix),
+        email: noneByDefault(about.mail),
+        mobile: noneByDefault(about.mobile),
+        fix: noneByDefault(about.fix),
         fax: noneByDefault(about.fax),
-        aboutYourSelf: [
-            { lang: noneByDefault(about.lang), yourself: noneByDefault(about.aboutMe) }
-        ],
-        address: noneByDefault(about.address),
+        address: {
+            street: noneByDefault(about.street),
+            cp : noneByDefault(about.cp),
+            city : noneByDefault(about.city)
+        },
         facebook: noneByDefault(about.facebook),
         github: noneByDefault(about.github),
         twitter: noneByDefault(about.twitter),
@@ -36,6 +32,13 @@ function buildAbout(about: AboutDetailForm, userId: string, imageId: string) {
         imgur: noneByDefault(about.imgur),
         reddit: noneByDefault(about.reddit)
     }
+    newAbout.lang[retLang(about.lang)] = { 
+        aboutCompany : noneByDefault(about.aboutCompany),
+        job: noneByDefault(about.jobName),
+        aboutYou: noneByDefault(about.aboutYou),
+        skills: noneByDefault(about.skill)
+    }
+
     return newAbout
 }
 

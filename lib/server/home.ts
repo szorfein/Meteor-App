@@ -1,16 +1,18 @@
 import { HomeDetail, HomeDetailForm } from '/both/models/extra.model'
 import { HomesDetail } from '/both/collections/extras.collection'
+import { retLang } from '/lib/lang'
 
 function buildNewForm(form: HomeDetailForm, userId: string, image: string) {
     const newForm : HomeDetail = {
         banner: image,
-        welcome: [{ 
-            lang: form.welcome_lang,
-            title: form.welcome_title,
-            message: form.welcome_message
-        }],
         idOwner: userId
     }
+
+    newForm.lang[retLang(form.lang)] = {
+        title: form.title,
+        message: form.message
+    }
+
     return newForm
 }
 

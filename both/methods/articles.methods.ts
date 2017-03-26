@@ -7,6 +7,7 @@ Meteor.methods({
     insArticle: function(article: ArticleForm, image: string, tags: Array<string>) {
         check(image, String)
         check(tags, [String])
+        console.log('METHOD ins: LANG Choose -> ' + article.lang)
 
         if (Meteor.isServer) {
             const { articleLib } = require('/lib/server/article')
@@ -18,6 +19,7 @@ Meteor.methods({
         check(image, String)
         check(tags, [String])
         check(id, String)
+        console.log('METHOD udp: LANG Choose -> ' + article.lang)
 
         if (Meteor.isServer) {
             const { articleLib } = require('/lib/server/article')

@@ -5,10 +5,10 @@
                 <div class="col-xs-12 col-sm-12 col-lg-9">
                     <div class="card">
                         <article-panel [article]="article"></article-panel>
-                        <div class="article-detail" *ngFor="let bloc of article.bloc">
+                        <div class="article-detail">
                             <div class="card-block">
                                 <div class="blog-header text-center">
-                                    <h1 class="card-title">{{ bloc.title }}</h1>
+                                    <h1 class="card-title">{{ article.lang[0].title }}</h1>
                                     <p class="card-subtitle">
                                     <small class="mb-2 text-muted"> 
                                         by: {{ article.authorId | displayNameWithId }} 
@@ -27,9 +27,9 @@
                             <img class="card-img img-fluid" [src]="article | displayMainImage">
                             <div class="card-block">
                                 <div class="card-text">
-                                    <div class="description markdown" [innerHTML]="bloc.description | markdown">
+                                    <div class="description markdown" [innerHTML]="article.lang[0].description | markdown">
                                     </div>
-                                    <div class="article markdown" [innerHTML]="bloc.article | markdown">
+                                    <div class="article markdown" [innerHTML]="article.lang[0].article | markdown">
                                     </div>
                                 </div>
                             </div> 

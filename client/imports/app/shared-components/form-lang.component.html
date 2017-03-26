@@ -1,0 +1,11 @@
+<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ lang }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <button class="dropdown-item btn btn-link" type="button" (click)="langSelected('en')">en</button>
+            <button class="dropdown-item btn btn-link" type="button" (click)="langSelected('fr')">fr</button>
+        </div>
+    </div>
+</div>
