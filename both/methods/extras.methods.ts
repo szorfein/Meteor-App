@@ -3,16 +3,6 @@ import { check } from 'meteor/check'
 
 Meteor.methods({
 
-    sendAboutForView: function() {
-        let about : AboutDetail
-
-        if (Meteor.isServer) {
-            const { extraLib } = require('/lib/server/extra')
-            about = extraLib.returnAboutForView()
-        }
-        return about
-    },
-
     createAboutInfo: function(about : AboutDetailForm, imageId : string) {
         Meteor.call('isRoot')
         if (Meteor.isServer) {

@@ -60,11 +60,11 @@ export function name(v : FormControl) {
     return v.status = 'INVALID'
 }
 
-export function lang(v : FormControl) {
-    if (/^[\w]{2}$/i.test(v.value)) {
-        return null
-    }
-    return v.status = 'INVALID'
+export function isLang(v : string) {
+    if (/^(en|fr)$/i.test(v))
+        return true
+
+    return false
 }
 
 export function forceMail(v : FormControl) {

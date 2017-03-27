@@ -5,6 +5,7 @@ import { MeteorObservable } from 'meteor-rxjs'
 import { Tags } from '/both/collections/tags.collection'
 import { Tag } from '/both/models/tag.model'
 import { retLang } from '/lib/lang'
+import { isLang } from '/lib/validate'
 import template from './articles-form.component.html'
 
 @Component({
@@ -105,7 +106,7 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
     }
 
     langSelected(lang : string) {
-        if (/^(en|fr)$/i.test(lang)) {
+        if (isLang(lang)) {
             this.lang = lang
         }
     }

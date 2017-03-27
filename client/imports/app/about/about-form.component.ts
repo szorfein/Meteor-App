@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs'
 import { AboutDetail } from '/both/models/extra.model'
 import { AboutsDetail } from '/both/collections/extras.collection'
 import { facebook , git , twitter , dotshare , imgur , reddit , 
-    name , lang , mail , company } from '/lib/validate'
+    name , isLang , mail , company } from '/lib/validate'
 import { retLang } from '/lib/lang'
 import template from './about-form.component.html'
 
@@ -20,6 +20,7 @@ export class AboutFormComponent implements OnInit, OnDestroy {
     aboutSub: Subscription
     aboutForm: FormGroup
     image : string
+    lang : string = 'en'
 
     constructor(
         private formBuilder: FormBuilder
@@ -53,12 +54,12 @@ export class AboutFormComponent implements OnInit, OnDestroy {
             this.aboutForm = this.formBuilder.group({
                 image: [this.image],
                 name: [this.about.name, name],
-                lang: ['en', lang],
+                lang: [this.lang],
                 company: [this.about.company, company],
-                aboutCompany: [this.about.lang[retLang('en')].aboutCompany],
-                jobName: [this.about.lang[retLang('en')].job],
-                aboutYou: [this.about.lang[retLang('en')].aboutYou],
-                skill: [this.about.lang[retLang('en')].skills],
+                aboutCompany: [this.about.lang[retLang(this.lang)].aboutCompany],
+                jobName: [this.about.lang[retLang(this.lang)].job],
+                aboutYou: [this.about.lang[retLang(this.lang)].aboutYou],
+                skill: [this.about.lang[retLang(this.lang)].skills],
                 mail: [this.about.email, mail],
                 mobile: [this.about.mobile],
                 fix: [this.about.fix],
@@ -80,7 +81,7 @@ export class AboutFormComponent implements OnInit, OnDestroy {
         this.aboutForm = this.formBuilder.group({
             image: [''],
             name: ['', name],
-            lang: ['en', lang],
+            lang: [this.lang],
             company: ['', company],
             aboutCompany: [''],
             jobName: [''],
@@ -104,6 +105,7 @@ export class AboutFormComponent implements OnInit, OnDestroy {
 
     addPost() {
         if (this.aboutForm.valid) {
+            this.aboutForm.value.lang = this.lang
             MeteorObservable.call('createAboutInfo', this.aboutForm.value, this.image).subscribe(() => {
                 alert('information has been register');
             }, (err) => {
@@ -116,6 +118,11 @@ export class AboutFormComponent implements OnInit, OnDestroy {
 
     onImage(imageId: string) {
         this.image = imageId
+    }
+
+    langSelected(lang : string) {
+        if (isLang(lang))
+            this.lang = lang
     }
 
     ngOnDestroy() {
