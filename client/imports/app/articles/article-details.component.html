@@ -11,7 +11,7 @@
                                     <h1 class="card-title">{{ article.lang[0].title }}</h1>
                                     <p class="card-subtitle">
                                     <small class="mb-2 text-muted"> 
-                                        by: {{ article.authorId | displayNameWithId }} 
+                                        by: <a class="dark-link" [routerLink]="['/user',article.authorId | displayNameWithId]">{{ article.authorId | displayNameWithId }}</a> 
                                         | {{ article.createdAt | date:"d MMMM y à H" }}h
                                         | <span *ngFor="let tag of article.tags">
                                                                     <a class="dark-link" [routerLink]="['/blog/category', tag]"> {{tag}}</a>

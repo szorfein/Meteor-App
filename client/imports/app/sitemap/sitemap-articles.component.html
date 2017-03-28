@@ -2,8 +2,8 @@
     <h5>Articles</h5>
     <ul>
         <li *ngFor="let article of articles | async">
-            <a [routerLink]="['/blog', article._id]" [attr.alt]="article.bloc[0].title">
-                {{ article.bloc[0].title }}
+            <a [routerLink]="['/blog', article._id]" [attr.alt]="article.lang[0].title">
+                {{ article.lang[0].title }}
             </a>
         </li>
     </ul>

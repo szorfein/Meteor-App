@@ -12,7 +12,8 @@ export interface RegisterUser {
 }
 
 export interface UserBar {
-    username: string;
+    username: string
+    message : number
 }
 
 export interface UserExt extends CollectionObject {

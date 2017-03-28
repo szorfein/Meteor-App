@@ -16,12 +16,14 @@ Meteor.methods({
 
     userInfoBar: function() {
         let userBar : UserBar
+
         if (Meteor.isServer) {
             if (this.userId) {
                 const { userLib } = require('/lib/server/user')
-                userBar = userLib.findUserInfoBar(this.userId)
+                userBar = userLib.findUserInfoBar()
             }
         }
+
         return userBar
     },
 
@@ -61,6 +63,17 @@ Meteor.methods({
         Meteor.call('controlNewNinja', newNinja)
 
         return newNinja
-    }
+    },
 
+    retUserName : (userId : string) => {
+        check(userId, String)
+        let userName : string
+
+        if (Meteor.isServer) {
+            const { userLib } = require('/lib/server/user')
+            userName = userLib.retUserName(userId)
+        }
+
+        return userName
+    }
 })

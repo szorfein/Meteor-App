@@ -7,7 +7,7 @@ enum indexName {
 }
 
 enum indexNew {
-    view , comm
+    view , comm , mess
 }
 
 class IndexLib {

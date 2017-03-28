@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy, NgZone } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Meteor } from 'meteor/meteor'
 import { MeteorObservable } from 'meteor-rxjs'
-import { Subscription, Observable } from 'rxjs'
-import { InjectUser } from 'angular2-meteor-accounts-ui'
+import { Subscription } from 'rxjs'
 import { UserBar } from '/both/models/user.model'
 import template from './user-bar.component.html'
 
@@ -11,26 +10,25 @@ import template from './user-bar.component.html'
     template
 })
 
-@InjectUser('user')
 export class UserBarComponent implements OnInit, OnDestroy {
 
     user : UserBar
-    userSub : Subscription
+    autorunSub : Subscription
 
     ngOnInit() {
-
-        if (this.userSub) 
-            this.userSub.unsubscribe()
-
-        this.userSub = MeteorObservable.subscribe('userbar').subscribe(() => {
-            MeteorObservable.autorun().subscribe(() => {
-                this.callUser()
-            })
+        this.kill()
+        this.autorunSub = MeteorObservable.autorun().subscribe(() => {
+            this.callUser()
         })
     }
 
-    callUser() {
-        MeteorObservable.call('userInfoBar').subscribe((user: UserBar) => {
+    private kill() {
+        if (this.autorunSub)
+            this.autorunSub.unsubscribe()
+    }
+
+    private callUser() {
+        MeteorObservable.call('userInfoBar').subscribe((user : UserBar) => {
             this.user = user
         })
     }
@@ -40,6 +38,6 @@ export class UserBarComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.userSub.unsubscribe()
+        this.kill()
     }
 }

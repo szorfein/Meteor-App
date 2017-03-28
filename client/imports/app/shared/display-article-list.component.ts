@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { Article } from '/both/models/article.model'
+import { MeteorObservable } from 'meteor-rxjs'
+import { Subscription } from 'rxjs'
 import template from './display-article-list.component.html'
 
 enum Display {
@@ -19,10 +21,12 @@ export class DisplayArticleList implements OnInit {
     blogDisplay : boolean = false
     thumbnailDisplay : boolean = false
     inline : string = 'inline'
+    userSub : Subscription
 
     constructor() {}
 
     ngOnInit() {
+        this.userSub = MeteorObservable.subscribe('user').subscribe()
         this.setDisplay()
     }
 
