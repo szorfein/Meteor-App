@@ -11,9 +11,9 @@
         <a [routerLink]="['/blog', article._id]">
             <img class="card-img-top img-fluid" *ngIf="article.image" [attr.src]="article | displayMainImage">
         </a>
-        <div class="card-block">
+        <div *ngIf="lang" class="card-block">
             <h3 class="title card-title">
-                <a class="dark-link" [routerLink]="['/blog', article._id]">{{article.lang[0].title}}</a>
+                <a class="dark-link" [routerLink]="['/blog', article._id]">{{lang.title}}</a>
             </h3>
             <div class="card-subtitle mb-2">
                 <small class="text-muted">
@@ -24,7 +24,7 @@
                     | {{ article.view }} view
                 </small>
             </div>
-            <p class="card-text" [innerHTML]="article.lang[0].description | markdown"></p>
+            <p class="card-text" [innerHTML]="lang.description | markdown"></p>
         </div>
     </div>
 </div>
@@ -35,8 +35,8 @@
             <a [routerLink]="['/blog', article._id]">
                 <img class="img-fluid" *ngIf="article.image" [attr.src]="article | displayMainImage" style="height:50px">
             </a>
-            <div class="post-info">
-                <a class="dark-link" [routerLink]="['/blog', article._id]">{{article.lang[0].title}}</a>
+            <div *ngIf="lang" class="post-info">
+                <a class="dark-link" [routerLink]="['/blog', article._id]">{{lang.title}}</a>
                 <div class="post-meta">
                     <span class="updated">{{ article.createdAt | date:"d MMMM y" }}h</span>
                     <display-tags [tag]="article.tags" [display]="inline"></display-tags>
@@ -51,9 +51,9 @@
         <a [routerLink]="['/blog', article._id]">
             <img class="img-fluid card-img-top" *ngIf="article.image" [attr.src]="article | displayMainImage">
         </a>
-        <div class="card-block">
+        <div *ngIf="lang" class="card-block">
             <a class="dark-link" [routerLink]="['/blog', article._id]">
-                <h5 class="card-title">{{ article.lang[0].title }}</h5>
+                <h5 class="card-title">{{ lang.title }}</h5>
             </a>
             <p class="card-text"><small class="text-muted">{{ article.createdAt | date:"d MMMM y" }}h</p>
         </div>
@@ -70,8 +70,8 @@
                 </a>
             </div>
             <div class="col">
-                <div class="media-body blog-post card-block">
-                    <h5 class="card-title"><a class="dark-link" [routerLink]="['/blog', article._id]">{{ article.lang[0].title }}</a></h5>
+                <div *ngIf="lang" class="media-body blog-post card-block">
+                    <h5 class="card-title"><a class="dark-link" [routerLink]="['/blog', article._id]">{{ lang.title }}</a></h5>
                     <div class="card-subtitle mb-2">
                         <small class="text-muted">
                             by <a class="dark-link" [routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
@@ -81,7 +81,7 @@
                             | {{ article.view }} view
                         </small>
                     </div>
-                    <p class="card-text" [innerHTML]="article.lang[0].description | markdown"></p>
+                    <p class="card-text" [innerHTML]="lang.description | markdown"></p>
                     <p class="text-right">
                     <a class="btn" [routerLink]="['/blog', article._id]">read more</a>
                     </p>

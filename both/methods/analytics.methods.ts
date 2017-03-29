@@ -35,6 +35,20 @@ Meteor.methods({
                 console.log('visitor has left -> ' + this.connection.clientAddress)
             })
         }
+    },
+
+    selectLang: function() {
+        let lang : string = 'en'
+
+        if (Meteor.isServer) {
+            const acceptLang = this.connection.httpHeaders['accept-language']
+            if (/^en-([a-z]){2}/i.test(acceptLang)) {
+                lang = 'en'
+            } else if (/^fr-([a-z]){2}/i.test(acceptLang)) {
+                lang = 'fr'
+            }
+        }
+        return lang
     }
 })
 

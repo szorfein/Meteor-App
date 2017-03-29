@@ -34,7 +34,13 @@
                 <user-bar></user-bar>
             </div>
             <div [hidden]="user">
+                <!--
                 <about-display [element]="social" [display]="inline"></about-social>
+                -->
+                <div id="language" class="inline">
+                    <button class="btn btn-link" (click)="cookieLang('fr')">fr</button> | 
+                    <button class="btn btn-link" (click)="cookieLang('en')">en</button>  
+                </div>
             </div>
         </div> <!-- end social media -->
     </nav>

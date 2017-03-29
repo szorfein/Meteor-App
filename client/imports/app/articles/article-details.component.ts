@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map'
 import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
 import { Images } from '/both/collections/images.collection'
+import { CookieService } from 'angular2-cookie/core'
 import template from './article-details.component.html'
 
 @Component({
@@ -25,7 +26,9 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     me : string = 'me'
     blog : string = 'blog'
 
-    constructor(private route: ActivatedRoute) {}
+    constructor(private route: ActivatedRoute,
+                private _cookieService : CookieService
+               ) {}
 
     ngOnInit() {
         this.kill()
@@ -36,6 +39,7 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
             this.imageSub = MeteorObservable.subscribe('images').subscribe()
             this.printArticle()
         })
+        this.getCookie()
     }
 
     printArticle() {
@@ -61,6 +65,10 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
 
         if (this.articleSub)
             this.articleSub.unsubscribe()
+    }
+
+    getCookie() {
+        console.log('from article-detail get -> ' + this._cookieService.get('language'))
     }
 
     ngOnDestroy() {

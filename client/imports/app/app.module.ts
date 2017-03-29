@@ -6,6 +6,7 @@ import { AccountsModule } from 'angular2-meteor-accounts-ui'
 import { Ng2PaginationModule } from 'ng2-pagination'
 import { ChartsModule } from 'ng2-charts'
 import { HttpModule } from '@angular/http'
+import { CookieService } from 'angular2-cookie/services/cookies.service'
 
 import { AppComponent } from './app.component.web'
 import { routes, ROUTES_PROVIDERS } from './app.routes'
@@ -94,7 +95,8 @@ if (Meteor.isCordova) {
         ],
         providers: [
             ...ROUTES_PROVIDERS,
-            ImgurService
+            ImgurService,
+            CookieService
         ],
         bootstrap: [
             AppComponent
