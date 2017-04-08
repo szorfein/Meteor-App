@@ -86,6 +86,11 @@ a.grey-link {
     background-color: #fff;
 }
 
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #5e5065 !important;
+    border-color: #5e5065;
+}
+
 /*
  * Navbar
  */
@@ -551,7 +556,8 @@ a.grey-link {
 */
 
 .main-footer {
-    background-color: rgba(0,0,0,.5);
+    background-color: rgba(238,238,238,1);
+    color: #222;
     font-size: 14px;
     h5 {
         margin-bottom: 15px;
@@ -567,9 +573,9 @@ a.grey-link {
         color: #eee;
         margin: 0;
         a {
-            color: #aaa;
+            color: #222;
             &:hover {
-                color: #fff;
+                color: #333;
             }
         }
         li {
@@ -585,16 +591,17 @@ a.grey-link {
 }
 
 .copyright {
-    background-color: rgba(0,0,0,.3);
+    background-color: rgba(41,43,44,1);
     border-top: 2px solid $red;
     padding: 1em;
+    color: #aaa;
 }
 
 .white>li>a {
-    color: #aaa;
+    color: #222;
     text-decoration: none;
     &:hover {
-        color: #fff;
+        color: #333;
     }
 }
 
