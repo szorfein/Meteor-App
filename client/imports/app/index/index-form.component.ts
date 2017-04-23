@@ -58,7 +58,6 @@ export class IndexFormComponent implements OnInit {
             }, (err) => {
                 alert(`Cannot update home cause ${err}`)
             })
-            this.homeForm.reset()
         }
     }
 

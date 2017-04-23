@@ -5,7 +5,7 @@
 */
 
 body {
-    background-color: rgba(43,45,41,.99);
+    background-color: rgba(239,225,236,.73);
     color: #aaa;
 }
 
@@ -89,6 +89,10 @@ a.grey-link {
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-color: #5e5065 !important;
     border-color: #5e5065;
+}
+
+.modal-backdrop {
+    z-index: 1025;
 }
 
 /*
@@ -217,6 +221,7 @@ a.grey-link {
 .index-about {
     min-height: 10rem;
 }
+
 .last-articles {
     img.d-block.img-fluid {
         height: 17rem;
@@ -284,6 +289,14 @@ a.grey-link {
     .blog-post {
         margin-left: -1em;
     }
+    .nav-space {
+        padding-right: .6em;
+        margin-bottom: .6em;
+    }
+    &>.card>.card-footer {
+        background-color: #fff;
+        color: #000;
+    }
 }
 
 .articles-list {
@@ -314,7 +327,6 @@ a.grey-link {
     li { 
         display: flex;
         display: -ms-flexbox;
-        border-bottom: 1px solid rgba(0,0,0,.1);
         margin: 0;
         padding: 3px 20px;
         font-size: 12px;
@@ -359,12 +371,12 @@ a.grey-link {
     background-color: #fff;
     color: #000;
     box-shadow: 0 0 5px 0 #e2e3e4;
-    border-radius: 1px 1px 1px 1px;
+    border-radius: 4px 4px 4px 4px;
     h5 {
         font-size: 16px;
         font-weight: 300;
         line-height: 20px;
-        padding: 15px 20px;
+        padding: 15px 5px;
         color: #564c4c;
         line-height: 1;
         letter-spacing: 1.2px;
@@ -427,7 +439,6 @@ a.grey-link {
 .blog {
     margin: 1em 0;
     background-color: #fff;
-    padding-bottom: 3em;
     border-radius: 3px;
     h3.card-title>a {
         text-decoration: none;
@@ -481,9 +492,9 @@ a.grey-link {
 
 .contact {
     h3 {
-        font-size: 24px;
+        font-size: 21px;
         margin-bottom: 26px;
-        font-weight: 300;
+        font-weight: 200;
     }
     address {
         line-height: 22px;

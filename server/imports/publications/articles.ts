@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { check } from 'meteor/check'
 import { Articles } from '/both/collections/articles.collection'
-import { tag } from '/lib/validate'
+import { tag, isMeteorId } from '/lib/validate'
 
 interface Options {
     [key: string]: any
@@ -29,21 +29,25 @@ Meteor.publish('articlesTag', function(tagName : string) {
     throw new Meteor.Error('404', 'Tag not found')
 })
 
-Meteor.publish('articlesRelated', function(tags: Array<string>) {
+Meteor.publish('articlesRelated', function(articleId : string, tags : Array<string>) {
     if (tags.length) {
         for (let i=0; i<tags.length; i++) {
             if (!/^[a-z]{3,10}$/i.test(tags[i]))
                 throw new Meteor.Error('404', 'not valid tag')
         }
-        return Articles.find({ 
-            $and : [
-                { isPublic: true },
-                { $or : [
-                    { 'tags': tags[0] },
-                    { 'tags': tags[1] },
-                ]}
-            ]
-        }, { skip:0,limit:3,sort: {'createdAt':-1} })
+
+        if (isMeteorId(articleId)) {
+            return Articles.find({ 
+                '_id': { $nin : [ articleId ] },
+                $and : [
+                    { isPublic: true },
+                    { $or : [
+                        { 'tags': tags[0] },
+                        { 'tags': tags[1] },
+                    ]}
+                ]
+            }, { skip:0,limit:3,sort: {'createdAt':-1} })
+        }
     }
     throw new Meteor.Error('404', 'Bad tags parameter')
 })

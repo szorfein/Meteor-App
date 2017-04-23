@@ -5,10 +5,11 @@ import { PaginationService } from 'ng2-pagination'
 import { getIndex } from '/lib/index'
 import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
+import { retLang } from '/lib/lang'
 
 interface Pagination {
-    limit: number;
-    skip: number;
+    limit : number
+    skip : number
 }
 
 interface Options extends Pagination {
@@ -56,13 +57,10 @@ export class ArticlesList implements OnInit, OnDestroy {
             if (this.articlesSub)
                 this.articlesSub.unsubscribe()
 
-            this.articlesSub = MeteorObservable.subscribe('articles', options)
-            .subscribe(() => { 
-                       this.articles = Articles.find({}, {
-                           sort: {
-                               createdAt: nameOrder
-                           }
-                       }).zone()
+            this.articlesSub = MeteorObservable.subscribe('articles', options).subscribe(() => { 
+                this.articles = Articles.find({}, { 
+                    sort: { createdAt: nameOrder }
+                }).zone()
             })
         })
 
@@ -86,11 +84,11 @@ export class ArticlesList implements OnInit, OnDestroy {
         })
     }
     
-    search(value: string): void {
-        console.log('search value : ' + value.length)
-
-        if (value.length === 2) 
-            this.articles = Articles.find(value ? { 'bloc.lang': value } : {}).zone()
+    onSearch(v : string) : void {
+        console.log('search value : ' + v.length)
+        if (v.length === 2) {
+            this.articles = Articles.find({ $text: { $search : v }}).zone()
+        }
     }
 
     searchByTag(tag) {

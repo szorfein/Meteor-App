@@ -36,10 +36,10 @@ export class ContactFormComponent implements OnInit {
         if (this.contactForm.valid && this.captchaRes) {
             MeteorObservable.call('addContact', this.contactForm.value).subscribe(() => {
                 alert('Your message has been send')
+                this.contactForm.reset()
             }, (err) => {
                 alert(`Cannot send message cause ${err}`)
             })
-            this.contactForm.reset()
         }
     }
 

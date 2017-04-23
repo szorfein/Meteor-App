@@ -7,24 +7,17 @@ import { UserExt } from '/both/models/user.model'
 import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
 import { incIndex, decIndex } from '/lib/index'
+import { isMeteorId } from '/lib/validate'
+import { retLang } from '/lib/lang'
 
 function giveTitle(articleId: string, lang: string) {
-    const article = Articles.findOne({ $and: [{'_id':articleId}, {'bloc.lang':lang}] })
-    if (article) 
-        return article.bloc[0].title
+    if (isMeteorId(articleId)) {
+        const article = Articles.findOne({ _id: articleId })
+        if (article) 
+            return article.lang[retLang('en')].title
+    }
 
     throw new Meteor.Error('404', 'Article not found')
-}
-
-function newComment(articleId : string, post : string, subId : string, user : string) {
-    Comments.insert({
-        poster: user,
-        posted: new Date(),
-        lastposted: new Date(),
-        father: articleId,
-        son: subId,
-        post: post
-    })
 }
 
 function editUserProfile(articleId : string) {
@@ -52,9 +45,9 @@ function giveCommentList(newtitle : string) {
             
 Meteor.methods({
 
-    AddComment: function(articleId : string, post : string, son? : string, user? : string) : void {
-        let sub = son ? son : ''
-        const username = this.userId ? this.userId : user
+    AddComment: function(articleId : string, post : string, son? : string, username? : string) : void {
+        const sub = son ? son : ''
+        const usr = username ? username : this.userId
         check(articleId, String)
         check(post, String)
         if (son) {
@@ -63,8 +56,7 @@ Meteor.methods({
 
         if (Meteor.isServer) {
             const { commentLib } = require('/lib/server/comment')
-            commentLib.add(articleId)
-            newComment(articleId, post, sub, username)
+            commentLib.add(articleId, post, sub, usr)
             if (this.userId)
                 editUserProfile(articleId)
         }

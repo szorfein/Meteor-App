@@ -20,7 +20,7 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
     tagsSub : Subscription
     myTag = new Set()
     arrayOfTags : string[] = []
-    image: string = ''
+    image : string = ''
     imageSub : Subscription
     lang : string = 'en'
 
@@ -34,27 +34,31 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
         }
     }
 
-    constructor(
-        private formBuilder: FormBuilder
-    ) {}
+    constructor( private formBuilder: FormBuilder ) {}
 
     ngOnInit() {
-        this.imageSub = MeteorObservable.subscribe('images').subscribe()
         this.printForm()
     }
 
     onImage(imageId : string) : void {
         this.image = imageId
+        this.addForm.value.image = imageId
+        this.kill()
+        this.imageSub = MeteorObservable.subscribe('image', this.image).subscribe()
+        console.log('addForm.image -> ' + this.addForm.value.image)
     }
 
-    printForm():void {
+    private printForm() : void {
         if (this.edit) {
+            this.kill()
             this.image = this.edit.image
+            this.imageSub = MeteorObservable.subscribe('image', this.image).subscribe()
             this.addForm = this.formBuilder.group({
-                title: [this.edit.lang[retLang(this.lang)].title, [Validators.required, Validators.minLength(2)] ],
-                description: [this.edit.lang[retLang(this.lang)].description, Validators.required],
-                lang: [this.lang, Validators.required],
-                article: [this.edit.lang[retLang(this.lang)].article, Validators.required],
+                title: [this.edit.lang[retLang(this.lang)].title],
+                description: [this.edit.lang[retLang(this.lang)].description],
+                image: [this.image],
+                lang: [this.lang],
+                article: [this.edit.lang[retLang(this.lang)].article],
                 isPublic: [this.edit.isPublic],
                 toFooter: [this.edit.pastToFooter]
             })
@@ -62,15 +66,13 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
             this.addForm = this.formBuilder.group({
                 title: ['', [Validators.required, Validators.minLength(2)] ],
                 description: ['', Validators.required],
+                image: [this.image],
                 lang: [this.lang, Validators.required],
                 article: ['', Validators.required],
                 isPublic: [false],
                 toFooter: [false]
             })
         }
-
-        if (this.tagsSub)
-            this.tagsSub.unsubscribe()
 
         this.tagsSub = MeteorObservable.subscribe('tags').subscribe(() => {
             this.tags = Tags.find({}).zone()
@@ -86,15 +88,19 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
         if (this.addForm.valid) {
             this.arrayOfTags = Array.from(this.myTag)
             this.addForm.value.lang = this.lang
+            let img = this.addForm.value.image
+            console.log('We will add img -> ' + img)
 
             if (this.edit) {
-                MeteorObservable.call('updArticle', this.addForm.value, this.image, this.arrayOfTags, this.edit._id).subscribe(() => {
+                console.log('we edit an article')
+                MeteorObservable.call('updArticle', this.addForm.value, img, this.arrayOfTags, this.edit._id).subscribe(() => {
                     alert('Article has been update')
                 }, (err) => {
                     alert(`Cannot update article cause ${err}`)
                 })
             } else {
-                MeteorObservable.call('insArticle', this.addForm.value, this.image, this.arrayOfTags).subscribe(() => {
+                console.log('we will create a new article')
+                MeteorObservable.call('insArticle', this.addForm.value, img, this.arrayOfTags).subscribe(() => {
                     alert('Article has been created')
                 }, (err) => {
                     alert(`Cannot insert article cause ${err}`)
@@ -102,6 +108,8 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
             }
 
             this.addForm.reset()
+        } else { 
+            console.log('addForm not valid...')
         }
     }
 
@@ -111,10 +119,15 @@ export class ArticlesFormComponent implements OnInit, OnDestroy {
         }
     }
 
-    ngOnDestroy() {
+    private kill() {
         if (this.tagsSub)
             this.tagsSub.unsubscribe()
-        
-        this.imageSub.unsubscribe()
+
+        if (this.imageSub)
+            this.imageSub.unsubscribe()
+    }
+
+    ngOnDestroy() {
+        this.kill()
     }
 }

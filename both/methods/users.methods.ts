@@ -38,7 +38,7 @@ Meteor.methods({
         }
     },
 
-    isRoot : function() {
+    isRoot: function() {
         if (Meteor.isServer) {
             const { userLib } = require('/lib/server/user')
             if (!userLib.isAdmin(this.userId))
@@ -46,7 +46,7 @@ Meteor.methods({
         }
     },
 
-    isOwner : function(username: string) {
+    isOwner: function(username : string) {
         check(username, String)
         let userext
 
@@ -58,20 +58,22 @@ Meteor.methods({
         return userext
     },
 
-    registerUserFrom: function(newNinja: RegisterUser) { 
+    registerUserFrom: function(newNinja : RegisterUser) { 
 
         Meteor.call('controlNewNinja', newNinja)
 
         return newNinja
     },
 
-    retUserName : (userId : string) => {
+    retUserName: function(userId : string) {
         check(userId, String)
-        let userName : string
+
+        let userName : string = ''
 
         if (Meteor.isServer) {
             const { userLib } = require('/lib/server/user')
-            userName = userLib.retUserName(userId)
+            if (userId)
+                userName = userLib.retUserName(userId)
         }
 
         return userName

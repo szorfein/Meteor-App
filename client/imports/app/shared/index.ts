@@ -1,5 +1,4 @@
-import { DisplayMainImagePipe } from './display-main-image.pipe'
-import { DisplayPreviewImage } from './display-preview-image.pipe'
+import { DisplayImagePipe } from './display-image.pipe'
 import { DisplayNamePipe } from './display-name.pipe'
 import { DisplayNameWithIdPipe } from './display-name-with-id.pipe'
 import { DisplayReplyCommentPipe } from './display-reply-comment.pipe'
@@ -13,8 +12,7 @@ import { CaptchaComponent } from './captcha.component'
 import { DisplayImgurComponent } from './display-imgur.component'
 
 export const SHARED_DECLARATIONS : any[] = [
-    DisplayMainImagePipe,
-    DisplayPreviewImage,
+    DisplayImagePipe,
     DisplayNamePipe,
     DisplayNameWithIdPipe,
     DisplayReplyCommentPipe,

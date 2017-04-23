@@ -1,40 +1,7 @@
 <div class="articles separator">
-
-    <!--
-    <div class="row ma-filter">
-        <div class="col-md-12">
-            <button class="btn btn-default search" type="button" data-toggle="collapse"
-                                                          data-target="#searchbar"
-                                                          aria-expanded="false"
-                                                          aria-controls="searchbar"
-                                                          aria-label="Search">
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                Search
-            </button>
-            <div class="collapse" id="searchbar">
-                <form>
-                    <div class="input-group">
-                        <input class="form-control" type="text" #searchtext 
-                                                    placeholder="Search for..."> 
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" 
-                                                  (click)="search(searchtext.value)">
-                                Search
-                            </button>
-                        </span>
-                    </div>
-                </form>
-            </div>
-        </div>
+    <div class="tag-main">
+        <tag-main (tagSelect)="searchByTag($event)" [display]="inline"></tag-main>
     </div>
-    -->
-
-    <div class="row">
-        <div class="col tag-main">
-            <tag-main (tagSelect)="searchByTag($event)" [display]="inline"></tag-main>
-        </div>
-    </div>
-
     <div class="articles-bloc">
         <div class="row">
             <div class="col mt-2">
@@ -42,7 +9,6 @@
             </div>
         </div>
         <div class="row">
-            <!-- Start Article-List -->
             <div class="col-xs-12 col-sm-12 col-lg-9">
                 <div class="blog" *ngFor="let article of articles | async">
                     <display-article-list [article]="article" [display]="blog"></display-article-list>
@@ -51,6 +17,7 @@
                     <pagination-controls (pageChange)="onPageChanged($event)"></pagination-controls>
                 </nav>
             </div>
+            <article-search (search)="onSearch($event)"></article-search>
             <div class="col-xs-12 col-sm-12 col-lg-3 sidebar">
                 <sidebar></sidebar>
             </div>

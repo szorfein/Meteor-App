@@ -9,17 +9,19 @@ function giveUser(userId? : string) : User {
     return Users.findOne(usrId)
 }
 
-function tryFoundProfil(userId: string):void {
-    let user = UsersExt.findOne({'idOwner': userId})
+function tryFoundProfil() : void {
+    const userId = Meteor.userId()
+    let user = UsersExt.findOne({ 'idOwner': userId })
 
     if (!user) {
-        createUserProfil(userId)
+        createUserProfil()
     } 
 }
 
-function createUserProfil(userId: string) {
+function createUserProfil() {
+    const userId = Meteor.userId()
     let user = giveUser(userId)
-    const root = isFirstUser(userId)
+    const root = isFirstUser()
 
     if (user) {
         UsersExt.insert({
@@ -35,7 +37,7 @@ function createUserProfil(userId: string) {
     }
 }
 
-function isFirstUser(userId: string):boolean {
+function isFirstUser() : boolean {
     let user : number = Users.find().cursor.count()
     return (user === 1)
 }
@@ -50,12 +52,11 @@ function isUserOrEmailAlrealyExist(newNinja : RegisterUser) {
 
 class UserLib {
 
-
     private isLogged() {
         return !!Meteor.userId()
     }
 
-    public returnAdmin(userId: string) {
+    public returnAdmin(userId : string) {
         let ninja : UserBar
 
         if (this.isAdmin(userId)) {
@@ -68,22 +69,29 @@ class UserLib {
     public retUserName(userId? : string) {
         let usrId : string = userId ? userId : Meteor.userId()
         let user = giveUser(usrId)
-        return user ? user.username : ''
+
+        if (!user) 
+            throw new Meteor.Error('404', 'Username or id doesnt exist')
+
+        return user.username
     }
 
     public findUserInfoBar() {
-        tryFoundProfil(Meteor.userId())
         if (this.isLogged()) {
+            tryFoundProfil()
             return this.buildUserBar()
         }
     }
 
-    private buildUserBar() : UserBar {
-        let userbar : UserBar = { 
-            username : this.retUserName(),
-            message : indexLib.returnIndex('mess_'+Meteor.userId())
+    private buildUserBar() {
+        if (this.isLogged()) {
+            const userId = Meteor.userId()
+            let userbar : UserBar = { 
+                username : this.retUserName(),
+                message : indexLib.returnIndex('mess_'+userId)
+            }
+            return userbar
         }
-        return userbar
     }
 
     //TODO : add filter for username, password and email
@@ -96,17 +104,9 @@ class UserLib {
     }
 
     public isAdmin(userId : string) : boolean {
-        let root = UsersExt.findOne({
-            $and: [
-                { 'admin': true },
-                { 'isPublic': false }
-            ]
-        })
+        let root = this.rootId()
 
-        if (root)
-            return !!(root.idOwner == userId)
-
-        return false
+        return !!(root == userId)
     }
 
     public isOwner(username: string, userId: string) {
@@ -121,17 +121,16 @@ class UserLib {
     }
 
     public rootId() {
-        let rootId : string = ''
         const root = Users.findOne({ 
             $and : [
                 { username : ninja.username },
                 { 'emails.address' : ninja.email }
             ]
         })
-        if (root)
-            rootId = root._id
+        if (!root)
+            throw new Meteor.Error('404', 'Root Id no found :(')
 
-        return rootId
+        return root._id
     }
 }
 

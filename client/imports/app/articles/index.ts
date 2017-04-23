@@ -6,6 +6,7 @@ import { ArticleComponent } from './article.component'
 import { ArticlesDocFooterComponent } from './articles-doc-footer.component'
 import { ArticlesRelatedComponent } from './articles-related.component'
 import { ArticlePanelComponent } from './article-panel.component'
+import { ArticleSearchComponent } from './article-search.component'
 
 export const ARTICLES_DECLARATIONS = [
     ArticlesFormComponent,
@@ -15,5 +16,6 @@ export const ARTICLES_DECLARATIONS = [
     ArticleComponent,
     ArticlesDocFooterComponent,
     ArticlesRelatedComponent,
-    ArticlePanelComponent
+    ArticlePanelComponent,
+    ArticleSearchComponent
 ]

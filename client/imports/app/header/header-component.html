@@ -24,8 +24,8 @@
                 <li class="nav-item">
                     <a class="flex-sm-fill nav-link" [routerLink]="['/contact']">contact</a>
                 </li>
-                <li class="nav-item">
-                    <a [hidden]="user" class="flex-sm-fill nav-link" [routerLink]="['/login']">login</a>
+                <li *ngIf="!user" class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#form-auth" href="#">login</a>
                 </li>
             </ul>
         </div>
@@ -45,3 +45,4 @@
         </div> <!-- end social media -->
     </nav>
 </div>
+<modal-auth></modal-auth>

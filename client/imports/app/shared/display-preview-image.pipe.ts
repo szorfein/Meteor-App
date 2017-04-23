@@ -1,21 +1,28 @@
 import { Pipe, PipeTransform } from '@angular/core'
+import { isImageUrl, isMeteorId } from '/lib/validate'
 import { Images } from '/both/collections/images.collection'
 
 @Pipe({
-    name: 'previewImage'
+    name: 'displayImage'
 })
 
-export class DisplayPreviewImage implements PipeTransform {
-    transform(image: string) {
+export class DisplayImagePipe implements PipeTransform {
+    transform(imageId : string) : string {
 
-        if (!image)
+        if (!imageId)
             return
 
-        let imageUrl : string
-        const found = Images.findOne({ '_id': image })
+        if (isImageUrl(imageId)) {
+            return imageId
+        }
 
-        if (found)
-            imageUrl = found.url
+        let imageUrl : string = ''
+
+        if (isMeteorId(imageId)) {
+            let found = Images.findOne(imageId)
+            if (found)
+                imageUrl = found.url
+        }
 
         return imageUrl
     }

@@ -54,6 +54,7 @@ export class CaptchaComponent implements OnInit, OnDestroy {
                 console.log('Captcha success')
             }, (err) => {
                 alert(`Error with captcha -> ${err}`)
+                this.captchaForm.reset()
                 this.getCaptcha()
             })
         }

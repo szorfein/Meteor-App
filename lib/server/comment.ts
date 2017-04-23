@@ -6,10 +6,22 @@ import { Comments } from '/both/collections/comments.collection'
 
 class CommentLib {
     
-    public add(idArticle : string) {
-        this.checkCommentIndex(idArticle)
-        indexLib.inc('comm_'+idArticle)
-        articleLib.updateComment(idArticle)
+    public add(articleId : string, post : string, son : string, username : string) {
+        this.checkCommentIndex(articleId)
+        indexLib.inc('comm_'+articleId)
+        articleLib.updateComment(articleId)
+        this.newComment(articleId, post, son, username)
+    }
+
+    private newComment(articleId : string, post : string, sonId: string, user : string) {
+        Comments.insert({
+            poster: user,
+            posted: new Date(),
+            lastposted: new Date(),
+            father: articleId,
+            son: sonId,
+            post: post
+        })
     }
 
     public remove(postId : string, idArticle : string) {

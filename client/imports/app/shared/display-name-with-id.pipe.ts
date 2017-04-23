@@ -8,7 +8,7 @@ import { Users } from '/both/collections/users.collection'
 })
 
 export class DisplayNameWithIdPipe implements PipeTransform {
-    transform(userId: string):string {
+    transform(userId : string) : string {
         
         if (!userId)
             return ''
@@ -18,8 +18,9 @@ export class DisplayNameWithIdPipe implements PipeTransform {
 
         if (isMeteorId(userId)) {
             user = Users.findOne(userId)
-            if (user)
+            if (user) {
                 username = user.username
+            }
         } else if (tag(userId)) {
             username = userId
         }

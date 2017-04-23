@@ -5,6 +5,7 @@ import { retLang } from '/lib/lang'
 function buildNewForm(form: HomeDetailForm, userId: string, image: string) {
     const newForm : HomeDetail = {
         banner: image,
+        lang: [{}],
         idOwner: userId
     }
 

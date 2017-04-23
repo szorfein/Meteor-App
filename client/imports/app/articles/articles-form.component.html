@@ -1,76 +1,66 @@
-<div class="form-container">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 col-lg-6 form-part">
-                <form [formGroup]="addForm" (ngSubmit)="addArticle(); onReset()">
-
-                    <fieldset>
-
-                        <div class="form-group">
-                            <label for="title">Title</label>
-                            <input class="form-control" 
-                                   type="text" formControlName="title" placeholder="title">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="image">Image</label>
-                            <upload-image #upload (onFile)="onImage($event)"></upload-image>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea class="form-control" rows="3"
-                                                           formControlName="description" placeholder="description">
-                            </textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <form-lang (langSelect)="langSelected($event)"></form-lang>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="article">Article</label>
-                            <textarea class="form-control" rows="20"
-                                                           formControlName="article" placeholder="article">
-                            </textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" 
-                                           formControlName="isPublic">Public</label>
-
-                                <label>
-                                    <input type="checkbox"
-                                           formControlName="toFooter">toFooter?</label>
-
-                                <div *ngFor="let t of tags | async">
-                                    <label>
-                                        <input type="checkbox"
-                                               (click)="addTag(t.name)" name="{{ t.name }}">
-                                        {{t.name}}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button class="btn btn-primary" type="submit">Add</button>
-                    </fieldset>
-                </form>
+<form [formGroup]="addForm" (ngSubmit)="addArticle(); onReset()" novalidate>
+    <div class="row">
+        <div class="col-md-12 col-lg-6 form-part">
+            <div class="form-group">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" formControlName="title" placeholder="title" required>
             </div>
-            <div class="col-md-12 col-lg-6 preview">
-                <h2>Preview</h2>
-                <h3>{{ addForm.value.title }}</h3>
-                <div class="thumbnail">
-                    <img *ngIf="image" class="img-fluid" [src]="image | previewImage">
-                    <div class="caption">
-                        <div class="markdown" [innerHTML]="addForm.value.description | markdown"></div>
-                        <div class="markdown" [innerHTML]="addForm.value.article | markdown"></div>
 
+            <div class="form-group">
+                <label class="form-label" for="image">Image</label>
+                <input class="form-control" type="text" formControlName="image" placeholder="image">
+                <upload-image #upload (onFile)="onImage($event)"></upload-image>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" rows="3" formControlName="description" placeholder="description" required>
+                </textarea>
+            </div>
+
+            <div class="form-group">
+                <form-lang (langSelect)="langSelected($event)"></form-lang>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="article">Article</label>
+                <textarea class="form-control" rows="20" formControlName="article" placeholder="article" required>
+                </textarea>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" formControlName="isPublic">
+                        Public
+                    </label>
+
+                    <label>
+                        <input type="checkbox" formControlName="toFooter">
+                        toFooter?
+                    </label>
+
+                    <div *ngFor="let t of tags | async">
+                        <label>
+                            <input type="checkbox" (click)="addTag(t.name)" name="{{ t.name }}">
+                            {{t.name}}
+                        </label>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-md-12 col-lg-6 preview">
+            <h2>Preview</h2>
+            <h3>{{ addForm.value.title }}</h3>
+            <div class="thumbnail">
+                <img class="img-fluid" [attr.src]="addForm.value.image | displayImage">
+                <div class="caption">
+                    <div class="markdown" [innerHTML]="addForm.value.description | markdown"></div>
+                    <div class="markdown" [innerHTML]="addForm.value.article | markdown"></div>
+
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit" [disabled]="!addForm.valid">Add</button>
     </div>
-</div>
+</form>

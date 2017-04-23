@@ -12,6 +12,7 @@ import template from './articles-related.component.html'
 
 export class ArticlesRelatedComponent implements OnInit, OnDestroy {
     @Input() tags : Array<string>
+    @Input() articleId : string
     articles : Observable<Article[]>
     articlesSub : Subscription
     thumbnail : string = 'thumbnail'
@@ -26,8 +27,10 @@ export class ArticlesRelatedComponent implements OnInit, OnDestroy {
     }
 
     private callArticles() {
-        this.articlesSub = MeteorObservable.subscribe('articlesRelated', this.tags).subscribe(() => {
-            this.articles = Articles.find().zone()
+        this.articlesSub = MeteorObservable.subscribe('articlesRelated', this.articleId, this.tags).subscribe(() => {
+            if (this.articleId) {
+                this.articles = Articles.find( { '_id': { $nin: [ this.articleId ] } } ).zone()
+            }
         }, (err) => { console.log(err) })
     }
 

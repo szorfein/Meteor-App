@@ -20,10 +20,11 @@ export interface Article extends CollectionObject {
 }
 
 export interface ArticleForm {
-    title: string,
-    description: string,
-    lang?: string,
-    article: string,
+    title: string
+    description: string
+    lang?: string
+    image: string
+    article: string
     isPublic: boolean
     toFooter: boolean
 }

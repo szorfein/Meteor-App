@@ -26,9 +26,10 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     me : string = 'me'
     blog : string = 'blog'
 
-    constructor(private route: ActivatedRoute,
-                private _cookieService : CookieService
-               ) {}
+    constructor(
+        private route: ActivatedRoute,
+        private _cookieService : CookieService
+    ) {}
 
     ngOnInit() {
         this.kill()

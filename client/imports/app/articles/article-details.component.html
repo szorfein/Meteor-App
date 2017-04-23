@@ -24,7 +24,7 @@
                                     </p>
                                 </div>
                             </div> <!-- End card block -->
-                            <img class="card-img img-fluid" [src]="article | displayMainImage">
+                            <img class="card-img img-fluid" [src]="article.image | displayImage">
                             <div class="card-block">
                                 <div class="card-text">
                                     <div class="description markdown" [innerHTML]="article.lang[0].description | markdown">
@@ -43,7 +43,7 @@
                             <about-display [element]="me" [display]="blog"></about-display>  
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
-                            <articles-related [tags]="article.tags"></articles-related>
+                            <articles-related [articleId]="article._id" [tags]="article.tags"></articles-related>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <comment [articleId]="article._id"></comment>

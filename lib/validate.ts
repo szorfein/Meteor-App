@@ -237,3 +237,7 @@ export function isAlbum(v : string) {
 export function isImage(v : string) {
     return /^https:\/\/i.imgur.com\/([\w]{7}).(png|jpeg)$/i.test(v)
 }
+
+export function isImageUrl(v : string) {
+    return /(png|jpeg|jpg)$/i.test(v)
+}

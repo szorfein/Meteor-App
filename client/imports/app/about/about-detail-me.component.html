@@ -2,7 +2,7 @@
 
 <div class="container" *ngIf="about && displayBloc">
     <div class="card text-center aboutme">
-        <img class="card-img rounded-circle selfie img-fluid" [attr.src]="about.imageOfYou | previewImage" alt="My head">
+        <img class="card-img rounded-circle selfie img-fluid" [attr.src]="about.imageOfYou | displayImage" alt="My head">
         <div class="card-block">
             <h3 class="card-title"> {{ about.name | displayOrNone }}</h3>
             <p class="card-text">{{ about.lang[0].aboutYou | displayOrNone }}</p>
@@ -18,7 +18,7 @@
     <ul class="sidebar-widget">
         <li>
             <a [routerLink]="['/about']" class="d-flex align-self-center">
-                <img class="rounded-circle mr-3 img-fluid" [attr.src]="about.imageOfYou | previewImage" alt="My head" style="height:400;width:400">
+                <img class="rounded-circle mr-3 img-fluid" [attr.src]="about.imageOfYou | displayImage" alt="My head" style="height:400;width:400">
             </a>
             <div class="post-meta">
                 <a [routerLink]="['/about']">
@@ -36,7 +36,7 @@
         </div>
         <div class="row">
             <div class="col-xs-5">
-                <img class="img-fluid card-img img-blog" *ngIf="about.imageOfYou" [attr.src]="about.imageOfYou | previewImage" alt="My Head" style="height:150px;width:150px">
+                <img class="img-fluid card-img img-blog" *ngIf="about.imageOfYou" [attr.src]="about.imageOfYou | displayImage" alt="My Head" style="height:150px;width:150px">
             </div>
             <div class="col-sm-8">
                 <div class="media-body blog-post card-block">

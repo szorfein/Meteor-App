@@ -9,7 +9,7 @@
             </ul>
         </div>
         <a [routerLink]="['/blog', article._id]">
-            <img class="card-img-top img-fluid" *ngIf="article.image" [attr.src]="article | displayMainImage">
+            <img class="card-img-top img-fluid" *ngIf="article.image" [attr.src]="article.image | displayImage">
         </a>
         <div *ngIf="lang" class="card-block">
             <h3 class="title card-title">
@@ -33,7 +33,7 @@
     <ul class="sidebar-widget">
         <li>
             <a [routerLink]="['/blog', article._id]">
-                <img class="img-fluid" *ngIf="article.image" [attr.src]="article | displayMainImage" style="height:50px">
+                <img class="img-fluid" *ngIf="article.image" [attr.src]="article.image | displayImage" style="height:50px">
             </a>
             <div *ngIf="lang" class="post-info">
                 <a class="dark-link" [routerLink]="['/blog', article._id]">{{lang.title}}</a>
@@ -49,11 +49,11 @@
 <div *ngIf="article && thumbnailDisplay">
     <div class="card">
         <a [routerLink]="['/blog', article._id]">
-            <img class="img-fluid card-img-top" *ngIf="article.image" [attr.src]="article | displayMainImage">
+            <img class="img-fluid card-img-top" *ngIf="article.image" [attr.src]="article.image| displayImage">
         </a>
         <div *ngIf="lang" class="card-block">
             <a class="dark-link" [routerLink]="['/blog', article._id]">
-                <h5 class="card-title">{{ lang.title }}</h5>
+                <h5 class="title card-title">{{ lang.title }}</h5>
             </a>
             <p class="card-text"><small class="text-muted">{{ article.createdAt | date:"d MMMM y" }}h</p>
         </div>
@@ -61,17 +61,24 @@
 </div>
 
 <div class="blog-element" *ngIf="article && blogDisplay">
-    <div class="card mt-3">
+    <div class="card">
         <article-panel [article]="article"></article-panel>
+        <div class="card-text">
+            <ul class="nav">
+                <li *ngFor="let tag of article.tags" class="nav-item nav-space">
+                    <a class="dark-link nav-link" [routerLink]="['/blog/category', tag]">{{tag}}</a>
+                </li>
+            </ul>
+        </div>
         <div class="row">
             <div class="col">
                 <a [routerLink]="['/blog', article._id]">
-                    <img class="img-fluid card-img" *ngIf="article.image" [attr.src]="article | displayMainImage">
+                    <img class="img-fluid card-img" *ngIf="article.image" [attr.src]="article.image | displayImage">
                 </a>
             </div>
             <div class="col">
                 <div *ngIf="lang" class="media-body blog-post card-block">
-                    <h5 class="card-title"><a class="dark-link" [routerLink]="['/blog', article._id]">{{ lang.title }}</a></h5>
+                    <h5 class="title card-title"><a class="dark-link" [routerLink]="['/blog', article._id]">{{ lang.title }}</a></h5>
                     <div class="card-subtitle mb-2">
                         <small class="text-muted">
                             by <a class="dark-link" [routerLink]="['/user', article.authorId | displayNameWithId]">{{article.authorId | displayNameWithId }}</a>
@@ -87,6 +94,9 @@
                     </p>
                 </div>
             </div>
+        </div>
+        <div class="card-footer">
+            Share on :
         </div>
     </div>
 </div>

@@ -18,7 +18,7 @@ export class TagArticlesListComponent implements OnInit, OnDestroy {
     imagesSub : Subscription
     articles : Observable<Article[]>
     articlesSub : Subscription
-    card : string = 'card'
+    blog : string = 'blog'
     formular : string = 'article'
 
     constructor(private route : ActivatedRoute) {}

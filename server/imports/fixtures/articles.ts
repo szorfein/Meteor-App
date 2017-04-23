@@ -16,7 +16,7 @@ export function loadArticles() {
                 lastEditOwner: userLib.rootId(),
                 lang: [{}],
                 isPublic: true,
-                tags: [ 'linux', 'Windows', 'OSX' ],
+                tags: [ 'Linux', 'Windows', 'OSX' ],
                 index: incIndex('articleId')
             },
             {
@@ -27,7 +27,7 @@ export function loadArticles() {
                 lastEditOwner: userLib.rootId(),
                 lang: [{}],
                 isPublic: false,
-                tags: [ 'linux', 'OSX' ],
+                tags: [ 'Linux', 'OSX' ],
                 index: incIndex('articleId')
             }
         ]
@@ -45,5 +45,7 @@ export function loadArticles() {
         }
 
         articles.forEach((article: Article) => Articles.insert(article))
+
+        //Articles._ensureIndex( { 'lang.article': 1 } )
     }
 }

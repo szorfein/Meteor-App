@@ -1,16 +1,17 @@
-<div class="elements-sidebar">
-    search here
-</div>
-<div class="elements-sidebar">
-    <h5 class="sidebar-title">Recent post</h5>
-    <article [element]="sidebarM"></article>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col elements-sidebar m-1">
+            <h5 class="sidebar-title">Recent post</h5>
+            <article [element]="sidebarM"></article>
+        </div>
+        <div class="col elements-sidebar m-1">
+            <h5 class="sidebar-title">Popular Posts</h5>
+        </div>
+    </div>
 </div>
 <div class="elements-sidebar">
     <h5 class="sidebar-title">Follow Us</h5>
     <about-display [element]="social" [display]="bloc"></about-social>
-</div>
-<div class="elements-sidebar">
-    <h5 class="sidebar-title">Popular Posts</h5>
 </div>
 <div class="elements-sidebar">
     <h5 class="sidebar-title">Labels</h5>
