@@ -1,0 +1,9 @@
+<form [formGroup]="searchForm" (ngSubmit)="searchValid()" novalidate>
+    <div class="row">
+        <div class="col form-group">
+            <label class="sr-only" for="research">Research</label>
+            <input class="form-control" type="text" formControlName="sff" placeholder="research...">
+        </div>
+        <button type="submit" [disabled]="!searchForm.valid">Search</button>
+    </div>
+</form>
