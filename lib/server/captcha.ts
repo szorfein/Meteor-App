@@ -1,7 +1,7 @@
 import { Md5 } from 'ts-md5/dist/md5'
 import { Captcha, SecretCaptcha, CaptchaForm } from '/both/models/captcha.model'
 import { Captchas } from '/both/collections/captchas.collection'
-import { Server } from '/server/main.config.ts'
+import { Server } from '/server/main.config'
 import { indexLib } from './index'
 import { Meteor } from 'meteor/meteor'
 

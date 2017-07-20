@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { PaginationService } from 'ng2-pagination'
+import { PaginationService } from 'ngx-pagination'
 import { ArticlesList } from '../shared-components/articles-list.class'
 
 import template from './articles-list.component.mobile.html'

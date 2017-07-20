@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
 import { AccountsModule } from 'angular2-meteor-accounts-ui'
-import { Ng2PaginationModule } from 'ng2-pagination'
+import { NgxPaginationModule } from 'ngx-pagination'
 import { ChartsModule } from 'ng2-charts'
 import { HttpModule } from '@angular/http'
 import { CookieService } from 'angular2-cookie/services/cookies.service'
@@ -43,7 +43,7 @@ let moduleDefinition
 if (Meteor.isCordova) {
     moduleDefinition = {
         imports: [
-            Ng2PaginationModule,
+            NgxPaginationModule,
             IonicModule.forRoot(AppMobileComponent)
         ],
         declarations: [
@@ -67,7 +67,7 @@ if (Meteor.isCordova) {
             ReactiveFormsModule,
             RouterModule.forRoot(routes),
             AccountsModule,
-            Ng2PaginationModule,
+            NgxPaginationModule,
             FileDropModule,
             ChartsModule,
             HttpModule

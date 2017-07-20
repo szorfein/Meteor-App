@@ -16,7 +16,6 @@ es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
 shell-server@0.2.1            # Server-side component of the `meteor shell` command
 
 angular2-compilers
-accounts-password
 check
 mys:fonts
 mobile-status-bar
@@ -25,3 +24,4 @@ jalik:ufs
 jalik:ufs-gridfs
 tmeasday:publish-counts
 email
+accounts-password

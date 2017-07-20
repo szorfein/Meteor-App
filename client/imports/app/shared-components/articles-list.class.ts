@@ -1,7 +1,7 @@
 import { OnInit, OnDestroy } from '@angular/core'
 import { Observable, Subscription, Subject } from 'rxjs'
 import { MeteorObservable } from 'meteor-rxjs'
-import { PaginationService } from 'ng2-pagination'
+import { PaginationService } from 'ngx-pagination'
 import { getIndex } from '/lib/index'
 import { Articles } from '/both/collections/articles.collection'
 import { Article } from '/both/models/article.model'
