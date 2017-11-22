@@ -3,7 +3,9 @@ Minimal webblog with meteor, angular2, bootstrap 4 and ionic.
 
 # Status
 
-Currently again in development, try it with caution.
+Currently DEAD, this project do not start anymore, problem with dependencie. meteor-angular as switch to ionic-cli and work better (for now...). [issue](https://github.com/Urigo/Ionic2-MeteorCLI-WhatsApp/issues)
+
+Some part of this code will be move to my next project [penthotal](https://github.com/szorfein/penthotal)
 
 ## Preview
 

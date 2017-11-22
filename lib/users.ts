@@ -11,6 +11,7 @@ export function isRoot(userid : string):boolean {
         { 'isPublic': false }
     ]})
 
+    console.log('Is Root ?? ' + !!(root.idOwner == userid))
     return !!(root.idOwner == userid)
 }
 
